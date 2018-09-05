@@ -1,0 +1,59 @@
+
+			
+			/*p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}*/
+			.mui-popover {
+				height: 200px;
+				left:18px!important;
+				background: #FFFFFF;
+				width: 90%;
+				text-align: center;
+			}
+			.mui-popover .mui-popover-arrow{
+				top:-20px;
+				
+			}
+			.mui-popover .mui-popover-arrow:after{
+				background: #FFFFFF;
+			}
+			.mui-input-group:before,.mui-input-group:after,.mui-input-group .mui-input-row:last-child:after{
+				height: 0px;
+			}
+			.mui-popover .mui-checkbox input[type=checkbox]{
+				/*right:8px;*/
+				top:calc((100% - 28px)/2);
+			}
+			
+			.mui-popover .mui-input-group .mui-input-row{
+				height: auto;
+				min-height: 48px;
+				padding-left: 20px;
+			}
+			.mui-popover .mui-checkbox label{
+				text-align: center;
+				word-break:break-all;
+				width: auto;
+				padding-right: 50px;
+				padding-left: 0px;
+			}
+			.mui-popover .mui-checkbox .active:before{
+				position: relative;
+			    box-shadow: 0 2px 2px 0 rgba(199,27,30,0.40);
+			    margin-right: 20px;
+			    content: '!';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #C71B1E;
+			}
+			
+			.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
+			    color: #C71B1E;
+			}
+			

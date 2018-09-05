@@ -1,0 +1,437 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<style>
+			
+			.mui-table-view-cell:after {
+				height: 0px!important;
+			}
+			
+			.status{
+				color: #C71B1E!important;
+			}
+			.price-content .mui-card-header{
+				height: auto;
+				padding:15px 0px;
+			}
+			.price-content .mui-card-header .mui-table-view{
+				width: 100%;
+			}
+			.price-content.mui-card .mui-card-header:not:before{
+			    height: 24px;
+			    width: 2px;
+			    box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);
+			    position: absolute;
+			    right: 0;
+			    left: 0px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #C71B1E;
+			}
+			/*.price-content.mui-card .mui-card-header .mui-table-view:after{
+				
+			}*/
+			.price-content .mui-card-header .mui-table-view-cell{
+				padding: 0px;
+				padding-left: 20px;
+			}
+			
+			.price-content .mui-card-header .mui-table-view-cell:first-child{
+				font-size: 16px;
+				color: #C71B1E;
+				font-weight: 600;
+				line-height: 22px;
+			}
+			.price-content .mui-card-header .mui-table-view-cell:last-child{
+				font-size: 12px;
+				color: #999999;
+				padding-top: 3px;
+			}
+			.price-content .mui-card-header .mui-table-view-cell:first-child:before{
+				height:22px;
+				width:2px;
+				box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);
+				position: absolute;
+				top:-1px;
+				right: 0;
+				left: 0px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #C71B1E;
+			}
+			.price-card .mui-card-content label{
+				padding-right: 28px;
+			}
+			.price-card .mui-card-content var{
+				color: #333333;
+			}
+			.price-card .mui-card-content input[type=text]{
+				width: auto;
+				height: auto;
+				padding: 10px 0px;
+				border:0px;
+				border-bottom: 1px solid rgba(228,228,228,.5);
+    			border-radius: 0px;
+    			color: #999999;
+    			margin-bottom: 0px;
+			}
+			.mui-icon-arrowdown {
+				font-size: 14px;
+				color: #333333;
+			}
+			.mui-icon-arrowdown:after {
+			    content: '\e581';
+			}
+			.mui-icon-arrowdown:before {
+			    content: '';
+			}
+			.car-card .mui-table-view-cell>a:not(.mui-btn){
+				margin-left: -20px;
+				margin-right: -60px;
+				margin-top:-15px;
+				/*margin-bottom: 0px;*/
+				font-size: 15px;
+				color: #333333;
+				font-weight: 600;
+				height: 45px;
+			}
+			.mui-navigate-right:after, .mui-push-left:after, .mui-push-right:after{
+				color: #333333;
+			}
+			.car-card .mui-table-view-cell.mui-active{
+				background: #FFFFFF!important;
+			}
+			.car-card .mui-table-view-cell.mui-active a{
+				color: #CE575A;
+			}
+			.car-card .mui-table-view-cell.mui-active a:before{
+				height:24px;
+				width:2px;
+				box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);
+				position: absolute;
+				right: 0;
+				left: 0px;
+				top:13px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #C71B1E;
+			}
+			.car-card .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{
+				/*margin:0px!important;*/
+				margin-left: 0px!important;
+				margin-top: 10px;
+			}
+			.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
+				padding-left: 0px;
+				background-position: 0px 100%;
+				padding-top: 5px;
+				font-size: 14px;
+				margin-left: -10px;
+			}
+			.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell .require{
+				margin-top: 20px;
+				height: 5px;
+			}
+			/*.require:before{
+				height:5px;
+				width:5px;
+				/*box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);*/
+				position: absolute;
+				right: 0;
+				left: 5px;
+				top:13px;
+				content: '*';
+				-webkit-transform: scaleY(.2);
+				transform: scaleY(.2);
+				background-color: #C71B1E;
+			}*/
+			.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell label{
+				color: #333333;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">新建报价单</h1>
+		</header>
+
+		<div class="mui-content price-content" id="mui-content">
+			<div class="mui-card mui-clearfix price-card">
+				<div class="mui-card-header">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							报价单号
+						</li>
+						<li class="mui-table-view-cell">
+							状态
+						</li>
+					</ul>	
+				</div>
+				<div class="mui-card-content">
+					<ul class="mui-table-view mui-clearfix">
+						<li class="mui-table-view-cell">
+							<label>客户名称</label>
+							<var>客户名称</var>
+						</li>
+						<li class="mui-table-view-cell">
+							<label>定金金额</label>
+							<input type="text" name="name" id="flow_name" class="mui-input-clear" placeholder="请输入姓名" value="">
+						</li>
+						<li class="mui-table-view-cell">
+							<label>订单类型</label>
+							<i class="mui-icon mui-icon-arrowdown">销售订单    </i>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">车辆信息</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<span style="color: #C71B1E;">*</span>
+								<label class="require">品牌</label>
+								<var>奥迪</var>
+							</li>
+							<li class="mui-table-view-cell">
+								<span style="color: #C71B1E;">*</span>
+								<label>品牌</label>
+								<var>奥迪</var>
+							</li>
+							<li class="mui-table-view-cell">
+								<span style="color: #C71B1E;">*</span>
+								<label>品牌</label>
+								<var>奥迪</var>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>	
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">原厂选装</a>
+						<div class="mui-collapse-content">
+							<form class="mui-input-group">
+								<div class="mui-input-row">
+									<label>Input</label>
+									<input type="text" placeholder="普通输入框">
+								</div>
+								<div class="mui-input-row">
+									<label>Input</label>
+									<input type="text" class="mui-input-clear" placeholder="带清除按钮的输入框">
+								</div>
+		
+								<div class="mui-input-row mui-plus-visible">
+									<label>Input</label>
+									<input type="text" class="mui-input-speech mui-input-clear" placeholder="语音输入">
+								</div>
+								<div class="mui-button-row">
+									<button class="mui-btn mui-btn-primary" type="button" onclick="return false;">确认</button>&nbsp;&nbsp;
+									<button class="mui-btn mui-btn-primary" type="button" onclick="return false;">取消</button>
+								</div>
+							</form>
+						</div>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">装潢</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">二手车登记</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">上牌</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">金融产品</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">新车车险</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">卡券</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">延保</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+			<div class="mui-card car-card">
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">其他项目</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							</li>
+							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							</li>
+						</ul>
+					</li>
+				</ul>	
+			</div>
+		</div>
+		
+
+		
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common/common.js"></script>
+		<script src="../../js/common/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+					var self = plus.webview.currentWebview();
+					//					processid = self.processid;
+					//					status = self.status;
+					//					showContent(processid, status);
+					//					showModal();
+
+				});
+
+			
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

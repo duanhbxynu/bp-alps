@@ -1,0 +1,464 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<!--<link href="../../css/leads.css" rel="stylesheet" />-->
+	</head>
+
+	<body>
+
+		<div id="flowPullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll stream-scroll list-scroll">
+				
+				<div class="mui-card">
+					<div class="mui-card-header">
+						<label>客流编号 1</label>
+						<span>接待中</span>
+					</div>
+					<div class="mui-card-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									姓名 <span id="name">11</span>
+								</li>
+								<li class="mui-table-view-cell">
+									电话 <span id="tel">11</span>
+								</li>
+								<li class="mui-table-view-cell">
+									到店人数（男） <span id="origin">11</span>
+								</li>
+								<li class="mui-table-view-cell">
+									到店人数（女）<span id="intent_car">11</span>
+								</li>
+								<li class="mui-table-view-cell">
+									客流类型:<span id="invitation_status">11</span>
+								</li>
+								<li class="mui-table-view-cell">
+									创建时间:<span id="create_date">11</span>
+								</li>
+							</ul>
+					</div>
+				</div>
+				<div class="mui-card">
+					<div class="mui-card-header">客流编号2</div>
+					<div class="mui-card-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									姓名 <span id="name"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									电话 <span id="tel"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									到店人数（男） <span id="origin"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									到店人数（女）<span id="intent_car"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									客流类型:<span id="invitation_status"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									创建时间:<span id="create_date"></span>
+								</li>
+							</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/lead.js"></script>
+		<script>
+							
+			mui.init({
+				pullRefresh: {
+					container: '#flowPullrefresh',
+					down: {
+						contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+			            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+			            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						contentnomore:'没有更多数据了',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			var count = 0;
+			var customerFlowList = null;
+			
+			//TODO state
+//			var state = localStorage.getItem('$state') || "{}";
+			
+			
+//			var token = $.getUrlParam('token');
+//			var page = $.getUrlParam('page');
+//			page = page>0?page:0;
+//			var values = {access_token:token,currentPage:page,pagesize:10};
+//			
+			
+////			//###########数据列表查询#############
+//			function qryDataList( params, fn) {
+//				var token = JSON.parse(state).token;
+//				var page = common.urlParam.getUrlParam('page');
+//				page = page>0?page:0;
+//				params = {access_token:token,currentPage:page,pagesize:10};
+//				console.log("到店客流页面"+token);
+//				console.log("customer flow list request:"+JSON.stringify(params));
+//				
+//				var qryUrl = common.URL.serviceBaseUrl+"alpssalewebservices/customer-flow/today/list";
+//				mui.ajax(qryUrl, {
+//					data: params,
+//					dataType: 'jsonp', //服务器返回json格式数据
+//					jsonp:'callback',
+//					type: 'POST', //HTTP请求类型
+//					timeout: 10000, //超时时间设置为10秒；
+//					success: fn,
+//					error: function(xhr, type, errorThrown) {
+//						//异常处理；
+//						plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//					}
+//				});
+//			}
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				
+				setTimeout(function() {
+					var streamScroll = document.body.querySelector('.stream-scroll');
+					console.log(streamScroll);
+					lead.qryCustomerList([],function(data) {
+						var data = JSON.parse(data);
+						if(data.success) {
+							//成功返回数据，
+							//1.清空原ul下的子节点全部清空
+							while(streamScroll.hasChildNodes()) {
+								console.log('清理列表数据...');
+								streamScroll.removeChild();
+							}
+							count = 0;
+							//2.将数据前10条填充到列表中
+							fillingData("pulldown",data.customerFlowList);
+							
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+					});
+					
+			
+					
+//					qryDataList(belongsPersId, [], function(data) {
+//						if(data.success) {
+//							//成功返回数据，
+//							progressLib = data.data;
+//							//1.清空原ul下的子节点全部清空
+//							while(table.hasChildNodes()) {
+//								console.log('清理列表数据...');
+//								table.removeChild(table.firstChild);
+//							}
+//							count = 0;
+//							//2.将数据前10条填充到列表中
+//							fillingData("pulldown");
+//							
+//						} else {
+//							plus.nativeUI.toast(data.error);
+//						}
+//
+//					});
+//					mui('#flowPullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+					
+					
+					
+//					var streamCard = document.body.querySelectorAll('.mui-card');
+//					console.log(streamCard);
+//					for(var i = streamCard.length, len = i + 2; i < len; i++) {
+//						var card = document.createElement('div');
+//						card.className = 'mui-card';
+//						card.innerHTML ='<div class="mui-card-header"><label>客流编号' + (i + 1) +'</label></div>'+
+//										'<div class="mui-card-content">'+
+//											'<ul class="mui-table-view">'+
+//												'<li class="mui-table-view-cell">'+
+//													'<span>姓名 </span><span id="name"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'<label>电话</label><span id="tel"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'到店人数（男） <span id="origin"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'到店人数（女）<span id="intent_car"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'客流类型 <span id="invitation_status"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'创建时间 <span id="create_date"></span>'+
+//												'</li>'+
+//											'</ul>'+
+//										'</div>';
+//						//下拉刷新，新纪录插到最前面；
+//						streamScroll.insertBefore(card, streamScroll.firstChild);
+//					}
+//					mui('#flowPullrefresh').pullRefresh().refresh(true);
+					mui('#flowPullrefresh').pullRefresh().endPulldownToRefresh();
+					showCustomerDetail();
+				}, 500);
+			}
+			
+			function fillingData(pull,customerFlowList){
+				
+				if(pull == "pullup"){
+					mui('#flowPullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(customerFlowList.length / 10))); //参数为true代表没有更多数据了。
+				}
+				
+				var listLen = customerFlowList.length;
+
+				var streamScroll = document.body.querySelector('.stream-scroll');
+				var streamCard = document.body.querySelectorAll('.mui-card');
+				
+				
+				var i = streamCard.length;
+//				alert(i);
+				var len = null;
+				if((i + 10 > listLen) && (i - 10 < listLen)) {
+					len = listLen;
+				} else {
+					len = i + 10;
+				}
+//				alert('len='+len);
+				for(; i < len; i++) {
+//					alert("customerFlowList[i]");
+//					alert(customerFlowList[i]);
+//					console.log(customerFlowList[i]);
+					var statusValue = '接待中';
+					if(customerFlowList[i].statusCode == 'pending') {
+						statusValue = '等待';
+					}else if(customerFlowList[i].statusCode == 'reception'){
+						statusValue = '接待中';
+					} else if(customerFlowList[i].statusCode == 'complete'){
+						statusValue = '接待完成';
+					}
+					var gender = '';
+					if(customerFlowList[i].gender == 'MALE') {
+						gender = '男';
+					} else {
+						gender = '女';
+					}
+					var typeValue = '首次到店';
+					if(customerFlowList[i].typeCode == 'firstTime') {
+						typeValue = '首次到店';
+					}else if(customerFlowList[i].typeCode == 'secondTime') {
+						typeValue = '二次到店';
+					}else if(customerFlowList[i].typeCode == 'invalid') {
+						typeValue = '无效';
+					}else{
+						typeValue = '未留档';
+					}
+					var inMan = customerFlowList[i].inMan||"0";
+					var inWoman = customerFlowList[i].inWoman||"0";
+						var card = document.createElement('div');
+						card.className = 'mui-card';
+						card.setAttribute("data-customerFlowId",customerFlowList[i].id );
+//						var customerFlow = JSON.stringify(customerFlowList[i]);
+//						alert(customerFlow);
+//						card.setAttribute("data-customerFlow",customerFlow );
+						card.innerHTML ='<div class="mui-card-header"><label>客流编号' + customerFlowList[i].id +'</label><span>'+ statusValue +'</span></div>'+
+										'<div class="mui-card-content">'+
+											'<ul class="mui-table-view">'+
+												'<li class="mui-table-view-cell">'+
+													'<label>姓名</label> <span id="name">'+ customerFlowList[i].name +'&#12288&#12288'+ gender +'</span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'<label>电话</label> <span id="tel">'+ customerFlowList[i].phone +'</span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'<label>到店人数（男）<label> <span id="inMan">'+ inMan +'</span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'<label>到店人数（女）</label><span id="inWoman">'+ inWoman +'</span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'<label>客流类型</label> <span id="flowType">'+ typeValue +'</span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'<label>创建时间<label> <span id="create_date">'+ customerFlowList[i].creationTime +'</span>'+
+												'</li>'+
+											'</ul>'+
+										'</div>';
+						console.log("=============line 123================");
+						console.log(card);
+						if(pull=="pullup"){
+							streamScroll.appendChild(card);
+						}else{
+							//下拉刷新，新纪录插到最前面；
+							streamScroll.insertBefore(card, streamScroll.firstChild);
+						}
+						
+						console.log("=============line 126================");
+						console.log(streamScroll);
+//						alert(streamScroll);
+				}
+//				alert(streamScroll);
+			}
+			
+			
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				
+				setTimeout(function() {
+					lead.qryCustomerList([],function(data) {
+						var data = JSON.parse(data);
+//						alert(data);
+						if(data.success) {
+//							alert(data.customerFlowList);
+//							alert(data.customerFlowList.length);
+							customerFlowList = data.customerFlowList;
+//							alert(customerFlowList);
+							fillingData("pullup",customerFlowList);
+						}else {
+							console.log('line220');
+							plus.nativeUI.toast(data.error);
+						}
+					});
+					
+					
+					
+//					var streamScroll = document.body.querySelector('.stream-scroll');
+//					var streamCard = document.body.querySelectorAll('.mui-card');
+//					console.log(streamCard);
+//					for(var i = streamCard.length, len = i + 2; i < len; i++) {
+//						var card = document.createElement('div');
+//						card.className = 'mui-card';
+//						card.setAttribute("data-customerId",i+1);
+//						card.innerHTML ='<div class="mui-card-header">客流编号' + (i + 1) +'</div>'+
+//										'<div class="mui-card-content">'+
+//											'<ul class="mui-table-view">'+
+//												'<li class="mui-table-view-cell">'+
+//													'姓名 <span id="name"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'电话 <span id="tel"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'到店人数（男） <span id="origin"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'到店人数（女）<span id="intent_car"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'客流类型 <span id="invitation_status"></span>'+
+//												'</li>'+
+//												'<li class="mui-table-view-cell">'+
+//													'创建时间 <span id="create_date"></span>'+
+//												'</li>'+
+//											'</ul>'+
+//										'</div>';
+//						console.log("=============line 123================");
+//						console.log(card);
+//						streamScroll.appendChild(card);
+//						console.log("=============line 126================");
+//						console.log(streamScroll);
+//						
+//								
+//					}
+						mui('#flowPullrefresh').pullRefresh().refresh(true);
+						
+						mui('#flowPullrefresh').pullRefresh().endPullupToRefresh();
+						
+						showCustomerDetail();
+				}, 500);
+			}
+			
+			
+			var detailPage = null;
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+//						var streamScroll = document.body.querySelector('.stream-scroll');
+//						var streamCard = document.body.querySelectorAll('.mui-card');
+////						alert(streamCard.length);
+//						alert("line404");
+//						//清空子节点
+//						if(streamCard.length != 0){
+//							console.log('清理列表数据...');
+//							streamScroll.removeChild();
+//						}
+//						while(streamScroll.hasChildNodes()) {
+//							console.log('清理列表数据...');
+//							streamScroll.removeChild();
+//						}
+						mui('#flowPullrefresh').pullRefresh().pullupLoading();
+						
+					}, 10);
+					/*预加载详情页*/
+					detailPage = mui.preload({
+						url:'instore-customerstream-detail.html',
+						id:'customerFlowDetail',//默认使用当前页面的url作为id
+					});
+					
+					showCustomerDetail();
+					
+				});
+			} else {
+				mui.ready(function() {
+					mui('#flowPullrefresh').pullRefresh().pullupLoading();
+					/*预加载详情页*/
+					detailPage = mui.preload({
+						url:'instore-customerstream-detail.html',
+						id:'customerFlowDetail',//默认使用当前页面的url作为id
+					});
+					showCustomerDetail();
+				});
+			}
+			
+//			window.addEventListener('refresh', function(e){//执行刷新
+//				location.reload();
+//	//			self.evalJS("mui('#flowPullrefresh').pullRefresh().pullupLoading()");
+//			});
+			
+			//客流详情
+			function showCustomerDetail(){
+				mui('.stream-scroll').on('tap', '.mui-card', function() {
+					var customerFlowId = this.getAttribute("data-customerFlowId");
+//					var customerFlow = this.getAttribute("data-customerFlow");
+//					alert(customerFlow);
+					//获得详情页面
+					if(!detailPage){
+					    detailPage = plus.webview.getWebviewById('customerFlowDetail');
+					}
+					  //触发详情页面的show事件
+					mui.fire(detailPage,'show',customerFlowId);
+					//打开详情页面          
+					mui.openWindow({
+						id: 'customerFlowDetail',
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})
+			}
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>alps-app</name>
+	<name>bp-alps</name>
 	<comment>Create By HBuilder</comment>
 	<projects>
 	</projects>
@@ -22,7 +22,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1533284100158</id>
+			<id>1536117298855</id>
 			<name></name>
 			<type>10</type>
 			<matcher>

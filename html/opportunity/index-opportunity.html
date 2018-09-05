@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<style>
+			.mui-fullscreen {
+				background-color: #efeff4!important;
+			}
+			
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.oppor-tab {
+				background: #F9F9F9;
+				box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+				font-family: Arial-Black;
+				font-size: 18px;
+				color: #212121;
+				font-weight: 900;
+			}
+			
+			.oppor-content {
+				margin: 0px;
+			}
+			
+			.mui-active {
+				color: #C71B1E!important;
+				box-shadow: 0 2px 4px 0 rgba(182, 45, 41, 0.35)
+			}
+			
+			#icon-search {
+				color: #C71B1E!important;
+				font-weight: 800;
+			}
+			
+			
+			
+			
+		</style>
+		
+		<style>
+			
+			
+			.mui-input-row {
+				line-height: 25px;
+			}
+			.img-avatar {
+				float: left;
+				padding-bottom: 5px;
+				margin-left: 0px;
+				padding-bottom: 5px;
+			}
+			.mui-table-view:before {
+				height: 0px;
+			}
+			
+			.oppor-scroll-wrapper .mui-card{
+				margin:8px;
+			}
+			.oppor-scroll .mui-card-header{
+				padding-left:20px;
+				padding-right:20px;
+				border-bottom: 1px dashed #E4E4E4;
+				height: 45px;
+			}
+			
+			.oppor-scroll .mui-card-header:after{
+				height: 0;
+			}
+			.oppor-scroll .mui-table-view .mui-table-view-cell:not(:first-child){
+				font-size: 12px;
+			}
+			
+			.oppor-scroll .mui-table-view .mui-table-view-cell:first-child{
+				color: #212121;
+				padding-top: 16px;
+				font-weight: 600;
+				
+			}
+			var{
+				line-height: 20px;
+			}
+			
+			.oppor-scroll .mui-table-view .mui-table-view-cell:last-child{
+				color: #618DF6 ;
+			}
+			
+			.mui-table-view-cell:after {
+				height: 0px;
+			}
+			.mui-table-view-cell var:not(:first-child):not(:last-child){
+				padding-left:5px;
+				padding-right: 5px;
+			}
+			.second-cell var:not(:last-child){
+				color: #666666;
+			}
+			.second-cell var:last-child{
+				color: #444444;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-search mui-pull-right" id="icon-search"></a>
+			<h1 class="mui-title">意向</h1>
+		</header>-->
+		<!--<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="#">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">线索</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-tab-label">意向</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>-->
+		<div class="mui-content oppor-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted oppor-tab">
+					<a class="mui-control-item mui-active" id="customerstream" href="#item1mobile" data-wid="leads/instore-customerstream.html">
+						H
+					</a>
+					<a class="mui-control-item" id="leads" href="#item2mobile" data-wid="leads/leads-invitation.html">
+						A
+					</a>
+					<a class="mui-control-item " id="customerstream" href="#item1mobile" data-wid="leads/instore-customerstream.html">
+						B
+					</a>
+					<a class="mui-control-item" id="leads" href="#item2mobile" data-wid="leads/leads-invitation.html">
+						C
+					</a>
+					<a class="mui-control-item" id="leads" href="#item2mobile" data-wid="leads/leads-invitation.html">
+						T
+					</a>
+				</div>
+
+				<div id="opporPullrefresh" class="mui-scroll-wrapper oppor-scroll-wrapper">
+					<div class="mui-scroll oppor-scroll" style="margin-top: 37px;">
+						<!--数据列表-->
+						<!--<div class="mui-card clear" data-opporCode="OP0000009">
+							<div class="mui-card-header">
+								<label>意向编号 OP0000009</label>
+								<span>新建</span>
+							</div>
+							<div class="mui-card-content">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell">
+										<var>到店客流测试0904</var>
+										<var>女</var>
+										<var>13314566541</var>
+										<var class="mui-pull-right">到店客流</var>
+									</li>
+									<li class="mui-table-view-cell second-cell">
+										<var>H级别</var>
+										<var>2018-09-04 10:10:10</var>
+										<var class="mui-pull-right">奥迪A6</var>
+									</li>
+									<li class="mui-table-view-cell">
+										<i class="mui-icon-extra mui-icon-extra-outline active"></i>
+										<var class="active">
+											剩余时间2小时15分
+										</var>
+									</li>
+								</ul>
+							</div>
+						</div>-->
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/oppor/oppor.js"></script>
+		<script>
+			
+		(function($, doc) {
+			$.init({
+				swipeBack: false,
+				pullRefresh: {
+					container: '#opporPullrefresh',
+					down: {
+						contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+			            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+			            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						contentnomore:'没有更多数据了',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			
+			
+			var detailPage = "";
+			
+			//查询参数
+			var level = 'H';
+			var mobile = '';
+			
+			//下拉刷新初始化动作	
+			if(mui.os.plus) {
+				mui.plusReady(function() {
+//					showProgressCount();
+//					showJobList();
+
+					setTimeout(function() {
+						mui('#opporPullrefresh').pullRefresh().pullupLoading();
+						console.log("第一次进入");
+					}, 1000);
+					
+					/*预加载详情页*/
+					detailPage = mui.preload({
+						url:'opportunity-detail.html',
+						id:'opporDetail',//默认使用当前页面的url作为id
+					});
+					
+					showOpporDetail();
+				
+				});
+			} else {
+				mui.ready(function() {
+//					showProgressCount();
+//					showJobList();
+					mui('#opporPullrefresh').pullRefresh().pullupLoading();
+				});
+				/*预加载详情页*/
+					detailPage = mui.preload({
+						url:'opportunity-detail.html',
+						id:'opporDetail',//默认使用当前页面的url作为id
+					});
+					
+					showOpporDetail();
+			}
+			
+//			window.addEventListener('refresh', function(e){//执行刷新
+////						location.reload();
+//				console.log("第二次进入");
+//			    var level = e.detail.level;
+//					    
+//			});
+					
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			
+			var count = 0;
+			var opportunityList = null;
+			
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				
+				setTimeout(function() {
+					var opporScroll = document.body.querySelector('.oppor-scroll');
+					var params = {
+						level:level,
+						mobile:mobile,
+						currentPage:0,
+						pagesize:10
+					}
+					oppor.qryOpporList(params,function(data) {
+						var data = JSON.parse(data);
+						console.log(data);
+						if(data.success) {
+							//成功返回数据，
+							//1.清空原ul下的子节点全部清空
+							while(opporScroll.hasChildNodes()) {
+								console.log('清理列表数据...');
+								opporScroll.removeChild();
+							}
+							count = 0;
+							//2.将数据前2条填充到列表中
+							opportunityList = data.opportunityList;
+							fillingData("pulldown",opportunityList);
+							
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+					});
+					
+					mui('#opporPullrefresh').pullRefresh().endPulldownToRefresh();
+					showOpporDetail();
+				}, 500);
+			}
+			
+			function fillingData(pull,opportunityList){
+				
+				if(pull == "pullup"){
+					mui('#opporPullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(opportunityList.length / 10))); //参数为true代表没有更多数据了。
+				}
+				
+				var listLen = opportunityList.length;
+				console.log(listLen);
+				var opporScroll = document.body.querySelector('.oppor-scroll');
+				var opporCard = document.body.querySelectorAll('.mui-card');
+				
+				
+				var i = opporCard.length;
+//				alert(i);
+				var len = null;
+				if((i + 10 > listLen) && (i - 10 < listLen)) {
+					len = listLen;
+				} else {
+					len = i + 10;
+				}
+				for(; i < len; i++) {
+//					var statusValue = '接待中';
+//					if(customerFlowList[i].statusCode == 'pending') {
+//						statusValue = '等待';
+//					}else if(customerFlowList[i].statusCode == 'reception'){
+//						statusValue = '接待中';
+//					} else if(customerFlowList[i].statusCode == 'complete'){
+//						statusValue = '接待完成';
+//					}
+					var gender = '';
+					if(opportunityList[i].gender == 'MALE') {
+						gender = '男';
+					} else {
+						gender = '女';
+					}
+					
+						var card = document.createElement('div');
+						card.className = 'mui-card';
+						card.setAttribute("data-opporCode",opportunityList[i].code );
+						card.innerHTML ='<div class="mui-card-header"><label>意向编号' + opportunityList[i].code +'</label><span>'+ opportunityList[i].statusName +'</span></div>'+
+										'<div class="mui-card-content">'+
+											'<ul class="mui-table-view">'+
+												'<li class="mui-table-view-cell">'+
+													'<var>'+opportunityList[i].name+'</var> <var>'+gender+'</var><var>'+opportunityList[i].mobile+'</var><var class="mui-pull-right">'+opportunityList[i].platform+'</var>'+
+												'</li>'+
+												'<li class="mui-table-view-cell second-cell">'+
+													'<var>'+opportunityList[i].levelName+'</var> <var>'+opportunityList[i].creationtime+'</var><var class="mui-pull-right">'+opportunityList[i].vehicleCategoryName+'&#12288&#12288'+opportunityList[i].vehicleName+'</var>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'<i class="mui-icon-extra mui-icon-extra-outline active"></i> <var class="active">'+ opportunityList[i].lastFollowTime +'</var>'+
+												'</li>'+
+											'</ul>'+
+										'</div>';
+						console.log("=============line 123================");
+						console.log(card);
+						if(pull=="pullup"){
+							opporScroll.appendChild(card);
+						}else{
+							//下拉刷新，新纪录插到最前面；
+							opporScroll.insertBefore(card, streamScroll.firstChild);
+						}
+						
+						console.log("=============line 126================");
+						console.log(opporScroll);
+//						alert(streamScroll);
+				}
+//				alert(streamScroll);
+			}
+			
+			
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				
+				setTimeout(function() {
+					var params = {
+						level:level,
+						mobile:mobile,
+						currentPage:0,
+						pagesize:10
+					}
+					oppor.qryOpporList(params,function(data) {
+						var data = JSON.parse(data);
+						console.log(data);
+//						alert(data);
+						if(data.success) {
+//							alert(data.customerFlowList);
+//							alert(data.customerFlowList.length);
+							opportunityList = data.opportunityList;
+//							alert(customerFlowList);
+							fillingData("pullup",opportunityList);
+						}else {
+							console.log('line220');
+							plus.nativeUI.toast(data.error);
+						}
+					});
+					
+						mui('#opporPullrefresh').pullRefresh().refresh(true);
+						
+						mui('#opporPullrefresh').pullRefresh().endPullupToRefresh();
+						
+						showOpporDetail();
+				}, 500);
+			}
+			
+			
+			function showOpporDetail(){
+				mui('.oppor-scroll').on('tap', '.mui-card', function() {
+					var opporCode = this.getAttribute("data-opporCode");
+//					var customerFlow = this.getAttribute("data-customerFlow");
+					console.log(opporCode);
+//					获得详情页面
+					console.log(detailPage);
+					if(!detailPage){
+					    detailPage = plus.webview.getWebviewById('opporDetail');
+					}
+					  //触发详情页面的show事件
+					mui.fire(detailPage,'show',opporCode);
+					//打开详情页面          
+					mui.openWindow({
+						id: 'opporDetail',
+						url:'opportunity-detail.html',
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})
+			}
+		})(mui, document);	
+		</script>
+	</body>
+
+</html>

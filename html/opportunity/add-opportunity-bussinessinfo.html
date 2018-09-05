@@ -1,0 +1,536 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/timeline.css" rel="stylesheet" />
+		<!--<link href="../../css/form.css" rel="stylesheet" />-->
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<style>
+			
+			
+			
+			.mui-icon-arrowdown {
+			   font-size: 14px;
+			}
+			.mui-icon-arrowdown:after {
+			    content: '\e581';
+			    font-size: 18px;
+			}
+			.mui-icon-arrowdown:before {
+			    content: '';
+			}
+				.focus-group .mui-input-row{
+				height: auto;
+			}
+			.focus-group .mui-input-row:after{
+				height: 0px;
+			}
+			.focus-group label{
+				width: 100%;
+				display: block;
+			}
+			.focus-group .mui-btn-group{
+				display: inline-block;
+				padding-left: 20px;
+				padding-right: 5px;
+				width: 100%;
+				/*width: calc(100% - 20px);
+				width: -moz-calc(100% - 20px);
+				width: -webkit-calc(100% - 20px);*/
+			}
+			.focus-group .mui-btn-group .mui-btn{
+				float: none;
+				font-size: 12px;
+				padding: 0px;
+				height: 30px;
+				width: calc((100% - 80px)/4);
+				width: -moz-calc((100% - 80px)/4);
+				width: -webkit-calc((100% - 80px)/4);
+				margin: 5px 15px 5px 0px;
+				
+			}
+			
+			
+			[data-type=year] .mui-dtpicker-title h5,
+			[data-type=year] .mui-picker{
+			    width: 100%!important;
+			}
+			/*月日时*/
+			[data-type="year"] [data-id="picker-i"],
+			[data-type="year"] [data-id="title-i"],
+			[data-type="year"] [data-id="picker-h"],
+			[data-type="year"] [data-id="title-h"],
+			[data-type="year"] [data-id="picker-d"],
+			[data-type="year"] [data-id="title-d"],
+			[data-type="year"] [data-id="picker-m"],
+			[data-type="year"] [data-id="title-m"] {
+			    display: none!important;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">创建意向</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<!--<div class="mui-content-padded">
+				<div class="mui-padded-item mui-active">
+					<span class="mui-badge">1</span>
+					<span class="mui-badge-label">基本信息</span>
+				</div>
+				<div class="mui-padded-item">
+					<span class="progress-bar"></span>
+				</div>
+				<div class="mui-padded-item">
+					<span class="mui-badge">2</span>
+					<span class="mui-badge-label">业务信息</span>
+				</div>
+				<div class="mui-padded-item ">
+					<span class="progress-bar"></span>
+				</div>
+				<div class="mui-padded-item">
+					<span class="mui-badge">3</span>
+					<span class="mui-badge-label">工作家庭信息</span>
+				</div>
+			</div>-->
+
+			<div class="mui-content-padded" id="progressBar">
+				<div class="progressBar progress-active"></div>
+				<div class="progressBar"></div>
+				<div class="course_nr course_nr_1">
+					<span class="mui-badge badge-active">1</span>
+					<span class="mui-badge-label badge-label-active">基本信息</span>
+				</div>
+				<div class="course_nr course_nr_2">
+					<span class="mui-badge badge-active">2</span>
+					<span class="mui-badge-label badge-label-active">业务信息</span></div>
+				<div class="course_nr course_nr_3">
+					<span class="mui-badge">3</span>
+					<span class="mui-badge-label">工作家庭信息</span></div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-input-group  mui-clearfix">
+					<div class="mui-input-row mui-select-row">
+						<label class="require">意向品牌</label>
+						<!--<label style="float: right;text-align: right;padding-right: 20px;" class="vehicleTypeCode" value="奥迪">奥迪</label>-->
+						<span class="mui-select" data-desc="意向品牌" id="vehicleTypeCode">
+							请选择品牌
+						</span>
+					</div>
+					
+					<!--<div class="mui-input-row">
+						<label class="require">意向车系</label>
+						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择车系</i>
+					</div>-->
+					<div class="mui-input-row mui-select-row">
+						<label class="require">意向车系 </label>
+						<span class="mui-select vehicleCategoryCode" data-desc="意向车系" id="vehicleCategoryCode">
+							请选择车系
+						</span>
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label class="require">意向车型 </label>
+						<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
+							请选择车型
+						</span>
+					</div>
+					<!--<div class="mui-input-row">
+						<label class="require">意向车型</label>
+						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择车型</i>
+					</div>-->
+					<div class="mui-input-row mui-select-row">
+						<label class="require">颜色偏好</label>
+						<span class="mui-select" id="color" data-desc="颜色偏好">
+							请选择颜色偏好
+						</span>
+						<!--<input type="text" id="color" name="color" class="mui-input-clear" placeholder="请输入颜色偏好" value="红">-->
+					</div>
+				</div>	
+			</div>
+			<div class="mui-card">
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label>竞品车型</label>
+						<input type="text" id="competitiveVehicle" name="competitiveVehicle" class="mui-input-clear" placeholder="请输入竞品车型" value="">
+					</div>
+					<div class="mui-input-row">
+						<label class="require">是否置换</label>
+						<!--<span class="radio-list radio-single-list">
+							<div class="mui-radio mui-left ">
+								<label class="active">是</label>
+								<input id="Gender_male" name="gender" class="gender" type="radio" checked="true" />
+							</div> 
+							<span class="spliter" style="margin-right: 8px;">|</span> 
+							<div class="mui-radio mui-left ">
+								<label class="female">否</label>
+								<input id="Gender_female" name="gender" class="gender"  type="radio">
+							</div>
+						</span>-->
+						<div class="radio-list radio-single-list ">
+						    <div class="mui-radio mui-left active">
+								<label class="">是</label>
+								<input id="replacement_true" value="true" name="replacement" class="replacement" type="radio" checked="true" />
+							</div>
+							<div class="mui-radio mui-left">
+								<label class="">否</label>
+								<input id="replacement_false" value="false" name="replacement" class="replacement"  type="radio">
+							</div>
+					    </div>
+					</div>
+					<div class="mui-input-row">
+						<label>置换车辆信息</label>
+						<input type="text" name="replacementVehicle" id="replacementVehicle" class="mui-input-clear" placeholder="请输入置换车辆信息" value="">
+					</div>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-input-group">
+					<!--<div class="mui-input-row ">
+						<label class="require">购车类型</label>
+						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择购车类型</i>
+					</div>-->
+					<div class="mui-input-row mui-select-row">
+						<label class="require">购车类型 </label>
+						<span class="mui-select" id="purchaseTypeCode" data-desc="购车类型">
+							请选择购车类型
+						</span>
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label class="require">预购日期</label>
+						<span class="mui-select" name="purchaseTimeTypeCode" data-desc="预购日期" id="purchaseTimeTypeCode">
+							请选择预购日期
+						</span>
+						<!--<input type="date" name="purchaseTimeTypeCode" id="purchaseTimeTypeCode">-->
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择预购日期</i>-->
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label class="require">意向级别 </label>
+						<span class="mui-select" name="levelCode" data-desc="意向级别" id="levelCode">
+							请选择意向级别
+						</span>
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label class="require">购车预算 </label>
+						<span class="mui-select" name="budget" data-desc="购车预算" id="budget">
+							请选择购车预算
+						</span>
+					</div>
+					<!--<div class="mui-input-row">
+						<label class="require">意向级别</label>
+						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择意向级别</i>
+					</div>-->
+					<!--<div class="mui-input-row">
+						<label class="require">购车预算</label>
+						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择购车预算</i>
+					</div>-->
+					<div class="mui-input-row mui-select-row">
+						<label>付款方式</label>
+						<span class="mui-select" id="paymentMethod">
+							请选择付款方式
+						</span>
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择付款方式</i>-->
+					</div>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-input-group">	
+					<div class="mui-input-row mui-select-row">
+						<label>购车用途</label>
+						<span class="mui-select" name="purpose" id="purpose">
+							请选择购车用途
+						</span>
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择购车用途</i>-->
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>驾照颁发年份</label>
+						<span class="mui-select"  name="licenseYear" id="licenseYear">
+							请选择驾照颁发年份
+						</span>
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择驾照颁发年份</i>-->
+					</div>
+				</div>
+			</div>
+			<div class="mui-card focus-card">
+				<div class="mui-input-group focus-group">
+					<div class="mui-input-row">
+						<label>购车关注点</label>
+						<div class="mui-btn-group buyerPoint-btn-group">
+							<!--<button type="button" name="buyerPoint" value="brand" class="mui-btn mui-btn-outlined mui-btn-outlined-active">
+								品牌
+							</button>
+							<button type="button" name="buyerPoint" value="surface" class="mui-btn mui-btn-outlined">
+								外形
+							</button>
+							<button type="button" name="buyerPoint" value="surface" class="mui-btn mui-btn-outlined">
+								动力
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								操控
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								舒适
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								安全
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								价格
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								优惠
+							</button>-->
+						</div>	
+					</div>
+					<div class="mui-input-row">
+						<label>服务需求 </label>
+						<div class="mui-btn-group servicesTypes-btn-group">
+							<!--<button type="button" class="mui-btn mui-btn-outlined">
+								品牌
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								外形
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								动力
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								操控
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								舒适
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								安全
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								价格
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								优惠
+							</button>-->
+						</div>	
+					</div>
+					
+					<div class="mui-input-row textarea-row">
+						<label class="">备注</label>
+						<textarea id="textarea" rows="5" placeholder="请输入备注信息" value=""></textarea>
+					</div>
+				</div>
+					<!--</div>
+					<div class="mui-input-row" style="margin: 10px 5px;">
+						<textarea id="textarea" rows="5" placeholder="多行文本框"></textarea>
+					</div>-->
+				<div class="mui-input-group">	
+					<div class="mui-button-row">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-cancel" id="last_step">上一步</button>
+						<button type="button" class="mui-btn mui-btn-danger btn-save" id="next_step">下一步</button>
+					</div>
+				</div>	
+			</form>
+		</div>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/oppor/oppor-bussiness-picker.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				
+				var baseOpportunity = null;
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+					var self = plus.webview.currentWebview();
+					baseOpportunity = self.baseOpportunity;
+					console.log(baseOpportunity);
+					
+					
+				});
+					
+				doc.getElementById("next_step").addEventListener('tap',function(){
+					var vehicleTypeCode = doc.getElementById("vehicleTypeCode").getAttribute('data-value');
+					if(!vehicleTypeCode){
+						plus.nativeUI.toast('请选择意向品牌！');
+						return;
+					}
+					var vehicleCategoryCode = doc.getElementById("vehicleCategoryCode").getAttribute('data-value');
+					if(!vehicleTypeCode){
+//						alert("请选择意向车系");
+						plus.nativeUI.toast('请选择意向车系！');
+						return;
+					}
+					var vehicleCode = doc.getElementById("vehicleCode").getAttribute('data-value');
+					if(!vehicleCode){
+//						alert("请选择意向车型");
+						plus.nativeUI.toast('请选择意向车型！');
+						return;
+					}
+					var color = doc.getElementById("color").getAttribute('data-value');
+					if(!color){
+//						alert("请选择颜色偏好");
+						plus.nativeUI.toast('请选择颜色偏好！');
+						return;
+					}
+					var purchaseTypeCode = doc.getElementById("purchaseTypeCode").getAttribute('data-value');
+					if(!purchaseTypeCode){
+//						alert("请选择购车类型");
+						plus.nativeUI.toast('请选择购车类型！');
+						return;
+					}
+					var levelCode = doc.getElementById("levelCode").getAttribute('data-value');
+					if(!levelCode){
+//						alert("请选择意向级别");
+						plus.nativeUI.toast('请选择意向级别！');
+						return;
+					}
+					var budget = doc.getElementById("budget").getAttribute('data-value');
+					if(!budget){
+//						alert("请选择购车预算");
+						plus.nativeUI.toast('请选择购车预算！');
+						return;
+					}
+					var purchaseTimeTypeCode = doc.getElementById("purchaseTimeTypeCode").getAttribute('data-value');
+					if(!purchaseTimeTypeCode){
+//						alert("请选择预购日期");
+						plus.nativeUI.toast('请选择预购日期！');
+						return;
+					}
+					/*竞品车型*/
+					var competitiveVehicle = doc.getElementById("purchaseTimeTypeCode").value;
+					/*是否置换*/
+					var replacement = doc.body.querySelector('[name="replacement"]:checked').value;
+					/*置换车辆信息*/
+					var replacementVehicle = doc.getElementById("replacementVehicle").value;
+					/*付款方式*/
+					var paymentMethod = doc.getElementById("paymentMethod").getAttribute('data-value');
+					/*购车用途*/
+					var purpose = doc.getElementById("purpose").getAttribute('data-value');
+					/*驾照颁发年份*/
+					var licenseYear = doc.getElementById("licenseYear").getAttribute('data-value');
+					
+					var buypoints=[];
+					$('.buyerPoint-btn-group .mui-btn-outlined-active').each(function(i,item){
+						var buyerPoint = item.getAttribute('data-value');
+						buypoints.push(buyerPoint);
+					})
+					var servicesTypes=[];
+					$('.servicesTypes-btn-group .mui-btn-outlined-active').each(function(i,item){
+						var servicesType = item.getAttribute('data-value');
+						servicesTypes.push(servicesType);
+					})
+					
+					var notes = doc.getElementById("textarea").value;
+				
+					var bussinessOppor ={
+						vehicleTypeCode:vehicleTypeCode,
+						vehicleCategoryCode:vehicleCategoryCode,
+						vehicleCode:vehicleCode,
+						color:color,
+						purchaseTypeCode:purchaseTypeCode,
+						levelCode:levelCode,
+						budget:budget,
+						purchaseTimeTypeCode:purchaseTimeTypeCode,
+						competitiveVehicle:competitiveVehicle,
+						replacement:replacement,
+						replacementVehicle:replacementVehicle,
+						paymentMethod:paymentMethod,
+						purpose:purpose,
+						licenseYear:licenseYear,
+						buypoints:buypoints,
+						servicesTypes:servicesTypes,
+						notes:notes
+					}
+					
+//					console.log(bussinessOppor);
+					mui.extend(baseOpportunity,bussinessOppor);
+					console.log(baseOpportunity);
+					mui.openWindow({
+							url: '../opportunity/add-opportunity-workfamilyinfo.html',
+							id: "oppor-workfamilyinfo", //默认使用当前页面的url作为id
+							styles: { //窗口参数
+								popGesture: 'hide'
+								},
+							extras: {
+								baseOpportunity:baseOpportunity
+							}, //自定义扩展参数
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
+								//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+							},
+							waiting: {
+								autoShow: true, //自动显示等待框，默认为true
+								title: '正在加载...' //等待对话框上显示的提示内容
+							},
+							createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+						})
+					
+				})
+				
+				document.getElementById("last_step").addEventListener('tap',function(){
+					$.back();
+				})
+				
+				//性别切换
+				$('.radio-single-list').on('tap','.replacement',function(){
+					var replacementVehicle = this;
+					
+					if (this) {
+							
+						this.checked = !this.checked;
+						$.trigger(this, 'change');
+							
+						$(".radio-single-list .mui-radio").each(function () {
+							this.classList.remove('active');
+						}) 
+						replacementVehicle.parentNode.classList.add('active');
+							
+					}
+				})	
+				
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

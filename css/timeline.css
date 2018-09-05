@@ -1,0 +1,164 @@
+/*timeline*/
+			.mui-padded-item {
+				display: table-cell;
+				overflow: hidden;
+				width: 1%;
+				height: 50px;
+				text-align: center;
+				vertical-align: middle;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.mui-padded-item:nth-child(2n){
+					width: 48%;
+				/*text-align: left;*/
+			}
+			
+			.mui-badge-label {
+				font-size: 12px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				line-height: 24px;
+				color: #999999;
+			}
+			
+			.mui-badge {
+				font-size: 12px;
+				line-height: 1;
+				display: inline-block;
+				padding: 3px 6px;
+				color: #FFFFFF;
+				border-radius: 100px;
+				/*background-color: rgba(217,217,217,.15);*/
+				background-color: #D9d9d9;
+			}
+			
+			#progressBar {
+				width: auto;
+				height: 50px;
+				position: relative;
+				margin:10px 25px;
+			}
+			
+			#progressBar .progressBar:first-child {
+				position: absolute;
+				width: calc(50% - 80px);
+				width: -webkit-calc(50% - 80px)!important;
+				width: -moz-calc(50% - 80px)!important;
+				margin-left: 50px;
+				margin-top: 12px;
+				border: 1px solid #E4E4E4 ;
+				transform: scale(1,0.5);//scale(x,y) 对元素进行缩放 X表示水平方向缩放的倍数 | Y表示垂直方向的缩放倍数
+								Y是一个可选参数，没有设置的话，则表示X，Y两个方向的缩放倍数是一样的。并以X为准。
+			}
+			#progressBar .progressBar:nth-child(2){
+				position: absolute;
+				margin-top: 12px;
+				margin-left: calc(50% + 25px);
+				margin-left: -webkit-calc(50% + 25px)!important;
+				margin-left: -moz-calc(50% + 25px)!important;
+				width: calc(50% - 85px);
+				width: -webkit-calc(50% - 85px)!important;
+				width: -moz-calc(50% - 85px)!important;
+				border: 1px solid #E4E4E4;
+				transform: scale(1,0.5);
+			}
+		
+			#progressBar>.course_nr {
+				position: absolute;
+				width: auto;
+				height: 40px;
+				color: #000000;
+				text-align: center;
+    			vertical-align: middle;
+			}
+			#progressBar .course_nr_2 {
+				left:-moz-calc(50% - 25px)!important;
+			    left: -webkit-calc(50% - 25px)!important;
+			    left: calc(50% - 25px)!important;
+			}
+			
+			#progressBar .course_nr_3 {
+				right:0px;
+			}
+			
+			
+			.active:before {
+				color: #06d276!important;
+			}
+			
+			.badge-label-active{
+				color: #618DF6!important;;
+			}
+			.badge-active{
+				background-color: #618DF6!important;
+			}
+			.progress-active{
+				border: 1px solid #618DF6!important;
+				transform: scale(1,1)!important;			}
+			
+.timeline {
+			    margin: 0 0 16px;
+			    padding: 0;
+			    position: relative;
+			}
+			.timeline-item{
+				position: relative;
+			}
+			.timeline-badge {
+			    background-color: #C71B1E;;
+			    -webkit-border-radius: 12px;
+			    width: 12px;
+			    height: 12px;
+			    top:calc(50% - 12px);
+			    float: left;
+   				position: absolute;
+			}
+			.timeline-item:before {
+			    left: 4px;
+			    content: '';
+			    position: absolute;
+			    display: block;
+			    width: 3px;
+			    background: #C71B1E;
+			    top:0;
+			    bottom: -21px;
+			    -webkit-transform: scaleX(0.5);
+				-moz-transform:scaleX(0.5)
+				transform: scaleX(0.5);
+			   
+			}
+			.timeline-item:first-child:before{
+				 top: calc(50% - 12px);
+			}
+			.timeline-item:last-child:before{
+				 bottom: calc(50% + 12px);
+			}
+			.timeline .timeline-body {
+			    margin-left: 30px;
+			    position: relative;
+			    padding: 9px 20px 2px 20px;
+			    margin-bottom: 20px;
+			    background-color: #ffffff;
+			}
+			.timeline-body-head-caption{
+				font-size: 15px;
+				color: #C71B1E;
+				text-align: justify;
+			}
+			.timeline-body-desc{
+				color: #151515;
+				line-height: 21px;
+			}
+			.font-12-666{
+				color: #666666;
+				font-size: 12px;
+				line-height: 17px;
+			}
+			.font-13-333{
+				color: #333333;
+				font-size: 13px;
+				line-height: 18px;
+			}

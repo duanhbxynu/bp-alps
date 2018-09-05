@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link href="../css/reset.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			/*html,
+			body {
+				background-color: #efeff4;
+			}*/
+			.mui-tab-item.mui-active{
+				color: #0062CC!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>
+			<h1 id="title" class="mui-title">线索</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="leadsTab" class="mui-tab-item mui-active" href="#" data-wid='leads/index-lead-single.html'>
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">线索</span>
+			</a>
+			<a id="opporTab" class="mui-tab-item" href="#" data-wid="opportunity/index-opportunity.html">
+				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-tab-label">意向</span>
+			</a>
+			<a id="orderTab" class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			 //mui初始化
+			//初始化mui
+			mui.init({
+				gestureConfig: {
+					doubletap: true
+				}
+	
+			});
+			var subpages = ['leads/index-leads.html', 'opportunity/index-opportunity.html'];
+			var subpage_style = {
+				top: '45px',
+				bottom: '51px'
+			};
+			
+			var aniShow = {};
+			//下拉刷新/上拉加载
+			var pageFlag = 0;
+			 //创建子页面，首个选项卡页面显示，其它均隐藏；
+			mui.plusReady(function() {
+				console.log("创建子页面");
+				var self = plus.webview.currentWebview();
+				for (var i = 0; i < 4; i++) {
+					var temp = {};
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if (i > 0) {
+						sub.hide();
+					}else{
+						temp[subpages[i]] = "true";
+						mui.extend(aniShow,temp);
+					}
+					self.append(sub);
+				}
+			});
+			 //当前激活选项
+			var activeTab = subpages[0];
+			var header = document.getElementById("header");
+			var title = document.getElementById("title");
+			 //选项卡点击事件
+			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				
+				console.log("模拟点击");
+				var targetTab = this.getAttribute('data-wid');
+				console.log(targetTab);
+				console.log(activeTab);
+				if (targetTab == activeTab) {
+					var headerHtml = '';
+					//线索
+					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
+								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">线索</h1>';
+	
+					header.innerHTML = headerHtml;
+					pageFlag = 0;
+					
+					return;
+				}
+				//更换标题
+				//删除header下面所有的old子节点
+				while(header.hasChildNodes()) {
+					header.removeChild(header.firstChild);
+				}
+				
+				//更换header样式
+				if(targetTab == "leads/index-leads.html") {
+					var headerHtml = '';
+					//线索
+					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
+								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">线索</h1>';
+	
+					header.innerHTML = headerHtml;
+					pageFlag = 0;
+				}else if(targetTab == "opportunity/index-opportunity.html"){
+					var headerHtml = '';
+					//意向
+					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">意向</h1>';
+	
+					header.innerHTML = headerHtml;
+					pageFlag = 1;
+				}
+				
+				//显示目标选项卡
+				//若为iOS平台或非首次显示，则直接显示
+				if(mui.os.ios||aniShow[targetTab]){
+					plus.webview.show(targetTab);
+				}else{
+					//否则，使用fade-in动画，且保存变量
+					var temp = {};
+					temp[targetTab] = "true";
+					mui.extend(aniShow,temp);
+					plus.webview.show(targetTab,"fade-in",300);
+				}
+				//隐藏当前;
+				plus.webview.hide(activeTab);
+				//更改当前活跃的选项卡
+				activeTab = targetTab;
+			});
+//			 //自定义事件，模拟点击“首页选项卡”
+//			document.addEventListener('gohome', function() {
+//				var defaultTab = document.getElementById("leadsTab");
+//				//模拟首页点击
+//				mui.trigger(defaultTab, 'tap');
+//				//切换选项卡高亮
+//				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+//				if (defaultTab !== current) {
+//					current.classList.remove('mui-active');
+//					defaultTab.classList.add('mui-active');
+//				}
+//			});
+			
+			window.addEventListener('refresh', function(e){//执行刷新
+				console.log("执行刷新");
+				console.log(e.detail.targetTab);
+				console.log(e.detail.activeTab);
+				var activeTab = e.detail.activeTab;
+				var defaultTab = document.getElementById(activeTab);
+				//模拟首页点击
+				var targetTab = e.detail.targetTab;
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if (defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+				//下拉刷新/上拉加载
+				if(targetTab == "leads/index-leads.html"){
+					console.log("//下拉刷新/上拉加载");
+					var contentWebview = plus.webview.getWebviewById(targetTab);
+					contentWebview.evalJS("mui('#flowPullrefresh').pullRefresh().pullupLoading()");
+//					var self = plus.webview.currentWebview();
+//					self.append(contentWebview);
+					
+				}else if(targetTab == "opportunity/index-opportunity.html"){
+					var contentWebview = plus.webview.getWebviewById(targetTab);
+					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().pullupLoading();");
+//					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().scrollTo(0,0,100)");
+				}
+//				console.log("targetTab");
+//				console.log(targetTab);
+				plus.webview.show(targetTab);
+				
+			});
+			
+			//下拉刷新/上拉加载
+//		var contentWebview = null;
+//		document.querySelector('header').addEventListener('doubletap', function() {
+//			contentWebview = plus.webview.currentWebview().children()[pageFlag];
+//			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+//		});
+		</script>
+	</body>
+
+</html>

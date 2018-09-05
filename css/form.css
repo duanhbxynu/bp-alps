@@ -1,0 +1,302 @@
+/*.mui-input-group .mui-input-row {
+				height: 2.8rem;
+			}
+			
+			.mui-input-row label~input[type=text] {
+				padding-right: 1.8rem;
+				text-align: right;
+			}
+			
+			.mui-input-row label~input{
+				width: 55%;
+			}*/
+			
+			
+			
+			/*.mui-radio-customer-type .mui-radio label{
+				width: 50%;
+				display: inline;
+				top:0.55rem;
+				height: 50px;
+			}
+			*/
+			/*.mui-radio-customer-type .mui-radio{
+				top:0.55rem;
+				line-height: 2;
+				
+			}*/
+			/*.mui-radio-customer-type .mui-radio label{
+				padding-top: 20px;
+			}*/
+			/*.customer-type-person label:after{
+				position: absolute;
+				top: 0.78rem;
+				left: 3.22rem;
+				height: 24px;
+				width: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}*/
+			
+			/*.mui-radio-customer-type .mui-radio label{
+				line-height: 2;
+				width: 50%;
+				display: inline;
+				text-align: left;
+			   	height: 1.22rem;
+			}*/
+			
+			/*.mui-icon-clear {
+				height: 1.6rem!important;
+				top: 0.78rem!important;
+				line-height: 1.2;
+			}*/
+			
+			/*.mui-radio.mui-left label {
+				padding-left: 1.22rem;
+			}*/
+			
+			/*.mui-input-group .mui-input-row:after,
+			.mui-table-view-cell:after {
+				right: 0.83rem;
+			}*/
+			
+			/*.radio-list {
+				height: 2.8rem;
+				float: right;
+			}
+			
+			.mui-radio input[type=radio]:checked:before {
+				color: #CB2924;
+			}*/
+			
+			/*.mui-checkbox.mui-left input[type=checkbox],
+			.mui-radio.mui-left input[type=radio] {
+				width: 20px;
+				height: 20px;
+				top: 0.78rem;
+				left: 0px;
+			}*/
+			
+			/*.mui-checkbox input[type=checkbox]:before,
+			.mui-radio input[type=radio]:before {
+				font-size: 0.78rem;
+			}
+			
+			.radio-list .mui-radio {
+				display: inline-block;
+			}
+			.mui-radio-customer-type .mui-radio{
+				width: 50%;
+				display: inline;
+			}*/
+			
+			
+			
+			
+			/*.mui-radio-male label:after{
+				position: absolute;
+				top: 0.78rem;
+				left: 3.22rem;
+				height: 24px;
+				width: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #E4E4E4;
+			}*/
+			
+			.mui-input-row .mui-numbox {
+				margin: 7px 15px;
+				
+			}
+			
+			.mui-input-row .mui-inline {
+				color: #999999;
+				height: 50px;
+				
+			}
+			.leads,.brand,.models,.car{
+				float: right;
+			}
+			.leads-desc,.brand-desc,.models-desc,.car-desc{
+				line-height: 2.3;
+			}
+			
+			.mui-icon-arrowdown {
+				line-height: 2;
+				margin-right: 20px ;
+			}
+			
+			.mui-input-row .stream-status label {
+				padding-right: 0px!important;
+				padding-left: 0px;
+				text-align: right;
+				height: 22px;
+				
+			}
+			.mui-input-row .stream-status .reception{
+				line-height: 1.5;
+				width: 25%;
+				text-align: left;
+			   	border-right: 1px solid #cccccc;
+			   	margin-top: 0.75rem!important;
+			   	padding-top: 0px;
+			}
+			
+		
+			.mui-input-row .stream-status .complete{
+				width: 30%;
+				padding-right: 0.83rem!important;
+			}
+			
+			
+			.mui-input-group .mui-button-row {
+				height: 6rem;
+				padding-top: 1.8rem;
+			}
+			
+			.mui-btn {
+				border-radius: 25px;
+				width: 5rem;
+				height: 2rem;
+			}
+			
+			/*.mui-btn:nth-child(2n) {
+				margin-left: 0.83rem;
+			}*/
+			.customer-type-list{
+				width:55%;
+			}
+			.customer-type-list .mui-radio{
+				width: 45%;
+				/*text-align: right;*/
+			}
+			.customer-type-person{
+				text-align: center;
+				    /*border-right: 1px solid #c8c7cc;*/
+				    /*height: 22px;*/
+				    /*margin-top:13px;*/
+				
+			}
+			.customer-type-company{
+				text-align: right;
+				
+			}
+			
+			.customer-type-list .mui-radio label{
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+			/*.customer-type-person:after{
+				position: absolute;
+				float: none;
+				top: 0.78rem;
+				height: 24px;
+				width: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}*/
+			/*.radio_inline{
+                display: inline-block;
+                width: 65%;
+            }
+            .radio_inline label{
+
+                width: 20%;
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .radio_inline input[type=radio]{
+
+                width: 15%;             
+                right: auto;
+            }*/
+			/*.customer-type input[type=radio] {
+				left:0.78rem!important;
+			}
+			.customer-type-company input[type=radio] {
+				left:2.7rem!important;
+			}*/
+			.customer-type-company input[type=radio] {
+				right: 78px!important;
+				left: 22px!important;
+			}
+			
+			
+			.mui-input-row textarea{
+				float: none!important;
+				display: block;
+				margin: 0px auto;
+				width: calc(100% - 40px)!important;
+				width: -moz-calc(100% - 40px)!important;
+				width: -webkit-calc(100% - 40px)!important;
+				border: 1px solid #C9C9C9!important;
+				border-radius: 2px;
+				padding: 5px!important;
+				
+			}
+			.link-area {
+				/*display: inline;*/
+				width: 55%;
+				/*text-align: right;*/
+				/*width: auto;*/
+				float: right;
+				
+			}
+			.link-area .mui-radio:first-child{
+				display: inline-block;
+				width: 45%;
+				text-align: right;
+			}
+			.link-area .mui-radio:first-child label,.link-area .mui-radio:last-child label{
+				display: inline-block;
+				width: 90%;
+				text-align: right;
+				/*padding-right: 15px;*/
+			}
+			
+			.link-area .mui-radio:first-child input[type=radio],.link-area .mui-radio:last-child input[type=radio]{
+				display: inline-block;
+				width: 10%;
+				padding-right: 0px;
+				text-align: right;
+				left: 10px;
+				/*padding-right: 15px;*/
+			}
+			
+			.link-area .mui-radio:last-child{
+				display: inline-block;
+				width: 45%;
+				text-align: right;
+			}
+			
+			.spliter {
+				width: 1px;
+				height: 24px;
+				color: #E4E4E4;
+/*				border: 1px solid #E4E4E4;
+*/				/*padding: 0px 8px;*/
+				-webkit-transform: scaleY(.5);
+   				transform: scaleY(.5); 
+   			 	/*background-color: #E4E4E4;*/
+			}
+			
+		
+			
+			.mui-button-row{
+				display: inline-block;
+				padding-left: 45px;
+				padding-right: 10px;
+				width: 100%;
+			}
+			.mui-button-row .mui-btn{
+				width: calc((100% - 110px)/2);
+				width: -moz-calc((100% - 110px)/2);
+				width: -webkit-calc((100% - 110px)/2);
+				margin-right: 35px;
+			}

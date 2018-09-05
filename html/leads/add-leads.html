@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<style>
+			
+		    
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">新建线索</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<div class="mui-card detail-scroll">
+				<div class="mui-input-group">
+					<div class="mui-input-row radio-multiple-row">
+						<label class="radio-multiple-label">客户类型</label>
+						<div class="radio-list radio-multiple-list radio-type-list">	
+							<div class="mui-radio mui-left customer-type customer-type-person">
+								<label class="active">个人</label>
+								<input id="Gender_male" name="type" class="gender" type="radio" checked="true" />
+						    </div>
+							<!--<span class="spliter">|</span>--> 
+							<div class="mui-radio mui-left customer-type ">
+								<label class="company">公司</label>
+								<input id="Gender_female" name="type" class="gender"  type="radio">
+							</div>
+						</div>
+					</div>
+					<div class="mui-input-row">
+						<label>姓名</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入姓名" value="李小姐">
+					</div>
+					<div class="mui-input-row">
+						<label>性别</label>
+						<div class="radio-list radio-single-list radio-gender-list">
+						    <div class="mui-radio mui-left mui-radio-male">
+								<label class="active">男</label>
+								<input id="Gender_male" name="gender" class="gender" type="radio" checked="true" />
+							</div>
+							<!--<span class="spliter" style="margin-right: 8px;">|</span>--> 
+							<div class="mui-radio mui-left mui-radio-female">
+								<label class="female">女</label>
+								<input id="Gender_female" name="gender" class="gender"  type="radio">
+							</div>
+					    </div>
+					</div>
+					<div class="mui-input-row">
+						<label>电话</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入电话" value="122222">
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>线索来源 </label>
+						<span class="mui-select" id="showTypePicker">
+							首次到店
+						</span>
+					</div>
+					<div class="mui-input-row oppor-car-row mui-select-row">
+						<label>意向车系 </label>
+						<span class="mui-select" id="showCarPicker">
+							请选择
+						</span>
+						
+					</div>	
+					<div class="mui-input-row textarea-row">
+						<label>备注</label>
+						<textarea id="textarea" rows="5" placeholder="多行文本框"></textarea>
+					</div>
+					<div class="mui-input-group">	
+						<div class="mui-button-row">
+							<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-cancel">取消</button>
+							<button type="button" class="mui-btn mui-btn-danger btn-save">保存</button>
+						</div>
+					</div>	
+			</div>
+		</div>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/common/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+					var self = plus.webview.currentWebview();
+					
+				});
+				/**
+//					 * 获取对象属性的值
+//					 * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+//					 * @param {Object} obj 对象
+//					 * @param {String} param 属性名
+//					 */
+//					var _getParam = function(obj, param) {
+//						return obj[param] || '';
+//					};
+				//下拉选项卡
+				//线索来源
+				var leadsPicker = new $.PopPicker();
+
+				leadsPicker.setData(leadsData);
+
+				var showleadsPicker = doc.getElementById('showleadsPicker');
+				var leads = doc.getElementById('leads');
+
+				showleadsPicker.addEventListener('tap', function(event) {
+
+					leadsPicker.show(function(items) {
+						leads.innerText = (items[0] || {}).text;
+						leads.setAttribute("data-value",(items[0] || {}).value);
+					
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+				//-----------------------------------------
+					//					//品牌三级联动
+					var carPicker = new $.PopPicker({
+						layer: 3
+					});
+					carPicker.setData(carData3);
+					var showCarPickerButton = doc.getElementById('showCarPicker');
+					var carResult3 = doc.getElementById('car');
+					showCarPickerButton.addEventListener('tap', function(event) {
+						carPicker.show(function(items) {
+							carResult3.innerText = _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+							carResult3.setAttribute("data-value",(items[2] || {}).value);
+						
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

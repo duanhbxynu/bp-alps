@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>线索邀约</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div id="leadsPullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll leads-scroll list-scroll">
+				<!--<div class="mui-card">
+					<div class="mui-card-header">线索编号</div>
+					<div class="mui-card-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									姓名: <span id="name">李小姐</span>
+								</li>
+								<li class="mui-table-view-cell">
+									电话: <span id="tel"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									客户来源: <span id="origin"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									意向车型:<span id="intent_car"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									邀约状态:<span id="invitation_status"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									创建日期:<span id="create_date"></span>
+								</li>
+							</ul>
+					</div>
+				</div>
+				<div class="mui-card">
+					<div class="mui-card-header">线索编号</div>
+					<div class="mui-card-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									姓名: <span id="name"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									电话: <span id="tel"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									客户来源: <span id="origin"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									意向车型:<span id="intent_car"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									邀约状态:<span id="invitation_status"></span>
+								</li>
+								<li class="mui-table-view-cell">
+									创建日期:<span id="create_date"></span>
+								</li>
+							</ul>
+					</div>
+				</div>-->
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<!--<script src="../../js/mui.pullToRefresh.js"></script>-->
+		<!--<script src="../../js/mui.pullToRefresh.material.js"></script>-->
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#leadsPullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+		
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					
+					var leadsScroll = document.body.querySelector('.leads-scroll');
+					var leadsCard = document.body.querySelectorAll('.mui-card');
+					console.log(leadsCard);
+					for(var i = leadsCard.length, len = i + 2; i < len; i++) {
+						var card = document.createElement('div');
+						card.className = 'mui-card';
+						card.innerHTML ='<div class="mui-card-header">线索编号' + (i + 1) +'</div>'+
+										'<div class="mui-card-content">'+
+											'<ul class="mui-table-view">'+
+												'<li class="mui-table-view-cell">'+
+													'姓名 <span id="name"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'电话 <span id="tel"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'客户来源 <span id="origin"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'意向车型 <span id="intent_car"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'邀约状态 <span id="invitation_status"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'创建时间 <span id="create_date"></span>'+
+												'</li>'+
+											'</ul>'+
+										'</div>';
+						console.log("=============line 123================");
+						console.log(card);
+						//下拉刷新，新纪录插到最前面；
+						leadsScroll.insertBefore(card, leadsScroll.firstChild);
+						console.log("=============line 126================");
+						console.log(leadsScroll);
+					}
+					mui('#leadsPullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					
+					var leadsScroll = document.body.querySelector('.leads-scroll');
+					var leadsCard = document.body.querySelectorAll('.mui-card');
+					console.log(leadsScroll);
+					for(var i = leadsCard.length, len = i + 2; i < len; i++) {
+						var card = document.createElement('div');
+						card.className = 'mui-card';
+						card.innerHTML ='<div class="mui-card-header">线索编号' + (i + 1) +'</div>'+
+										'<div class="mui-card-content">'+
+											'<ul class="mui-table-view">'+
+												'<li class="mui-table-view-cell">'+
+													'姓名 <span id="name"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'电话 <span id="tel"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'客户来源 <span id="origin"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'意向车型 <span id="intent_car"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'邀约状态 <span id="invitation_status"></span>'+
+												'</li>'+
+												'<li class="mui-table-view-cell">'+
+													'创建时间 <span id="create_date"></span>'+
+												'</li>'+
+											'</ul>'+
+										'</div>';
+						console.log("=============line 123================");
+						console.log(card);
+						leadsScroll.appendChild(card);
+						console.log("=============line 126================");
+						console.log(leadsScroll);
+						
+								
+					}
+						mui('#leadsPullrefresh').pullRefresh().refresh(true);
+						
+						mui('#leadsPullrefresh').pullRefresh().endPullupToRefresh((++count > 2));
+						showleadsDetail();
+				}, 500);
+			}
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#leadsPullrefresh').pullRefresh().pullupLoading();
+					}, 10);
+
+				});
+			} else {
+				mui.ready(function() {
+					mui('#leadsPullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+			//线索详情
+			function showleadsDetail(){
+				mui('.leads-scroll').on('tap', '.mui-card', function() {
+					var customerId = this.getAttribute("data-customerId");
+					
+					//打开关于页面
+					mui.openWindow({
+						url: 'leads-invitation-detail.html',
+						id: "leadsDetail", //默认使用当前页面的url作为id
+						extras: {
+							customerId: customerId
+						}, //自定义扩展参数
+						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					})
+				})
+			}
+		</script>
+	</body>
+</html>

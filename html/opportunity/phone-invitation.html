@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/popover.css" rel="stylesheet" />
+		<style>
+			.radio-single-list .mui-radio:last-child {
+			    padding-left: 0px!important; 
+			}
+			.mui-input-row label~.radio-list{
+				padding-right: 20px;
+			}
+			
+			.mui-input-row label{
+				padding-right: 0px;
+			}
+			.mui-input-row .mui-icon-search{
+				display: inline!important;
+				width: 10%!important;
+				font-size: 18px;
+			}
+			.mui-input-row label~.market-activity-search{
+			    width: 55%;
+			    padding-right: 20px;
+			    /*padding-top: 15px;
+			    padding-bottom: 15px;*/
+			    font-size: 14px;
+			    text-align: right;
+			    line-height: 20px;
+			    float: right;
+			    margin-bottom: 10px;
+			    margin-top: 10px;
+			}
+			.market-activity-search input[type=text]{
+				height: 30px;
+				margin-bottom: 0px;
+				padding-left: 5px;
+				font-size: 14px;
+				width: calc(90% - 20px);
+				padding-top: 0px;
+			    padding-bottom: 0px;
+			    line-height: 20px!important;
+			    border: 0px;
+			    text-align: right;
+				
+			}
+			.mui-icon-clear {
+			    font-size: 20px;
+			    position: absolute;
+			    z-index: 1;
+			    top: 10px;
+			    right: calc(10% + 10px)!important;
+			    width: 38px;
+			    height: 38px;
+			    text-align: center;
+			    color: #999;
+		    }
+		    #middlePopover {
+				position: fixed;
+				top: 200px;
+				margin-right: 18px;
+				left: auto;
+			}
+			.mui-popover .mui-popover-arrow {
+				left: 90%;
+				/*left:calc(95% - 20px)!important;*/
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">跟进记录详情</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<div class="mui-card leads-scroll leads-detail-scroll">
+				<div class="mui-card-header">跟进录入</div>
+				<div class="mui-card-content">
+					<div class="mui-input-row" id="phone_invitation"> 
+						<label>电话是否接通 </label>
+						<div class="radio-list radio-single-list">
+						        <div class="mui-radio mui-left active">
+									<label class="">是</label>
+								</div>
+								<div class="mui-radio mui-left ">
+									<label>否</label>
+								</div>
+					       </div>
+					</div>
+					<!--<div class="market-activity">
+						<label>市场活动名称</label>
+						
+						<div class="mui-input-row mui-search">
+							<input type="text" class="mui-input-clear" placeholder="">
+						</div>
+					</div>-->
+					
+					<div class="mui-input-row" id="phone_invitation"> 
+						<label>市场活动名称 </label>
+						<div class="market-activity-search">
+						    <input type="text" name="name" id="inputMarketActivity" class="mui-input-clear" placeholder="请输入市场活动名称" value="">
+							<i class="mui-icon mui-icon-search" id="icon_search"></i>
+					    </div>
+						
+					</div>
+					<div class="mui-input-row textarea-row">
+						<label class="">跟进内容</label>
+						<textarea id="textarea" rows="5" placeholder="请输入备注信息" value=""></textarea>
+					</div>
+					<div class="mui-button-row">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-save" id="btn_save">取消</button>
+							<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_create">保存</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+<!--<div class="mui-input-row mui-checkbox ">
+										<label class="active">radio</label>
+										<input name="radio1" type="checkbox" checked>
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox" id="div">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>-->
+		<div id="middlePopover" class="mui-popover">
+					<div class="mui-popover-arrow" id="mui-popover-arrow"></div>
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll market-activity-scroll">
+								<div class="mui-input-group market-activity-group" id="marketActivityGroup">
+									
+								</div>
+						</div>
+					</div>
+		
+				</div>
+		
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/follow/follow.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var MIN_SOUND_TIME = 800;
+				$.init({
+					gestureConfig: {
+						tap: true, //默认为true
+						doubletap: true, //默认为false
+						longtap: true, //默认为false
+						swipe: true, //默认为true
+						drag: true, //默认为true
+						hold: true, //默认为false，不监听
+						release: true //默认为false，不监听
+					}
+				});
+				mui('.mui-scroll-wrapper').scroll();
+				
+//				以下为注意事项：
+
+//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
+				mui.back = function() {
+					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
+				}
+				
+
+				$.plusReady(function() {
+					window.addEventListener('showTitle', function(event) {
+						
+						document.getElementById('mui-title').innerHTML = event.detail.type;
+						
+					});
+				})
+				
+//				2.如果在IOS上，触摸屏幕边缘也是可以关闭页面，造成问题同上，所以处理IOS要做以下处理。（写在b页面）
+//				mui.plusReady(function() {
+//					//右滑返回隐藏webview
+//					plus.webview.currentWebview().setStyle({
+//						'popGesture': 'hide'
+//					);
+//				        //这里的例子是每次进入都会重新加载数据，所以退出（退出以通过处理改为隐藏hide）需要清空页面加载的数据
+//					var self = plus.webview.currentWebview();
+//					self.addEventListener("hide", function(e) {
+//				           //do something...  这里清空加载的数据
+//				        }, false)
+//				});
+
+				doc.getElementById('icon_search').addEventListener('tap',function(){
+					var info = doc.getElementById('inputMarketActivity').value;
+					var params = {
+						name:info
+					}
+//					var offsetLeft = document.getElementById("icon_search").offsetLeft-15;
+//					doc.getElementById("mui-popover-arrow").setAttribute("style","left:"+offsetLeft+"px;")
+//						
+//					$('#middlePopover').popover('show');
+//					return;
+					follow.searchMarketActivity(params,function(data){
+						console.log("market activity result:"+JSON.stringify(data));
+//						var data = JSON.parse(data);
+						console.log(data.success)
+						console.log("--------------------------------------------------------------");
+						if(data.success==true){
+							var marketActivityList = data.marketActivityList;
+							console.log(marketActivityList);
+//							$("#marketActivityContent").html("");
+							var marketActivityContent = doc.body.querySelector('.market-activity-group');
+							//1.清空原ul下的子节点全部清空
+							if(marketActivityContent.children.length>0){
+//							while(marketActivityContent.hasChildNodes()) {
+								console.log('清理列表数据...');
+								marketActivityContent.removeChild();
+							}
+							$.each(marketActivityList,function(i,marketActivity){
+								
+								var html = document.createElement('div');
+								html.className = 'mui-input-row mui-checkbox';
+								html.setAttribute("data-code",marketActivity.code );
+								html.innerHTML ='<label>'+marketActivity.name+'</label>'+
+												'<input name="radio1" type="checkbox">';
+								marketActivityContent.appendChild(html);
+							})
+							var marketActivityHeight = doc.getElementById('marketActivityGroup');
+							var contentHeight = marketActivityHeight.offsetHeight;
+							console.log(contentHeight);
+							var offsetLeft = document.getElementById("icon_search").offsetLeft-15;
+							doc.getElementById("mui-popover-arrow").setAttribute("style","left:"+offsetLeft+"px;")
+						
+//							if(contentHeight<300){
+//								doc.getElementById('middlePopover').setAttribute("style","height:"+contentHeight+"px!important;display:block;");
+//							}
+							$('#middlePopover').popover('show');
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+					})
+				})
+//				mui('.mui-input-row').on('change', 'input[class="mui-input-clear"]',function() {
+//					console.log(this.value);
+//				})
+				mui('.market-activity-group').on('tap','.mui-checkbox',function(){
+					$('#middlePopover').popover('hide');
+					
+//					var marketActivity = this;
+//					marketActivity.children[0].classList.add('active');
+					document.getElementById("inputMarketActivity").value='activity1';
+//					console.log(document.getElementById("div").siblings());
+//					console.log(marketActivity.parentNode);
+//					document.getElementById("div").parentNode.children[0];
+				})
+				doc.getElementById('btn_create').addEventListener('tap',function(){
+					$.back();
+				})
+				doc.getElementById('btn_save').addEventListener('tap',function(){
+					$.back();
+				})
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

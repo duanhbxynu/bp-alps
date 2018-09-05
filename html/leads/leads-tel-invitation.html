@@ -1,0 +1,407 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/leads.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<style>
+			
+			
+			.mui-input-row label~input[type=text] {
+				direction: rtl;
+				padding-right: 1.8rem;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 55%;
+			}
+			
+			.mui-input-row label {
+				line-height: 22px;
+				font-family: PingFangSC-Regular;
+				width: 45%;
+			}
+			
+			
+			.mui-icon-clear {
+				height: 1.6rem!important;
+				top: 0.78rem!important;
+				line-height: 1.2;
+			}
+			
+			.mui-radio.mui-left label {
+				padding-left: 1.22rem;
+			}
+			
+			.mui-input-group .mui-input-row:after,
+			.mui-table-view-cell:after {
+				right: 0.83rem;
+			}
+			
+			.radio-list {
+				height: 2.8rem;
+				float: right;
+			}
+			
+			.mui-radio input[type=radio]:checked:before,.mui-checkbox input[type=checkbox]:checked:before {
+				color: #C71B1E ;
+				box-shadow: ;
+			}
+			
+			.mui-checkbox.mui-left input[type=checkbox],
+			.mui-radio.mui-left input[type=radio] {
+				width: 20px;
+				height: 20px;
+				top: 0.78rem;
+				left: 0px;
+			}
+			
+			.mui-checkbox input[type=checkbox]:before,
+			.mui-radio input[type=radio]:before {
+				font-size: 0.78rem;
+			}
+			
+			.radio-list .mui-radio {
+				display: inline-block;
+			}
+			
+			.mui-radio.mui-left .active,
+			.stream-status .active {
+				color: #CB2924;
+			}
+			
+			.mui-radio-female {
+				padding-left: 1.22rem;
+			}
+			
+			.mui-radio.mui-left.mui-radio-female input[type=radio] {
+				left: 20px;
+			}
+			
+			.mui-radio-male label:after {
+				position: absolute;
+				top: 0.78rem;
+				left: 3.22rem;
+				height: 24px;
+				width: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.mui-input-row .mui-numbox {
+				margin: 7px 15px;
+				
+			}
+			
+			.mui-input-row .mui-inline {
+				color: #999999;
+				
+			}
+			.stream-type{
+				float: right;
+			}
+			.stream-type-desc{
+				line-height: 22px;
+			}
+			
+			.mui-icon-arrowdown {
+				margin-right: 18px ;
+				font-size: 16px;
+				line-height: 22px;
+			}
+			.mui-input-group .mui-button-row {
+				height: 6rem;
+				padding-top: 1.8rem;
+			}
+			
+			.mui-btn {
+				border-radius: 25px;
+				width: 5rem;
+				height: 2rem;
+			}
+			
+			.btn-create-intention {
+				margin-left: 0.83rem;
+			}
+			
+			
+			.follow-content textarea{
+				margin: 12px 28px 30px 20px;
+				
+				width: 90%;
+			}
+			.lable-inline-right label{
+				line-height: 22px;
+			    width: 25%;
+			    text-align: right;
+			    /*border-right: 1px solid #E4E4E4;*/
+			    /*margin-top: 0.75rem!important;*/
+			    padding: 11px 0px;
+			}
+			/*.lable-inline-right label:last-child:before{
+				position: absolute;
+				top: 0.65rem;
+				right: 70px;
+				height: 24px;
+				width: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #E4E4E4;
+			}*/
+			.lable-inline-right .lable-inline-hr{
+				width: 20%;
+				text-align: center;
+				color: #E4E4E4;
+				box-shadow: none;
+			}
+			.lable-inline-right label:last-child{
+				 padding-right: 20px;
+				 width: 5%;
+			}
+			
+			
+			.mui-plus .plus{
+				display: inline;
+			}
+			
+			.plus{
+				display: none;
+			}
+			
+			#middlePopover {
+				position: fixed;
+				top: 16px;
+				margin-right: 18px;
+				left: auto;
+			}
+			
+			/*p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}*/
+			.mui-popover {
+				height: 300px;
+				left:18px!important;
+				background: #FFFFFF;
+				width: 90%;
+				text-align: center;
+			}
+			.mui-popover .mui-popover-arrow{
+				top:-20px;
+				
+			}
+			.mui-popover .mui-popover-arrow:after{
+				background: #FFFFFF;
+			}
+			.mui-input-group:before,.mui-input-group:after,.mui-input-group .mui-input-row:last-child:after{
+				height: 0px;
+			}
+			.mui-popover .mui-checkbox input[type=checkbox]{
+				right:8px;
+				top:11px;
+			}
+			.mui-popover .mui-input-group .mui-input-row{
+				height: auto;
+				min-height: 48px;
+			}
+			.mui-popover .mui-checkbox label{
+				text-align: center;
+				word-break:break-all;
+				width: auto;
+				max-width: 98%;
+			}
+			.mui-popover .mui-checkbox .active:before{
+				position: relative;
+			    box-shadow: 0 2px 2px 0 rgba(199,27,30,0.40);
+			    
+			    margin-right: 20px;
+			    content: '!';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #C71B1E;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">跟进记录详情</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<div class="mui-card leads-scroll leads-detail-scroll">
+					<div class="mui-card-header">跟进类目</div>
+					<div class="mui-card-content">
+						<div class="mui-input-row">
+							<label>跟进类型 </label>
+							
+						</div>
+						<div class="mui-input-row">
+							<label>电话是否接通 </label>
+							<span class="lable-inline-right">
+								<label class="active">是</label>
+								<label class="lable-inline-hr">|</label>
+								<label>否</label>
+							</span>
+						</div>
+						<div class="mui-input-row">
+							<label>市场活动名称 </label>
+							<div class="stream-type">
+								<a id="streamType" class="mui-inline stream-type-desc" href="#" data-value="1">
+									首次到店
+								</a>
+								<!--<a href="#middlePopover" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px;">-->
+								<a href="#middlePopover" class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown" id="showTypePicker"></a>
+								
+							</div>
+						</div>
+						<div class="mui-input-row" >
+							<label>跟进内容 </label>
+						</div>
+						<div class="mui-input-row follow-content" >
+							<textarea id="textarea" rows="5" placeholder="多行文本框">1111</textarea>
+						</div>
+					</div>
+				</div>
+			
+				<div class="mui-button-row">
+					<button type="button" id="tel_invitation" class="mui-btn mui-btn-danger mui-btn-outlined">取消</button>
+					<button type="button" id="create_intention" class="mui-btn mui-btn-danger">保存</button>
+				</div>
+				<div id="middlePopover" class="mui-popover">
+					<div class="mui-popover-arrow"></div>
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+								<div class="mui-input-group">
+									<div class="mui-input-row mui-checkbox">
+										<label class="active">radio</label>
+										<input name="radio1" type="checkbox" checked>
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+								</div>
+						</div>
+					</div>
+		
+				</div>
+		</div>
+		
+		
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common/common.js"></script>
+		<script src="../../js/common/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init({
+//					statusBarBackground: '#f7f7f7'
+				});
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				
+
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+					var self = plus.webview.currentWebview();
+
+
+				});
+
+//				//下拉选项卡
+//				var streamTypePicker = new mui.PopPicker();
+//
+//				streamTypePicker.setData(streamTypeData);
+//
+				var showTypePicker = doc.getElementById('showTypePicker');
+//				var streamType = doc.getElementById('streamType');
+//
+				showTypePicker.addEventListener('tap', function(event) {
+					
+				}, false);
+
+				doc.getElementById('create_intention').addEventListener('tap',function(){
+					//打开关于页面
+					mui.openWindow({
+						url: 'leads-tel-invitation-detail.html',
+						id: "telInvitationDetail" //默认使用当前页面的url作为id
+					})
+				})
+				
+				
+				
+				
+				
+				mui('.mui-scroll-wrapper').scroll({indicators:false});
+				var showTypePicker = doc.getElementById('showTypePicker');
+				showTypePicker.addEventListener('tap', function(event) {
+					
+					
+				}, false);
+				mui('body').on('shown', '.mui-popover', function(e) {
+//					document.body.removeChild(doc.body.querySelector(".mui-backdrop"));
+					
+				});
+				mui('body').on('hidden', '.mui-popover', function(e) {
+					//console.log('hidden', e.detail.id);//detail为当前popover元素
+				});
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

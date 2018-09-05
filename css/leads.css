@@ -1,0 +1,17 @@
+
+.mui-content{
+	height: auto;
+}
+.mui-control-item{
+	color: #333333!important;
+}
+
+.btn-outlined-sm{
+	width: 3.5rem!important;
+}
+.btn-lined-lg{
+	width: 7.5rem!important;;
+}
+/*.mui-btn:nth-child(2n) {
+	margin-left: 2.6rem;
+}*/

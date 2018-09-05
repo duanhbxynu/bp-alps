@@ -3167,8 +3167,10 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		var xhr = settings.xhr(settings);
 		var nativeSetHeader = xhr.setRequestHeader;
 		var abortTimeout;
-
+		
+		
 		setHeader('X-Requested-With', 'XMLHttpRequest');
+		
 		setHeader('Accept', mime || '*/*');
 		if(!!(mime = settings.mimeType || mime)) {
 			if(mime.indexOf(',') > -1) {
@@ -3321,6 +3323,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		$.ajaxSettings = $.extend($.ajaxSettings, {
 			xhr: function(settings) {
 				if (settings.crossDomain) { //强制使用plus跨域
+					console.log("//强制使用plus跨域");
 					return new plus.net.XMLHttpRequest();
 				}
 				//仅在webview的url为远程文件，且ajax请求的资源不同源下使用plus.net.XMLHttpRequest

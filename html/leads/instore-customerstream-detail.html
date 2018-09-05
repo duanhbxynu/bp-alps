@@ -1,0 +1,626 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!--<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta http-equiv="content-security-policy">-->
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/modal.css" />
+		<style>
+			
+			.stream-status-row label{
+				width: 35%!important;
+				padding-right: 0px!important;
+			}
+			.mui-input-row .stream-status{
+				width: calc((65% - 20px)/2)!important;
+				width: -moz-calc((65% - 20px)/2)!important;;
+				width: -webkit-calc((65% - 20px)/2)!important;
+				text-align: center;
+				/*border-right: 1px solid #E4E4E4;*/
+			}
+			.mui-input-row .stream-status:last-child{
+				text-align: right;
+				padding-right: 8px!important;
+			}
+			/*.stream-status-row .stream-status:last-child:before{
+				position: absolute;
+				margin-left: -20px;
+			    height: 22px;
+			    width: 1px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #E4E4E4;
+			}*/
+			/*.mui-input-row .stream-status label {
+				padding-right: 0px!important;
+				padding-left: 0px;
+				text-align: right;
+				height: 22px;
+			}*/
+			.mui-input-row .stream-status .reception{
+				line-height: 1.5;
+				width: 25%;
+				text-align: left;
+			   	border-right: 1px solid #E4E4E4;
+			   	margin-top: 0.75rem!important;
+			   	padding-top: 0px;
+			}
+			
+		
+			.mui-input-row .stream-status .complete{
+				width: 30%;
+				padding-right: 1.8rem!important;
+			}
+			
+			
+			.hr{
+				position: absolute;
+				display: inline;
+				margin-top:15px!important;
+				margin-bottom:15px!important;;
+				margin-left: 9px;
+				height: 20px;
+				border:0.5px solid #E4E4E4;
+				text-align: center;    
+				
+			}
+			
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">到店客流详情</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<div class="mui-card leads-detail-scroll detail-scroll ">
+				<div class="mui-card-header" id="flow_id">
+					客流编号
+				</div>
+				<div class="mui-card-content">
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<label>姓名</label>
+							<input type="text" name="name" id="flow_name" class="mui-input-clear" placeholder="请输入姓名" value="">
+							<!--<span class="mui-icon mui-icon-clear "></span>-->
+						</div>
+						<div class="mui-input-row">
+							<label>性别</label>
+							<div class="radio-list radio-single-list radio-gender-list">
+						        <div class="mui-radio mui-left mui-radio-male active">
+									<label class="">男</label>
+									<input id="male" name="gender" class="gender" value="MALE" type="radio" checked="true" />
+								</div>
+								<div class="mui-radio mui-left mui-radio-female">
+									<label class="female">女</label>
+									<input id="female" name="gender" class="gender" value="FEMALE"  type="radio">
+								</div>
+					       </div>
+						</div>
+						<div class="mui-input-row">
+							<label>电话</label>
+							<input type="text" id="flow_phone" name="phone" class="mui-input-clear" placeholder="请输入电话" value="">
+						</div>
+						<div class="mui-input-row">
+							<label>到店人数（男）</label>
+							<input type="text" id="flow_inMan" name="inMan" class="mui-input-clear" placeholder="请输入人数" value="0">
+							<!--<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0'>
+								<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+								<input class="mui-numbox-input" id="flow_inMan" name="inMan" type="number" />
+								<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+							</div>-->
+						</div>
+						<div class="mui-input-row">
+							<label>到店人数（女）</label>
+							<input type="text" id="flow_inWoman" name="inWoman" class="mui-input-clear" placeholder="请输入人数" value="0">
+							<!--<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0' data-numbox-max='10'>-->
+							<!--<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0'>
+								<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+								<input class="mui-numbox-input" id="flow_inWoman"  name="inWoman" type="number"/>
+								<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+							</div>-->
+						</div>
+						<div class="mui-input-row mui-select-row">
+							<label>客流类型 </label>
+							<!--<i class="mui-icon mui-icon-arrowdown" id="showTypePicker">4</i>-->
+							
+							<span class="stream-type mui-select" id="showTypePicker">
+								<!--<a id="streamType" class="mui-inline stream-type-desc" href="#" data-value="1">
+									首次到店
+								</a>-->
+								<!--<span class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown" id="showTypePicker"></span>-->
+								首次到店
+							</span>
+							
+							
+						</div>
+						<!--<div class="mui-input-row stream-status-row">
+							<label>处理状态 </label>
+							<span id="stream_status" class="stream-status">
+								<label class="reception active" data-value="reception" id="reception">接待中</label>
+								<label class="complete" data-value="complete" id="complete">接待完成</label>
+							</span>
+						</div>-->
+						
+						<div class="mui-input-row stream-status-row">
+							<label>处理状态 </label>
+							<label class="stream-status reception active" id="reception" data-value="reception">接待中</label>
+							<hr class="hr"></hr>
+							<label class="stream-status complete" id="complete" data-value="reception">接待完成</label>
+							<!--<span id="stream_status" class="stream-status">
+								<label class="reception active" data-value="reception" id="reception">接待中</label>
+								<label class="complete" data-value="complete" id="complete">接待完成</label>
+							</span>-->
+						</div>
+						
+						<div class="mui-button-row">
+							<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-save" id="btn_save">保存</button>
+							<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_create">创建意向</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+		<!--创建意向本人未完结意向-->
+		<div id="modal" class="mui-modal">
+				<header class="mui-bar mui-bar-nav">
+					<!--<a class="mui-icon mui-icon-close mui-pull-right" href="#modal"></a>-->
+					<h1 class="mui-title">意向列表</h1>
+				</header>
+				<div class="mui-content">
+					<p class="modal-self mui-hidden">查询到本人名下存在未完结意向</p>
+					<p class="modal-other">查询到其他销售顾问名下存在未完结意向</p>
+					<div class="mui-input-row">
+						<!--<label id="oppor_code">意向编号</label>
+						<label id="oppor_name">客户姓名</label>
+						<label id="oppor_sales">销售顾问</label>
+						<label id="oppor_create_time">11</label>-->
+						<label id="oppor_code"></label>
+						<label id="oppor_name"></label>
+						<label id="oppor_sales"></label>
+						<label id="oppor_create_time"></label>
+					</div>
+					<div class="modal-self mui-button-row mui-hidden">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" id="btn_cancel">取消</button>
+						<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_save_create">提交</button>
+					</div>
+					<div class="modal-other mui-button-row">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-outlined-sm" id="btn_cancel">取消</button>
+						<button type="button" class="mui-btn mui-btn-danger btn-create-intention btn-lined-lg" id="btn_save_create">获取意向编辑权限</button>
+					</div>
+				</div>
+		</div>
+			
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/mui.jsonp.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/lead.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/regex.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init({
+					beforeback: function() {
+				　　　　 //获得父页面的webview 
+				
+//						var indexLeads = plus.webview.getWebviewById("instore-customerstream.html").opener();
+//						plus.webview.getWebviewById("instore-customerstream.html").hide();
+//				　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+//				        $.fire(indexLeads, 'refresh',{
+//				        	targetTab:'instore-customerstream.html',
+//				        	targetid:'customerstream'
+//				        });
+				        
+				        
+				        var indexOpener = plus.webview.getWebviewById("leads/index-leads.html").opener();
+				        var indexLeads = plus.webview.getWebviewById("leads/index-leads.html")
+//						indexLeads.hide();
+						
+						
+						$.fire(indexOpener, 'refresh',{
+					        targetTab:'leads/index-leads.html',
+					        activeTab:'leadsTab'
+					    });
+				    
+				    
+
+//						//获得父页面的webview 
+//						var customerstream = plus.webview.currentWebview().opener();
+//				　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+//				        $.fire(customerstream, 'refresh',null);
+				        //返回true,继续页面关闭逻辑
+				        return true;
+				    }
+				});
+//				console.log(mui('.stream-status-row .stream-status:first-child'))
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				//添加show自定义事件监听
+				window.addEventListener('show', function(event) {
+					
+					var customerFlowId = event.detail;
+					
+					lead.getCustomerFlowDetail(customerFlowId,function(data){
+						
+						var data = JSON.parse(data);
+						if(data.success==true) {
+							var customerFlowList = data.customerFlowList;
+							if(customerFlowList){
+								var gender = customerFlowList[0].gender;
+								var typeCode = customerFlowList[0].typeCode;
+								var statusCode = customerFlowList[0].statusCode;
+								var phone = customerFlowList[0].phone;
+					
+								document.getElementById('flow_id').innerHTML = '客流编号'+customerFlowList[0].id;
+								document.getElementById('flow_id').setAttribute("data-id",customerFlowList[0].id);
+								if(customerFlowList[0].name){
+									document.getElementById('flow_name').setAttribute('value',customerFlowList[0].name);
+								}
+								if(customerFlowList[0].phone){
+									document.getElementById('flow_phone').setAttribute('value',customerFlowList[0].phone);
+								}
+								if(customerFlowList[0].inMan){
+									document.getElementById('flow_inMan').setAttribute('value',customerFlowList[0].inMan);
+								}
+								if(customerFlowList[0].inWoman){
+									document.getElementById('flow_inWoman').setAttribute('value',customerFlowList[0].inWoman);
+								}
+								if(gender == 'MALE'){
+									doc.getElementsByClassName("mui-radio-male")[0].classList.add('active');
+									doc.getElementById('male').setAttribute("checked",true); 
+									doc.getElementsByClassName("mui-radio-female")[0].classList.remove('active');
+									doc.getElementById('female').removeAttribute("checked")
+								}else if(gender == 'FEMALE'){
+									doc.getElementsByClassName("mui-radio-female")[0].classList.add('active');
+									doc.getElementById('female').setAttribute("checked",true); 
+									doc.getElementsByClassName("mui-radio-male")[0].classList.remove('active');
+									doc.getElementById('male').removeAttribute("checked")
+								}
+								if(typeCode){
+									var typeText = common.baseOption.getSelectHtml(typeCode,streamTypeData);
+							    //  doc.getElementById('streamType').innerText = typeText;
+								//  doc.getElementById('streamType').setAttribute("data-value",typeCode);
+									doc.getElementById('showTypePicker').innerText = typeText;
+									doc.getElementById('showTypePicker').setAttribute("data-value",typeCode);
+								}
+								if(statusCode == 'pending'){
+									doc.getElementById('reception').classList.add('active');
+									doc.getElementById('complete').classList.remove('active');
+								}else if(statusCode == 'complete'){
+									doc.getElementById('reception').classList.remove('active');
+									doc.getElementById('complete').classList.add('active');
+								}
+							}
+							
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+						
+					});
+					
+					
+					
+				}, false);
+				
+				
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+					
+					
+					
+//					$.oldBack = mui.back;
+//					var backButtonPress = 0;
+//					$.back = function(event) {
+//						backButtonPress++;
+//						if (backButtonPress > 1) {
+//							plus.runtime.quit();
+//						} else {
+//							plus.nativeUI.toast('再按一次退出应用');
+//						}
+//						setTimeout(function() {
+//							backButtonPress = 0;
+//						}, 1000);
+//						return false;
+//					};
+
+
+//					$.oldBack = mui.back;
+//				　　　$.back = function(event) {
+//				　　　	$.oldBack = back('main', '../index-leads.html');
+//				　　　　	return false;
+//				　　　};
+
+					
+				});
+				
+				
+//				function back(keys, urls){
+//				　　　　mui.plusReady(function(){
+//				　　　　var self = plus.webview.currentWebview();	
+//				　　　　var opener = self.opener();	
+//				　　　　if(opener){
+//				　　　　　　mui.fire(opener,'newsId',{}); 
+//				　　　　}	
+//				　　　　self.close();
+//				　　　　opener.show();
+//				　　})
+//				
+//			　	　}
+
+				//下拉选项卡
+				var streamTypePicker = new mui.PopPicker();
+
+				streamTypePicker.setData(streamTypeData);
+
+				var showTypePicker = doc.getElementById('showTypePicker');
+				var streamType = doc.getElementById('streamType');
+
+				showTypePicker.addEventListener('tap', function(event) {
+
+					streamTypePicker.show(function(items) {
+						showTypePicker.innerText = (items[0] || {}).text;
+						var streamTypeValue = (items[0] || {}).value;
+						showTypePicker.setAttribute("data-value",streamTypeValue);
+					
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+				
+				//性别切换
+				$('.radio-gender-list').on('tap','.gender',function(){
+//					this.classList.add('active');
+//					$(this).('.gender').setAttribute("checked",true); 
+//					
+//					
+//					console.log(this);
+					var gender = this;
+//					var radioList = $('.radio-gender-list .mui-radio');
+					
+					if (this) {
+					//				input.click();
+							
+						this.checked = !this.checked;
+						$.trigger(this, 'change');
+							
+						$(".radio-gender-list .mui-radio").each(function () {
+//								console.log(this.classList);
+								this.classList.remove('active');
+						}) 
+						gender.parentNode.classList.add('active');
+							
+					}
+				})
+				
+				//处理状态切换
+				$('.stream-status-row').on('tap','.stream-status',function(){
+					var active = this;
+					$(".stream-status").each(function () {
+						this.classList.remove('active');
+					}) 
+					
+					active.classList.add('active');
+				})
+				//创建意向
+//				doc.getElementById('btn_create').addEventListener('tap',function(){
+					
+//					首先到“意向”表中“客流编号”字段检查是否存在本客流编号，如果存在，则提示该客流已经创建意向记录，不可重复创建
+					//1.未查询到本人名下存在未完结意向,允许直接创建新的意向
+//					$('#modal').show();
+//					document.getElementById("modal").classList.add('mui-active')
+//					document.getElementById("modal").setAttribute('style','min-height: auto;')
+//					var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
+//					mask.show();//显示遮罩
+//					mask.close();//关闭遮罩
+//				})
+				
+				//创建意向
+				
+				doc.getElementById('btn_create').addEventListener('tap',function(){
+//					
+					var name = document.getElementById('flow_name').value;
+					var gender = document.querySelector('[name="gender"]:checked').value;
+					var mobilestr = doc.getElementById('flow_phone').value;
+					var flow = {
+						name:name,
+						gender:gender,
+						mobile:mobilestr
+					}
+					if(!RegCheck.mobile(mobilestr)){
+						return plus.nativeUI.toast("请输入正确的电话");
+					}
+					var params = {mobile:mobilestr};
+					//首先到“意向”表中“客流编号”字段检查是否存在本客流编号，如果存在，则提示该客流已经创建意向记录，不可重复创建
+					lead.checkOppor(params,function(data){
+						var data = JSON.parse(data);
+						console.log("opportunity detail result:"+JSON.stringify(data));
+						console.log("--------------------------------------------------------------");
+						if(data.success==true){
+							var opportunity = data.opportunityList[0];
+							var currentUser = JSON.parse(localStorage.getItem('$state')).username;
+							//2.查询到本人名下存在未完结意向
+							console.log("currentUser");
+							console.log(currentUser);
+							console.log("opportunity.code");
+							console.log(opportunity.code);
+							console.log(opportunity.createdPerson);
+							if(opportunity.createdPerson == currentUser){
+								openOpporPage(opportunity.code,opportunity);
+//							location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"&id="+opportunity.code);
+							}else{
+							//3.查询到其他销售顾问名下的未完结意向	
+								document.getElementById("modal").classList.add('mui-active')
+								document.getElementById("modal").setAttribute('style','min-height: auto;')
+								var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
+								$('#oppor_code').setAttribute('data-opprcode',opportunity.code);
+								document.getElementById('oppor_code').innerHTML = '意向编号'+opportunity.code;
+								document.getElementById('oppor_name').innerHTML = '客户姓名'+opportunity.name;
+								document.getElementById('oppor_sales').innerHTML = '销售人员'+opportunity.createdPerson;
+//								document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
+								mask.show();//显示遮罩
+							}
+						}else{
+							//1.未查询到本人名下存在未完结意向,允许直接创建新的意向,将客流的姓名，性别，电话自动带入意向维护页面
+							openOpporPage("",flow);
+//							location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"");
+						}
+					})
+				})
+				
+				
+				//保存到店客流详情
+				doc.getElementById('btn_save').addEventListener('tap',function(){
+					
+					var id = document.getElementById('flow_id').getAttribute("data-id");
+					var name = document.getElementById('flow_name').value;
+					var gender = document.querySelector('[name="gender"]:checked').value;
+					var phone = document.getElementById('flow_phone').value;
+					var inMan = document.getElementById("flow_inMan").value;
+					var inWoman = document.getElementById("flow_inWoman").value;
+					if(!RegCheck.mobile(phone)){
+						return plus.nativeUI.toast("请输入正确的电话");
+					}
+					if(!RegCheck.number(inMan)){
+						return plus.nativeUI.toast("请输入正确的到店人数(男)");
+					}
+					if(!RegCheck.number(inWoman)){
+						return plus.nativeUI.toast("请输入正确的到店人数(女)");
+					}
+					
+					var typeCode = doc.getElementById('showTypePicker').getAttribute("data-value");
+					var statusCode = document.querySelector('.stream-status-row .active').getAttribute("data-value");
+					var params = {
+						"id": id,
+						"name": name,
+						"gender": gender,
+						"phone": phone,
+						"inMan": inMan,
+						"inWoman": inWoman,
+						"typeCode": typeCode,
+						"statusCode": statusCode
+					};
+					lead.updateCustomerDetail(params,function(data){
+						var data = JSON.parse(data);
+						if(data.success==true) {
+//							alert(data.success);
+							
+							// 获取所有Webview窗口
+//							var wvs=plus.webview.all();
+//							for(var i=0;i<wvs.length;i++){
+//								console.log('webview'+i+': '+wvs[i].getURL());
+//							}
+	
+//							alert($.back);
+//							var indexLeads = plus.webview.getWebviewById("main");
+//							if(indexLeads){
+//								indexLeads.close();
+//							}
+					       	
+							$.back();
+//							var old_back = $.back;  
+//							$.back = function(){
+//								var oper = plus.webview.currentWebview().opener();
+//								alert(oper);
+//							    var indexLeads = plus.webview.getWebviewById("main");
+//							    alert("indexLeads");
+//							    alert(indexLeads);
+//							    if(!indexLeads){
+//							    	$.openWindow({
+//							            "id":"main",
+//							            "url":'../index-leads.html'
+//						        	})
+//							    }
+//								//触发父页面的自定义事件(refresh),从而进行刷新
+//								$.fire(indexLeads, 'refresh',{
+//									targetTab:'leads/instore-customerstream.html',
+//									targetid:'customerstream'
+//								});
+//								return false;
+////								$.openWindow({
+////						            "id":"main",
+////						            "url":'../index-leads.html'
+////						        })
+//								old_back();
+//							}
+//							alert($.back);
+			                  
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+					});
+					
+				})
+				
+				function openOpporPage(code,flowToOppor){
+					console.log("创建意向");
+//					console.log("code = "+code);
+//					//打开关于页面
+					mui.openWindow({
+						url: '../opportunity/add-opportunity-baseinfo.html',
+						id: "oppor-baseinfo", //默认使用当前页面的url作为id
+						styles: { //窗口参数
+							popGesture: 'hide'
+							},
+						extras: {
+							code: code,
+							flowToOppor:flowToOppor
+						}, //自定义扩展参数
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
+							//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+						},
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '正在加载...' //等待对话框上显示的提示内容
+						},
+						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					})
+				}
+				
+				
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>
