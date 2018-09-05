@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<style>
+			
+			.mui-table-view-cell:after {
+				height: 0px!important;
+			}
+			
+			.mui-table-view-cell var {
+				float: right;
+				color: #212121;
+			}
+			.status{
+				color: #C71B1E!important;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-plusempty mui-pull-right" id="add_price"></a>
+			<h1 class="mui-title" id="mui-title">商谈报价</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<ul class="mui-table-view mui-clearfix">
+						<li class="mui-table-view-cell">
+							报价单号<var id="name">OP0001</var>
+						</li>
+						<li class="mui-table-view-cell">
+							状态<var id="tel" class="status">草稿</var>
+						</li>
+						<li class="mui-table-view-cell">
+							报价时间<var id="intent_car">2018-09-03</var>
+						</li>
+						<li class="mui-table-view-cell">
+							总价 <var id="origin">￥ 20万</var>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<ul class="mui-table-view mui-clearfix">
+						<li class="mui-table-view-cell">
+							报价单号<var id="name">OP002</var>
+						</li>
+						<li class="mui-table-view-cell">
+							状态<var id="tel" class="status">草稿</var>
+						</li>
+						<li class="mui-table-view-cell">
+							报价时间<var id="intent_car">2018-09-02</var>
+						</li>
+						<li class="mui-table-view-cell">
+							总价 <var id="origin">￥ 21万</var>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		
+
+		
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common/common.js"></script>
+		<script src="../../js/common/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+					var self = plus.webview.currentWebview();
+					//					processid = self.processid;
+					//					status = self.status;
+					//					showContent(processid, status);
+					//					showModal();
+
+				});
+
+
+				doc.getElementById('add_price').addEventListener('tap', function() {
+					//打开关于页面
+										mui.openWindow({
+											url: 'add-discuss-price.html',
+											id: "add-price"//默认使用当前页面的url作为id
+					//						extras: {
+					//							customerId: customerId
+					//						}, //自定义扩展参数
+					//						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+										})
+				})
+
+				
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>
