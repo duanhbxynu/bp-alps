@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "html/index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -124,6 +124,145 @@
 					"xxhdpi": ""
 				}
 			}
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"html/leads/index-leads.html": {
+				"resources": [],
+				"refer": [
+					"html/leads/instore-customerstream-detail.html",
+					"html/login.html"
+				],
+				"priority": 0
+			},
+			"html/index.html": {
+				"resources": [
+					"html/leads/index-leads.html"
+				],
+				"refer": [
+					"html/opportunity/index-opportunity.html"
+				],
+				"priority": 0
+			},
+			"html/login.html": {
+				"resources": [],
+				"refer": [
+					"html/reg.html",
+					"html/index.html"
+				],
+				"priority": 0
+			},
+			"html/opportunity/index-opportunity.html": {
+				"resources": [],
+				"refer": [
+					"html/opportunity/opportunity-detail.html",
+					"html/login.html"
+				],
+				"priority": 0
+			},
+			"html/opportunity/opportunity-detail.html": {
+				"resources": [],
+				"refer": [
+					"html/opportunity/phone-invitation.html",
+					"html/opportunity/follow-record.html"
+				],
+				"priority": 0
+			},
+			"html/opportunity/follow-record.html": {
+				"resources": [],
+				"refer": [
+					"html/opportunity/follow-record-detail.html"
+				],
+				"priority": 0
+			},
+			"html/leads/instore-customerstream-detail.html": {
+				"resources": [],
+				"refer": [
+					"html/opportunity/add-opportunity-baseinfo.html"
+				],
+				"priority": 0
+			},
+			"html/opportunity/add-opportunity-baseinfo.html": {
+				"resources": [],
+				"refer": [
+					"html/opportunity/add-opportunity-bussinessinfo.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/lead.js",
+				"js/mui.picker.min.js",
+				"js/follow/follow.js",
+				"js/oppor/oppor.js",
+				"fonts/mui-icons-extra.ttf",
+				"html/unlock.html",
+				"js/common.js",
+				"js/common/Md5.js",
+				"js/oppor/oppor-bussiness-picker.js",
+				"js/mui.poppicker.js",
+				"js/mui.js",
+				"js/common/regex.js",
+				"css/mui.imageviewer.css",
+				"css/mui.picker.min.css",
+				"js/common/common-validator.js",
+				"html/leads/leads-invitation-detail.html",
+				"js/common/common-header-Initialization.js",
+				"html/leads/leads-tel-invitation.html",
+				"css/chat.css",
+				"js/app.js",
+				"js/mui.picker.js",
+				"js/common/crypto.js",
+				"html/opportunity/add-opportunity-workfamilyinfo.html",
+				"html/main.html",
+				"js/common/sha1.js",
+				"js/common/base64.js",
+				"js/mui.pullToRefresh.material.js",
+				"css/popover.css",
+				"fonts/mui.ttf",
+				"css/mui.css",
+				"js/mui.enterfocus.js",
+				"index.html",
+				"html/leads/add-leads.html",
+				"css/leads.css",
+				"html/opportunity/index-opportunity-sub.html",
+				"js/common/arttmpl.js",
+				"css/form.css",
+				"js/oppor/oppor-family-picker.js",
+				"html/leads/search-leads.html",
+				"js/mui.imageViewer.js",
+				"js/mui.jsonp.js",
+				"html/opportunity/index-opportunity-1.html",
+				"js/common/hmac.js",
+				"js/common/common-database.js",
+				"js/common/select.data.js",
+				"html/leads/instore-customerstream.html",
+				"html/forget_password.html",
+				"css/icons-extra.css",
+				"html/opportunity/discuss-price.html",
+				"js/common/car.data-3.js",
+				"js/common/app-update-util.js",
+				"js/mui.min.js",
+				"js/webviewGroup.js",
+				"js/common/city.data-3.js",
+				"css/mui.poppicker.css",
+				"js/mui.pullToRefresh.js",
+				"js/common/common-header.js",
+				"css/style.css",
+				"html/opportunity/add-discuss-price.html",
+				"css/mui.picker.css",
+				"css/modal.css",
+				"js/mui.picker.all.js",
+				"html/leads/leads-invitation.html",
+				"css/mui.min.css",
+				"js/mui.locker.js",
+				"html/leads/leads-tel-invitation-detail.html",
+				"css/reset.css",
+				"js/common/common-dealImg.js",
+				"css/timeline.css"
+			]
 		}
 	}
 }

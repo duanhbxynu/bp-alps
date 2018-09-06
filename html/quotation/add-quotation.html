@@ -10,158 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
-		<style>
-			
-			.mui-table-view-cell:after {
-				height: 0px!important;
-			}
-			
-			.status{
-				color: #C71B1E!important;
-			}
-			.price-content .mui-card-header{
-				height: auto;
-				padding:15px 0px;
-			}
-			.price-content .mui-card-header .mui-table-view{
-				width: 100%;
-			}
-			.price-content.mui-card .mui-card-header:not:before{
-			    height: 24px;
-			    width: 2px;
-			    box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);
-			    position: absolute;
-			    right: 0;
-			    left: 0px;
-			    content: '';
-			    -webkit-transform: scaleY(.5);
-			    transform: scaleY(.5);
-			    background-color: #C71B1E;
-			}
-			/*.price-content.mui-card .mui-card-header .mui-table-view:after{
-				
-			}*/
-			.price-content .mui-card-header .mui-table-view-cell{
-				padding: 0px;
-				padding-left: 20px;
-			}
-			
-			.price-content .mui-card-header .mui-table-view-cell:first-child{
-				font-size: 16px;
-				color: #C71B1E;
-				font-weight: 600;
-				line-height: 22px;
-			}
-			.price-content .mui-card-header .mui-table-view-cell:last-child{
-				font-size: 12px;
-				color: #999999;
-				padding-top: 3px;
-			}
-			.price-content .mui-card-header .mui-table-view-cell:first-child:before{
-				height:22px;
-				width:2px;
-				box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);
-				position: absolute;
-				top:-1px;
-				right: 0;
-				left: 0px;
-				content: '';
-				-webkit-transform: scaleY(.5);
-				transform: scaleY(.5);
-				background-color: #C71B1E;
-			}
-			.price-card .mui-card-content label{
-				padding-right: 28px;
-			}
-			.price-card .mui-card-content var{
-				color: #333333;
-			}
-			.price-card .mui-card-content input[type=text]{
-				width: auto;
-				height: auto;
-				padding: 10px 0px;
-				border:0px;
-				border-bottom: 1px solid rgba(228,228,228,.5);
-    			border-radius: 0px;
-    			color: #999999;
-    			margin-bottom: 0px;
-			}
-			.mui-icon-arrowdown {
-				font-size: 14px;
-				color: #333333;
-			}
-			.mui-icon-arrowdown:after {
-			    content: '\e581';
-			}
-			.mui-icon-arrowdown:before {
-			    content: '';
-			}
-			.car-card .mui-table-view-cell>a:not(.mui-btn){
-				margin-left: -20px;
-				margin-right: -60px;
-				margin-top:-15px;
-				/*margin-bottom: 0px;*/
-				font-size: 15px;
-				color: #333333;
-				font-weight: 600;
-				height: 45px;
-			}
-			.mui-navigate-right:after, .mui-push-left:after, .mui-push-right:after{
-				color: #333333;
-			}
-			.car-card .mui-table-view-cell.mui-active{
-				background: #FFFFFF!important;
-			}
-			.car-card .mui-table-view-cell.mui-active a{
-				color: #CE575A;
-			}
-			.car-card .mui-table-view-cell.mui-active a:before{
-				height:24px;
-				width:2px;
-				box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);
-				position: absolute;
-				right: 0;
-				left: 0px;
-				top:13px;
-				content: '';
-				-webkit-transform: scaleY(.5);
-				transform: scaleY(.5);
-				background-color: #C71B1E;
-			}
-			.car-card .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{
-				/*margin:0px!important;*/
-				margin-left: 0px!important;
-				margin-top: 10px;
-			}
-			.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
-				padding-left: 0px;
-				background-position: 0px 100%;
-				padding-top: 5px;
-				font-size: 14px;
-				margin-left: -10px;
-			}
-			.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell .require{
-				margin-top: 20px;
-				height: 5px;
-			}
-			/*.require:before{
-				height:5px;
-				width:5px;
-				/*box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);*/
-				position: absolute;
-				right: 0;
-				left: 5px;
-				top:13px;
-				content: '*';
-				-webkit-transform: scaleY(.2);
-				transform: scaleY(.2);
-				background-color: #C71B1E;
-			}*/
-			.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell label{
-				color: #333333;
-			}
-		</style>
-
+		<link rel="stylesheet" type="text/css" href="../../css/quotation/addQuotation.css"/>
 	</head>
 
 	<body>
@@ -169,7 +18,6 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title" id="mui-title">新建报价单</h1>
 		</header>
-
 		<div class="mui-content price-content" id="mui-content">
 			<div class="mui-card mui-clearfix price-card">
 				<div class="mui-card-header">
@@ -200,109 +48,241 @@
 					</ul>
 				</div>
 			</div>
-
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">车辆信息</a>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell">
-								<span style="color: #C71B1E;">*</span>
+			<!--车辆信息-->
+			<div class="mui-card car-card carDetails">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">车辆信息</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
 								<label class="require">品牌</label>
-								<var>奥迪</var>
+								<p class="selBrand">
+									<span class="brands">请选择品牌</span>
+								</p>
 							</li>
-							<li class="mui-table-view-cell">
-								<span style="color: #C71B1E;">*</span>
-								<label>品牌</label>
-								<var>奥迪</var>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">车系</label>
+								<p class="selseries">
+									<span class="series">请选择车系</span>
+								</p>
 							</li>
-							<li class="mui-table-view-cell">
-								<span style="color: #C71B1E;">*</span>
-								<label>品牌</label>
-								<var>奥迪</var>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">车型</label>
+								<p class="selCarType">
+									<span class="carType">请选择车型</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">外观颜色</label>
+								<p class="selOutColors">
+									<span class="outColors">请选择外观颜色</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">内饰颜色</label>
+								<p class="selInnerColors">
+									<span class="innerColors">请选择内饰颜色</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime">
+								<label class="require">预计交车时间</label>
+								<p class="selPreTime">
+									<span class="preTime">请填写预计交车时间</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">厂方指导价</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="guide">
+									<input type="number" placeholder="请填写厂方指导价"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">车辆销售价</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="sellMoney">
+									<input type="number" placeholder="请填写车辆销售价"/>
+								</p>								
+							</li>							
+							<li class="mui-table-view-cell brand">
+								<label class="require">付款方式</label>
+								<p class="selPayWay">
+									<span class="payWay">请选择付款方式</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell comments">
+								<label class="require">备注</label>
+								<textarea placeholder="请填写备注信息"></textarea>
 							</li>
 						</ul>
-					</li>
-				</ul>	
+			        </li>
+			    </ul>
 			</div>	
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">原厂选装</a>
-						<div class="mui-collapse-content">
-							<form class="mui-input-group">
-								<div class="mui-input-row">
-									<label>Input</label>
-									<input type="text" placeholder="普通输入框">
+			<!--原厂选装-->
+			<div class="mui-card car-card original">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">原厂选装</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" placeholder="请输入原装选厂关键字">
 								</div>
-								<div class="mui-input-row">
-									<label>Input</label>
-									<input type="text" class="mui-input-clear" placeholder="带清除按钮的输入框">
-								</div>
-		
-								<div class="mui-input-row mui-plus-visible">
-									<label>Input</label>
-									<input type="text" class="mui-input-speech mui-input-clear" placeholder="语音输入">
-								</div>
-								<div class="mui-button-row">
-									<button class="mui-btn mui-btn-primary" type="button" onclick="return false;">确认</button>&nbsp;&nbsp;
-									<button class="mui-btn mui-btn-primary" type="button" onclick="return false;">取消</button>
-								</div>
-							</form>
-						</div>
-					</li>
-				</ul>	
+							</li>
+						</ul>
+			        </li>
+			    </ul>
 			</div>
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
+			<!--装潢-->
+			<div class="mui-card car-card original">
+				<ul class="mui-table-view"> 			
 					<li class="mui-table-view-cell mui-collapse">
 						<a class="mui-navigate-right" href="#">装潢</a>
 						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
-							</li>
-						</ul>
-					</li>
-				</ul>	
-			</div>
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">二手车登记</a>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" placeholder="请输入原装选厂关键字">
+								</div>
 							</li>
 						</ul>
 					</li>
 				</ul>	
 			</div>
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
+			<!--二手车登记-->
+			<div class="mui-card car-card carDetails secondHand">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">二手车登记</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell mui-input-row mui-radio predictTime guideMoney">
+		                       <span>*</span>
+								<label class="require" style="margin: 0;">是否置换</label>
+		                        <span class="radio_inline mui-radio" style="margin-right: 0;float: right;height: 18px;">
+		                            <input name="radio1" type="radio" id="radio_yes" checked value="1">
+		                            <label for="radio_yes">是</label>
+		                            <input name="radio1" type="radio" id="radio_no" value="0">     
+		                            <label for="radio_no" style="padding-right: 0;">否</label>        
+		                        </span>               
+		           			</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">行驶里程</label>
+								<p style="float:right;margin-left: 12px;color: black;">公里</p>
+								<p class="">
+									<input type="number" placeholder="请填写行驶里程"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell  predictTime guideMoney">
+								<label class="require">购买年份</label>
+								<p class="">
+									<input type="text" placeholder="请填写购买年份"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell  predictTime guideMoney">
+								<label class="require">二手车品牌</label>
+								<p class="">
+									<input type="text" placeholder="请填写品牌"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">车型</label>
+								<p class="">
+									<input type="text" placeholder="请填写车型"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">估价金额</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" placeholder="请填写估价金额"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell mui-input-row mui-radio predictTime guideMoney">
+								<label class="require" style="margin: 0;">收购方式</label>
+		                        <span class="radio_inline mui-radio" style="margin-right: 0;float: right;height: 18px;">
+		                            <input name="radio2" type="radio" checked value="1">
+		                            <label for="radio_yes">抵车款</label>
+		                            <input name="radio2" type="radio" value="0">     
+		                            <label for="radio_no" style="padding-right: 0;">现金</label>        
+		                        </span>               
+		           			</li>
+							<li class="mui-table-view-cell comments">
+								<label class="require">备注</label>
+								<textarea placeholder="请填写备注信息"></textarea>
+							</li>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--上牌-->
+			<div class="mui-card car-card carDetails secondHand">
+				<ul class="mui-table-view"> 			
 					<li class="mui-table-view-cell mui-collapse">
 						<a class="mui-navigate-right" href="#">上牌</a>
 						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">新车购置税</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" placeholder="请填写新车购置税"/>
+								</p>
 							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							<li class="mui-table-view-cell mui-input-row mui-radio predictTime guideMoney">
+								<label class="require" style="margin: 0;">上牌方式</label>
+		                        <span class="radio_inline mui-radio" style="margin-right: 0;float: right;height: 18px;">
+		                            <input name="radio3" type="radio" checked value="1">
+		                            <label for="radio_yes">自行上牌</label>
+		                            <input name="radio3" type="radio" value="0">     
+		                            <label for="radio_no" style="padding-right: 0;">本店上牌</label>        
+		                        </span>               
+		           			</li>
+		           			<li class="mui-table-view-cell mui-input-row mui-radio predictTime guideMoney">
+								<label class="require" style="margin: 0;">车辆产地</label>
+		                        <span class="radio_inline mui-radio" style="margin-right: 0;float: right;height: 18px;">
+		                            <input name="radio4" type="radio" id="radio_yes" checked value="1">
+		                            <label for="radio_yes">国产</label>
+		                            <input name="radio4" type="radio" id="radio_no" value="0">     
+		                            <label for="radio_no" style="padding-right: 0;">进口</label>        
+		                        </span>               
+		           			</li>
+		           			
+		           			
+		           			
+		           			
+		           			
+		           			<!---->
+							<li class="mui-table-view-cell brand">
+								<label class="require">上牌地图</label>
+								<p class="">
+									<span class="">请选择地址</span>
+								</p>
 							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							
+							
+							
+							
+							
+							
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">上牌服务费</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" placeholder="请填写服务费"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell comments">
+								<label class="require">备注</label>
+								<textarea placeholder="请填写备注信息"></textarea>
 							</li>
 						</ul>
 					</li>
 				</ul>	
 			</div>
+			<!--金融产品-->
 			<div class="mui-card car-card">
 				<ul class="mui-table-view mui-table-view-chevron">
 					
@@ -319,6 +299,7 @@
 					</li>
 				</ul>	
 			</div>
+			<!--新车车险-->
 			<div class="mui-card car-card">
 				<ul class="mui-table-view mui-table-view-chevron">
 					
@@ -335,6 +316,7 @@
 					</li>
 				</ul>	
 			</div>
+			<!--卡券-->
 			<div class="mui-card car-card">
 				<ul class="mui-table-view mui-table-view-chevron">
 					
@@ -351,6 +333,7 @@
 					</li>
 				</ul>	
 			</div>
+			<!--延保-->
 			<div class="mui-card car-card">
 				<ul class="mui-table-view mui-table-view-chevron">
 					
@@ -367,6 +350,7 @@
 					</li>
 				</ul>	
 			</div>
+			<!--其他项目-->
 			<div class="mui-card car-card">
 				<ul class="mui-table-view mui-table-view-chevron">
 					
@@ -389,14 +373,13 @@
 		
 
 		<script src="../../js/mui.js"></script>
-		<script src="../../js/common/common.js"></script>
-		<script src="../../js/common/mui.picker.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/common/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
-
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -411,6 +394,54 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				
+				//选择车辆信息
+				var picker = new mui.PopPicker();
+				mui(".brand").on('tap','.selBrand .brands',function(){				
+					picker.setData(selBrands);
+					picker.show(function(SelectedItem) {
+						document.getElementsByClassName("brands")[0].innerHTML = SelectedItem[0].text;
+					});
+				});
+				mui(".brand").on('tap','.selseries .series',function(){				
+					picker.setData(selSeries);
+					picker.show(function(SelectedItem) {
+						document.getElementsByClassName("series")[0].innerHTML = SelectedItem[0].text;
+					});
+				});
+				mui(".brand").on('tap','.selCarType .carType',function(){				
+					picker.setData(selCarType);
+					picker.show(function(SelectedItem) {
+						document.getElementsByClassName("carType")[0].innerHTML = SelectedItem[0].text;
+					});
+				});
+				mui(".brand").on('tap','.selOutColors .outColors',function(){				
+					picker.setData(selOutColors);
+					picker.show(function(SelectedItem) {
+						document.getElementsByClassName("outColors")[0].innerHTML = SelectedItem[0].text;
+					});
+				});
+				mui(".brand").on('tap','.selInnerColors .innerColors',function(){				
+					picker.setData(selInnerColors);
+					picker.show(function(SelectedItem) {
+						document.getElementsByClassName("innerColors")[0].innerHTML = SelectedItem[0].text;
+					});
+				});
+				mui(".brand").on('tap','.selPayWay .payWay',function(){				
+					picker.setData(selPayWay);
+					picker.show(function(SelectedItem) {
+						document.getElementsByClassName("payWay")[0].innerHTML = SelectedItem[0].text;
+					});
+				});
+				//选择预计交车时间
+//				var dtPicker = new mui.DtPicker(); 
+//				mui(".predictTime").on('tap','.selPreTime .preTime',function(){				
+//					dtPicker.show(function (selectItems) { 
+//				        console.log(selectItems.y);
+//				        console.log(selectItems.m);
+//				    })
+//				});
+			    
 
 				$.plusReady(function() {
 

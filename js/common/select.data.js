@@ -412,3 +412,76 @@ var incomeData = [{
 	value: '09',
 	text: '200万以上'
 }]
+
+//新建报价单-车辆信息-品牌
+var selBrands = [{
+	value: "01",
+	text: "奥迪"
+}, {
+    value: "02",
+	text: "宝马"
+}, {
+    value: "03",
+	text: "奔驰"
+}, {
+    value: "04",
+	text: "兰博基尼"
+}, {
+    value: "05",
+	text: "法拉利"
+}]
+//选择车型
+var selSeries = [{
+	value: "01",
+	text: "A3"
+}, {
+    value: "02",
+	text: "A5"
+}, {
+    value: "03",
+	text: "A8"
+}]
+//选择车系
+var selCarType = [{
+	value: "01",
+	text: "A3 001"
+}, {
+    value: "02",
+	text: "A3 002"
+}, {
+    value: "03",
+	text: "A3 003"
+}]
+//选择外饰颜色
+var selOutColors = [{
+	value: "01",
+	text: "红色"
+}, {
+    value: "02",
+	text: "蓝色"
+}, {
+    value: "03",
+	text: "黄色"
+}]
+//选择内饰颜色
+var selInnerColors = [{
+	value: "01",
+	text: "红色"
+}, {
+    value: "02",
+	text: "蓝色"
+}, {
+    value: "03",
+	text: "黄色"
+}]
+//请选择付款方式
+var selPayWay = [{
+	value: "01",
+	text: "现金"
+}, {
+    value: "02",
+	text: "银联"
+}, {
+    value: "03",
+	text: "支付宝"
+}]

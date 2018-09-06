@@ -1,0 +1,251 @@
+.mui-table-view-cell:after {
+	height: 0px!important;
+}
+
+.status {
+	color: #C71B1E!important;
+}
+
+.price-content .mui-card-header {
+	height: auto;
+	padding: 15px 0px;
+}
+
+.price-content .mui-card-header .mui-table-view {
+	width: 100%;
+}
+
+.price-content.mui-card .mui-card-header:not:before {
+	height: 24px;
+	width: 2px;
+	box-shadow: 0 2px 4px 0 rgba(199, 27, 30, 0.40);
+	position: absolute;
+	right: 0;
+	left: 0px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #C71B1E;
+}
+
+.price-content .mui-card-header .mui-table-view-cell {
+	padding: 0px;
+	padding-left: 20px;
+}
+
+.price-content .mui-card-header .mui-table-view-cell:first-child {
+	font-size: 16px;
+	color: #C71B1E;
+	font-weight: 600;
+	line-height: 22px;
+}
+
+.price-content .mui-card-header .mui-table-view-cell:last-child {
+	font-size: 12px;
+	color: #999999;
+	padding-top: 3px;
+}
+
+.price-content .mui-card-header .mui-table-view-cell:first-child:before {
+	height: 22px;
+	width: 2px;
+	box-shadow: 0 2px 4px 0 rgba(199, 27, 30, 0.40);
+	position: absolute;
+	top: -1px;
+	right: 0;
+	left: 0px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #C71B1E;
+}
+
+.price-card .mui-card-content label {
+	width: 25%;
+    display: inline-block;
+}
+
+.price-card .mui-card-content input[type=text] {
+	width: 73%;
+	height: auto;
+	padding: 10px 0px;
+	border: 0px;
+	border-bottom: 1px solid rgba(228, 228, 228, .5);
+	border-radius: 0px;
+	color: #999999;
+	margin-bottom: 0px;
+}
+
+.mui-icon-arrowdown {
+	font-size: 14px;
+	color: #333333;
+}
+
+.mui-icon-arrowdown:after {
+	content: '\e581';
+}
+
+.mui-icon-arrowdown:before {
+	content: '';
+}
+
+.car-card .mui-table-view-cell>a:not(.mui-btn) {
+	margin-left: -20px;
+	margin-top: -15px;
+	font-size: 15px;
+	color: #333333;
+	font-weight: 600;
+	height: 45px;
+}
+
+.mui-navigate-right:after,
+.mui-push-left:after,
+.mui-push-right:after {
+	color: #333333;
+}
+
+.car-card .mui-table-view-cell.mui-active {
+	background: #FFFFFF!important;
+}
+
+.car-card .mui-table-view-cell.mui-active a {
+	color: #CE575A;
+}
+
+.car-card .mui-table-view-cell.mui-active a:before {
+	height: 24px;
+	width: 2px;
+	box-shadow: 0 2px 4px 0 rgba(199, 27, 30, 0.40);
+	position: absolute;
+	right: 0;
+	left: 0px;
+	top: 13px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #C71B1E;
+}
+
+.car-card .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron {
+	margin-top: 10px;
+	margin-left: 15px;
+}
+
+.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell {
+	background-position: 0px 100%;
+	padding: 15px 0;
+	font-size: 14px;
+	margin-left: -10px;
+	padding-right: 15px;
+}
+
+.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell .require {
+	margin-top: 20px;
+	height: 5px;
+}
+
+.mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell label {
+	color: #333333;
+}
+
+.carDetails .mui-table-view-cell > span {
+	float: left;
+	display: inline-block;
+	margin-right: 5px;
+	position: relative;
+	top: 2px;
+	color: #C71B1E;
+}
+.carDetails .mui-table-view .mui-table-view-chevron li:not(:last-child){
+	border-bottom: 1px solid #E4E4E4;
+}
+.mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron {
+    margin-right: 0;
+}
+.carDetails .mui-table-view-cell p{
+	display: inline;
+	
+}
+
+.carDetails .mui-table-view-chevron .brand p span:after{
+	position: absolute;
+    display: inline-block;
+    content: '\e580';
+    color: #8f8f94;
+    right: 0;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .predictTime{
+	padding-right: 0;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .guideMoney input{
+	width: auto;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    text-align: right;
+    border: none;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments{
+	padding-right: 0;
+	padding-bottom: 25px;
+	margin-top: 20px;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments textarea{
+	margin-top: 12px;
+}
+.original  .mui-search{
+	display: inline-block;
+	width: 100%;
+}
+.original .mui-search input{
+	height: 32px;
+}
+.original .mui-table-view-cell span{
+	float: left;
+	margin-right: 15px;
+    font-size: 14px;
+}
+.original .mui-icon-search:before{
+	position: relative;
+	top: 6px;
+	left: 5px;
+}
+.original .mui-input-row .mui-input-clear~.mui-icon-clear{
+	top: 6px !important;
+}
+.original .mui-table-view-cell.mui-collapse .mui-collapse-content{
+	padding-right: 0;
+}
+.original .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
+	margin-left: -15px;
+    padding-right: 0; 
+}
+
+
+.secondHand .radio_inline{
+    display: inline-block;
+    width: 65%;
+    margin-right: 0;
+    text-align: right !important;
+}
+ .secondHand .radio_inline label{
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    top: -17px;
+}
+.secondHand .radio_inline input[type=radio]{
+    width: 15%;             
+    right: auto;
+    top: -4px;
+    z-index: 1000;
+}
+
+.secondHand .mui-radio > label.require{
+	margin:0;
+	padding: 0;
+	width: 22%;
+	float: left;
+}
