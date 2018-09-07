@@ -170,9 +170,10 @@
 .carDetails .mui-table-view-chevron .brand p span:after{
 	position: absolute;
     display: inline-block;
+    font-family: Muiicons;
     content: '\e580';
     color: #8f8f94;
-    right: 0;
+    right: -2px;
 }
 .carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .predictTime{
 	padding-right: 0;
