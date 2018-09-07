@@ -89,10 +89,10 @@
 									<span class="innerColors">请选择内饰颜色</span>
 								</p>
 							</li>
-							<li class="mui-table-view-cell predictTime">
+							<li class="mui-table-view-cell predictTime guideMoney">
 								<label class="require">预计交车时间</label>
 								<p class="selPreTime">
-									<span class="preTime">请填写预计交车时间</span>
+									<input class="preTime" type="text" placeholder="请填写预计交车时间"/>
 								</p>
 							</li>
 							<li class="mui-table-view-cell predictTime guideMoney">
@@ -248,25 +248,13 @@
 		                            <input name="radio4" type="radio" id="radio_no" value="0">     
 		                            <label for="radio_no" style="padding-right: 0;">进口</label>        
 		                        </span>               
-		           			</li>
-		           			
-		           			
-		           			
-		           			
-		           			
-		           			<!---->
+		           			</li>		           			
 							<li class="mui-table-view-cell brand">
-								<label class="require">上牌地图</label>
-								<p class="">
-									<span class="">请选择地址</span>
+								<label class="require">上牌地址</label>
+								<p class="selAddress">
+									<span class="address">请选择地址</span>
 								</p>
-							</li>
-							
-							
-							
-							
-							
-							
+							</li>							
 							<li class="mui-table-view-cell predictTime guideMoney">
 								<label class="require">上牌服务费</label>
 								<p style="float:right;margin-left: 12px;color: black;">元</p>
@@ -283,17 +271,81 @@
 				</ul>	
 			</div>
 			<!--金融产品-->
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
+			<div class="mui-card car-card carDetails secondHand">
+				<ul class="mui-table-view"> 			
 					<li class="mui-table-view-cell mui-collapse">
 						<a class="mui-navigate-right" href="#">金融产品</a>
 						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">金融类型</label>
+								<p class="">
+									<span class="">请选择类型</span>
+								</p>
 							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">金融期限</label>
+								<p class="">
+									<span class="">请选择期限</span>
+								</p>
 							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">金融机构</label>
+								<p class="">
+									<span class="">请选择机构</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">金融产品</label>
+								<p class="">
+									<span class="">请选择产品</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell brand">
+								<span>*</span>
+								<label class="require">起租日期</label>
+								<p class="">
+									<span class="">请选择日期</span>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<span>*</span>
+								<label class="require">按揭/融资金额</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" placeholder="请填写费用"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<span>*</span>
+								<label class="require">金融服务费</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" placeholder="请填写费用"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">利率</label>
+								<p class="">
+									<input type="number" placeholder="请填写利率"/>
+								</p>
+							</li>							
+							<li class="mui-table-view-cell mui-input-row mui-radio predictTime guideMoney">
+								<span>*</span>
+								<label class="require" style="margin: 0;">是否抵押</label>
+		                        <span class="radio_inline mui-radio" style="margin-right: 0;float: right;height: 18px;">
+		                            <input name="radio5" type="radio" checked value="1">
+		                            <label for="radio_yes">是</label>
+		                            <input name="radio5" type="radio" value="0">     
+		                            <label for="radio_no" style="padding-right: 0;">否</label>        
+		                        </span>               
+		           			</li>
+							<li class="mui-table-view-cell comments">
+								<label class="require">备注</label>
+								<textarea placeholder="请填写备注信息"></textarea>
 							</li>
 						</ul>
 					</li>
@@ -317,56 +369,71 @@
 				</ul>	
 			</div>
 			<!--卡券-->
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">卡券</a>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+			<div class="mui-card car-card original">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">卡券</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" placeholder="请输入卡券关键字">
+								</div>
 							</li>
 						</ul>
-					</li>
-				</ul>	
+			        </li>
+			    </ul>
 			</div>
 			<!--延保-->
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">延保</a>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
-							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+			<div class="mui-card car-card original">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">延保</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" placeholder="请输入延保关键字">
+								</div>
 							</li>
 						</ul>
-					</li>
-				</ul>	
+			        </li>
+			    </ul>
 			</div>
 			<!--其他项目-->
-			<div class="mui-card car-card">
-				<ul class="mui-table-view mui-table-view-chevron">
-					
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">其他项目</a>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">iOS</a>
+			<div class="mui-card car-card carDetails secondHand">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">其他</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell  predictTime guideMoney">
+								<label class="require">综合服务内容</label>
+								<p class="">
+									<input type="text" placeholder="请填写内容"/>
+								</p>
 							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">Android</a>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">综合服务费</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" placeholder="请填写服务费"/>
+								</p>
 							</li>
-							<li class="mui-table-view-cell"><a class="mui-navigate-right" href="#">HTML5</a>
+							<li class="mui-table-view-cell  predictTime guideMoney">
+								<label class="require">其他收入描述</label>
+								<p class="">
+									<input type="text" placeholder="请填写内容"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">其他收入</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" placeholder="请填写"/>
+								</p>
 							</li>
 						</ul>
-					</li>
-				</ul>	
-			</div>
+			        </li>
+			    </ul>
+			</div>	
 		</div>
 		
 
@@ -377,6 +444,7 @@
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -442,6 +510,14 @@
 //				    })
 //				});
 			    
+			    //请选择上牌地址
+			    var picker2 = new mui.PopPicker({layer: 3});
+			    mui(".brand").on('tap','.selAddress .address',function(){				
+					picker2.setData(childrenData3);
+					picker2.show(function(SelectedItem) {
+						document.getElementsByClassName("address")[0].innerHTML = SelectedItem[0].text+" "+SelectedItem[1].text+" "+SelectedItem[2].text;
+					});
+				});
 
 				$.plusReady(function() {
 
