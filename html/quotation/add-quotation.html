@@ -500,13 +500,12 @@
 					});
 				});
 				//选择预计交车时间
-//				var dtPicker = new mui.DtPicker(); 
-//				mui(".predictTime").on('tap','.selPreTime .preTime',function(){				
-//					dtPicker.show(function (selectItems) { 
-//				        console.log(selectItems.y);
-//				        console.log(selectItems.m);
-//				    })
-//				});
+				mui(".predictTime").on('tap','.selPreTime .preTime',function(){		
+					picker.setData(purchaseTimeTypeCodeData);
+					picker.show(function(SelectedItem) {
+						document.getElementsByClassName("preTime")[0].value = SelectedItem[0].text;
+					});
+				});
 			    
 			    //请选择上牌地址
 			    var picker2 = new mui.PopPicker({layer: 3});
