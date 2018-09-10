@@ -404,20 +404,23 @@
 				}, false);
 				
 				//性别切换
+				$('.radio-gender-list').on('tap','.mui-radio',function(){
+					
+					$(".radio-gender-list .mui-radio").each(function () {
+						this.classList.remove('active');
+					}) 
+					this.classList.add('active');
+					this.childNodes[3].checked = true;
+					
+				})
 				$('.radio-gender-list').on('tap','.gender',function(){
 //					this.classList.add('active');
 //					$(this).('.gender').setAttribute("checked",true); 
-//					
-//					
-//					console.log(this);
 					var gender = this;
-//					var radioList = $('.radio-gender-list .mui-radio');
 					
 					if (this) {
-					//				input.click();
 							
-						this.checked = !this.checked;
-						$.trigger(this, 'change');
+						this.checked = true;
 							
 						$(".radio-gender-list .mui-radio").each(function () {
 //								console.log(this.classList);

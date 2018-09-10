@@ -35,8 +35,16 @@
 			<div class="mui-demo-container">
 				<div id="demo1" class="mui-text-left">
 					<div class="timeline">
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		
+		<div class="timeline-hidden  mui-hidden">
 						<!-- TIMELINE ITEM -->
-						<div class="timeline-item">
+						<div class="timeline-item mui-hidden">
 							<div class="timeline-badge">
 							</div>
 							<div class="timeline-body">
@@ -55,7 +63,7 @@
 						</div>
 						<!-- END TIMELINE ITEM -->
 						<!-- TIMELINE ITEM -->
-						<div class="timeline-item">
+						<div class="timeline-item mui-hidden">
 							<div class="timeline-badge">
 							</div>
 							<div class="timeline-body">
@@ -74,7 +82,7 @@
 						</div>
 						<!-- END TIMELINE ITEM -->
 					<!-- TIMELINE ITEM -->
-						<div class="timeline-item">
+						<div class="timeline-item mui-hidden">
 							<div class="timeline-badge">
 							</div>
 							<div class="timeline-body">
@@ -99,11 +107,6 @@
 						</div>
 						<!-- END TIMELINE ITEM -->
 					</div>
-				</div>
-
-			</div>
-
-		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/common.js"></script>
 		<script src="../../js/follow/follow.js"></script>
@@ -120,7 +123,7 @@
 				//获取父级页面查询过来的参数
 				var self = plus.webview.currentWebview();
 				var opporCode = self.opporCode;
-//				showFollowRecord(opporCode);
+				showFollowRecord(opporCode);
 			});
 			function showFollowRecord(opporCode){
 				
@@ -129,11 +132,13 @@
 				}
 				follow.getOpporFollow(params,function(data){
 					console.log(data);
-					console.log(JSON.parse(data));
-					var data = JSON.parse(data);
+					console.log(data.success);
+					console.log(data.followOpportunityList);
+					console.log("follow oppo list result:"+JSON.stringify(data));
+//					var data = JSON.parse(data);
 					if(data.success==true) {
 						var followOpportunityList = data.followOpportunityList;
-						console.log(followOpportunityList.length);
+						console.log(followOpportunityList);
 						var timeline = document.body.querySelector('.timeline');
 						if(followOpportunityList.length>0){
 							$.each(followOpportunityList,function(index,followOpportunity){
@@ -148,12 +153,13 @@
 						
 								var timelineItem = document.createElement('div');
 								timelineItem.className = 'timeline-item';
-								timelineItem.setAttribute("data-code",followOpportunity.code );
+								timelineItem.setAttribute("data-code",followOpportunity.code);
+								timelineItem.setAttribute("data-typeCode",followOpportunity.typeCode );
 								timelineItem.innerHTML ='<div class="timeline-badge"></div>'+
 												'<div class="timeline-body">'+
 													'<div class="timeline-body-head">'+contentHtml+'</div>'+
 													'<div class="timeline-body-content">'+
-														'<p class="font-12-333">'+followOpportunity.storeName+'&#12288&#12288'+followOpportunity.salesConsultantName+'</p>'+
+														'<p class="font-12-333">'+followOpportunity.storeName+'&nbsp;&nbsp;&nbsp;'+followOpportunity.salesConsultantName+'</p>'+
 													'</div>'+
 												'</div>';
 								console.log("=============line 123================");
@@ -172,15 +178,21 @@
 				})
 			}
 			$('.timeline').on('tap','.timeline-item',function(){
-				var recordCode = this.getAttribute('data-code');
-				mui.openWindow({
-					url: 'follow-record-detail.html',
-					id: "followRecordDetail",//默认使用当前页面的url作为id
-					extras: {
-						recordCode: recordCode
-					}, //自定义扩展参数
-					createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
-				})
+				var followCode = this.getAttribute('data-code');
+				var typeCode = this.getAttribute('data-typeCode');
+//				if(typeCode == 'invitation'||typeCode == 'outsideActivity'||typeCode == 'inshop'){
+					mui.openWindow({
+						url: 'follow-record-detail.html',
+						id: "followRecordDetail",//默认使用当前页面的url作为id
+						extras: {
+							followCode: followCode,
+							typeCode:typeCode,
+							
+						}, //自定义扩展参数
+						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					})
+//				}
+				
 			})
 			
 		}(mui, document));

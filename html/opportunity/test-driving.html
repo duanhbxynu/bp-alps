@@ -1,0 +1,601 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link href="../../css/popover.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<style>
+			.radio-single-list .mui-radio:last-child {
+			    padding-left: 0px!important; 
+			}
+			.mui-input-row label~.radio-list{
+				padding-right: 20px;
+			}
+			
+			.mui-input-row label{
+				padding-right: 0px;
+			}
+			.mui-input-row .mui-icon-search{
+				display: inline!important;
+				width: 10%!important;
+				font-size: 18px;
+			}
+			.mui-input-row label~.market-activity-search{
+			    width: 55%;
+			    padding-right: 20px;
+			    /*padding-top: 15px;
+			    padding-bottom: 15px;*/
+			    font-size: 14px;
+			    text-align: right;
+			    line-height: 20px;
+			    float: right;
+			    margin-bottom: 10px;
+			    margin-top: 10px;
+			}
+			.market-activity-search input[type=text]{
+				height: 30px;
+				margin-bottom: 0px;
+				padding-left: 0px;
+				padding-right: 0px;
+				font-size: 14px;
+				width: calc(100% - 30px);
+				padding-top: 0px;
+			    padding-bottom: 0px;
+			    line-height: 20px!important;
+			    border: 0px;
+			    text-align: right;
+				
+			}
+			.mui-icon-clear {
+			    font-size: 20px;
+			    position: absolute;
+			    z-index: 1;
+			    top: 10px;
+			    right:38px!important;
+			    width: 18px!important;
+			    height: 18px!important;
+			    text-align: center;
+			    color: #999;
+		    }
+		    #middlePopover {
+				position: fixed;
+				top: 200px;
+				margin-right: 18px;
+				left: auto;
+			}
+			.mui-popover .mui-popover-arrow {
+				left: 90%;
+				/*left:calc(95% - 20px)!important;*/
+			}
+			input[type=date]{
+				width: auto!important;
+				text-align: right;
+				padding-right: 20px;
+			}
+			
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">试乘试驾</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<div class="mui-card leads-scroll leads-detail-scroll">
+				<div class="mui-card-header">
+					跟进录入
+					<var id="vehicleTypeCode"></var>
+				</div>
+				<div class="mui-card-content">
+					<!--<div class="mui-input-row mui-select-row">
+						<label>品牌</label>
+						<span class="mui-select" data-desc="意向品牌" id="vehicleTypeCode">
+							请选择品牌
+						</span>
+					</div>-->
+					
+					<div class="mui-input-row mui-select-row">
+						<label>车系 </label>
+						<span class="mui-select vehicleCategoryCode" data-desc="意向车系" id="vehicleCategoryCode">
+							请选择车系
+						</span>
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>车型 </label>
+						<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
+							请选择车型
+						</span>
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>提车时间 </label>
+						<input class="mui-select" type="date" name="bookingCartSTime" id="bookingCartSTime">
+						<!--<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
+							请选择车型
+						</span>-->
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>预计还车时间 </label>
+						<input class="mui-select" type="date" name="bookingCartNTime" id="bookingCartNTime">
+						<!--<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
+							请选择车型
+						</span>-->
+					</div>
+					
+					<div class="mui-input-row" id="phone_invitation"> 
+						<label>市场活动名称 </label>
+						<div class="market-activity-search">
+						    <input type="text" name="name" id="inputMarketActivity"  placeholder="请输入市场活动名称" value="">
+							<!--<input type="text" name="name" id="inputMarketActivity" class="mui-input-clear" placeholder="请输入市场活动名称" value="">-->
+							
+							<i class="mui-icon mui-icon-search" id="icon_search"></i>
+					    </div>
+						
+					</div>
+					<div class="mui-input-row textarea-row">
+						<label class="">跟进内容</label>
+						<textarea id="textarea" rows="5" placeholder="请输入备注信息" value=""></textarea>
+					</div>
+					<div class="mui-button-row">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-save" id="btn_cancel">取消</button>
+							<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_save">保存</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+<!--<div class="mui-input-row mui-checkbox ">
+										<label class="active">radio</label>
+										<input name="radio1" type="checkbox" checked>
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox" id="div">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>
+									<div class="mui-input-row mui-checkbox">
+										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+										<input name="radio1" type="checkbox" >
+									</div>-->
+				<div id="middlePopover" class="mui-popover">
+					<div class="mui-popover-arrow" id="mui-popover-arrow"></div>
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll market-activity-scroll">
+								<div class="mui-input-group mui-radio-list market-activity-group" id="marketActivityGroup">
+									
+								</div>
+						</div>
+					</div>
+		
+				</div>
+		
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/follow/follow.js"></script>
+		
+		<script type="text/javascript">
+			(function($, doc) {
+				var MIN_SOUND_TIME = 800;
+				$.init({
+					gestureConfig: {
+						tap: true, //默认为true
+						doubletap: true, //默认为false
+						longtap: true, //默认为false
+						swipe: true, //默认为true
+						drag: true, //默认为true
+						hold: true, //默认为false，不监听
+						release: true //默认为false，不监听
+					}
+				});
+				mui('.mui-scroll-wrapper').scroll();
+				
+//				以下为注意事项：
+
+//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
+				mui.back = function() {
+					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
+				}
+				var opporCode = "";
+				var type = "";
+				var typeCode = ""; 
+				var vehicleTypeCode = "";
+				var vehicleCategoryCode = "";
+				var vehicleCode = "";
+				var categoryData = "";
+				var vehicleCategoryCodePicker = "";
+				if(!localStorage.getItem('$state')) {
+					plus.nativeUI.toast('登陆过期，请重新登陆！');
+					return;
+				}
+				var username = JSON.parse(localStorage.getItem('$state')).username;
+				$.plusReady(function() {
+					window.addEventListener('showTitle', function(event) {
+						opporCode = event.detail.opporCode;
+						type = event.detail.type;
+						typeCode = event.detail.typeCode;
+						vehicleTypeCode = event.detail.vehicleTypeCode;
+						vehicleCode  = event.detail.vehicleCode;
+						vehicleCategoryCode = event.detail.vehicleCategoryCode;
+						document.getElementById('mui-title').innerHTML = event.detail.type;
+						document.getElementById('vehicleTypeCode').innerHTML = vehicleTypeCode;
+						//车系
+						vehicleCategoryCodePicker = new $.PopPicker();
+						mui.each(categoryList, function(i, category) {
+							if(vehicleTypeCode == category.value) {
+								console.log(i);
+								console.log(category);
+								console.log(category.children);
+								categoryData = category.children;
+//								categoryData.push(category.children);
+								console.log(categoryData);
+								vehicleCategoryCodePicker.setData(categoryData);
+								return;
+							}
+						})
+					});
+				})
+				
+//				2.如果在IOS上，触摸屏幕边缘也是可以关闭页面，造成问题同上，所以处理IOS要做以下处理。（写在b页面）
+//				mui.plusReady(function() {
+//					//右滑返回隐藏webview
+//					plus.webview.currentWebview().setStyle({
+//						'popGesture': 'hide'
+//					);
+//				        //这里的例子是每次进入都会重新加载数据，所以退出（退出以通过处理改为隐藏hide）需要清空页面加载的数据
+//					var self = plus.webview.currentWebview();
+//					self.addEventListener("hide", function(e) {
+//				           //do something...  这里清空加载的数据
+//				        }, false)
+//				});
+
+				//品牌
+//	var vehicleTypeCodePicker = new $.PopPicker();
+	//车系
+	
+	
+//	var vehicleTypeCodeButton = doc.getElementById('vehicleTypeCode');
+//	
+//	
+//	vehicleTypeCodeButton.addEventListener('tap', function(event) {
+//		vehicleTypeCodePicker.show(function(items) {
+//			vehicleTypeCodeButton.innerHTML = items[0].text;
+//			vehicleTypeCodeButton.setAttribute('data-vehicleTypeCode',items[0].value);
+//			vehicleTypeCodeButton.setAttribute('data-vehicleType',items[0].text);
+//			vehicleCategoryCodePicker.setData(items[0].children);
+//
+//			//返回 false 可以阻止选择框的关闭
+//			//return false;
+//		});
+//	}, false);
+	
+		
+	var vehicleCategoryCodeButton = doc.getElementById('vehicleCategoryCode');
+	vehicleCategoryCodeButton.addEventListener('tap', function(event) {
+		console.log(vehicleCategoryCodePicker);
+		
+		vehicleCategoryCodePicker.show(function(items) {
+			vehicleCategoryCodeButton.innerHTML = items[0].text;
+			vehicleCategoryCodeButton.setAttribute("data-vehicleCategoryCode", items[0].value);
+			vehicleCategoryCodeButton.setAttribute("data-vehicleCategory", items[0].text);
+
+			//						modelsPicker.setData(items[0]);
+
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		});
+	}, false);
+
+	//车型
+	var vehicleCodePicker = new $.PopPicker();
+	var vehicleCodeButton = doc.getElementById('vehicleCode');
+	vehicleCodeButton.addEventListener('tap', function(event) {
+		var categoryCode = doc.getElementById('vehicleCategoryCode').getAttribute("data-vehicleCategoryCode");
+		if(!categoryCode) {
+//			alert("请选择意向车系");
+			//TODO
+			plus.nativeUI.toast("请选择意向车系");
+			return;
+		}
+		var productData = [];
+		mui.each(productList, function(i, product) {
+			if(categoryCode == product.id) {
+				console.log(product);
+				productData.push(product);
+				console.log(productData);
+				vehicleCodePicker.setData(productData);
+				return;
+			}
+		})
+
+		vehicleCodePicker.show(function(items) {
+
+			vehicleCodeButton.innerHTML = items[0].text;
+
+			vehicleCodeButton.setAttribute("data-vehicleCode", items[0].value);
+			vehicleCodeButton.setAttribute("data-vehicle", items[0].text);
+//			colorPicker.setData(items[0].children);
+
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		});
+
+	}, false);
+	
+		doc.getElementById('bookingCartSTime').addEventListener('tap', function() {
+			var dDate = new Date();
+	//		dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
+			/*
+			 * 首次显示时实例化组件
+			 * 示例为了简洁，将 options 放在了按钮的 dom 上
+			 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+			 */
+
+			this.picker = new $.DtPicker({
+				type: "date", //设置日历初始视图模式 
+				beginDate: new Date() //设置开始日期 
+				//				    labels: ['Year', 'Mon', 'Day', 'Hour', 'min'],//设置默认标签区域提示语 
+				//				    customData: { 
+				//				        h: [
+				//				            { value: 'AM', text: 'AM' },
+				//				            { value: 'PM', text: 'PM' }
+				//				        ] 
+				//				    }//时间/日期别名 
+			});
+				this.picker.show(function(rs) {
+				doc.getElementById('bookingCartSTime').value = rs.text;
+				doc.getElementById('bookingCartSTime').setAttribute("data-value",rs.value )
+				this.picker = null;
+			});
+		});	
+		doc.getElementById('bookingCartNTime').addEventListener('tap', function() {
+			var dDate = new Date();
+	//		dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
+			/*
+			 * 首次显示时实例化组件
+			 * 示例为了简洁，将 options 放在了按钮的 dom 上
+			 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+			 */
+
+			this.picker = new $.DtPicker({
+				type: "date", //设置日历初始视图模式 
+				beginDate: new Date() //设置开始日期 
+				//				    labels: ['Year', 'Mon', 'Day', 'Hour', 'min'],//设置默认标签区域提示语 
+				//				    customData: { 
+				//				        h: [
+				//				            { value: 'AM', text: 'AM' },
+				//				            { value: 'PM', text: 'PM' }
+				//				        ] 
+				//				    }//时间/日期别名 
+			});
+			this.picker.show(function(rs) {
+				doc.getElementById('bookingCartNTime').value = rs.text;
+				doc.getElementById('bookingCartNTime').setAttribute("data-value",rs.value )
+				this.picker = null;
+			});
+		});
+
+				doc.getElementById('icon_search').addEventListener('tap',function(){
+					var info = doc.getElementById('inputMarketActivity').value;
+					console.log(info);
+					var params = {
+						name:info
+					}
+					var offsetLeft = document.getElementById("icon_search").offsetLeft-15;
+					doc.getElementById("mui-popover-arrow").setAttribute("style","left:"+offsetLeft+"px;")
+					var marketActivityContent = doc.body.querySelector('.market-activity-group');
+							//1.清空原ul下的子节点全部清空
+//					if(marketActivityContent.childNodes.length>0){
+//						console.log('清理列表数据...');
+//						for(var i=marketActivityContent.childNodes.length;i>0;i--){
+//							marketActivityContent.removeChild(marketActivityContent.childNodes[i-1]);
+//						}
+//					}
+					marketActivityContent.innerHTML = '';
+					follow.searchMarketActivity(params,function(data){
+						console.log("market activity result:"+JSON.stringify(data));
+//						var data = JSON.parse(data);
+						console.log(data.success)
+						console.log("--------------------------------------------------------------");
+						if(data.success==true){
+							var marketActivityList = data.marketActivityList;
+							console.log(marketActivityList);
+//							$("#marketActivityContent").html("");
+							
+							$.each(marketActivityList,function(i,marketActivity){
+								
+								var html = document.createElement('div');
+								html.className = 'mui-input-row mui-radio';
+								html.setAttribute("data-marketActivityCode",marketActivity.code );
+								html.setAttribute("data-marketActivityName",marketActivity.name );
+								html.innerHTML ='<label>'+marketActivity.name+'</label>'+
+												'<input name="marketActivity" type="radio">';
+								marketActivityContent.appendChild(html);
+							})
+//							var marketActivityHeight = doc.getElementById('marketActivityGroup');
+//							var contentHeight = marketActivityHeight.offsetHeight;
+//							console.log(contentHeight);
+//							var offsetLeft = document.getElementById("icon_search").offsetLeft-15;
+//							doc.getElementById("mui-popover-arrow").setAttribute("style","left:"+offsetLeft+"px;")
+//						
+//							if(contentHeight<300){
+//								doc.getElementById('middlePopover').setAttribute("style","height:"+contentHeight+"px!important;display:block;");
+//							}
+							$('#middlePopover').popover('show');
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+					})
+				})
+//				mui('.mui-input-row').on('change', 'input[class="mui-input-clear"]',function() {
+//					console.log(this.value);
+//				})
+				mui('.radio-single-list').on('tap','.mui-radio',function(){
+					var activeRadio =  this;
+					mui('.radio-single-list .mui-radio').each(function(i,object){
+						this.classList.remove('active');
+					})
+					activeRadio.classList.add('active');
+					doc.getElementById('connectCustomer').setAttribute('data-value',activeRadio.getAttribute('data-value'))
+				})
+				mui('.market-activity-group').on('tap','.mui-radio',function(){
+//					
+					var marketActivity = this;
+					var marketActivityCode = marketActivity.getAttribute("data-marketActivityCode");
+					var marketActivityName = marketActivity.getAttribute("data-marketActivityName");
+//					console.log(marketActivity);
+					console.log(marketActivity.childNodes.size);
+//					marketActivity.childNodes[3].checked = true;
+					mui('.mui-radio label').each(function(i,object){
+						this.classList.remove('active');
+					})
+					marketActivity.children[0].classList.add('active');
+					$('#middlePopover').popover('hide');
+					console.log(marketActivityCode);
+					console.log(marketActivityName);
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityCode",marketActivityCode );
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityName",marketActivityName );
+					doc.getElementById('inputMarketActivity').value = marketActivityName;
+				})
+				
+				mui('.market-activity-group').on('tap','input[type=radio]',function(){
+					
+					var activityRadio = this;
+					var marketActivityCode = activityRadio.parentNode.getAttribute("data-marketActivityCode");
+					var marketActivityName = activityRadio.parentNode.getAttribute("data-marketActivityName");
+					activityRadio.checked = true;
+					mui('.mui-radio label').each(function(i,object){
+						this.classList.remove('active');
+					})
+					this.previousElementSibling.classList.add('active');
+					$('#middlePopover').popover('hide');
+					
+					console.log(marketActivityCode);
+					console.log(marketActivityName);
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityCode",marketActivityCode );
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityName",marketActivityName );
+					doc.getElementById('inputMarketActivity').value = marketActivityName;
+					
+				})
+				
+				doc.getElementById('btn_cancel').addEventListener('tap',function(){
+					$.back();
+				})
+				doc.getElementById('btn_save').addEventListener('tap',function(){
+    				var vehicleCategoryCode = doc.getElementById('vehicleCategoryCode').getAttribute('data-vehicleCategoryCode');
+    				var vehicleCategory = doc.getElementById('vehicleCategoryCode').getAttribute('data-vehicleCategory');
+					var vehicleCode = doc.getElementById('vehicleCode').getAttribute('data-vehicleCode');
+    				var vehicle = doc.getElementById('vehicleCode').getAttribute('data-vehicle');
+					
+					var bookingCartSTime = doc.getElementById('bookingCartSTime').getAttribute('data-value');
+					var bookingCartNTime = doc.getElementById('bookingCartNTime').getAttribute('data-value');
+					var marketActivityCode = doc.getElementById('inputMarketActivity').getAttribute('data-marketActivityCode');
+					var marketActivityName = doc.getElementById('inputMarketActivity').getAttribute('data-marketActivityName');
+//					var connectCustomer = doc.getElementById('connectCustomer').getAttribute('data-value');
+//					console.log(connectCustomer);
+					var content = doc.getElementById('textarea').value;
+					var params = {
+						opportunityCode:opporCode,
+						followOpportunity:{
+							salesConsultantName:username,
+							type:type,
+							typeCode:typeCode,
+							vehicleCategoryCode:vehicleCategoryCode,
+							vehicleCategory:vehicleCategory,
+							vehicleCode:vehicleCode,
+							vehicle:vehicle,
+//							connectCustomer:connectCustomer,
+							marketActivityCode:marketActivityCode,
+							marketActivityName:marketActivityName,
+							contentList: [
+						      {
+						        content: content
+						      }
+						    ]	
+						}
+						
+					}
+					console.log(params);
+					
+					follow.saveFollow(params,function(data){
+						console.log("follow append content result:"+JSON.stringify(data));
+						console.log("--------------------------------------------------------------");
+						if(data.success==true){
+							
+							//微信分享
+							plus.share.getServices(function(ss) {
+							//		s = ss[0];sinaweibo
+							//		s = ss[1];tencentweibo
+							//		s = ss[2];qq
+							//		s = ss[3];weixin
+								for(var i in ss) {
+	
+									var s = ss[i];
+									if(s.id == "weixin") {
+										var msg = {
+											href:"#",
+											title: username + '为您服务',
+											content: "您进行试乘试驾需要上传驾驶证，并进行签名确认！",
+	//										thumbs: ['../../image/logo.png'],
+//											pictures: ['../../image/logo.png'],
+											//"WXSceneSession";/*微信好友*/"WXSceneTimeline" /*微信朋友圈*/
+											extra: {
+												scene: "WXSceneSession"
+											} /*微信好友*/
+										};
+										s.send(msg, function() {
+											plus.nativeUI.alert("分享成功");
+											$.back();
+	
+										}, function(e) {
+											plus.nativeUI.alert("分享失败!");
+										});
+										break;
+									}
+								}
+							}, function(e) {
+								plus.nativeUI.alert("获取分享服务列表失败：" + e.message);
+							});
+							
+//							alert("success");
+						
+						}else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+				   
+					})
+					
+					
+				})
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

@@ -125,8 +125,24 @@ var common = {
 	   	getOpporFollow:function(){
 	   		return serviceBaseUrl+"alpssalewebservices/follow-oppo/list";
 	   	},
+	   	//创建跟进记录
+	   	createFollow:function(){
+	   		return serviceBaseUrl+"alpssalewebservices/follow-oppo/creation";
+	   	},
+	   	getFollowDetail:function(){
+	   		return serviceBaseUrl+"alpssalewebservices/follow-oppo/detail";
+	   	},
+	   	appendFollow:function(){
+	   		return serviceBaseUrl+"alpssalewebservices/follow-oppo/appendcontent";
+	   	},
+	   	quotaionList:function(){
+	   		return serviceBaseUrl+"alpssalewebservices/quotaion/list";
+	   	},
+	   	createQuotaion:function(){
+	   		return serviceBaseUrl+"alpssalewebservices/quotaion/create";
+	   	},
 	   	//搜索市场活动
-	   	getOpporFollow:function(){
+	   	getMarketactivity:function(){
 	   		return serviceBaseUrl+"alpssalewebservices/follow-oppo/getmarketactivity";
 	   	},
 	   	//【帮工友报名】页面信息拉取

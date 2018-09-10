@@ -39,9 +39,9 @@
 	vehicleCodeButton.addEventListener('tap', function(event) {
 		var categoryCode = doc.getElementById('vehicleCategoryCode').getAttribute("data-value");
 		if(!categoryCode) {
-			alert("请选择意向车系");
+//			alert("请选择意向车系");
 			//TODO
-			//						plus.nativeUI.toast("请选择意向车系");
+			plus.nativeUI.toast("请选择意向车系");
 			return;
 		}
 		var productData = [];

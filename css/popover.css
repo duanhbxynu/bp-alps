@@ -26,7 +26,7 @@
 			.mui-input-group:before,.mui-input-group:after,.mui-input-group .mui-input-row:last-child:after{
 				height: 0px;
 			}
-			.mui-popover .mui-checkbox input[type=checkbox]{
+			.mui-popover .mui-checkbox input[type=checkbox],.mui-popover .mui-radio input[type=radio]{
 				/*right:8px;*/
 				top:calc((100% - 28px)/2);
 			}
@@ -36,14 +36,14 @@
 				min-height: 48px;
 				padding-left: 20px;
 			}
-			.mui-popover .mui-checkbox label{
+			.mui-popover .mui-checkbox label,.mui-popover .mui-radio label{
 				text-align: center;
 				word-break:break-all;
 				width: auto;
 				padding-right: 50px;
 				padding-left: 0px;
 			}
-			.mui-popover .mui-checkbox .active:before{
+			.mui-popover .mui-checkbox .active:before,.mui-popover .mui-radio .active:before{
 				position: relative;
 			    box-shadow: 0 2px 2px 0 rgba(199,27,30,0.40);
 			    margin-right: 20px;
@@ -55,5 +55,9 @@
 			
 			.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
 			    color: #C71B1E;
+			    content: '\e442'; 
+			    
 			}
-			
+			.mui-radio input[type=radio]:before{
+				font-size: 28px;
+			}
