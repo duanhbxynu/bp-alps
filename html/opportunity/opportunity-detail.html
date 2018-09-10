@@ -304,10 +304,12 @@
 					preloadPages: [{
 							id: 'opporFollow',//b页面id
 							url:'opportunity-follow.html',
-						},
-						{
+					},{
 							url: 'test-driving.html',//b页面url路径
 							id: 'testDrive'//b页面id
+						},{
+							url:'../quotation/quotation-list.html',
+							id: 'quotation-list'//b页面id
 						}
 					]
 				});
@@ -476,7 +478,14 @@
 					console.log(typeCode);
 					console.log(vehicleTypeCode);
 					if(typeCode == 'quotation'){
-						console.log(1);
+						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
+							type: type,
+							typeCode:typeCode,
+							opporCode:opporCode,
+							vehicleTypeCode:vehicleTypeCode,
+							vehicleCategoryCode:vehicleCategoryCode,
+							vehicleCode:vehicleCode
+						});
 						mui.openWindow({
 							url:'../quotation/quotation-list.html',
 							id: 'quotation-list'//b页面id

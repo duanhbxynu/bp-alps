@@ -77,8 +77,8 @@
 	content: '';
 }
 .car-card .mui-table-view-cell>a:not(.mui-btn) {
-	margin-left: -20px;
-	margin-top: -15px;
+	/*margin-left: -20px;
+	margin-top: -15px;*/
 	font-size: 15px;
 	color: #333333;
 	font-weight: 600;
@@ -93,7 +93,7 @@
 	background: #FFFFFF!important;
 }
 .car-card .mui-table-view-cell.mui-active a {
-	color: #CE575A;
+	color: #C71B1E;
 }
 .car-card .mui-table-view-cell.mui-active a:before {
 	height: 24px;
@@ -102,7 +102,7 @@
 	position: absolute;
 	right: 0;
 	left: 0px;
-	top: 13px;
+	top: 9px;
 	content: '';
 	-webkit-transform: scaleY(.5);
 	transform: scaleY(.5);
@@ -147,7 +147,7 @@
 	position: absolute;
     display: inline-block;
     font-family: Muiicons;
-    content: '\e580';
+    content: '\e581';
     color: #8f8f94;
     right: -2px;
 }

@@ -438,14 +438,14 @@
 		    <a class="mui-tab-item" id="creatQuotation" href="#">创建</a>
 		</footer>
 
-		
-
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/quotation/quotaion-car-picker.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -463,8 +463,7 @@
 						aniShow = "slide-in-right";
 					}
 				}
-				
-				//选择车辆信息
+				//选择订单类型
 				var picker = new mui.PopPicker();
 				mui(".brand").on('tap','.selBrand .brands',function(){				
 					picker.setData(selBrands);
@@ -472,32 +471,41 @@
 						document.getElementsByClassName("brands")[0].innerHTML = SelectedItem[0].text;
 					});
 				});
-				mui(".brand").on('tap','.selseries .series',function(){				
-					picker.setData(selSeries);
-					picker.show(function(SelectedItem) {
-						document.getElementsByClassName("series")[0].innerHTML = SelectedItem[0].text;
-					});
-				});
-				mui(".brand").on('tap','.selCarType .carType',function(){				
-					picker.setData(selCarType);
-					picker.show(function(SelectedItem) {
-						document.getElementsByClassName("carType")[0].innerHTML = SelectedItem[0].text;
-					});
-				});
-				mui(".brand").on('tap','.selOutColors .outColors',function(){				
-					picker.setData(selOutColors);
-					picker.show(function(SelectedItem) {
-						document.getElementsByClassName("outColors")[0].innerHTML = SelectedItem[0].text;
-					});
-				});
-				mui(".brand").on('tap','.selInnerColors .innerColors',function(){				
-					picker.setData(selInnerColors);
-					picker.show(function(SelectedItem) {
-						document.getElementsByClassName("innerColors")[0].innerHTML = SelectedItem[0].text;
-					});
-				});
+				
+				//选择车辆信息
+//				var picker = new mui.PopPicker();
+//				mui(".brand").on('tap','.selBrand .brands',function(){				
+//					picker.setData(selBrands);
+//					picker.show(function(SelectedItem) {
+//						document.getElementsByClassName("brands")[0].innerHTML = SelectedItem[0].text;
+//					});
+//				});
+//				mui(".brand").on('tap','.selseries .series',function(){				
+//					picker.setData(selSeries);
+//					picker.show(function(SelectedItem) {
+//						document.getElementsByClassName("series")[0].innerHTML = SelectedItem[0].text;
+//					});
+//				});
+//				mui(".brand").on('tap','.selCarType .carType',function(){				
+//					picker.setData(selCarType);
+//					picker.show(function(SelectedItem) {
+//						document.getElementsByClassName("carType")[0].innerHTML = SelectedItem[0].text;
+//					});
+//				});
+//				mui(".brand").on('tap','.selOutColors .outColors',function(){				
+//					picker.setData(selOutColors);
+//					picker.show(function(SelectedItem) {
+//						document.getElementsByClassName("outColors")[0].innerHTML = SelectedItem[0].text;
+//					});
+//				});
+//				mui(".brand").on('tap','.selInnerColors .innerColors',function(){				
+//					picker.setData(selInnerColors);
+//					picker.show(function(SelectedItem) {
+//						document.getElementsByClassName("innerColors")[0].innerHTML = SelectedItem[0].text;
+//					});
+//				});
 				mui(".brand").on('tap','.selPayWay .payWay',function(){				
-					picker.setData(selPayWay);
+					picker.setData(paymentMethodData);
 					picker.show(function(SelectedItem) {
 						document.getElementsByClassName("payWay")[0].innerHTML = SelectedItem[0].text;
 					});
@@ -511,14 +519,15 @@
 				});
 			    
 			    //请选择上牌地址
-			    var picker2 = new mui.PopPicker({layer: 3});
+			    var picker2 = new mui.PopPicker({layer: 2});
 			    mui(".brand").on('tap','.selAddress .address',function(){				
-					picker2.setData(childrenData3);
+					picker2.setData(provinceDataList3);
 					picker2.show(function(SelectedItem) {
-						document.getElementsByClassName("address")[0].innerHTML = SelectedItem[0].text+" "+SelectedItem[1].text+" "+SelectedItem[2].text;
+						document.getElementsByClassName("address")[0].innerHTML = SelectedItem[0].text+" "+SelectedItem[1].text;
+						document.getElementsByClassName("address")[0].setAttribute("data-value",(SelectedItem[0] || {}).value+(SelectedItem[1] || {}).id);
 					});
 				});
-
+				
 				$.plusReady(function() {
 
 					/*---------关闭滚动条------*/
@@ -528,10 +537,7 @@
 
 					//获取父级页面查询过来的参数
 					var self = plus.webview.currentWebview();
-					//					processid = self.processid;
-					//					status = self.status;
-					//					showContent(processid, status);
-					//					showModal();
+					processid = self.processid;
 
 				});
 

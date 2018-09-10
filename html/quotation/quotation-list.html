@@ -17,12 +17,29 @@
 				height: 0px!important;
 			}
 			
+			.mui-table-view-cell{
+				height: 30px;
+				padding: 5px 20px;
+			}
+			
 			.mui-table-view-cell var {
 				float: right;
 				color: #212121;
 			}
+			.mui-table-view-cell:first-child{
+				height: 38px;
+				padding-top: 13px;
+			}
+			.mui-table-view-cell:last-child{
+				height: 38px;
+				padding-bottom: 13px;
+			}
 			.status{
 				color: #C71B1E!important;
+			}
+			.mui-icon-plusempty{
+				font-weight: 800;
+				color:linear-gradient(-180deg, #E53A40 0%, #C71B1E 100%)!important;
 			}
 			
 		</style>
@@ -32,12 +49,34 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class="mui-icon mui-icon-plusempty mui-pull-right" id="add_price"></a>
+			<a class="mui-icon mui-icon-plusempty mui-pull-right" id="add_quotation"></a>
 			<h1 class="mui-title" id="mui-title">商谈报价</h1>
 		</header>
 
 		<div class="mui-content" id="mui-content">
-			<div class="mui-card">
+			<script id='content-template' type="text/template">
+				<% for(var i in quotationList){ var item=quotationList[i]; %>
+					<div class="mui-card">
+						<div class="mui-card-content">
+							<ul class="mui-table-view mui-clearfix">
+								<li class="mui-table-view-cell">
+									报价单号<var id="name"><%=( item.code|| '&nbsp;&nbsp;') %></var>
+								</li>	
+								<li class="mui-table-view-cell">
+									状态<var id="tel" class="status"><%=( item.status|| '&nbsp;&nbsp;') %></var>
+								</li>
+								<li class="mui-table-view-cell">
+									报价时间<var id="intent_car"><%=( item.creationtime|| '&nbsp;&nbsp;') %></var>
+								</li>
+								<li class="mui-table-view-cell">
+									总价 <var id="origin"><%=( item.totalPrice|| '&nbsp;&nbsp;') %></var>
+								</li>
+							</ul>
+						</div>
+					</div>	
+				<% } %>
+			</script>
+			<!--<div class="mui-card">
 				<div class="mui-card-content">
 					<ul class="mui-table-view mui-clearfix">
 						<li class="mui-table-view-cell">
@@ -75,7 +114,7 @@
 
 					</ul>
 				</div>
-			</div>
+			</div>-->
 
 		</div>
 		
@@ -84,6 +123,7 @@
 
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/arttmpl.js"></script>
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
@@ -106,33 +146,79 @@
 					}
 				}
 
+				var oppoCode = "";
+				var type = "";
+				var typeCode = ""; 
+				var vehicleTypeCode = "";
+				var vehicleCategoryCode = "";
+				var vehicleCode = "";
+				var categoryData = "";
+				var vehicleCategoryCodePicker = "";
+				if(!localStorage.getItem('$state')) {
+					plus.nativeUI.toast('登陆过期，请重新登陆！');
+					return;
+				}
+				var username = JSON.parse(localStorage.getItem('$state')).username;
+				var token = JSON.parse(localStorage.getItem('$state')).token;
 				$.plusReady(function() {
-
-					/*---------关闭滚动条------*/
-					plus.webview.currentWebview().setStyle({
-						scrollIndicator: 'none'
+					template.config('escape', false);
+					window.addEventListener('showList', function(event) {
+						oppoCode = event.detail.opporCode;
+						var values = {oppoCode:oppoCode};
+						console.log("quotation list request:"+JSON.stringify(values));
+						$.ajax({
+							url:serviceBaseUrl+"alpssalewebservices/quotaion/list",
+							type:"POST",
+							dataType:"json",
+							contentType: 'application/json',
+				            data: JSON.stringify(values),
+				            beforeSend: function (xhr) {
+							       xhr.setRequestHeader("Authorization","Bearer " + token);
+							},
+							success: function (data) {
+								console.log(data)
+								console.log("quotation list result:"+JSON.stringify(data));
+								console.log("--------------------------------------------------------------");
+								console.log(data.success);
+								if(data.success){
+									
+									var quotationList = data.quotationList;
+									if(quotationList.length>0){
+										//追加模板消息 
+										console.log("追加模板消息");
+								        var str = template('content-template', { 
+								            "quotationList": quotationList 
+								        }); 
+								        doc.getElementById('mui-content').innerHTML =  str;
+										
+									}else{
+										console.log("暂无报价");
+										doc.getElementById('mui-content').innerHTML =  "暂无报价";
+									}
+								}
+						    },
+						    error: function(jqXHR, textStatus, errorThrown){
+						    	console.log(jqXHR);
+						    	console.log(textStatus);
+						    	console.log(errorThrown);
+						    	common.baseOption.goToLogin();
+						    	//location.href = baseConfig.baseUrl+baseConfig.login_page;
+						    }
+						})
 					});
-
-					//获取父级页面查询过来的参数
-					var self = plus.webview.currentWebview();
-					//					processid = self.processid;
-					//					status = self.status;
-					//					showContent(processid, status);
-					//					showModal();
-
-				});
+				})
 
 
-				doc.getElementById('add_price').addEventListener('tap', function() {
+				doc.getElementById('add_quotation').addEventListener('tap', function() {
 					//打开关于页面
-										mui.openWindow({
-											url: 'add-discuss-price.html',
-											id: "add-price"//默认使用当前页面的url作为id
-					//						extras: {
-					//							customerId: customerId
-					//						}, //自定义扩展参数
-					//						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
-										})
+					mui.openWindow({
+						url: 'add-quotation.html',
+						id: "add-quotation",//默认使用当前页面的url作为id
+						extras: {
+							oppoCode: oppoCode
+						}, //自定义扩展参数
+						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					})
 				})
 
 				
