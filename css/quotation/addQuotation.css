@@ -1,20 +1,17 @@
+/*创建报价单css*/
 .mui-table-view-cell:after {
 	height: 0px!important;
 }
-
 .status {
 	color: #C71B1E!important;
 }
-
 .price-content .mui-card-header {
 	height: auto;
 	padding: 15px 0px;
 }
-
 .price-content .mui-card-header .mui-table-view {
 	width: 100%;
 }
-
 .price-content.mui-card .mui-card-header:not:before {
 	height: 24px;
 	width: 2px;
@@ -27,25 +24,21 @@
 	transform: scaleY(.5);
 	background-color: #C71B1E;
 }
-
 .price-content .mui-card-header .mui-table-view-cell {
 	padding: 0px;
 	padding-left: 20px;
 }
-
 .price-content .mui-card-header .mui-table-view-cell:first-child {
 	font-size: 16px;
 	color: #C71B1E;
 	font-weight: 600;
 	line-height: 22px;
 }
-
 .price-content .mui-card-header .mui-table-view-cell:last-child {
 	font-size: 12px;
 	color: #999999;
 	padding-top: 3px;
 }
-
 .price-content .mui-card-header .mui-table-view-cell:first-child:before {
 	height: 22px;
 	width: 2px;
@@ -59,12 +52,10 @@
 	transform: scaleY(.5);
 	background-color: #C71B1E;
 }
-
 .price-card .mui-card-content label {
 	width: 25%;
     display: inline-block;
 }
-
 .price-card .mui-card-content input[type=text] {
 	width: 73%;
 	height: auto;
@@ -75,20 +66,16 @@
 	color: #999999;
 	margin-bottom: 0px;
 }
-
 .mui-icon-arrowdown {
 	font-size: 14px;
 	color: #333333;
 }
-
 .mui-icon-arrowdown:after {
 	content: '\e581';
 }
-
 .mui-icon-arrowdown:before {
 	content: '';
 }
-
 .car-card .mui-table-view-cell>a:not(.mui-btn) {
 	margin-left: -20px;
 	margin-top: -15px;
@@ -97,21 +84,17 @@
 	font-weight: 600;
 	height: 45px;
 }
-
 .mui-navigate-right:after,
 .mui-push-left:after,
 .mui-push-right:after {
 	color: #333333;
 }
-
 .car-card .mui-table-view-cell.mui-active {
 	background: #FFFFFF!important;
 }
-
 .car-card .mui-table-view-cell.mui-active a {
 	color: #CE575A;
 }
-
 .car-card .mui-table-view-cell.mui-active a:before {
 	height: 24px;
 	width: 2px;
@@ -125,12 +108,10 @@
 	transform: scaleY(.5);
 	background-color: #C71B1E;
 }
-
 .car-card .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron {
 	margin-top: 10px;
 	margin-left: 15px;
 }
-
 .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell {
 	background-position: 0px 100%;
 	padding: 15px 0;
@@ -138,16 +119,13 @@
 	margin-left: -10px;
 	padding-right: 15px;
 }
-
 .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell .require {
 	margin-top: 20px;
 	height: 5px;
 }
-
 .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell label {
 	color: #333333;
 }
-
 .carDetails .mui-table-view-cell > span {
 	float: left;
 	display: inline-block;
@@ -164,9 +142,7 @@
 }
 .carDetails .mui-table-view-cell p{
 	display: inline;
-	
 }
-
 .carDetails .mui-table-view-chevron .brand p span:after{
 	position: absolute;
     display: inline-block;
@@ -222,8 +198,6 @@
 	margin-left: -15px;
     padding-right: 0; 
 }
-
-
 .secondHand .radio_inline{
     display: inline-block;
     width: 65%;
@@ -243,10 +217,71 @@
     top: -4px;
     z-index: 1000;
 }
-
 .secondHand .mui-radio > label.require{
 	margin:0;
 	padding: 0;
 	width: 22%;
 	float: left;
+}
+#mui-content > .mui-card:last-child{
+	margin-bottom: 60px;
+}
+.mui-bar-tab > #creatQuotation,.mui-bar-tab > #invalidQuotation{
+	background: #C71B1E;
+	color: #FFFFFF;
+}
+/*报价单详情页css*/
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li{
+	padding: 7px 0;
+	margin-left: -20px;
+	clear: both;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li.titles{
+	padding-bottom: 15px;
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 8px;
+    color: #333333;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li.titles label{
+    color: #333333;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li.detailWidth > p{
+	width: 78%;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li.detailWidth > p span{
+	text-align: justify;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li:last-child{
+	padding-bottom: 20px;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li label{
+	color: #666666;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p{
+	color: #333333;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p.detailRed{
+	color: #C71B1E;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li.red label,
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li.red p{
+	color: #C71B1E;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li>p{
+	float: right;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron>p.line{
+    border-top: 1px solid  #E4E4E4;
+    text-align: right;
+    padding: 20px 15px 20px 0;
+    font-size: 14px;
+	color: #C71B1E;
+	margin: 23px -15px 0 -30px;
+}
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron>p.total span:last-child{
+	color: #666;
+	margin-right: 20px;
+}
+.particulars .mui-table-view .mui-table-view-chevron li:not(:last-child){
+	border: none;
 }
