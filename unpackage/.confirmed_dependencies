@@ -1,53 +1,65 @@
 {
-	"html/leads/index-leads.html": {
-		"refer": [
-			"html/leads/instore-customerstream-detail.html",
-			"html/login.html"
-		],
-		"resources": []
-	},
-	"html/index.html": {
-		"resources": [
-			"html/leads/index-leads.html"
-		],
-		"refer": [
-			"html/leads/index-leads.html",
-			"html/opportunity/index-opportunity.html"
-		]
-	},
-	"html/login.html": {
-		"refer": [
-			"html/reg.html",
-			"html/index.html"
-		],
-		"resources": []
-	},
-	"html/opportunity/index-opportunity.html": {
-		"refer": [
-			"html/opportunity/opportunity-detail.html",
-			"html/login.html"
-		],
-		"resources": []
-	},
-	"html/opportunity/opportunity-detail.html": {
-		"refer": [
-			"html/opportunity/phone-invitation.html",
-			"html/opportunity/follow-record.html"
-		]
-	},
-	"html/opportunity/follow-record.html": {
-		"refer": [
-			"html/opportunity/follow-record-detail.html"
-		]
-	},
-	"html/leads/instore-customerstream-detail.html": {
-		"refer": [
-			"html/opportunity/add-opportunity-baseinfo.html"
-		]
-	},
-	"html/opportunity/add-opportunity-baseinfo.html": {
-		"refer": [
-			"html/opportunity/add-opportunity-bussinessinfo.html"
-		]
-	}
+  "html/leads/index-leads.html": {
+    "refer": [
+      "html/leads/instore-customerstream-detail.html",
+      "html/login.html"
+    ],
+    "resources": []
+  },
+  "html/index.html": {
+    "resources": [
+      "html/leads/index-leads.html"
+    ],
+    "refer": [
+      "html/leads/index-leads.html",
+      "html/opportunity/index-opportunity.html"
+    ]
+  },
+  "html/login.html": {
+    "refer": [
+      "html/reg.html",
+      "html/index.html"
+    ],
+    "resources": []
+  },
+  "html/opportunity/index-opportunity.html": {
+    "refer": [
+      "html/opportunity/opportunity-detail.html",
+      "html/login.html"
+    ],
+    "resources": []
+  },
+  "html/opportunity/opportunity-detail.html": {
+    "refer": [
+      "html/opportunity/phone-invitation.html",
+      "html/opportunity/follow-record.html",
+      "html/opportunity/opportunity-follow.html",
+      "html/quotation/quotation-list.html",
+      "html/opportunity/test-driving.html"
+    ],
+    "resources": []
+  },
+  "html/opportunity/follow-record.html": {
+    "refer": [
+      "html/opportunity/follow-record-detail.html"
+    ],
+    "resources": []
+  },
+  "html/leads/instore-customerstream-detail.html": {
+    "refer": [
+      "html/opportunity/add-opportunity-baseinfo.html"
+    ],
+    "resources": []
+  },
+  "html/opportunity/add-opportunity-baseinfo.html": {
+    "refer": [
+      "html/opportunity/add-opportunity-bussinessinfo.html"
+    ],
+    "resources": []
+  },
+  "html/order/index-order.html": {
+    "refer": [
+      "html/login.html"
+    ]
+  }
 }

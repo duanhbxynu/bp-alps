@@ -37,7 +37,7 @@
 				<span class="mui-icon mui-icon-email"></span>
 				<span class="mui-tab-label">意向</span>
 			</a>
-			<a id="orderTab" class="mui-tab-item" href="#">
+			<a id="orderTab" class="mui-tab-item" href="#" data-wid="order/index-order.html">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">订单</span>
 			</a>
@@ -60,7 +60,7 @@
 				}
 	
 			});
-			var subpages = ['leads/index-leads.html', 'opportunity/index-opportunity.html'];
+			var subpages = ['leads/index-leads.html', 'opportunity/index-opportunity.html','order/index-order.html`'];
 			var subpage_style = {
 				top: '45px',
 				bottom: '51px'
@@ -132,6 +132,14 @@
 	
 					header.innerHTML = headerHtml;
 					pageFlag = 1;
+				}else if(targetTab == "order/index-order.html"){
+					var headerHtml = '';
+					//订单
+					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
+								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">订单</h1>';	
+					header.innerHTML = headerHtml;
+					pageFlag = 2;
 				}
 				
 				//显示目标选项卡
