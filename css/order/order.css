@@ -142,7 +142,203 @@
 .orderSearchValueAdd .mui-card{
 	margin-bottom: 35px;
 }
-#nextStep{
+#nextStep,.creatOrder{
 	background: #C71B1E;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
+/*整车订单*/
+.carload .mui-card-header{
+	color: #333333;
+	font-weight: 400;
+	padding: 15px;
+}
+.carload .mui-card-header:after{
+	background-color: transparent;
+}
+.carload .mui-card-content{
+	padding: 0 15px;
+}
+.carload .mui-card-content div p{
+	color: #666666;
+}
+.carload .mui-card-content div p span{
+	color: #212121;
+}
+.carload .mui-card-content div.types p{
+	display: inline-block;
+	margin-bottom: 15px;
+	line-height: 14px;
+}
+.carload .mui-card-content div.types p:nth-of-type(1){
+    margin-right: 22px;
+    padding-right: 22px;
+    border-right: 1px solid #E4E4E4;
+}
+.carload .mui-table-view-cell>a:not(.mui-btn) {
+	font-size: 15px;
+	color: #333333;
+	font-weight: 600;
+	height: 45px;
+}
+.carload .mui-navigate-right:after,
+.carload .mui-push-left:after,
+.carload .mui-push-right:after {
+	color: #333333;
+}
+.carload .mui-table-view-cell.mui-active {
+	background: #FFFFFF!important;
+}
+.carload .mui-table-view-cell.mui-active a {
+	color: #C71B1E;
+}
+.carload .mui-table-view-cell.mui-active a:before {
+	height: 24px;
+	width: 2px;
+	box-shadow: 0 2px 4px 0 rgba(199, 27, 30, 0.40);
+	position: absolute;
+	right: 0;
+	left: 0px;
+	top: 9px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #C71B1E;
+}
+.carload .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {
+    padding-left: 15px;
+}
+.carload .mui-card .mui-navigate-right span{
+	color: #CE575A;
+	font-weight: 400;
+	margin-right: 20px;
+	float: right;
+}
+/*整车订单-原厂选装*/
+.original  .mui-search{
+	display: inline-block;
+	width: 86%;
+}
+.original  .mui-search:before{
+	top: 24px;
+}
+.original .mui-search input{
+	height: 32px;
+	border-radius: 20px;
+	margin-bottom: 0;
+}
+.original .mui-table-view-cell span{
+	float: left;
+	margin-right: 15px;
+    font-size: 14px;
+}
+.original .mui-table-view-cell > p{
+	float: right;
+	color: #666666;
+	line-height: 32px;
+}
+.original .mui-icon-search:before{
+	position: relative;
+	top: 6px;
+	left: 5px;
+}
+.original .mui-input-row .mui-input-clear~.mui-icon-clear{
+	top: 6px !important;
+}
+.original .mui-table-view-cell.mui-collapse .mui-collapse-content{
+	padding-right: 0;
+}
+.original .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
+	margin-left: -15px;
+    padding-right: 0; 
+}
+.original .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{
+	margin: 14px 0px;
+}
+.original .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after{
+	background-color: transparent;
+}
+/*选装商品*/
+.original:last-child{
+	margin-bottom: 60px;
+}
+.original  .mui-collapse .mui-table-view .products:after{
+	left: 15px;
+	border: 1px dotted #E4E4E4;
+}
+.original  .mui-collapse .mui-table-view .products:last-child:after{
+	border: none;
+}
+.original .products > p:nth-of-type(1){
+	float: none;
+	font-size: 10px;
+	color: #333333;
+	margin-bottom: 11px;
+	line-height: 14px;
+	margin-left: 24px;
+}
+.original .products > p:nth-of-type(2){
+	margin-top: 12px;
+	margin-left: 97px;
+	font-size: 10px;
+	color: #999999;
+	line-height: 14px;
+	float: none;
+}
+.original .products .pro > div{
+	float: left;
+}
+.original .products .pro .proLeft{
+	height: 64px;
+	padding-top: 24px;
+	margin-right: 10px;
+}
+.original .products .pro .proMiddle{
+	width: 64px;
+	height: 64px;
+	background: #D8D8D8;
+	margin-right: 10px;
+}
+.original .products .pro .proMiddle img{
+	width: 64px;
+	height: 64px;
+}
+.original .products .pro .proRight{
+	width: calc(100% - 100px);
+}
+.original .products .pro .proRight > p:nth-of-type(1){
+	font-size: 13px;
+	color: #212121;
+	line-height: 13px;
+	margin-bottom: 8px;
+}
+.original .products .pro .proRight > p:nth-of-type(2){
+	font-size: 11px;
+	color: #CE575A;
+	line-height: 16px;
+	margin-bottom: 6px;
+}
+.original .products .pro .proRight .prices > p{
+	display: inline-block;
+	width: 80px;
+	height: 22px;
+	border: 1px solid #CE575A;
+	border-radius: 2px;
+	font-size: 12px;
+	color: #CE575A;
+	text-align: center;
+}
+.original .products .pro .proRight .prices .mui-numbox{
+	border-color: #CE575A;
+	width: 80px;
+	height: 22px;
+	padding: 0;
+    float: right;
+}
+.original .products .pro .proRight .prices .mui-numbox [class*=btn-numbox], .mui-numbox [class*=numbox-btn]{
+	width: 25px;
+}
+.original .products .pro .proRight .prices  .mui-numbox [class*=btn-numbox],
+.original .products .pro .proRight .prices  .mui-numbox [class*=numbox-btn]{
+	font-size: 14px;
+}
+/**/
