@@ -10,7 +10,145 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<!--<link href="../../css/style.css" rel="stylesheet" />-->
+		<link rel="stylesheet" type="text/css" href="../../css/modal.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/quotation/addQuotation.css"/>
+		<style type="text/css">
+			input[type=search]{
+				width: calc(100% - 40px);
+				/*margin-bottom: 0px!important;*/
+			}
+			.mui-icon-plus-filled {
+			    font-size: 14px;
+			    word-break: keep-all;
+			    line-height: 100%;
+			    padding-top: 6px;
+			    color: #666666;
+			    padding-left: 5px;
+		    }
+			.mui-icon-plus-filled:before {
+				content: "搜索";
+			}
+			.mui-placeholder{
+				margin-right: 0px!important;
+				width: calc(100% - 45px);
+			}
+			.mui-icon-clear{
+				margin-right: 0px!important;
+				width: 20px!important;
+				height: 20px!important;
+				right: 45px!important;
+			}
+			
+			#middlePopover {
+				position: fixed;
+				top: 200px;
+				margin-right: 18px;
+				left: auto;
+			}
+			.mui-popover .mui-popover-arrow {
+				left: 90%;
+				/*left:calc(95% - 20px)!important;*/
+			}
+			.mui-modal{
+				width: calc(100% - 36px)!important;
+				left: 18px!important;
+				top: calc((100% - 350px)/2)!important;
+			}
+			.mui-modal .mui-card{
+				margin: 0px;
+			}
+			.mui-modal .mui-card .mui-card-header{
+				padding: 0px 20px!important;
+				background-color: #F7F7F7;
+			}
+			.mui-modal .mui-card-header:after{
+				height: 0px;
+			}
+			.modal-title{
+				font-size: 14px;
+				height: 24px;
+				margin-top: 10px;
+			}
+			.modal-title:before{
+			    height: 22px;
+			    width: 2px;
+			    box-shadow: 0 2px 4px 0 rgba(199, 27, 30, 0.40);
+			    position: absolute;
+			    right: 0;
+			    left: 0px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #C71B1E;
+			}
+			.mui-modal .mui-table-view-cell{
+				padding:11px 20px;
+			}
+			.mui-modal input[type=text]{
+				line-height: 19px;
+				padding: 0px!important;
+			}
+			.mui-modal.mui-active{
+				max-height: 350px;
+			}
+			.mui-modal textarea{
+				float: right;
+				width: 73%!important;
+				margin-top: -8px;
+				padding: 0px 3px!important;
+				height: 50px;
+				border: 1px solid rgba(0,0,0,.2)!important;
+			}
+			.mui-modal .mui-button-row {
+			    padding-top: 0px!important;
+			    margin:10px 0px;
+			    text-align: center;
+			}
+			.mui-modal .mui-button-row .mui-btn {
+			    height: 28px;
+			    padding: 0px;
+			    border-radius: 25px;
+			    width: 25%;
+			    margin:0px 5%;
+			}
+			.original .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
+				padding-bottom: 0px;
+				
+			}
+			.mui-table-view-cell-scroll{
+				padding-top: 0px!important;
+			}
+			.original-list-card{
+				border: 1px solid #E4E4E4;
+				margin: 0px 0px 8px 0px!important;
+			}
+			
+			.original-list-card .mui-table-view{
+				margin-top:0px!important;
+			}
+			
+			
+			.original-list-card .mui-card-header{
+				padding-left: 20px!important;
+				font-size: 14px;
+				line-height: 20px;
+			}
+			.original-list-card .mui-table-view-cell{
+				padding-left: 50px!important;
+			}
+			.original-list-card .mui-icon{
+				padding-right: 20px!important;
+			}
+			.original-list-card textarea{
+				float: right;
+				width: calc(100% - 45px)!important;
+				/*margin-top: -8px;*/
+				padding: 0px 3px!important;
+				height: 50px;
+				/*border: 1px solid rgba(0,0,0,.2)!important;*/
+			}
+		</style>
 	</head>
 
 	<body>
@@ -42,7 +180,7 @@
 						</li>
 						<li class="mui-table-view-cell">
 							<label>订单类型</label>
-							<i class="mui-icon mui-icon-arrowdown">销售订单    </i>
+							<i class="mui-icon mui-icon-arrowdown" id="order_type">请选择订单类型    </i>
 						</li>
 
 					</ul>
@@ -131,10 +269,50 @@
 		                <ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<div class="mui-input-row mui-search">
-								    <input type="search" class="mui-input-clear" placeholder="请输入原装选厂关键字">
+								    <input type="search" class="mui-input-clear" data-productType='optionalProduct' data-categoryCode="decor" placeholder="请输入原装选厂关键字">
+									<i id='optionalProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
+								<!--<i id='optionalProductSearchA' class="mui-icon mui-icon-plus-filled"></i>-->
 								</div>
+								<!--<label for="" class="footer-right">
+									<i id='msg-send' class="mui-icon mui-icon-plus-filled"></i>
+								</label>-->
 							</li>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll" id='optionalProductResultList'>
+								<!--<div class="mui-card mui-clearfix original-list-card" id='1collapseCard'>
+									<div class="mui-card-header">
+										<label id="produce_code">产品编号</label>
+										<i data-iconCode="1" class="mui-icon mui-icon-trash mui-pull-right"></i>
+									</div>
+									<div class="mui-card-content">
+											<ul class="mui-table-view mui-clearfix">
+												<li class="mui-table-view-cell">
+													<label>产品描述</label>
+													<var id="card_produce_name">产品描述</var>
+												</li>
+												<li class="mui-table-view-cell">
+													<label>参考价格</label>
+													<var id="card_produce_price">参考价格</var>
+												</li>
+												<li class="mui-table-view-cell">
+													<label>销售价格</label>
+													<var id="card_sale_price">参考价格</var>
+												</li>
+												<li class="mui-table-view-cell">
+													<label>数量</label>
+													<var id="card_sale_price">参考价格</var>
+												</li>
+												<li class="mui-table-view-cell">
+													<label>备注</label>
+													<textarea id="card_produce_textarea" placeholder="请填写备注信息"></textarea>
+												</li>
+												
+											</ul>
+											
+										</div>	
+								</div>-->
+							</li>	
 						</ul>
+			       		
 			        </li>
 			    </ul>
 			</div>
@@ -146,13 +324,17 @@
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<div class="mui-input-row mui-search">
-								    <input type="search" class="mui-input-clear" placeholder="请输入原装选厂关键字">
+								    <input type="search" class="mui-input-clear" data-productType="upholsteryProduct" data-categoryCode="parts"  placeholder="请输入装潢关键字">
+								    <i id='upholsteryProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
 								</div>
+							</li>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll" id='upholsteryProductResultList'>
 							</li>
 						</ul>
 					</li>
 				</ul>	
 			</div>
+			
 			<!--二手车登记-->
 			<div class="mui-card car-card carDetails secondHand">
 				<ul class="mui-table-view"> 
@@ -359,7 +541,8 @@
 		                <ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<div class="mui-input-row mui-search">
-								    <input type="search" class="mui-input-clear" placeholder="请输入新车车险关键字">
+								    <input type="search" class="mui-input-clear" data-productType="insuranceProduct" data-categoryCode="vinsurance" placeholder="请输入新车车险关键字">
+								    <i id='insuranceProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
 								</div>
 							</li>
 						</ul>
@@ -374,7 +557,8 @@
 		                <ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<div class="mui-input-row mui-search">
-								    <input type="search" class="mui-input-clear" placeholder="请输入卡券关键字">
+								    <input type="search" class="mui-input-clear" data-productType="coupon" data-categoryCode="voucher" placeholder="请输入卡券关键字">
+								    <i id='couponSearchA' class="mui-icon mui-icon-plus-filled "></i>
 								</div>
 							</li>
 						</ul>
@@ -389,10 +573,13 @@
 		                <ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<div class="mui-input-row mui-search">
-								    <input type="search" class="mui-input-clear" placeholder="请输入延保关键字">
+								    <input type="search" class="mui-input-clear" data-productType='extendedWarrantyProduct' data-categoryCode="dinsurance" placeholder="请输入延保关键字">
+								    <i id='extendedWarrantyProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
 								</div>
 							</li>
-						</ul>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll" id='extendedWarrantyProductResultList'>
+							</li>
+		                </ul>
 			        </li>
 			    </ul>
 			</div>
@@ -437,7 +624,86 @@
 		    <a class="mui-tab-item mui-active" id="cancelQuotation" href="#">取消</a>
 		    <a class="mui-tab-item" id="creatQuotation" href="#">创建</a>
 		</footer>
-
+		
+		<div id='searchAResult' class="ui-alert"></div>
+		
+		<div id="modal" class="mui-modal">
+			<div class="mui-card mui-clearfix price-card">
+				<div class="mui-card-header">
+					<label id="produce_code">产品编号</label>
+				</div>
+				<div class="mui-card-content">
+						<ul class="mui-table-view mui-clearfix">
+							<li class="mui-table-view-cell">
+								<label>产品描述</label>
+								<var id="produce_name">产品描述</var>
+							</li>
+							<li class="mui-table-view-cell">
+								<label>参考价格</label>
+								<var id="produce_price">参考价格</var>
+							</li>
+							<li class="mui-table-view-cell">
+								<label>销售价格</label>
+								<input type="text" name="salePrice" id="sale_price" class="mui-input-clear" placeholder="请输入销售价格" value="">
+							</li>
+							<li class="mui-table-view-cell">
+								<label>数量</label>
+								<input type="text" name="count" id="count" class="mui-input-clear" placeholder="请输入数量" value="">
+							</li>
+							<li class="mui-table-view-cell">
+								<label>备注</label>
+								<textarea id="produce_textarea" placeholder="请填写备注信息"></textarea>
+							</li>
+							
+						</ul>
+						
+					</div>	
+				<div class="mui-button-row">
+					<button type="button" id="btn_modal_cancel" class="mui-btn mui-btn-danger mui-btn-outlined btn_modal_cancel">取消</button>
+					<button type="button" id="btn_modal_save" class="mui-btn mui-btn-danger btn_modal_save">保存</button>
+				</div>
+			</div>
+		</div>
+		
+		<div id="insuranceModal" class="mui-modal">
+			<div class="mui-card mui-clearfix price-card">
+				<div class="mui-card-header">
+					<label id="produce_code">产品编号</label>
+				</div>
+				<div class="mui-card-content">
+						<ul class="mui-table-view mui-clearfix">
+							<li class="mui-table-view-cell">
+								<label>产品描述</label>
+								<var id="produce_name">产品描述</var>
+							</li>
+							<li class="mui-table-view-cell">
+								<label>参考价格</label>
+								<var id="produce_price">参考价格</var>
+							</li>
+							<li class="mui-table-view-cell">
+								<label>销售价格</label>
+								<input type="text" name="salePrice" id="sale_price" class="mui-input-clear" placeholder="请输入销售价格" value="">
+							</li>
+							<li class="mui-table-view-cell">
+								<label>数量</label>
+								<input type="text" name="count" id="count" class="mui-input-clear" placeholder="请输入数量" value="">
+							</li>
+							<li class="mui-table-view-cell">
+								<label>备注</label>
+								<textarea id="produce_textarea" placeholder="请填写备注信息"></textarea>
+							</li>
+							
+						</ul>
+						
+					</div>	
+				<div class="mui-button-row">
+					<button type="button" id="btn_modal_cancel" class="mui-btn mui-btn-danger mui-btn-outlined">取消</button>
+					<button type="button" id="btn_modal_save" class="mui-btn mui-btn-danger">保存</button>
+				</div>
+			</div>
+		</div>
+		
+		
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
@@ -445,7 +711,9 @@
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/quotation/quotaion-car-picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/quotation/quotation-car-picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/quotation/quotation-event-option.js" type="text/javascript" charset="utf-8"></script>
+		
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -465,12 +733,14 @@
 				}
 				//选择订单类型
 				var picker = new mui.PopPicker();
-				mui(".brand").on('tap','.selBrand .brands',function(){				
-					picker.setData(selBrands);
+				document.getElementById('order_type').addEventListener('tap',function(){
+					picker.setData(orderType);
 					picker.show(function(SelectedItem) {
-						document.getElementsByClassName("brands")[0].innerHTML = SelectedItem[0].text;
+						document.getElementById('order_type').innerHTML = SelectedItem[0].text;
+						document.getElementById('order_type').setAttribute("data-value",SelectedItem[0].text);
 					});
-				});
+				})
+				
 				
 				//选择车辆信息
 //				var picker = new mui.PopPicker();
@@ -528,6 +798,19 @@
 					});
 				});
 				
+				var productTypeList = {
+					parts:"optionalProduct", //原厂选装
+					decor:"upholsteryProduct", //装潢
+					vinsurance:"insuranceProduct",//保险
+					dinsurance:"extendedWarrantyProduct", //延保
+					voucher:"coupon" //卡券
+				};
+				var oppoCode = '';
+				if(!localStorage.getItem('$state')) {
+					plus.nativeUI.toast('登陆过期，请重新登陆！');
+					return;
+				}
+				var token = JSON.parse(localStorage.getItem('$state')).token;
 				$.plusReady(function() {
 
 					/*---------关闭滚动条------*/
@@ -537,10 +820,20 @@
 
 					//获取父级页面查询过来的参数
 					var self = plus.webview.currentWebview();
-					processid = self.processid;
+					oppoCode = self.oppoCode;
 
 				});
-
+//				$('.mui-table-view-cell-scroll').scroll();
+				
+				
+				
+				doc.getElementById('btn_modal_cancel').addEventListener('tap',function(){
+					document.getElementById("modal").classList.remove('mui-active');
+					document.getElementById("modal").setAttribute('style','');
+					mask.close();
+				})
+				
+				
 			
 
 			}(mui, document));

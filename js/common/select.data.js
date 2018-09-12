@@ -412,7 +412,24 @@ var incomeData = [{
 	value: '09',
 	text: '200万以上'
 }]
-
+/*
+ 零售订单
+对私大宗订单
+批发订单
+次新车订单*/
+var orderType = [{
+	value: "01",
+	text: "零售订单"
+}, {
+    value: "02",
+	text: "对私大宗订单"
+}, {
+    value: "03",
+	text: "批发订单"
+}, {
+    value: "04",
+	text: "次新车订单"
+}]
 //新建报价单-车辆信息-品牌
 var selBrands = [{
 	value: "01",
@@ -485,3 +502,5 @@ var selPayWay = [{
     value: "03",
 	text: "支付宝"
 }]
+
+

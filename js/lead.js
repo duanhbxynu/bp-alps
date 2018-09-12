@@ -27,11 +27,10 @@
 		console.log(qryUrl);
 		$.ajax(qryUrl, {
 			data: params,
-			dataType: 'jsonp', //服务器返回json格式数据
-			jsonp:'callback',
-			crossDomain: true,//强制使用5+跨域
+			dataType: 'json', //服务器返回json格式数据
+//			jsonp:'callback',
 			type: 'POST', //HTTP请求类型
-			timeout: 1000, //超时时间设置为10秒；
+//			timeout: 1000, //超时时间设置为10秒；
 			success: callback,
 			error: function(xhr, type, errorThrown) {
 				console.log("xhr");

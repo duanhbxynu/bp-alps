@@ -214,6 +214,7 @@
 						callback: pulldownRefresh
 					},
 					up: {
+						auto:true,
 						contentrefresh: '正在加载...',
 						contentnomore:'没有更多数据了',
 						callback: pullupRefresh
@@ -232,13 +233,11 @@
 			//下拉刷新初始化动作	
 			if(mui.os.plus) {
 				mui.plusReady(function() {
-//					showProgressCount();
-//					showJobList();
 
-					setTimeout(function() {
-						mui('#opporPullrefresh').pullRefresh().pullupLoading();
-						console.log("第一次进入");
-					}, 1000);
+//					setTimeout(function() {
+//						mui('#opporPullrefresh').pullRefresh().pullupLoading();
+//						console.log("第一次进入");
+//					}, 1000);
 					
 					/*预加载详情页*/
 					detailPage = mui.preload({
@@ -251,9 +250,7 @@
 				});
 			} else {
 				mui.ready(function() {
-//					showProgressCount();
-//					showJobList();
-					mui('#opporPullrefresh').pullRefresh().pullupLoading();
+//					mui('#opporPullrefresh').pullRefresh().pullupLoading();
 				});
 				/*预加载详情页*/
 					detailPage = mui.preload({

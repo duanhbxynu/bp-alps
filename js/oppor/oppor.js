@@ -101,10 +101,10 @@
 		$.ajax(common.URL.updateOppor(),{
 			type:"POST",
 			contentType: 'application/json',
-			dataType:"jsonp",
-			jsonp:'callback',
-			crossDomain: true,//强制使用5+跨域
-			timeout: 1000, //超时时间设置为10秒；
+			dataType:"json",
+//			jsonp:'callback',
+//			crossDomain: true,//强制使用5+跨域
+//			timeout: 1000, //超时时间设置为10秒；
 	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
 			    xhr.setRequestHeader("Authorization","Bearer " + token);

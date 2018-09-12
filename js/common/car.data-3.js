@@ -127,11 +127,11 @@ var productList = [{
 	text:"118i 领先型",
 	children:[{
 		value:"B0001_B",
-		text:"BLACK",
+		text:"黑",
 		price:1013
 	},{
 		value:"B0001_W",
-		text:"WHITE",
+		text:"白",
 		price:1014
 	}]
 },{
@@ -140,11 +140,11 @@ var productList = [{
 	text:"220i 运动设计套装",
 	children:[{
 		value:"B0002_B",
-		text:"BLACK",
+		text:"黑",
 		price:1015
 	},{
 		value:"B0002_W",
-		text:"WHITE",
+		text:"白",
 		price:1016
 	}]
 },{
@@ -153,11 +153,11 @@ var productList = [{
 	text:"318i 时尚型",
 	children:[{
 		value:"B0003_B",
-		text:"BLACK",
+		text:"黑",
 		price:1017
 	},{
 		value:"B0003_W",
-		text:"WHITE",
+		text:"白",
 		price:1018
 	}]
 },{
@@ -166,11 +166,11 @@ var productList = [{
 	text:"Limousine 运动型",
 	children:[{
 		value:"A0002_B",
-		text:"BLACK",
+		text:"黑",
 		price:1005
 	},{
 		value:"A0002_W",
-		text:"WHITE",
+		text:"白",
 		price:1006
 	}]
 },{
@@ -179,11 +179,11 @@ var productList = [{
 	text:"Plus 风尚型",
 	children:[{
 		value:"A0004_B",
-		text:"BLACK",
+		text:"黑",
 		price:1009
 	},{
 		value:"A0004_W",
-		text:"WHITE",
+		text:"白",
 		price:1010
 	}]
 },{
@@ -192,7 +192,7 @@ var productList = [{
 	text:"Plus 风尚型",
 	children:[{
 		value:"A0005_W",
-		text:"WHITE",
+		text:"白",
 		price:1012
 	}]
 },{
@@ -201,11 +201,11 @@ var productList = [{
 	text:"Sportback 风尚型",
 	children:[{
 		value:"A0003_B",
-		text:"BLACK",
+		text:"黑",
 		price:1007
 	},{
 		value:"A0003_W",
-		text:"WHITE",
+		text:"白",
 		price:1008
 	}]
 },{
@@ -214,11 +214,11 @@ var productList = [{
 	text:"TFSI 风尚版",
 	children:[{
 		value:"A0001_B",
-		text:"BLACK",
+		text:"黑",
 		price:1003
 	},{
 		value:"A0001_W",
-		text:"WHITE",
+		text:"白",
 		price:1004
 	}]
 }]
