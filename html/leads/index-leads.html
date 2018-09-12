@@ -169,6 +169,7 @@
 						callback: pulldownRefresh
 					},
 					up: {
+						auto:true,
 						contentrefresh: '正在加载...',
 						contentnomore:'没有更多数据了',
 						callback: pullupRefresh
@@ -190,13 +191,14 @@
 					var flowScroll = document.body.querySelector('.flow-scroll');
 					console.log(flowScroll);
 					lead.qryCustomerList([],function(data) {
-						var data = JSON.parse(data);
+//						var data = JSON.parse(data);
+						
 						if(data.success) {
 							//成功返回数据，
 							//1.清空原ul下的子节点全部清空
 							while(flowScroll.hasChildNodes()) {
 								console.log('清理列表数据...');
-								flowScroll.removeChild();
+								flowScroll.removeChild(flowScroll.firstChild);
 							}
 							count = 0;
 							//2.将数据前10条填充到列表中
@@ -311,7 +313,7 @@
 				
 				setTimeout(function() {
 					lead.qryCustomerList([],function(data) {
-						var data = JSON.parse(data);
+//						var data = JSON.parse(data);
 //						alert(data);
 						if(data.success) {
 							customerFlowList = data.customerFlowList;
@@ -338,8 +340,8 @@
 			if (mui.os.plus) {
 				mui.plusReady(function() {
 					setTimeout(function() {
-						console.log("leads/index-lead-single");
-						mui('#flowPullrefresh').pullRefresh().pullupLoading();
+						console.log("leads/index-leads");
+//						mui('#flowPullrefresh').pullRefresh().pullupLoading();
 						
 					}, 10);
 					/*预加载详情页*/
@@ -353,7 +355,7 @@
 				});
 			} else {
 				mui.ready(function() {
-					mui('#flowPullrefresh').pullRefresh().pullupLoading();
+//					mui('#flowPullrefresh').pullRefresh().pullupLoading();
 					/*预加载详情页*/
 					detailPage = mui.preload({
 						url:'instore-customerstream-detail.html',

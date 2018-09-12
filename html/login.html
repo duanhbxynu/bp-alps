@@ -238,7 +238,7 @@
 //						//第三方登录
 //						var authBtns = ['qihoo', 'weixin', 'sinaweibo', 'qq']; //配置业务支持的第三方登录
 //						var auths = {};
-//						var oauthArea = doc.querySelector('.oauth-area');
+						var oauthArea = doc.querySelector('.oauth-area');
 //						plus.oauth.getServices(function(services) {
 //							for (var i in services) {
 //								var service = services[i];
@@ -312,6 +312,7 @@
 //							toMain();
 //							var indexLeads = plus.webview.getWebviewById("main");
 //							indexLeads.reload(true);
+							
 							$.openWindow({
 								id: 'main',
 								url:'index.html',
