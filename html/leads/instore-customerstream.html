@@ -145,7 +145,7 @@
 							//1.清空原ul下的子节点全部清空
 							while(streamScroll.hasChildNodes()) {
 								console.log('清理列表数据...');
-								streamScroll.removeChild();
+								streamScroll.removeChild(streamScroll.firstChild);
 							}
 							count = 0;
 							//2.将数据前10条填充到列表中
@@ -244,7 +244,7 @@
 				for(; i < len; i++) {
 //					alert("customerFlowList[i]");
 //					alert(customerFlowList[i]);
-//					console.log(customerFlowList[i]);
+					console.log(customerFlowList[i].statusCode);
 					var statusValue = '接待中';
 					if(customerFlowList[i].statusCode == 'pending') {
 						statusValue = '等待';

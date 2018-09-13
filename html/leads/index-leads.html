@@ -85,7 +85,7 @@
 					
 				</div>
 				
-				<div id="flowPullrefresh" class="mui-scroll-wrapper flow-scroll-wrapper">
+				<div id="pullrefresh" class="mui-scroll-wrapper flow-scroll-wrapper">
 					<div class="mui-scroll flow-scroll list-scroll" style="margin-top: 37px;">
 				
 						<!--<div class="mui-card">
@@ -161,7 +161,7 @@
 			$.init({
 				swipeBack: false,
 				pullRefresh: {
-					container: '#flowPullrefresh',
+					container: '#pullrefresh',
 					down: {
 						contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
 			            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
@@ -214,7 +214,7 @@
 					
 			
 					
-					mui('#flowPullrefresh').pullRefresh().endPulldownToRefresh();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 					showCustomerDetail();
 				}, 500);
 			}
@@ -222,7 +222,7 @@
 			function fillingData(pull,customerFlowList){
 				
 				if(pull == "pullup"){
-					mui('#flowPullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(customerFlowList.length / 10))); //参数为true代表没有更多数据了。
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(customerFlowList.length / 10))); //参数为true代表没有更多数据了。
 				}
 				
 				var listLen = customerFlowList.length;
@@ -239,7 +239,9 @@
 					len = i + 10;
 				}
 				for(; i < len; i++) {
-					var statusValue = '接待中';
+					console.log(customerFlowList[i].statusCode);
+					console.log(customerFlowList[i].statusName);
+					var statusValue = '等待';
 					if(customerFlowList[i].statusCode == 'pending') {
 						statusValue = '等待';
 					}else if(customerFlowList[i].statusCode == 'reception'){
@@ -325,9 +327,9 @@
 					});
 					
 					
-//						mui('#flowPullrefresh').pullRefresh().refresh(true);
+//						mui('#pullrefresh').pullRefresh().refresh(true);
 						
-//						mui('#flowPullrefresh').pullRefresh().endPullupToRefresh();
+//						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						
 						showCustomerDetail();
 				}, 500);
@@ -341,7 +343,7 @@
 				mui.plusReady(function() {
 					setTimeout(function() {
 						console.log("leads/index-leads");
-//						mui('#flowPullrefresh').pullRefresh().pullupLoading();
+						mui('#pullrefresh').pullRefresh().pullupLoading();
 						
 					}, 10);
 					/*预加载详情页*/
@@ -355,7 +357,7 @@
 				});
 			} else {
 				mui.ready(function() {
-//					mui('#flowPullrefresh').pullRefresh().pullupLoading();
+					mui('#pullrefresh').pullRefresh().pullupLoading();
 					/*预加载详情页*/
 					detailPage = mui.preload({
 						url:'instore-customerstream-detail.html',

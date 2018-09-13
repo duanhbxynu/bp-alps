@@ -159,7 +159,7 @@
 							<label>处理状态 </label>
 							<label class="stream-status reception active" id="reception" data-value="reception">接待中</label>
 							<hr class="hr"></hr>
-							<label class="stream-status complete" id="complete" data-value="reception">接待完成</label>
+							<label class="stream-status complete" id="complete" data-value="complete">接待完成</label>
 							<!--<span id="stream_status" class="stream-status">
 								<label class="reception active" data-value="reception" id="reception">接待中</label>
 								<label class="complete" data-value="complete" id="complete">接待完成</label>
@@ -219,7 +219,6 @@
 				$.init({
 					beforeback: function() {
 				　　　　 //获得父页面的webview 
-				
 //						var indexLeads = plus.webview.getWebviewById("instore-customerstream.html").opener();
 //						plus.webview.getWebviewById("instore-customerstream.html").hide();
 //				　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
@@ -229,22 +228,15 @@
 //				        });
 				        
 				        
-				        var indexOpener = plus.webview.getWebviewById("leads/index-leads.html").opener();
-				        var indexLeads = plus.webview.getWebviewById("leads/index-leads.html")
-//						indexLeads.hide();
-						
-						
-						$.fire(indexOpener, 'refresh',{
-					        targetTab:'leads/index-leads.html',
-					        activeTab:'leadsTab'
-					    });
-				    
-				    
+//				        var indexOpener = plus.webview.getWebviewById("leads/index-leads.html").opener();
+//				        var indexLeads = plus.webview.getWebviewById("leads/index-leads.html")
+//						
+//						$.fire(indexOpener, 'refresh',{
+//					        targetTab:'leads/index-leads.html',
+//					        activeTab:'leadsTab'
+//					    });
+						common.baseOption.toIndex(0);
 
-//						//获得父页面的webview 
-//						var customerstream = plus.webview.currentWebview().opener();
-//				　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
-//				        $.fire(customerstream, 'refresh',null);
 				        //返回true,继续页面关闭逻辑
 				        return true;
 				    }
@@ -271,7 +263,7 @@
 					
 					lead.getCustomerFlowDetail(customerFlowId,function(data){
 						
-						var data = JSON.parse(data);
+//						var data = JSON.parse(data);
 						if(data.success==true) {
 							var customerFlowList = data.customerFlowList;
 							if(customerFlowList){
@@ -312,7 +304,7 @@
 									doc.getElementById('showTypePicker').innerText = typeText;
 									doc.getElementById('showTypePicker').setAttribute("data-value",typeCode);
 								}
-								if(statusCode == 'pending'){
+								if(statusCode == 'reception'){
 									doc.getElementById('reception').classList.add('active');
 									doc.getElementById('complete').classList.remove('active');
 								}else if(statusCode == 'complete'){
@@ -471,7 +463,7 @@
 					var params = {mobile:mobilestr};
 					//首先到“意向”表中“客流编号”字段检查是否存在本客流编号，如果存在，则提示该客流已经创建意向记录，不可重复创建
 					lead.checkOppor(params,function(data){
-						var data = JSON.parse(data);
+//						var data = JSON.parse(data);
 						console.log("opportunity detail result:"+JSON.stringify(data));
 						console.log("--------------------------------------------------------------");
 						if(data.success==true){
@@ -484,6 +476,7 @@
 							console.log(opportunity.code);
 							console.log(opportunity.createdPerson);
 							if(opportunity.createdPerson == currentUser){
+								
 								openOpporPage(opportunity.code,opportunity);
 //							location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"&id="+opportunity.code);
 							}else{
@@ -527,19 +520,24 @@
 					}
 					
 					var typeCode = doc.getElementById('showTypePicker').getAttribute("data-value");
+					var typeName = doc.getElementById('showTypePicker').innerText;
 					var statusCode = document.querySelector('.stream-status-row .active').getAttribute("data-value");
+					var statusName = document.querySelector('.stream-status-row .active').innerText;
 					var params = {
 						"id": id,
 						"name": name,
 						"gender": gender,
+						"genderCode": gender,
 						"phone": phone,
 						"inMan": inMan,
 						"inWoman": inWoman,
 						"typeCode": typeCode,
-						"statusCode": statusCode
+						"typeName": typeName,
+						"statusCode": statusCode,
+						"statusName": statusName
 					};
 					lead.updateCustomerDetail(params,function(data){
-						var data = JSON.parse(data);
+//						var data = JSON.parse(data);
 						if(data.success==true) {
 //							alert(data.success);
 							

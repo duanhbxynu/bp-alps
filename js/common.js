@@ -51,6 +51,22 @@ var common = {
 				}
 			});
 		},
+		/**
+		* 跳转到首页
+		* 参数默认为0(首页tab bar 的第一个子页面)
+		* */
+		toIndex:function(i) {
+			//设置默认值为0 
+			var i = i || 0;
+			
+			var idArr=["leadsTab","opporTab","orderTab","findTab","mineTab"];
+			
+			var main = plus.webview.getWebviewById("main"); //这里可能返回空；详见官方文档说明
+			//显示首页
+			console.log("应用首页,并且切换到对应的选项卡");
+			mui.fire(main,'tabSwith',{id:idArr[i]});	
+			main.show();	
+		},
 		jsonify:function(obj){
 			var seen = [];
 			var json = JSON.stringify(obj, function(key, value){

@@ -17,16 +17,20 @@
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 	                <div class="mui-scroll">
-	                    <a class="mui-control-item mui-active" data-index="0">整车订单</a>
-	                    <a class="mui-control-item" data-index="1">增值订单</a>
+	                    <a class="mui-control-item mui-active" data-index="0" data-orderType='wholeVehicle'>整车订单</a>
+	                    <a class="mui-control-item" data-index="1"  data-orderType='increment'>增值订单</a>
 	                    <a class="mui-control-item" data-index="2">全部</a>
 	                </div>
 	            </div>
 				<div class="mui-slider-group">
 					 <div class="mui-slider-item mui-control-content">
-	                    <div class="mui-scroll-wrapper">	                    	
-	                        <div class="mui-scroll">
-	                        	
+	                    <div id="orderPullrefresh" class="mui-scroll-wrapper">	                    	
+	                        <div class="mui-scroll" >
+	                        	<script id='content-template' type="text/template">
+									<% for(var i in contentList){ var item=contentList[i]; %>
+									
+									<% } %>
+								</script>
 	                        	<div class="mui-card">
 									<div class="mui-card-header">
 										订单编号KL092034
@@ -117,9 +121,88 @@
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script src="../../js/common.js"></script>
-		<script src="../../js/lead.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/order/order.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/arttmpl.js"></script>
 		<script>
-			mui.init()
+			mui.init({
+				swipeBack: false,
+				pullRefresh: {
+					container: '#orderPullrefresh',
+					down: {
+						contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+			            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+			            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: pulldownRefresh
+					},
+					up: {
+						auto:true,
+						contentrefresh: '正在加载...',
+						contentnomore:'没有更多数据了',
+						callback: pullupRefresh
+					}
+				}
+			});
+			var count = 0;
+			var orderList = null;
+			function pullupRefresh() {
+				
+				setTimeout(function() {
+					var params = {
+						currentPage:0,
+						pagesize:10
+					}
+					console.log("订单列表");
+					order.qryOrderList(params,function(data) {
+//						var data = JSON.parse(data);
+						console.log(data);
+						console.log("订单列表data.success"+data.success);
+						if(data.success) {
+							orderList = data.orderList;
+							console.log(orderList);
+							var str = template('content-template', { 
+						            "contentList": orderList,
+						            
+						        }); 
+							
+							
+						}else {
+							plus.nativeUI.toast(data.error);
+						}
+					});
+					
+						mui('#orderPullrefresh').pullRefresh().refresh(true);
+						
+						mui('#orderPullrefresh').pullRefresh().endPullupToRefresh();
+						
+				}, 500);
+			}
+			function pulldownRefresh() {
+				
+				setTimeout(function() {
+					var params = {
+						currentPage:0,
+						pagesize:10
+					}
+					order.qryOrderList(params,function(data) {
+//						var data = JSON.parse(data);
+						console.log(data);
+						if(data.success) {
+							orderList = data.orderList;
+							console.log(orderList);
+							
+						}else {
+							plus.nativeUI.toast(data.error);
+						}
+					});
+					
+						mui('#orderPullrefresh').pullRefresh().refresh(true);
+						
+						mui('#orderPullrefresh').pullRefresh().endPulldownToRefresh();
+						
+				}, 500);
+			}
+			
+			var itemIndex = 0;
 			mui.ready(function() {
 		        mui('.mui-scroll-wrapper').scroll({
 		            bounce: true,
@@ -127,9 +210,33 @@
 		            deceleration:mui.os.ios?0.003:0.0009
 		        });
 		        mui('.mui-scroll').on('tap','.mui-control-item:not(.mui-active)',function(){
+		        	itemIndex = this.getAttribute('data-index');
+		        	orderType = this.getAttribute('data-orderType');
+		        	
 		            mui('.mui-slider').slider().gotoItem(this.getAttribute('data-index'));
 		        });
 		    });
+		    function showOrderDetail(){
+				mui('.mui-scroll-wrapper').on('tap', '.mui-card', function() {
+					var orderCode = this.getAttribute("data-orderCode");
+					console.log(orderCode);
+					//打开详情页面          
+					mui.openWindow({
+						id: 'orderDetail',
+						url:'opportunity-detail.html',
+						extras:{
+					      orderCode:orderCode//自定义扩展参数，可以用来处理页面间传值
+					    },
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})
+		    }
+		    
 		</script>
 	</body>
 

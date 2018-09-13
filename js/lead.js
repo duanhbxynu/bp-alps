@@ -55,11 +55,11 @@
 		console.log("customer flow detail request:"+JSON.stringify(params));
 		$.ajax(common.URL.getCustomerFlowDetail(),{
 			type:"POST",
-			dataType:"jsonp",
-			jsonp:'callback',
-			crossDomain: true,//强制使用5+跨域
+			dataType:"json",
+//			jsonp:'callback',
+//			crossDomain: true,//强制使用5+跨域
 	        data: params,
-	        timeout: 1000, //超时时间设置为10秒；
+//	        timeout: 1000, //超时时间设置为10秒；
 			success: callback,
 		    error: function(xhr, textStatus, errorThrown){
 		    	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
@@ -81,10 +81,10 @@
 		$.ajax(common.URL.updateCustomerFlow(),{
 			type:"POST",
 			contentType: 'application/json',
-			dataType:"jsonp",
-			jsonp:'callback',
-			crossDomain: true,//强制使用5+跨域
-			timeout: 1000, //超时时间设置为10秒；
+			dataType:"json",
+//			jsonp:'callback',
+//			crossDomain: true,//强制使用5+跨域
+//			timeout: 1000, //超时时间设置为10秒；
 	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
 			    xhr.setRequestHeader("Authorization","Bearer " + token);
@@ -111,10 +111,10 @@
 		console.log(params);
 		$.ajax(common.URL.getOpporDetail(),{
 			type:"POST",
-			dataType:"jsonp",
-			jsonp:'callback',
-			crossDomain: true,//强制使用5+跨域
-			timeout: 1000, //超时时间设置为10秒；
+			dataType:"json",
+//			jsonp:'callback',
+//			crossDomain: true,//强制使用5+跨域
+//			timeout: 1000, //超时时间设置为10秒；
 	        data: params,
 	        beforeSend: function (xhr) {
 			    xhr.setRequestHeader("Authorization","Bearer " + token);

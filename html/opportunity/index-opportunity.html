@@ -46,11 +46,6 @@
 			
 			
 			
-		</style>
-		
-		<style>
-			
-			
 			.mui-input-row {
 				line-height: 25px;
 			}
@@ -158,7 +153,7 @@
 					</a>
 				</div>
 
-				<div id="opporPullrefresh" class="mui-scroll-wrapper oppor-scroll-wrapper">
+				<div id="pullrefresh" class="mui-scroll-wrapper oppor-scroll-wrapper">
 					<div class="mui-scroll oppor-scroll" style="margin-top: 37px;">
 						<!--数据列表-->
 						<!--<div class="mui-card clear" data-opporCode="OP0000009">
@@ -206,7 +201,7 @@
 			$.init({
 				swipeBack: false,
 				pullRefresh: {
-					container: '#opporPullrefresh',
+					container: '#pullrefresh',
 					down: {
 						contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
 			            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
@@ -234,10 +229,10 @@
 			if(mui.os.plus) {
 				mui.plusReady(function() {
 
-//					setTimeout(function() {
-//						mui('#opporPullrefresh').pullRefresh().pullupLoading();
-//						console.log("第一次进入");
-//					}, 1000);
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+						console.log("第一次进入");
+					}, 1000);
 					
 					/*预加载详情页*/
 					detailPage = mui.preload({
@@ -250,7 +245,7 @@
 				});
 			} else {
 				mui.ready(function() {
-//					mui('#opporPullrefresh').pullRefresh().pullupLoading();
+					mui('#pullrefresh').pullRefresh().pullupLoading();
 				});
 				/*预加载详情页*/
 					detailPage = mui.preload({
@@ -297,7 +292,7 @@
 							//1.清空原ul下的子节点全部清空
 							while(opporScroll.hasChildNodes()) {
 								console.log('清理列表数据...');
-								opporScroll.removeChild();
+								opporScroll.removeChild(opporScroll.firstChild);
 							}
 							count = 0;
 							//2.将数据前2条填充到列表中
@@ -312,7 +307,7 @@
 						}
 					});
 					
-					mui('#opporPullrefresh').pullRefresh().endPulldownToRefresh();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 					showOpporDetail();
 				}, 500);
 			}
@@ -320,7 +315,7 @@
 			function fillingData(pull,opportunityList){
 				
 				if(pull == "pullup"){
-					mui('#opporPullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(opportunityList.length / 10))); //参数为true代表没有更多数据了。
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(opportunityList.length / 10))); //参数为true代表没有更多数据了。
 				}
 				
 				var listLen = opportunityList.length;
@@ -376,14 +371,12 @@
 							opporScroll.appendChild(card);
 						}else{
 							//下拉刷新，新纪录插到最前面；
-							opporScroll.insertBefore(card, streamScroll.firstChild);
+							opporScroll.insertBefore(card, opporScroll.firstChild);
 						}
 						
 						console.log("=============line 126================");
 						console.log(opporScroll);
-//						alert(streamScroll);
 				}
-//				alert(streamScroll);
 			}
 			
 			
@@ -415,9 +408,9 @@
 						}
 					});
 					
-						mui('#opporPullrefresh').pullRefresh().refresh(true);
+						mui('#pullrefresh').pullRefresh().refresh(true);
 						
-						mui('#opporPullrefresh').pullRefresh().endPullupToRefresh();
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						
 						showOpporDetail();
 				}, 500);

@@ -297,7 +297,8 @@
 //						var data = JSON.parse(data);
 						console.log(data.success);
 						if(data.success==true){
-							openOpporList();
+							common.baseOption.toIndex(1);
+//							openOpporList();
 						}else{
 							plus.nativeUI.toast('创建意向出错！');
 							return;

@@ -118,10 +118,10 @@
 		console.log(loginInfo);
 		console.log("login request121:"+JSON.stringify(loginInfo));
 		$.ajax(common.URL.accountLogin(), {
-			dataType: 'jsonp', //服务器返回json格式数据
+			dataType:'jsonp', //服务器返回json格式数据
 			jsonp:"callback",
 			crossDomain: true,
-			type: 'post', //HTTP请求类型
+			type:'POST', //HTTP请求类型
 			data:loginInfo,
 //			timeout: 10000, //超时时间设置为10秒；
 			success: function(data) {

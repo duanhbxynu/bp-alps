@@ -29,7 +29,7 @@
 			<h1 id="title" class="mui-title">线索</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
-			<a id="leadsTab" class="mui-tab-item mui-active" href="#" data-wid='leads/index-lead-single.html'>
+			<a id="leadsTab" class="mui-tab-item mui-active" href="#" data-wid='leads/index-leads.html'>
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">线索</span>
 			</a>
@@ -41,11 +41,11 @@
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">订单</span>
 			</a>
-			<a class="mui-tab-item" href="#">
+			<a id="findTab" class="mui-tab-item" href="#">
 				<span class="mui-icon mui-icon-gear"></span>
 				<span class="mui-tab-label">发现</span>
 			</a>
-			<a class="mui-tab-item" href="#">
+			<a id="mineTab" class="mui-tab-item" href="#">
 				<span class="mui-icon mui-icon-gear"></span>
 				<span class="mui-tab-label">我的</span>
 			</a>
@@ -60,7 +60,7 @@
 				}
 	
 			});
-			var subpages = ['leads/index-leads.html', 'opportunity/index-opportunity.html','order/index-order.html`'];
+			var subpages = ['leads/index-leads.html','opportunity/index-opportunity.html','order/index-order.html'];
 			var subpage_style = {
 				top: '45px',
 				bottom: '51px'
@@ -71,9 +71,15 @@
 			var pageFlag = 0;
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+				if(!localStorage.getItem('$state')) {
+					plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+					common.baseOption.goToLogin();
+					return;
+				}
 				console.log("创建子页面");
 				var self = plus.webview.currentWebview();
-				for (var i = 0; i < 4; i++) {
+				for (var i = 0; i < subpages.length; i++) {
+					console.log(subpages[i]);
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
 					if (i > 0) {
@@ -96,23 +102,40 @@
 				var targetTab = this.getAttribute('data-wid');
 				console.log(targetTab);
 				console.log(activeTab);
+				
+				var wvs=plus.webview.all();
+				for(var i=0;i<wvs.length;i++){
+					console.log('webview'+i+': '+wvs[i].getURL());
+					console.log('webview'+i+': '+wvs[i].id);
+				}
+				if(!plus.webview.getWebviewById(targetTab)){
+					console.log("重新加载页面");
+					var sub = plus.webview.create(targetTab, targetTab, subpage_style);
+					var self = plus.webview.currentWebview();
+					self.append(sub);
+				}
+				
+				
 				if (targetTab == activeTab) {
-					var headerHtml = '';
-					//线索
-					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
-								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
-			 						+'<h1 id="title" class="mui-title">线索</h1>';
-	
-					header.innerHTML = headerHtml;
-					pageFlag = 0;
+//					var headerHtml = '';
+//					//线索
+//					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
+//								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
+//			 						+'<h1 id="title" class="mui-title">线索</h1>';
+//	
+//					header.innerHTML = headerHtml;
+//					pageFlag = 0;
 					
 					return;
 				}
+				
 				//更换标题
 				//删除header下面所有的old子节点
 				while(header.hasChildNodes()) {
+					console.log(header.firstChild);
 					header.removeChild(header.firstChild);
 				}
+				console.log("header.firstChild");
 				
 				//更换header样式
 				if(targetTab == "leads/index-leads.html") {
@@ -124,7 +147,9 @@
 	
 					header.innerHTML = headerHtml;
 					pageFlag = 0;
+					
 				}else if(targetTab == "opportunity/index-opportunity.html"){
+					
 					var headerHtml = '';
 					//意向
 					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="icon-search"></a>'
@@ -159,26 +184,9 @@
 				activeTab = targetTab;
 			});
 //			 //自定义事件，模拟点击“首页选项卡”
-//			document.addEventListener('gohome', function() {
-//				var defaultTab = document.getElementById("leadsTab");
-//				//模拟首页点击
-//				mui.trigger(defaultTab, 'tap');
-//				//切换选项卡高亮
-//				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
-//				if (defaultTab !== current) {
-//					current.classList.remove('mui-active');
-//					defaultTab.classList.add('mui-active');
-//				}
-//			});
-			
-			window.addEventListener('refresh', function(e){//执行刷新
-				console.log("执行刷新");
-				console.log(e.detail.targetTab);
-				console.log(e.detail.activeTab);
-				var activeTab = e.detail.activeTab;
-				var defaultTab = document.getElementById(activeTab);
+			document.addEventListener('gohome', function() {
+				var defaultTab = document.getElementById("leadsTab");
 				//模拟首页点击
-				var targetTab = e.detail.targetTab;
 				mui.trigger(defaultTab, 'tap');
 				//切换选项卡高亮
 				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
@@ -186,31 +194,43 @@
 					current.classList.remove('mui-active');
 					defaultTab.classList.add('mui-active');
 				}
-				//下拉刷新/上拉加载
-				if(targetTab == "leads/index-leads.html"){
-					console.log("//下拉刷新/上拉加载");
-					var contentWebview = plus.webview.getWebviewById(targetTab);
-					contentWebview.evalJS("mui('#flowPullrefresh').pullRefresh().pullupLoading()");
-//					var self = plus.webview.currentWebview();
-//					self.append(contentWebview);
-					
-				}else if(targetTab == "opportunity/index-opportunity.html"){
-					var contentWebview = plus.webview.getWebviewById(targetTab);
-					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().pullupLoading();");
-//					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().scrollTo(0,0,100)");
+			});
+			
+			//自定义事件，模拟点击“某一个选项卡”，从而实现首页选项卡切换
+			document.addEventListener('tabSwith', function(e){//执行刷新
+				//模拟首页点击
+				
+				var id=e.detail.id;	
+				var gotab = document.getElementById(id);	
+				mui.trigger(gotab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if (gotab !== current) {
+					current.classList.remove('mui-active');
+					gotab.classList.add('mui-active');
 				}
-//				console.log("targetTab");
-//				console.log(targetTab);
-				plus.webview.show(targetTab);
+				var targetTab = document.getElementById(id).getAttribute('data-wid');
+				var contentWebview = plus.webview.getWebviewById(targetTab);
+				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().pulldownLoading()");
+//				//下拉刷新/上拉加载
+//				if(targetTab == "leads/index-leads.html"){
+//					console.log("//下拉刷新/上拉加载");
+//					var contentWebview = plus.webview.getWebviewById(targetTab);
+//					contentWebview.evalJS("mui('#flowPullrefresh').pullRefresh().pullupLoading()");
+////					var self = plus.webview.currentWebview();
+////					self.append(contentWebview);
+//					
+//				}else if(targetTab == "opportunity/index-opportunity.html"){
+//					var contentWebview = plus.webview.getWebviewById(targetTab);
+//					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().pullupLoading();");
+////					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().scrollTo(0,0,100)");
+//				}
+////				console.log("targetTab");
+////				console.log(targetTab);
+//				plus.webview.show(targetTab);
 				
 			});
 			
-			//下拉刷新/上拉加载
-//		var contentWebview = null;
-//		document.querySelector('header').addEventListener('doubletap', function() {
-//			contentWebview = plus.webview.currentWebview().children()[pageFlag];
-//			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
-//		});
 		</script>
 	</body>
 
