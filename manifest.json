@@ -141,7 +141,8 @@
 					"html/leads/index-leads.html"
 				],
 				"refer": [
-					"html/opportunity/index-opportunity.html"
+					"html/opportunity/index-opportunity.html",
+					"html/order/index-order.html"
 				],
 				"priority": 0
 			},
@@ -199,6 +200,13 @@
 					"html/login.html"
 				],
 				"priority": 0
+			},
+			"html/opportunity/add-opportunity-bussinessinfo.html": {
+				"resources": [],
+				"refer": [
+					"html/opportunity/add-opportunity-workfamilyinfo.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -225,7 +233,6 @@
 				"js/app.js",
 				"js/mui.picker.js",
 				"js/common/crypto.js",
-				"html/opportunity/add-opportunity-workfamilyinfo.html",
 				"html/main.html",
 				"js/common/sha1.js",
 				"js/common/base64.js",
