@@ -1,16 +1,1291 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
-    <script src="js/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
-</head>
-<body>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>主菜单</title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+		<style type="text/css">
+			/*.btnheader{
+			background-color:#2AC845;color:#FFFFFF;margin-top: 5px;border-right:none;border-radius:0px;
+		}
+		.btn1head{
+			background-color:#FFFFFF;color:#000000;margin-top: 5px;border-left:none;border-radius:0px;
+		}*/
+			
+			html,
+			body,
+			.mui-content {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-bar-nav~ .mui-content .mui-pull-top-pocket {
+				top: 130px !important;
+			}
+			
+			#search {
+				border-radius: 15px;
+				-webkit-border-radius: 15px;
+				-moz-border-radius: 15px;
+			}
+			
+			#agentSearch {
+				border-radius: 15px;
+				-webkit-border-radius: 15px;
+				-moz-border-radius: 15px;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0px!important;
+			}
+			
+			.mui-search .mui-placeholder {
+				line-height: 0px;
+			}
+			
+			.listtable {
+				/*position: relative;
+				height: 2rem;
+				line-height: 1rem;
+				background-color: #f7f7f7;
+				*/
+				height: 45px;
+				line-height: 45px;
+				width: 100%;
+				border-bottom: 1px solid #ccc;
+				/*z-index: 9999;*/
+				/*top:50px;*/
+			}
+			
+			#findjob {
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+			}
+			
+			#person {
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+			}
+			
+			.ui-area-screening .mui-btn {
+				float: left;
+				width: 33%;
+				text-align: center;
+				font-size: 14px;
+				line-height: 1px;
+			}
+			
+			.worker-listtable .mui-btn {
+				float: left;
+				width: 33%;
+				text-align: center;
+				font-size: 16px;
+				line-height: 30px;
+				/*border-bottom:0px !important ;*/
+			}
+			
+			.ui-area-screening .mui-btn .icon-down {
+				position: relative;
+				padding-right: 1rem;
+				font-style: normal;
+			}
+			
+			.ui-area-screening .mui-btn .icon-down:after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				right: 0;
+				margin-top: -3px;
+				width: 0;
+				height: 0;
+				display: inline-block;
+				border-top: 6px solid #999999;
+				border-left: 4px solid transparent;
+				border-right: 4px solid transparent;
+				border-bottom: 0;
+				margin-left: 0.22rem;
+			}
+			
+			.mui-poppicker.mui-active {}
+			
+			.mui-segmented-control-positive .mui-control-item.mui-active {
+				color: #fff;
+				background-color: #ff7300;
+			}
+			
+			.mui-segmented-control-positive .mui-control-item {
+				color: #ff7300;
+				border-color: inherit;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				border-color: #ff7300;
+				border-left: 1px solid #ff7300;
+			}
+			
+			.segmentedControl {
+				position: absolute!important;
+				width: 162px!important;
+				left: 50px;
+				right: 50px;
+				border-color: #ff7300;
+				border-radius: 14px;
+				-webkit-border-radius: 14px;
+				-moz-border-radius: 14px;
+			}
+			
+			.mui-icon-search:before {
+				color: #ff7300;
+			}
+			
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #ff7300;
+			}
+			
+			.navspan {
+				font-size: 11px;
+				display: block;
+			}
+			
+			.mui-title {
+				color: #ff7300;
+				line-height: 45px;
+				font-weight: 800;
+			}
+			
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+			}
+			
+			.buttonradius {
+				border-radius: 27px!important;
+				-webkit-border-radius: 27px!important;
+				-moz-border-radius: 27px!important;
+			}
+		</style>
+	</head>
+
+	<body id="hehe">
+		<header id="header" class="mui-bar mui-bar-nav">
+			<div>
+				<div style="display: inline-block;float: left;">
+					<img src="../image/logo.png" width="60%" style="margin-top: 18%;" />
+				</div>
+				<div id="sliderSegmentedControl">
+					<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-positive segmentedControl mui-scroll">
+						<a id="findjob" class="mui-control-item mui-active" style="width:80px;line-height:28px;" href="#item1mobile">找工作</a>
+						<a id="person" class="mui-control-item" style="width:80px;line-height:28px;" href="#item2mobile">经纪人</a>
+					</div>
+				</div>
+				<div id="strategy" style="display: inline-block;float: right;">
+					<img src="../image/raiders.png" width="65%" style="margin-top: 27%;" />
+				</div>
+			</div>
+		</header>
+		<div class="mui-content" id="commonContent" style="padding-top: 45px;">
+			<div id="workercontent">
+				
+			</div>
+			<!--  div下拉刷新 -->
+			<div id="slider" class="mui-slider mui-fullscreen" style="margin-top:7px">
+				
+				<div class="mui-slider-group" id="s1">
+
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<!--+++++++++++++++-->
+						<div style="height: 40px;width: 100%;">
+							<span style="height: 100%;width: 20%;float: left;padding-top: 4px;padding-right: 3px;padding-left:5px ;">
+					<button id="showCityPicker" style="width: 100%;height: 27px;font-size: 15px;padding: 0px;color: #EC971F;margin-bottom: 0px;border:0;"><var id="cityVar" style="font-family: '微软雅黑';" class="icon-down">城市</var></button>
+				</span>
+							<span style="height: 100%;width: 60%;padding-bottom: 6px;margin-left:5px ;line-height: 30px;">
+					<span class="mui-input-row mui-search" >
+						<button id="search" type="button" style="background:white;width: 60%;display: inline;border:1px solid #ccc;margin-top: 1%;" class="mui-input-search" placeholder="搜索职位/公司">搜索职位/公司</button></span>
+							</span>
+							<span>
+					<img id="imap" src="../image/location.png" style="margin-top:1.5%;height: 24px;width: 7.3%;float: right;margin-right: 3%;"/>
+				</span>
+						</div>
+						<div style="height:45px;line-height: 45px;width:100%;border-bottom:1px solid #ccc ;" class="ui-area-screening">
+							<button id="showAreaPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="areaVar" class="icon-down">区域</var></button>
+							<button id="showJobPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="jobVar" class="icon-down">岗位</var></button>
+							<button id="showDistancesPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="distancesVar" class="icon-down">距离</var></button>
+						</div>
+						<!--  +++++++++++++++++++++++++++ -->
+						<div id="scroll1" class="mui-scroll-wrapper " style="margin-top:87px ;">
+							<div class="mui-scroll" id="scrollul1">
+								<ul class="mui-table-view ul1">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div style="height: 40px;width: 100%;">
+							<span style="height: 100%;width: 20%;float: left;padding-top: 4px;padding-right: 3px;padding-left:5px ;">
+								<button id="AgentshowCityPicker" style="width: 100%;height: 27px;font-size: 15px;padding: 0px;color: #EC971F;margin-bottom: 0px;border:0;"><var id="cityAgentVar"  class="icon-down">城市</var></button>
+								</span>
+							<span style="height: 100%;width: 55%;padding-bottom: 6px;margin-left:5px ;line-height: 30px;">
+								<span class="mui-input-row mui-search" >
+								<button id="agentSearch" type="button" style="background:white;width: 55%;display: inline;border:1px solid #ccc;margin-top: 1%;" class="mui-input-search" placeholder="搜索职位/公司">搜索职位/公司</button>
+								</span>
+							</span>
+							<span>
+								<button type="button" id="myDispalyRock" class="buttonradius mui-btn mui-btn-success mui-btn-outlined " style="height: 30px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-top:1%;margin-right: 2%;">我的展架</button>
+								</span>
+						</div>
+
+						<div style="height:45px;line-height: 45px;width:100%;border-bottom:1px solid #ccc ;" class="ui-area-screening">
+							<button id="AgentshowAreaPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="areaAgentVar" class="icon-down">区域</var></button>
+							<button id="AgentshowJobPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="jobAgentVar" class="icon-down">岗位</var></button>
+							<button id="AgentshowDistancesPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="distancesAgentVar" class="icon-down">距离</var></button>
+						</div>
+
+						<div class="mui-scroll-wrapper" style="margin-top:87px ;">
+							<div class="mui-scroll" id="scrollul2">
+								<ul class="mui-table-view ul2">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab" style="z-index: 99!important;">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="/html/index.html">
+
+				<img id="navjob" src="../image/job-nav-active.png" style="width:35%;position: relative;top:7px;" />
+
+				<span style="color:silver;" class="mui-tab-label navspan">职位</span>
+			</a>
+
+			<a class="mui-tab-item" href="/html/menu/tab-webview-subpage-discover.html">
+				<img id="navdiscover" src="../image/discover-nav.png" style="width:35%;position: relative;top:7px;" />
+				<span style="color:silver;" class="mui-tab-label navspan">发现</span>
+			</a>
+			<a class="mui-tab-item" href="/html/menu/tab-webview-subpage-workers.html">
+				<img id="navworker" src="../image/worker-nav.png" style="width:35%;position: relative;top:7px;" />
+				<span style="color:silver;" class="mui-tab-label navspan">工友库</span>
+			</a>
+
+			<a class="mui-tab-item" href="/html/menu/tab-webview-subpage-message.html">
+				<img id="navmessage" src="../image/message-nav.png" style="width:35%;position: relative;top:7px;" />
+				<!--<span class="mui-badge">9</span>-->
+				<span style="color:silver;" class="mui-tab-label navspan">消息</span>
+			</a>
+
+			<a class="mui-tab-item" href="/html/menu/tab-webview-subpage-aboutme.html">
+				<img id="navabout" src="../image/about-nav.png" style="width:35%;position: relative;top:7px;" />
+				<span style="color:silver;" class="mui-tab-label navspan">我的</span>
+			</a>
+		</nav>
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.pullToRefresh.js"></script>
+	<script src="../js/mui.pullToRefresh.material.js"></script>
+	<script src="../js/common/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/common/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/position/select.area.data.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/position/select.city.data.js" charset="utf-8"></script>
+	<script src="../js/common/common-header.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/common/base64.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Co7L0yCBgDeQbGKHdNKRo03cEzVpsLr8"></script>
+	<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/common/app-update-util.js" type="text/javascript" charset="utf-8"></script>
+	<!--支付弹出层-->
+	<script src="../js/aboutme/paymentmodals2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/aboutme/beecloud.js" type="text/javascript" charset="utf-8"></script>
+	<!--支付弹出层结束-->
+	<!--更新clientid clienttype开始-->
+	<script src="../js/aboutme/updateClientIdandType.js" type="text/javascript" charset="utf-8"></script>
+	<!--更新clientid clienttype结束 -->
+	<script type="text/javascript" charset="utf-8">
+		//初始化mui
+		mui.init({
+			gestureConfig: {
+				doubletap: true
+			},
+
+		});
+		var pullToRefresh = null;
+
+		var pullToRefreshAgent = null;
+
+		
+		//存储列表查询结果
+		var jobsLib = null;
+		//查询参数签名
+		var preSign = '';
+		//上拉次数判断参数
+		var count = 0;
+
 	
-</body>
+		//存储列表查询结果
+		var jobsLibAgent = null;
+		//查询参数签名
+		var preSignAgent = '';
+		//上拉次数判断参数
+		var countAgent = 0;
+
+		function qryDataList(params, fn) {
+			params = params || {};
+			mui.ajax(common.URL.findJobSearchConditionJob(), {
+				data: params,
+				async: false, //发送同步请求
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: fn,
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+					plus.nativeUI.toast('哎哟，网络出了点小差，请稍后再试！');
+				}
+			});
+		}
+
+		function fillingData() {
+
+			var table = document.body.querySelector('.ul1');
+			var cells = document.body.querySelectorAll('.li1');
+			console.log(jobsLib.length);
+			var jobssLibLen = jobsLib.length;
+
+			//console.log('最新数据长度：' + jobssLibLen);
+
+			var i = cells.length;
+			var len = null;
+			console.log(i);
+			if((cells.length + 10 > jobssLibLen) && (cells.length - 10 < jobssLibLen)) {
+				len = jobssLibLen;
+			} else {
+				len = i + 10;
+			}
+			console.log(len);
+			//			console.log('循环参数i：' + i);
+			//			console.log('循环参数len：' + len);
+			//			console.log('数据填充>>>');
+
+			for(; i < len; i++) {
+				var str = "";
+				var Salary = "";
+				var cashback = "";
+				var SettlementType = "";
+
+				if(jobsLib[i].corpJobName.length > 10) {
+					str = '...'
+				}
+				if(jobsLib[i].corpJobTotalSalary != null) {
+					Salary = jobsLib[i].corpJobTotalSalary;
+				}
+				//标签判断
+				if(jobsLib[i].jobIsHourly) {
+
+					if(jobsLib[i].jobIsPlatAllowance) {
+						cashback = '<button type="button" class="buttonradius mui-btn mui-btn-success mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px">平台补贴</button>'
+					}
+
+					if(jobsLib[i].hourlySettlementType == "01") {
+						SettlementType = '<button type="button" class="buttonradius mui-btn mui-btn-danger mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-right:2%">日结</button>'
+					} else if(jobsLib[i].hourlySettlementType == "02") {
+						SettlementType = '<button type="button" class="buttonradius mui-btn mui-btn-danger mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-right:2%">次日结</button>'
+					} else if(jobsLib[i].hourlySettlementType == "03") {
+						SettlementType = '<button type="button" class="buttonradius mui-btn mui-btn-danger mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-right:2%">周结</button>'
+					} else if(jobsLib[i].hourlySettlementType == "04") {
+						SettlementType = '<button type="button" class="buttonradius mui-btn mui-btn-danger mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-right:2%">半月结</button>'
+					} else if(jobsLib[i].hourlySettlementType == "05") {
+						SettlementType = '<button type="button" class="buttonradius mui-btn mui-btn-danger mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-right:2%">月结</button>'
+					} else if(jobsLib[i].hourlySettlementType == "06") {
+						SettlementType = '<button type="button" class="buttonradius mui-btn mui-btn-danger mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-right:2%">完工结</button>'
+					} else {
+						SettlementType = '';
+					}
+				} else if(jobsLib[i].jobIsEntryCashback) {
+					cashback = '<button type="button" class="buttonradius mui-btn mui-btn-success mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px">入职返现</button>'
+				} else if(jobsLib[i].cropJobIsCharge) {
+					cashback = '<button type="button" class="buttonradius mui-btn mui-btn-success mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px">收费职位</button>'
+				} else if(jobsLib[i].jobIsHotpush) {
+					cashback = '<button type="button" class="buttonradius mui-btn mui-btn-success mui-btn-outlined " style="height: 20px;line-height: 7px;padding:5px;float:right;font-size:12px">精品职位</button>'
+				} else {
+					cashback = '';
+				}
+
+				var li = document.createElement('li');
+				li.className = 'mui-table-view-cell li1';
+				li.setAttribute("data-value", jobsLib[i].id);
+				li.innerHTML = '<a class="jobDetail"><div class="mui-media-body" style="width:100%"><img src="../image/bao.png" style="width:5%;margin-right:1%" />' +
+					'<span>' + jobsLib[i].corpJobName.substring(0, 10) + str + '</span>' + '<span><img src="../image/adress.png" style="width:4%;margin-left:2%;float:right;margin-top:1%"/></span><span style="float:right;font-size:14px;color:#37353b">' + jobsLib[i].city + jobsLib[i].area + '</span>' +
+					'<p class="mui-ellipsis" style="color:#ff734b;margin-top:3%">' + Salary + '<span>' + cashback + SettlementType + '</span></p>' +
+					'<p class="mui-ellipsis" style="margin-top:3%;font-size:12px;color:#9f9e92">' + jobsLib[i].corpJobAddress + '<span style="margin-left:4%;float:right;"></span></p>' +
+					'</div>' +
+					'</div></a>';
+				//下拉刷新，新纪录插到最前面；
+
+				table.appendChild(li);
+			}
+			console.log('<<<<数据填充');
+			//JobDetail();
+		}
+
+		//###########数据列表查询函数#############
+		function qryDataListAgent(params, fn) {
+			params = params || {};
+			mui.ajax(common.URL.findJobSearchConditionJob(), {
+				data: params,
+				async: false, //发送同步请求
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: fn,
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+					plus.nativeUI.toast('哎哟，网络出了点小差，请稍后再试！');
+				}
+			});
+		}
+
+		//###############进行页面渲染#################
+		function fillingDataAgent() {
+
+			var table = document.body.querySelector('.ul2');
+			var cells = document.body.querySelectorAll('.li2');
+			//console.log(jobsLibAgent.length);
+			var jobssLibLen = jobsLibAgent.length;
+			console.log('最新数据长度：' + jobssLibLen);
+
+			var i = cells.length;
+			var len = null;
+			if((cells.length + 10 > jobssLibLen) && (cells.length - 10 < jobssLibLen)) {
+				len = jobssLibLen;
+			} else {
+				len = i + 10;
+			}
+			console.log('循环参数i：' + i);
+			console.log('循环参数len：' + len);
+			console.log('数据填充>>>');
+
+			for(; i < len; i++) {
+				var str = "";
+				var Salary = "";
+				var cashback = "";
+				var SettlementType = "",
+					applyNumber = 0,
+					jobNumber = 0;
+
+				if(jobsLibAgent[i].corpJobNumber) {
+					jobNumber = jobsLibAgent[i].corpJobNumber;
+				}
+				if(jobsLibAgent[i].corpJobApplyNumber) {
+					applyNumber = jobsLibAgent[i].corpJobApplyNumber;
+				}
+				if(jobsLibAgent[i].corpJobName.length > 10) {
+					str = '...'
+				}
+				if(jobsLibAgent[i].corpJobAgentReturnCost != null) {
+					Salary = jobsLibAgent[i].corpJobAgentReturnCost * jobsLibAgent[i].corpJobAgentReturnMonths;
+				}
+				cashback = '<button type="button" data-rack=' + jobsLibAgent[i].id + '  class="buttonradius mui-btn mui-btn-danger mui-btn-outlined " style="height: 30px;line-height: 7px;padding:5px;float:right;font-size:12px">加入专属展架</button>'
+
+				if(jobsLibAgent[i].corpJobAgentReturnMonths != null) {
+					SettlementType = '<button type="button" class="buttonradius mui-btn mui-btn-success mui-btn-outlined " style="height: 30px;line-height: 7px;padding:5px;float:right;font-size:12px;margin-right:2%">分' + jobsLibAgent[i].corpJobAgentReturnMonths + '个月</button>';
+				}
+
+				var diffDay = 0;
+				if(jobsLibAgent[i].diffDay) {
+					if(jobsLibAgent[i].diffDay > 0) {
+						diffDay = jobsLibAgent[i].diffDay;
+					}
+				}
+
+				var li = document.createElement('li');
+				li.className = 'mui-table-view-cell li2';
+				li.setAttribute("data-value", jobsLibAgent[i].id);
+				li.innerHTML = '<a ><div class="mui-media-body" style="width:100%"><img src="../image/bao.png" style="width:5%;margin-right:1%" />' +
+					'<span>' + jobsLibAgent[i].corpJobName.substring(0, 10) + str + '</span>' + '<span><img src="../image/adress.png" style="width:4%;margin-left:2%;float:right;margin-top:1%"/></span><span style="float:right;font-size:14px;color:#37353b">' + jobsLibAgent[i].city + jobsLibAgent[i].area + '</span>' +
+					'<p class="mui-ellipsis" style="color:#ff734b;margin-top:3%">' + Salary + '<span>' + cashback + SettlementType + '</span></p>' +
+					'<div style="width:100%;color:#8f8f94"><div style="width:25%;display:inline-block;"><span style="font-size:12px;text-align:center">共报名人数<br/>' + applyNumber + '人</span></div>' +
+					'<div style="width:25%;display:inline-block"><span style="font-size:12px;text-align:center">总需求人数<br/>' + jobNumber + '人</span></div>' +
+					'<div style="width:25%;display:inline-block"><span style="font-size:12px">距结束还剩<br/>' + diffDay + '天</span></div>' +
+					'</div>' +
+					'</div></a>';
+
+				table.appendChild(li);
+			}
+			console.log('<<<<数据填充');
+
+		}
+
+		
+		var subpages = ['/html/menu/tab-webview-subpage-position.html', '/html/menu/tab-webview-subpage-discover.html', '/html/menu/tab-webview-subpage-workers.html', '/html/menu/tab-webview-subpage-message.html', '/html/menu/tab-webview-subpage-aboutme.html', '/html/menu/tab-webview-subpage-position-agent.html', '/html/menu/tab-webview-subpage-discover-agent.html'];
+	
+		var subpage_style1 = {
+			top: '45px',
+			bottom: '51px'
+		}
+
+		//用于刷新页面（判断当前子页面）
+		var pageFlag = 0;
+		var aniShow = {};
+
+		//创建子页面，首个选项卡页面显示，其它均隐藏；
+
+		mui.plusReady(function() {
+			//检查当前clientId 和  clientType 
+			checkClientIdandType();
+			
+			var launchFlag = plus.storage.getItem("launchFlag");
+			var self = plus.webview.currentWebview();
+			var sub = null;
+
+			if(launchFlag) {
+
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-discover.html') == null) {
+					discoverPage = plus.webview.create('/html/menu/tab-webview-subpage-discover.html', '/html/menu/tab-webview-subpage-discover.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					discoverPage.hide();
+					plus.webview.currentWebview().append(discoverPage);
+				}
+				//首次登录未加载工友页面，切换重新加载。
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-workers.html') == null) {
+					console.log('121122111212211221212');
+
+					var workerPage = plus.webview.create('/html/menu/tab-webview-subpage-workers.html', '/html/menu/tab-webview-subpage-workers.html', {
+						top: '90px',
+						bottom: '51px'
+					});
+					workerPage.hide();
+					plus.webview.currentWebview().append(workerPage);
+				}
+
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-message.html') == null) {
+					messagePage = plus.webview.create('/html/menu/tab-webview-subpage-message.html', '/html/menu/tab-webview-subpage-message.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					messagePage.hide();
+					plus.webview.currentWebview().append(messagePage);
+				}
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-aboutme.html') == null) {
+					aboutmePage = plus.webview.create('/html/menu/tab-webview-subpage-aboutme.html', '/html/menu/tab-webview-subpage-aboutme.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					aboutmePage.hide();
+					plus.webview.currentWebview().append(aboutmePage);
+				}
+
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-discover-agent.html') == null) {
+					discoverAgentPage = plus.webview.create('/html/menu/tab-webview-subpage-discover-agent.html', '/html/menu/tab-webview-subpage-discover-agent.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					discoverAgentPage.hide();
+					plus.webview.currentWebview().append(discoverAgentPage);
+				}
+				console.log("版本更新a");
+				updateUtils.updateApp(1);
+				console.log("版本更新b");
+			} else {
+				console.log("第一次进来index+++++++++++++++++++++++++");
+
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-discover.html') == null) {
+					discoverPage = plus.webview.create('/html/menu/tab-webview-subpage-discover.html', '/html/menu/tab-webview-subpage-discover.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					discoverPage.hide();
+					plus.webview.currentWebview().append(discoverPage);
+				}
+
+				//首次登录未加载工友页面，切换重新加载。
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-workers.html') == null) {
+					console.log('121122111212211221212');
+
+					var workerPage = plus.webview.create('/html/menu/tab-webview-subpage-workers.html', '/html/menu/tab-webview-subpage-workers.html', {
+						top: '90px',
+						bottom: '51px'
+					});
+					workerPage.hide();
+					plus.webview.currentWebview().append(workerPage);
+				}
+
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-message.html') == null) {
+					messagePage = plus.webview.create('/html/menu/tab-webview-subpage-message.html', '/html/menu/tab-webview-subpage-message.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					messagePage.hide();
+					plus.webview.currentWebview().append(messagePage);
+				}
+
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-aboutme.html') == null) {
+					aboutmePage = plus.webview.create('/html/menu/tab-webview-subpage-aboutme.html', '/html/menu/tab-webview-subpage-aboutme.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					aboutmePage.hide();
+					plus.webview.currentWebview().append(aboutmePage);
+				}
+
+
+				if(plus.webview.getWebviewById('/html/menu/tab-webview-subpage-discover-agent.html') == null) {
+					discoverAgentPage = plus.webview.create('/html/menu/tab-webview-subpage-discover-agent.html', '/html/menu/tab-webview-subpage-discover-agent.html', {
+						top: '45px',
+						bottom: '51px'
+					});
+					discoverAgentPage.hide();
+					plus.webview.currentWebview().append(discoverAgentPage);
+				}
+
+			}
+			strategy();
+			positionPageEventListener();
+			positionAgentPageEventListener();
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+				$.ready(function() {
+
+					pullToRefresh = mui('#scrollul1').pullToRefresh({
+						down: {
+							callback: function() {
+								var self = this;
+								setTimeout(function() {
+									var table = self.element.querySelector('.ul1');
+									var params = {
+										'cityOptionValue': cityOptionValue,
+										'areaOptionValue': areaOptionValue,
+										'jobOptionValue': jobOptionValue,
+										'distancesOptionValue': distancesOptionValue
+
+									};
+									params.lat = lat;
+									params.lng = lng;
+									
+									qryDataList(params, function(data) {
+										if(data.success) {
+											console.log('下拉刷新...');
+											//成功返回数据，
+											jobsLib = data.data;
+											//1.清空原ul下的子节点全部清空
+											while(table.hasChildNodes()) {
+												console.log('清理列表数据...');
+												table.removeChild(table.firstChild);
+											}
+											count = 0;
+											//2.将数据前10条填充到列表中
+											fillingData();
+										} else {
+											plus.nativeUI.toast(data.error);
+										}
+
+									});
+									//ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
+									self.refresh(true);
+									self.endPullDownToRefresh();
+								}, 1000);
+							}
+						},
+						up: {
+							auto: true,
+							show: true, //显示底部上拉加载提示信息，可选；
+							contentinit: '上拉显示更多', //可以上拉提示信息
+							contentdown: '上拉显示更多', //上拉结束提示信息
+							contentrefresh: '正在加载...', //上拉进行中提示信息
+							contentnomore: '没有更多数据了', //上拉无更多信息时提示信息
+							callback: function() {
+								var self = this;
+								console.log(self);
+								setTimeout(function() {
+									console.log('上拉加载...');
+									var table = self.element.querySelector('.ul1');
+									var params = {
+										'cityOptionValue': cityOptionValue,
+										'areaOptionValue': areaOptionValue,
+										'jobOptionValue': jobOptionValue,
+										'distancesOptionValue': distancesOptionValue
+
+									};
+
+									var currentSign = Base64.encode(JSON.stringify(params));
+									params.lat = lat;
+									params.lng = lng;
+									if(preSign != currentSign) {
+										//查询条件改变时，需要查询数据库，清理页面节点，重新渲染页面
+										//TODO 从localstorage中获取persId
+										qryDataList(params, function(data) {
+											if(data.success) {
+												//更新数据
+												console.log("==================>条件不同<=======================")
+												jobsLib = data.data;
+												preSign = currentSign;
+												count = 0;
+												if(data.data.length > 0) {
+													fillingData();
+													//setTimeout(function() {
+														plus.navigator.closeSplashscreen();
+													//}, 2000);
+													
+												}
+
+											} else {
+												plus.nativeUI.toast(data.error);
+											}
+										});
+									} else {
+										//条件未变的情况下
+										console.log("条件一样");
+										fillingData();
+
+									}
+									self.refresh(true);
+									self.endPullUpToRefresh((++count > Math.ceil(jobsLib.length / 10)));
+									//ul.appendChild(createFragment(ul, index, 5));
+								}, 500);
+							}
+						}
+					});
+
+					pullToRefreshAgent = mui('#scrollul2').pullToRefresh({
+						down: {
+							callback: function() {
+								var self = this;
+								setTimeout(function() {
+
+//									var params = {};
+									var params = {
+										'cityOptionValue': cityOptionAgentValue,
+										'areaOptionValue': areaOptionAgentValue,
+										'jobOptionValue': jobOptionAgentValue,
+										'distancesOptionValue': distancesOptionAgentValue
+
+									};
+									params.lat = lat;
+									params.lng = lng;
+									params.AgentPerson = "AgentPerson";
+									var table = self.element.querySelector('.ul2');
+									qryDataListAgent(params, function(data) {
+										if(data.success) {
+											console.log('Agent下拉刷新...');
+											//成功返回数据，
+											jobsLibAgent = data.data;
+											//1.清空原ul下的子节点全部清空
+											while(table.hasChildNodes()) {
+												console.log('Agent清理列表数据...');
+												table.removeChild(table.firstChild);
+											}
+											countAgent = 0;
+											//2.将数据前10条填充到列表中
+											fillingDataAgent();
+										} else {
+											plus.nativeUI.toast(data.error);
+										}
+
+									});
+									//ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
+									self.refresh(true);
+									self.endPullDownToRefresh();
+								}, 1000);
+							}
+						},
+						up: {
+							auto: true,
+							show: true, //显示底部上拉加载提示信息，可选；
+							contentinit: '上拉显示更多', //可以上拉提示信息
+							contentdown: '上拉显示更多', //上拉结束提示信息
+							contentrefresh: '正在加载...', //上拉进行中提示信息
+							contentnomore: '没有更多数据了', //上拉无更多信息时提示信息
+							callback: function() {
+								var self = this;
+								console.log(self);
+								setTimeout(function() {
+									console.log('Agent上拉加载...');
+									var table = self.element.querySelector('.ul2');
+									var params = {
+										'cityOptionValue': cityOptionAgentValue,
+										'areaOptionValue': areaOptionAgentValue,
+										'jobOptionValue': jobOptionAgentValue,
+										'distancesOptionValue': distancesOptionAgentValue
+
+									};
+
+									var currentSign = Base64.encode(JSON.stringify(params));
+									params.lat = lat;
+									params.lng = lng;
+									params.AgentPerson = "AgentPerson";
+									if(preSignAgent != currentSign) {
+										//查询条件改变时，需要查询数据库，清理页面节点，重新渲染页面
+										//TODO 从localstorage中获取persId
+										qryDataListAgent(params, function(data) {
+											if(data.success) {
+												//更新数据
+												console.log("==================>Agent条件不同<=======================")
+												jobsLibAgent = data.data;
+												preSignAgent = currentSign;
+												countAgent = 0;
+												if(data.data.length > 0) {
+													fillingDataAgent();
+												}
+
+											} else {
+												plus.nativeUI.toast(data.error);
+											}
+										});
+									} else {
+										//条件未变的情况下
+										console.log("条件一样");
+										fillingDataAgent();
+									}
+									self.refresh(true);
+									self.endPullUpToRefresh((++count > Math.ceil(jobsLibAgent.length / 10)));
+									//ul.appendChild(createFragment(ul, index, 5));
+								}, 500);
+							}
+						}
+					});
+				});
+			})(mui);
+
+		});
+
+		//当前激活选项
+		var activeTab = subpages[0];
+		var title = document.getElementById("title");
+		//选项卡点击事件
+		mui('.mui-bar-tab').on('tap', 'a', function(e) {
+			var targetTab = this.getAttribute('href');
+			if(targetTab == activeTab) {
+				return;
+			} else if(targetTab == "/html/menu/tab-webview-subpage-workers.html") {
+				//+++++++登录拦截++++++
+				if(!localStorage.getItem('persId')) {
+					//未登录，跳转到登录页面
+					mui.openWindow({
+						url: '../html/aboutme/login.html',
+						id: 'login.html',
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '正在加载...', //等待对话框上显示的提示内容
+						},
+						extras: {
+							htmlurl: 'find-job-detail.html'
+						}
+					});
+					return;
+				}
+			}
+
+			var header = document.getElementById("header");
+			var commonContent = document.getElementById('commonContent');
+			var workercontent = document.getElementById('workercontent');
+			var slider = document.getElementById("slider");
+			var item1mobile = document.getElementById("item1mobile");
+			var item2mobile = document.getElementById("item2mobile");
+			
+			var navjob = document.getElementById("navjob");
+			var navdiscover = document.getElementById("navdiscover");
+			var navworker = document.getElementById("navworker");
+			var navmessage = document.getElementById("navmessage");
+			var navabout = document.getElementById("navabout");
+
+			//删除header下面所有的old子节点
+			while(header.hasChildNodes()) {
+				header.removeChild(header.firstChild);
+			}
+			//清理commoncontent下所有的old子节点
+			//			while(commonContent.hasChildNodes()) {
+			//				commonContent.removeChild(commonContent.firstChild);
+			//			}
+
+			//更换header样式
+			if(targetTab == "/html/index.html") {
+				console.log("进来position");
+				//alert(document.getElementById("hehe").innerHTML);
+				//console.log(document.getElementById("hehe").innerHTML);
+				slider.style.display="";
+				workercontent.innerHTML="";
+				header.style.cssText = 'padding-left: 10;padding-right: 10;';
+				var headerHtml = '';
+				var searchBtnHtml = '';
+				document.getElementById("s1").style.cssText="transform: translate3d(0px, 0px, 0px) translateZ(0px)";
+				item1mobile.className="mui-slider-item mui-control-content mui-active";
+				item2mobile.className="mui-slider-item mui-control-content";
+				
+				//找工作-经纪人
+				headerHtml += '<div>\
+				<div style="display: inline-block;float: left;">\
+					<img src="../image/logo.png" width="60%" style="margin-top: 18%;"/>\
+				</div>\
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-positive segmentedControl">\
+					<a id="findjob" class="mui-control-item mui-active" style="width:80px;line-height:28px;" href="#item1mobile">找工作</a>\
+					<a id="person" class="mui-control-item" style="width:80px;line-height:28px;" href="#item2mobile">经纪人</a>\
+				</div>\
+				<div id="strategy" style="display: inline-block;float: right;">\
+					<img src="../image/raiders.png" width="65%" style="margin-top: 27%;"/>\
+				</div>\
+			</div>';
+				//地区-搜索-地图
+				searchBtnHtml = '<div style="height: 40px;width: 100%;">\
+								<span style="height: 100%;width: 20%;float: left;padding-top: 4px;padding-right: 3px;padding-left:5px ;">\
+								<button id="showCityPicker" style="width: 100%;height: 27px;font-size: 15px;padding: 0px;color: #EC971F;margin-bottom: 0px;border:0;"><var id="cityVar"  class="icon-down">城市</var></button>\
+								</span>\
+								<span style="height: 100%;width: 60%;padding-bottom: 6px;margin-left:5px ;line-height: 30px;">\
+								<span class="mui-input-row mui-search" >\
+								<button id="search" type="button" style="background:white;width: 60%;display: inline;border:1px solid #ccc;margin-top: 1%;" class="mui-input-search" placeholder="搜索职位/公司">搜索职位/公司</button>\
+								</span>\
+								</span>\
+								<span>\
+								<img id="imap" src="../image/location.png" style="margin-top:1.5%;height: 24px;width: 7.3%;float: right;margin-right: 3%;"/>\
+								</span>\
+								</div>';
+
+				searchBtnHtml += '<div style="height:45px;line-height: 45px;width:100%;border-bottom:1px solid #ccc ;" class="ui-area-screening">\
+										<button id="showAreaPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="areaVar" class="icon-down">区域</var></button>\
+										<button id="showJobPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var var id="jobVar" class="icon-down">岗位</var></button>\
+										<button id="showDistancesPicker" class="mui-btn mui-btn-block mui-option" style="border:0;"><var id="distancesVar" class="icon-down">距离</var></button>\
+										</div>';
+
+				navjob.src = "../image/job-nav-active.png";
+				navdiscover.src = "../image/discover-nav.png";
+				navworker.src = "../image/worker-nav.png";
+				navmessage.src = "../image/message-nav.png";
+				navabout.src = "../image/about-nav.png";
+
+				header.innerHTML = headerHtml;
+				//commonContent.innerHTML = searchBtnHtml;
+				pageFlag = 0;
+				//添加监听事件
+				//positionPageEventListener();
+				Map();
+				strategy();
+			} else if(targetTab == "/html/menu/tab-webview-subpage-discover.html") {
+				workercontent.innerHTML="";
+				slider.style.display="none";
+				var headerHtml = '';
+				//找工作-经纪人
+				headerHtml += '<div>\
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-positive segmentedControl">\
+					<a id="discoverFindjob" class="mui-control-item mui-active" style="width:80px;line-height:28px;" href="/html/menu/tab-webview-subpage-position.html">找工作</a>\
+					<a id="discoverPerson" class="mui-control-item" style="width:80px;line-height:28px;" href="/html/menu/tab-webview-subpage-discover.html">经纪人</a>\
+				</div>\
+			</div>';
+
+				navjob.src = "../image/job-nav.png";
+				navdiscover.src = "../image/discover-nav-active.png";
+				navworker.src = "../image/worker-nav.png";
+				navmessage.src = "../image/message-nav.png";
+				navabout.src = "../image/about-nav.png";
+				
+				header.innerHTML = headerHtml;
+				pageFlag = 1;
+				document.getElementById("discoverFindjob").addEventListener("tap", function() {
+					//alert("person");
+					plus.webview.hide('/html/menu/tab-webview-subpage-discover-agent.html');
+					plus.webview.show('/html/menu/tab-webview-subpage-discover.html',"fade-in",300);
+				});
+				document.getElementById("discoverPerson").addEventListener("tap", function() {
+					//alert("discoverPerson");
+					plus.webview.hide('/html/menu/tab-webview-subpage-discover.html');
+					plus.webview.show('/html/menu/tab-webview-subpage-discover-agent.html',"fade-in",300);
+
+				});
+			} else if(targetTab == "/html/menu/tab-webview-subpage-workers.html") {
+				workercontent.innerHTML="";
+				header.style.cssText = 'padding-left: 0;padding-right: 0;';
+
+				var addIcon = document.createElement('div');
+				addIcon.className = 'mui-pull-left';
+				addIcon.id = 'addWorkers';
+				var iconHtml = '<img src="../image/icon_plus.png" width="75%" style="margin-top: 18%;padding-left: 10px;"/>';
+				addIcon.innerHTML = iconHtml;
+				//中间文本导航栏
+				var centerText = document.createElement('h1');
+				centerText.className = 'mui-title';
+				centerText.innerText = '工友库';
+
+				//右侧
+				var searchIcon = document.createElement('div')
+				searchIcon.className = 'mui-pull-right';
+				searchIcon.id = 'searchWorkers';
+				var searchIconHtml = '<img src="../image/icon_search.png" width="65%" style="margin-top: 18%;"/>';
+				searchIcon.innerHTML = searchIconHtml;
+
+				var divBar = document.createElement('div');
+				var BtnHtml = '<button id="showSexPicker" class="mui-btn mui-option" style="border:0;"><var class="icon-down">性别</var></button>\
+									<button id="showAgePicker" class="mui-btn mui-option" style="border:0;"><var class="icon-down">年龄</var></button>\
+									<button id="showDatePicker" class="mui-btn mui-option" style="border:0;"><var class="icon-down">登记日期</var></button>';
+
+				navjob.src = "../image/job-nav.png";
+				navdiscover.src = "../image/discover-nav.png";
+				navworker.src = "../image/worker-nav-active.png";
+				navmessage.src = "../image/message-nav.png";
+				navabout.src = "../image/about-nav.png";
+
+				divBar.className = 'listtable ui-area-screening';
+				divBar.className = 'listtable ui-area-screening worker-listtable';
+				divBar.innerHTML = BtnHtml;
+
+				header.appendChild(addIcon);
+				header.appendChild(centerText);
+				header.appendChild(searchIcon);
+				workercontent.appendChild(divBar);
+				slider.style.display="none";
+				//添加事件监听
+				workersPageEventListener();
+				pageFlag = 2;
+			} else if(targetTab == "/html/menu/tab-webview-subpage-message.html") {
+				//中间文本导航栏
+				workercontent.innerHTML="";
+				var centerText = document.createElement('h1');
+				centerText.className = 'mui-title';
+				centerText.innerText = '消息';
+
+				navjob.src = "../image/job-nav.png";
+				navdiscover.src = "../image/discover-nav.png";
+				navworker.src = "../image/worker-nav.png";
+				navmessage.src = "../image/message-nav-active.png";
+				navabout.src = "../image/about-nav.png";
+				slider.style.display="none";
+				header.appendChild(centerText);
+				pageFlag = 3;
+			} else if(targetTab == "/html/menu/tab-webview-subpage-aboutme.html") {
+				//中间文本导航栏
+				workercontent.innerHTML="";
+				var centerText = document.createElement('h1');
+				centerText.className = 'mui-title';
+				centerText.innerText = '我的';
+
+				navjob.src = "../image/job-nav.png";
+				navdiscover.src = "../image/discover-nav.png";
+				navworker.src = "../image/worker-nav.png";
+				navmessage.src = "../image/message-nav.png";
+				navabout.src = "../image/about-nav-active.png";
+				slider.style.display="none";
+				header.appendChild(centerText);
+				pageFlag = 4;
+
+			}
+
+			//若为iOS平台或非首次显示，则直接显示
+			if(mui.os.ios || aniShow[targetTab]) {
+				if(targetTab == "/html/menu/tab-webview-subpage-aboutme.html"){
+					console.log("flagAA");
+					var aboutme = plus.webview.getWebviewById('/html/menu/tab-webview-subpage-aboutme.html');
+					aboutme.reload(true);
+					plus.webview.show(targetTab);
+				}else{
+					console.log("flagAB");
+					plus.webview.show(targetTab);
+				}
+			} else {
+				//否则，使用fade-in动画，且保存变量
+				var temp = {};
+				temp[targetTab] = "true";
+				mui.extend(aniShow, temp);
+				if(targetTab == "/html/menu/tab-webview-subpage-aboutme.html"){
+					console.log("flagBA");
+					var aboutme = plus.webview.getWebviewById('/html/menu/tab-webview-subpage-aboutme.html');
+					aboutme.reload(true);
+					plus.webview.show(targetTab, "fade-in", 300);
+				}else{
+					console.log("flagBB");
+					plus.webview.show(targetTab, "fade-in", 300);
+				}
+			}
+			//隐藏当前
+			//隐藏头部，找工作，经纪人，两个子页面
+			//plus.webview.hide("/html/menu/tab-webview-subpage-position-agent.html");
+			plus.webview.hide("/html/menu/tab-webview-subpage-discover-agent.html");
+			plus.webview.hide(activeTab);
+			//更改当前活跃的选项卡
+			activeTab = targetTab;
+		});
+		//自定义事件，模拟点击“首页选项卡”
+		document.addEventListener('gohome', function() {
+			console.log("自定义事件，模拟点击首页选项卡");
+			var defaultTab = document.getElementById("defaultTab");
+			//模拟首页点击
+			mui.trigger(defaultTab, 'tap');
+			//切换选项卡高亮
+			var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+			if(defaultTab !== current) {
+				current.classList.remove('mui-active');
+				defaultTab.classList.add('mui-active');
+			}
+		});
+
+		//下拉刷新/上拉加载
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap', function() {
+			contentWebview = plus.webview.currentWebview().children()[pageFlag];
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});
+
+		//
+
+		//子页面 传回来城市 下拉列表的value
+		var cityValue = function(name) {
+			document.getElementById("cityVar").innerHTML = name;
+		}
+
+		//子页面 传回来区域 下拉列表的value
+		var areaValue = function(name) {
+			document.getElementById("areaVar").innerHTML = name;
+		}
+
+		//子页面 传回来职位下拉列表的value
+		var jobValue = function(name) {
+				document.getElementById("jobVar").innerHTML = name;
+			}
+			//子页面 传回来距离下拉列表的value
+		var distancesValue = function(name) {
+			document.getElementById("distancesVar").innerHTML = name;
+		}
+
+		//经纪人子页面 传回来城市 下拉列表的value
+		var cityAgentValue = function(name) {
+			document.getElementById("cityAgentVar").innerHTML = name;
+		}
+
+		//经纪人子页面 传回来区域 下拉列表的value
+		var areaAgentValue = function(name) {
+			document.getElementById("areaAgentVar").innerHTML = name;
+		}
+
+		//经纪人子页面 传回来职位下拉列表的value
+		var jobAgentValue = function(name) {
+				document.getElementById("jobAgentVar").innerHTML = name;
+			}
+			//经纪人子页面 传回来距离下拉列表的value
+		var distancesAgentValue = function(name) {
+			document.getElementById("distancesAgentVar").innerHTML = name;
+		}
+
+	
+		
+		
+		
+
+		//高远加：第一次打开APP时，按退出键会回到引导页，用此代码解决。
+		/**
+		 * 重写mui.back()，一秒内连续点击两次，退出应用，仅安卓有效；
+		 */
+		var first = null;
+		mui.back = function() {
+			if(!first) {
+				first = new Date().getTime();
+				/**
+				 * 自动消失提示信息
+				 * http://www.html5plus.org/doc/zh_cn/nativeui.html#plus.nativeUI.toast
+				 */
+				plus.nativeUI.toast("再按一次退出应用");
+				setTimeout(function() {
+					first = null;
+				}, 1000);
+			} else {
+				if(new Date().getTime() - first < 1000) {
+					/**
+					 * 退出应用，仅安卓有效；
+					 * http://www.html5plus.org/doc/zh_cn/runtime.html#plus.runtime.quit
+					 */
+					plus.runtime.quit();
+				}
+			}
+		};
+
+		
+		
+		
+	</script>
+
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>入口页面</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function() {
+				console.log('q');	
+				var launchFlag = plus.storage.getItem("launchFlag");
+				if(launchFlag) {
+	                mui.preload({
+						url:"index.html",
+						id:"index.html"
+					});
+					plus.webview.show('index.html');	
+				} else {
+					mui.preload({
+						url:"index.html",
+						id:"index.html"
+					});
+					mui.openWindow({
+							url: "guide.html",
+							id: "guide.html"
+					});
+				}
+
+			});
+		</script>
+	</body>
+
+</html>
