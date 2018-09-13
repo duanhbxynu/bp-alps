@@ -144,6 +144,16 @@
 				height: 50px;
 				/*border: 1px solid rgba(0,0,0,.2)!important;*/
 			}
+			.original .products .pro .proRight > div:nth-of-type(2){
+				margin-top: 12px;
+				font-size: 10px;
+				color: #999999;
+				line-height: 14px;
+			}
+			.original .products .pro .proRight > div:nth-of-type(2) p{
+				display: inline;
+				font-size: 10px;
+			}
 		</style>
 	</head>
 
@@ -267,46 +277,58 @@
 								<div class="mui-input-row mui-search">
 								    <input type="search" class="mui-input-clear" data-productType='optionalProduct' data-categoryCode="decor" placeholder="请输入原装选厂关键字">
 									<i id='optionalProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
-								<!--<i id='optionalProductSearchA' class="mui-icon mui-icon-plus-filled"></i>-->
 								</div>
-								<!--<label for="" class="footer-right">
-									<i id='msg-send' class="mui-icon mui-icon-plus-filled"></i>
-								</label>-->
 							</li>
-							<li class="mui-table-view-cell mui-table-view-cell-scroll" id='optionalProductResultList'>
-								<!--<div class="mui-card mui-clearfix original-list-card" id='1collapseCard'>
-									<div class="mui-card-header">
-										<label id="produce_code">产品编号</label>
-										<i data-iconCode="1" class="mui-icon mui-icon-trash mui-pull-right"></i>
+							<comment id='optionalProduct-comment'>
+							<script id='optionalProduct-template' type="text/template">
+							<% for(var i in productList){ var item=productList[i]; %>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll products">
+								<p data-productCode="<%= (item.code) %"><%= (item.code) %></p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft"><input type="radio" /></div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p><%= (item.name) %></p>
+										<p>参考价格 ¥<%= (item.price) %>元</p>
+										<div class="prices mui-clearfix">
+											<p contenteditable="true">￥</p>
+											<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0'>
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" />
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+										<div>
+								                                 备注：<p contenteditable="true">某某零件多配一件</p>
+								   		</div>
 									</div>
-									<div class="mui-card-content">
-											<ul class="mui-table-view mui-clearfix">
-												<li class="mui-table-view-cell">
-													<label>产品描述</label>
-													<var id="card_produce_name">产品描述</var>
-												</li>
-												<li class="mui-table-view-cell">
-													<label>参考价格</label>
-													<var id="card_produce_price">参考价格</var>
-												</li>
-												<li class="mui-table-view-cell">
-													<label>销售价格</label>
-													<var id="card_sale_price">参考价格</var>
-												</li>
-												<li class="mui-table-view-cell">
-													<label>数量</label>
-													<var id="card_sale_price">参考价格</var>
-												</li>
-												<li class="mui-table-view-cell">
-													<label>备注</label>
-													<textarea id="card_produce_textarea" placeholder="请填写备注信息"></textarea>
-												</li>
-												
-											</ul>
-											
-										</div>	
-								</div>-->
-							</li>	
+								</div>
+							</li>
+							<% } %>
+						</script>
+						</comment>
+							<!--<li class="mui-table-view-cell mui-table-view-cell-scroll products">
+								<p class="">产品编号001</p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft"><input type="radio" /></div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p>带等速万向节的摆动半轴</p>
+										<p>参考价格 ¥1000.00元</p>
+										<div class="prices mui-clearfix">
+											<p contenteditable="true">￥899.54</p>
+											<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0'>
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" />
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+							                     备注：<p contenteditable="true">某某零件多配一件</p>
+							    </div
+							</li>-->
 						</ul>
 			       		
 			        </li>
@@ -333,7 +355,7 @@
 										<p>带等速万向节的摆动半轴</p>
 										<p>参考价格 ¥1000.00元</p>
 										<div class="prices mui-clearfix">
-											<p>￥899.54</p>
+											<p contenteditable="true">￥899.54</p>
 											<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0'>
 											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
 											    <input class="mui-numbox-input" type="number" />
@@ -342,7 +364,9 @@
 										</div>
 									</div>
 								</div>
-								<p>备注：某某零件多配一件</p>
+								<div>
+						        	备注：<p contenteditable="true">某某零件多配一件</p>
+						        </div>
 							</li>
 						</ul>
 					</li>
@@ -725,6 +749,7 @@
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/arttmpl.js"></script>
 		<script src="../../js/quotation/quotation-car-picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/quotation/quotation-event-option.js" type="text/javascript" charset="utf-8"></script>
 		
@@ -745,6 +770,7 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				
 				//选择订单类型
 				var picker = new mui.PopPicker();
 				document.getElementById('order_type').addEventListener('tap',function(){
@@ -835,7 +861,7 @@
 					//获取父级页面查询过来的参数
 					var self = plus.webview.currentWebview();
 					oppoCode = self.oppoCode;
-
+					
 				});
 //				$('.mui-table-view-cell-scroll').scroll();
 				
