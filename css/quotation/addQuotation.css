@@ -274,8 +274,10 @@
 }
 .original .products .pro .proLeft{
 	height: 64px;
-	padding-top: 24px;
 	margin-right: 10px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .original .products .pro .proMiddle{
 	width: 64px;
@@ -415,3 +417,4 @@
 .particulars .mui-table-view .mui-table-view-chevron li:not(:last-child){
 	border: none;
 }
+

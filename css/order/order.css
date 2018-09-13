@@ -213,7 +213,7 @@
 	margin-right: 20px;
 	float: right;
 }
-/*整车订单-原厂选装*/
+/*增值订单-原厂选装*/
 .original  .mui-search{
 	display: inline-block;
 	width: 86%;
@@ -289,8 +289,10 @@
 }
 .original .products .pro .proLeft{
 	height: 64px;
-	padding-top: 24px;
 	margin-right: 10px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .original .products .pro .proMiddle{
 	width: 64px;
@@ -341,4 +343,103 @@
 .original .products .pro .proRight .prices  .mui-numbox [class*=numbox-btn]{
 	font-size: 14px;
 }
-/**/
+/*其他*/
+.original .orderSearch.mui-collapse .mui-table-view .mui-table-view-cell:after{
+	background-color: #c8c7cc;
+	left: 15px;
+}
+/*附件上传*/
+.original .uploadAccessory{
+	width: 289px;
+	height: 178px;
+	margin: 0 auto;
+	border: 1px dotted #999999;
+	background-image: -webkit-linear-gradient(-224deg, #8BBDEA 0%, #87C7CA 11%, #C1BDE9 27%, #C7BBEC 46%, #C0BCE8 62%, #B6BEE3 74%, #78C6C3 100%);
+	background-image: -moz-linear-gradient(-224deg, #8BBDEA 0%, #87C7CA 11%, #C1BDE9 27%, #C7BBEC 46%, #C0BCE8 62%, #B6BEE3 74%, #78C6C3 100%);
+	background-image: -o-linear-gradient(-224deg, #8BBDEA 0%, #87C7CA 11%, #C1BDE9 27%, #C7BBEC 46%, #C0BCE8 62%, #B6BEE3 74%, #78C6C3 100%);
+	background-image: linear-gradient(-224deg, #8BBDEA 0%, #87C7CA 11%, #C1BDE9 27%, #C7BBEC 46%, #C0BCE8 62%, #B6BEE3 74%, #78C6C3 100%);
+	border-radius: 4px;
+}
+.original .uploadAccessory p{
+	margin-top: 112px;
+	text-align: center;
+	font-size: 18px;
+	color: #212121;
+}
+/*整车订单-客户信息*/
+.carDetails .mui-table-view-cell > span {
+	float: left;
+	display: inline-block;
+	margin-right: 5px;
+	position: relative;
+	top: 2px;
+	color: #C71B1E;
+}
+.carDetails .mui-table-view .mui-table-view-chevron li:not(:last-child){
+	border-bottom: 1px solid #E4E4E4;
+}
+.mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron {
+    margin-right: 0;
+}
+.carDetails .mui-table-view-cell p{
+	display: inline;
+}
+.carDetails .mui-table-view-chevron .brand p span:after{
+	position: absolute;
+    display: inline-block;
+    font-family: Muiicons;
+    content: '\e581';
+    color: #8f8f94;
+    right: -2px;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .predictTime{
+	padding-right: 0;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .guideMoney input{
+	width: auto;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    text-align: right;
+    border: none;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments{
+	padding-right: 0;
+	padding-bottom: 25px;
+	margin-top: 20px;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments textarea{
+	margin-top: 12px;
+}
+.car_load .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
+	margin-left: 0;
+}
+.car_load .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell{
+	padding-left: 0;
+}
+.secondHand .radio_inline{
+    display: inline-block;
+    width: 65%;
+    margin-right: 0;
+    text-align: right !important;
+}
+ .secondHand .radio_inline label{
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    top: -17px;
+}
+.secondHand .radio_inline input[type=radio]{
+    width: 15%;             
+    right: auto;
+    top: -4px;
+    z-index: 1000;
+}
+.secondHand .mui-radio > label.require{
+	margin:0;
+	padding: 0;
+	width: 22%;
+	float: left;
+}
