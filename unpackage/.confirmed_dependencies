@@ -45,7 +45,8 @@
 		"refer": [
 			"html/opportunity/opportunity-follow.html",
 			"html/quotation/quotation-list.html",
-			"html/opportunity/test-driving.html"
+			"html/opportunity/test-driving.html",
+			"html/opportunity/follow-record.html"
 		]
 	}
 }

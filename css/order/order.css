@@ -285,6 +285,10 @@
 .original .products .pro .proRight > div:nth-of-type(2) p{
 	display: inline;
 	font-size: 10px;
+	 -webkit-user-select:text;
+       -moz-user-select:text;
+        -ms-user-select:text;
+            user-select:text;
 }
 .original .products .pro > div{
 	float: left;
@@ -330,6 +334,10 @@
 	font-size: 12px;
 	color: #CE575A;
 	text-align: center;
+	 -webkit-user-select:text;
+       -moz-user-select:text;
+        -ms-user-select:text;
+            user-select:text;
 }
 .original .products .pro .proRight .prices .mui-numbox{
 	border-color: #CE575A;
@@ -446,4 +454,51 @@
 	padding: 0;
 	width: 22%;
 	float: left;
+}
+/*车险*/
+.original .insurance > label{
+	margin-left: 14px;
+	color: #333333;
+}
+.original .insurance > label:after{
+	font-family: Muiicons;
+	content: '\e581';
+	margin-left: 10px;
+	color: #666666;
+}
+.original .insurance .insuranceDetail > div{
+	clear: both;
+	padding: 11px 0;
+	border-bottom: 1px solid #E4E4E4;
+}
+.original .insurance .insuranceDetail > div:last-child{
+	border: none;
+	margin-top: 20px;
+}
+.original .insurance .insuranceDetail > div:last-child textarea{
+	margin-top: 15px;
+}
+.original .insurance .insuranceDetail > div > span{
+	margin-right: 5px;
+    color: #C71B1E;
+}
+.original .insurance .insuranceDetail > div > p{
+	float: right;
+}
+.original .insurance .insuranceDetail > div > p > span{
+	margin-right: 0;
+}
+.original .insurance .insuranceDetail > div > p > span:after{
+	font-family: Muiicons;
+	content: '\e581';
+	margin-left: 5px;
+}
+.original .insurance .insuranceDetail > div > p > input{
+	width: auto;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    text-align: right;
+    border: none;
 }

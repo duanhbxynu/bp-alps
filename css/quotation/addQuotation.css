@@ -417,4 +417,83 @@
 .particulars .mui-table-view .mui-table-view-chevron li:not(:last-child){
 	border: none;
 }
-
+.orderDetail .particulars .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{
+	border-top: 1px solid #e4e4e4;
+    border-radius: 0;
+    margin-left: 0;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+.orderDetail .particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron>p.lines{
+	border-top: 1px dashed #E4E4E4;
+    margin: 6px 0px 6px -20px;
+}
+.orderDetail .particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p.detailBlue{
+	color: #618DF6;
+}
+/*底部tabBar*/
+.tabBar a.mui-active span:nth-of-type(2){
+	color: #C71B1E;
+}
+.tabBar a:nth-of-type(1) span.mui-icon{
+	background: url(../../images/editor1.png) no-repeat;
+	background-size: 100% 100%;
+}
+.tabBar a:nth-of-type(1).mui-active span.mui-icon{
+	background: url(../../images/editor2.png) no-repeat;
+	background-size: 100% 100%;
+}
+.tabBar a:nth-of-type(2) span.mui-icon{
+	background: url(../../images/msg1.png) no-repeat;
+	background-size: 100% 100%;
+}
+.tabBar a:nth-of-type(2).mui-active span.mui-icon{
+	background: url(../../images/msg2.png) no-repeat;
+	background-size: 100% 100%;
+}
+.tabBar a:nth-of-type(3) span.mui-icon{
+	background: url(../../images/set1.png) no-repeat;
+	background-size: 100% 100%;
+}
+.tabBar a:nth-of-type(3).mui-active span.mui-icon{
+	background: url(../../images/set2.png) no-repeat;
+	background-size: 100% 100%;
+}
+.tabBar a:nth-of-type(4) span.mui-icon{
+	background: url(../../images/more1.png) no-repeat;
+	background-size: 100% 100%;
+}
+.tabBar a:nth-of-type(4).mui-active span.mui-icon{
+	background: url(../../images/more2.png) no-repeat;
+	background-size: 100% 100%;
+}
+#messages{
+	width: 209px;
+}
+#messages,#messages .mui-table-view,#messages .mui-popover-arrow.mui-bottom:after{
+	background: #FFFFFF;
+}
+#messages.mui-bar-popover .mui-table-view{
+    width: 100%;
+    text-align: center;
+    padding-top: 11px;
+}
+#messages.mui-bar-popover .mui-table-view li{
+	padding-top: 0;
+}
+#messages.mui-bar-popover .mui-table-view li a{
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px solid #E4E4E4;
+}
+#messages.mui-bar-popover .mui-table-view li:last-child a{
+	border-bottom: none;
+}
+#messages.mui-bar-popover .mui-table-view li a label{
+	font-size: 14px;
+}
+#messages.mui-bar-popover .mui-table-view li a input{
+	float: right;
+    position: relative;
+    top: 5px;
+}
