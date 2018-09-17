@@ -466,6 +466,9 @@
 	margin-left: 10px;
 	color: #666666;
 }
+.original .insurance .insuranceDetail{
+	display: none;
+}
 .original .insurance .insuranceDetail > div{
 	clear: both;
 	padding: 11px 0;

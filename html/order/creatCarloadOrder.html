@@ -535,7 +535,58 @@
 								</div>
 								<p>搜索</p>
 							</li>
-							<li class="mui-table-view-cell">
+							<li class="mui-table-view-cell insurance">
+								<input type="radio" class="trafficInsurance" /><label for="">交强险</label>
+								<div class="insuranceDetail">
+									<div>
+										<span>*</span>
+										<label>保险公司</label>
+										<p class=""><span class="">请选择保险公司</span></p>
+									</div>
+									<div>
+										<span>*</span>
+										<label>保险名称</label>
+										<p class=""><input class="" type="text" placeholder="请输入保险名称"/></p>
+									</div>
+									<div>
+										<span>*</span>
+										<label>保险期限</label>
+										<p class=""><span class="">请选择保险期限</span></p>
+									</div>
+									<div>
+										<span>*</span>
+										<label>保险分类</label>
+										<p class=""><span class="">请选择保险分类</span></p>
+									</div>
+									<div>
+										<span>*</span>
+										<label>现金折让金额</label>
+										<p class=""><input class="" type="text" placeholder="请输入"/></p>
+									</div>
+									<div>
+										<label>赠送精品金额</label>
+										<p class=""><input class="" type="text" placeholder="请输入"/></p>
+									</div>
+									<div>
+										<label>保险类型</label>
+										<p class=""><span class="">请选择保险类型</span></p>
+									</div>
+									<div>
+										<label>保险预估金额</label>
+										<p class=""><input class="" type="text" placeholder="请输入"/></p>
+									</div>
+									<div>
+										<label>保单号</label>
+										<p class=""><input class="" type="text" placeholder="请输入保单号"/></p>
+									</div>
+									<div>
+										<label>备注</label>
+										<textarea placeholder="请填写备注信息"></textarea>
+									</div>
+								</div>
+							</li>
+							<li class="mui-table-view-cell insurance">
+								<input type="radio" name="" id="" value=""/><label for="">交强险</label>
 								
 							</li>
 						</ul>
@@ -700,6 +751,17 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				
+				//交强险下方内容是否展开
+				var selectRadio = document.getElementsByClassName('trafficInsurance')[0];
+				var insuranceDetail = document.getElementsByClassName('insuranceDetail')[0];
+				mui(".insurance").on('click','.insurance input',function(){		
+					if (selectRadio.checked == true) {
+						insuranceDetail.style.display = 'block';
+					} else{
+						insuranceDetail.style.display = 'none';
+					}
+				});
 
 				$.plusReady(function() {
 

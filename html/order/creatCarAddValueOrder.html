@@ -316,13 +316,16 @@
 				}
 				
 				//交强险下方内容是否展开
-//				var selectRadio = document.getElementsByClassName('trafficInsurance')[0];
-//				var insuranceDetail = document.getElementsByClassName('insuranceDetail')[0];
-//				if (selectRadio.checked == true) {
-//					insuranceDetail.style.display = 'block';
-//				} else{
-//					insuranceDetail.style.display = 'none';
-//				}
+				var selectRadio = document.getElementsByClassName('trafficInsurance')[0];
+				var insuranceDetail = document.getElementsByClassName('insuranceDetail')[0];
+				mui(".insurance").on('click','.insurance input',function(){		
+					if (selectRadio.checked == true) {
+						insuranceDetail.style.display = 'block';
+					} else{
+						insuranceDetail.style.display = 'none';
+					}
+				});
+				
 
 				$.plusReady(function() {
 
