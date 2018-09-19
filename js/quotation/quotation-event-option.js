@@ -7,6 +7,7 @@
 	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
 	var count = 0;
 	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
+		
 		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
 		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
 		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
@@ -29,126 +30,272 @@
 			success: function(data) {
 				console.log("product list result:" + JSON.stringify(data));
 				console.log("--------------------------------------------------------------");
-				//							var box = $("#"+productType+"SearchA").parent();
 				if(data.success == true) {
 					console.log("product list result:" + data.productList);
-					
 					var productView = template(productType+'-template', {
 							"productList": data.productList
 						});
 					document.getElementById(productType+'-comment').innerHTML = productView;
-//					var pickerData = [];
-//					mui.each(data.productList, function(i, product) {
-//						console.log(product);
-//						var pickerObject = {};
-//						pickerObject.value = product.code;
-//						pickerObject.text = product.name + "&nbsp;&nbsp;" + product.price;
-//						pickerObject.productName = product.name;
-//						pickerObject.productPrice = product.price;
-//						pickerData.push(pickerObject);
-//					})
-//					console.log(pickerData);
-//					searchAResultPicker.setData(pickerData);
-//					searchAResultPicker.show(function(items) {
-//						console.log(items[0]);
-//						
-//						if(produceType == 'optionalProduct' || produceType == 'upholsteryProduct' || produceType == "extendedWarrantyProduct"){
-//							//原厂选装  装潢
-//							document.getElementById("produce_code").innerHTML = "产品编号&nbsp;&nbsp;" + items[0].value;
-//							document.getElementById("produce_code").setAttribute('value',items[0].value);
-//							document.getElementById("produce_name").innerHTML = items[0].productName;
-//							document.getElementById("produce_price").innerHTML = items[0].productPrice + '元';
-//							document.getElementById("modal").classList.add('mui-active');
-//							document.getElementById("modal").setAttribute('style', 'min-height: auto;');
-//							document.getElementById("modal").setAttribute('data-productType', produceType);
-//							mask.show(); //显示遮罩
-//						}else if(produceType == 'insuranceProduct'){
-//							//保险
-//							
-//						}else if(produceType == 'coupon'){
-//							
-//						}
-						
-	
-						
-						//									$('#modal').popover('show');
-						//									userResult.innerText = JSON.stringify(items[0]);
-						//返回 false 可以阻止选择框的关闭
-						//return false;
-//					});
-					//								$(".content",box).html("");
-					//								var num = 0;
-					//								$.each(data.productList,function(i,product){
-					//									addEntryOptionBox(productType, product, num, false);
-					//									num++;
-					//								})
-					//								$("input[name='"+productType+"[].code']").change(function(){
-					//									$("input[name='"+productType+"[].price']").val($(this).attr("priceData"));
-					//								})
+					mui('.mui-numbox').numbox();
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				location.href = baseConfig.baseUrl + baseConfig.login_page;
+				console.log("xhr");
+				console.log(xhr); 
+				console.log("type");
+				console.log(type);
+				console.log("errorThrown");
+				console.log(errorThrown);
+				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+				common.baseOption.goToLogin();
 			}
 		})
 	
 	})
-	document.getElementById('btn_modal_save').addEventListener('tap', function() {
-		document.getElementById("modal").classList.remove('mui-active');
-		document.getElementById("modal").setAttribute('style', '');
-		mask.close();
-		var produceCode = document.getElementById("produce_code").getAttribute('value');
-		var produceType = document.getElementById("modal").getAttribute('data-productType');
-		console.log(produceType);
-		var collapseCardList = document.getElementById(produceType+'ResultList');
-		console.log(collapseCardList);
-		var collapseCard = document.createElement('div');
-		collapseCard.classList = 'mui-card mui-clearfix original-list-card';
-		collapseCard.setAttribute('id',produceCode+"collapseCard");
-		collapseCard.innerHTML ='<div class="mui-card-header">'+
-								 	'<label id="produce_code">产品编号  '+produceCode+'</label>'+
-									'<i data-iconCode='+produceCode+' class="mui-icon mui-icon-trash mui-pull-right"></i>'+
-								'</div>'+
-								'<div class="mui-card-content">'+
-									'<ul class="mui-table-view mui-clearfix">'+
-										'<li class="mui-table-view-cell">'+
-											'<label>产品描述</label>'+
-											'<var id="card_produce_name">产品描述</var>'+
-										'</li>'+
-										'<li class="mui-table-view-cell">'+
-											'<label>参考价格</label>'+
-											'<var id="card_produce_price">参考价格</var>'+
-										'</li>'+
-										'<li class="mui-table-view-cell">'+
-											'<label>销售价格</label>'+
-											'<var id="card_sale_price">参考价格</var>'+
-										'</li>'+
-										'<li class="mui-table-view-cell">'+
-											'<label>数量</label>'+
-											'<var id="card_sale_price">参考价格</var>'+
-										'</li>'+
-										'<li class="mui-table-view-cell">'+
-											'<label>备注</label>'+
-											'<textarea id="card_produce_textarea" ></textarea>'+
-										'</li>'+
-									'</ul>'+
-								'</div>';
-		collapseCardList.appendChild(collapseCard);		
-		deleCard();
-	//	document.getElementById("produce_code").innerHTML;
-	//	document.getElementById("produce_name").innerHTML;
-	//	document.getElementById("produce_price").innerHTML;
-	})
-	function deleCard(){
-		mui('.original-list-card').on('tap','.mui-icon-trash',function(){
+	
+	document.getElementById('creatQuotation').addEventListener('tap',function(){
 		
-		var produceCode = this.getAttribute('data-iconCode');
-		console.log(produceCode);
-		var collapseCard = document.getElementById(produceCode+'collapseCard');
-		var parent=collapseCard.parentNode;
-		console.log(parent);
-		parent.removeChild(collapseCard);
+		var opportunityCode = document.getElementById('customerName').getAttribute('data-oppoCode');
+		var deposit = document.getElementById('deposit').value;
+		var orderType = document.getElementById('order_type').getAttribute('data-value');
+		//车辆信息
+		var brands = document.getElementsByClassName("brands")[0].getAttribute('data-value');
+		var vehicle = document.getElementsByClassName("series")[0].getAttribute('data-value');
+		var carModel = document.getElementsByClassName("carType")[0].getAttribute("data-value");
+		var outColors = document.getElementsByClassName("outColors")[0].getAttribute("data-value");
+		var innerColors = document.getElementsByClassName("innerColors")[0].getAttribute("data-value");
+		var deliveryDate = document.getElementsByClassName("preTime")[0].getAttribute("data-value");
+		var carPrice = document.getElementById('carPrice').value;
+		var carSalesPrice = document.getElementById('carSalesPrice').value;
+		var paymentType = document.getElementsByClassName("payWay")[0].getAttribute("data-value");
+		//原厂选装
+		var optionalProduct = [];
+		mui('.optionalProduct input[type=checkbox]:checked').each(function(){
+			
+			var produceId = this.getAttribute("data-code");
+			var name = this.getAttribute("data-name");
+			var price = this.getAttribute("data-price");
+			var actualPriceStr = mui('#optionalProduct-'+produceId+"-actualPrice")[0].innerHTML;
+			var actualPrice = actualPriceStr.substring(1,actualPriceStr.length);
+			var quantity = mui('#optionalProduct-'+produceId+"-quantity")[0].value;
+			var product ={
+				actualPrice:actualPrice,
+//				actualPrice:parseInt(actualPrice),
+				code:produceId,
+				price:price,
+//				name:name,
+//				price:parseInt(price),
+				quantity:quantity
+			}
+			optionalProduct.push(product);
+		})
+		console.log(optionalProduct);
+		//装潢
+		var upholsteryProduct = [];
+		mui('.upholsteryProduct input[type=checkbox]:checked').each(function(){
+			
+			var produceId = this.getAttribute("data-code");
+			var name = this.getAttribute("data-name");
+			var price = this.getAttribute("data-price");
+			var actualPriceStr = mui('#upholsteryProduct-'+produceId+"-actualPrice")[0].innerHTML;
+			var actualPrice = actualPriceStr.substring(1,actualPriceStr.length);
+			var quantity = mui('#upholsteryProduct-'+produceId+"-quantity")[0].value;
+			var product ={
+				actualPrice:actualPrice,
+				code:produceId,
+				price:price,
+				quantity:quantity
+			}
+			upholsteryProduct.push(product);
+		})
+		console.log(upholsteryProduct);
+		//二手车登记
+		var secondHandCarMortgage = document.body.querySelector('input[name=secondHandCarMortgage]:checked').value;
+		var secondHandCarMileage = document.getElementById('secondHandCarMileage').value;
+		var secondHandCarPurchasedDate = document.getElementById('secondHandCarPurchasedDate').value;
+		var secondHandCarBrand = document.getElementById('secondHandCarBrand').value;
+		var secondHandCarVhicle = document.getElementById('secondHandCarVhicle').value;
+		var secondHandCarEvaluationOfPrice = document.getElementById('secondHandCarEvaluationOfPrice').value;
+		var secondHandCarRecycleType = document.body.querySelector('input[name=secondHandCarRecycleType]:checked').value;
+		var secondHandCarRemark = document.getElementById('secondHandCarRemark').value;
+		//上牌
+		var licensePlateTax = document.getElementById('licensePlateTax').value;
+		var licensePlatePurchaseMethod = document.body.querySelector('input[name=licensePlatePurchaseMethod]:checked').value;
+		var vehicleTypeForLicensePlate = document.body.querySelector('input[name=vehicleTypeForLicensePlate]:checked').value;
+		var province = document.getElementsByClassName("address")[0].getAttribute("data-province");
+		var city = document.getElementsByClassName("address")[0].getAttribute("data-city");
+		var licensePlateServiceCharge = document.getElementById('licensePlateServiceCharge').value;
+		var licensePlateRemake = document.getElementById('licensePlateRemake').value;
+		//金融产品
+		var financeType = document.getElementsByClassName("financeType")[0].getAttribute("data-value");
+		var financeCycle = document.getElementsByClassName("financeCycle")[0].getAttribute("data-value");
+		var financeCompany = document.getElementsByClassName("financeCompany")[0].getAttribute("data-value");
+		var financeProduct = document.getElementById('financeProduct').value;
+		var financeStartTime = document.getElementById('financeStartTime').value;
+		var financeUnitPrice = document.getElementById('financeUnitPrice').value;
+		var financeServiceCharge = document.getElementById('financeServiceCharge').value;
+		var financeRate = document.getElementById('financeRate').value;
+		var financeMortgage = document.body.querySelector('input[name=financeMortgage]:checked').value;
+		var financeRemark = document.getElementById('financeRemark').value;
+		//车险
+		var insuranceProduct = [];
+		mui('.insuranceProduct input[type=checkbox]:checked').each(function(){
+			
+			var produceId = this.getAttribute("data-code");
+			var name = this.getAttribute("data-name");
+			var price = this.getAttribute("data-price");
+			var actualPriceStr = mui('#insuranceProduct-'+produceId+"-actualPrice")[0].innerHTML;
+			var actualPrice = actualPriceStr.substring(1,actualPriceStr.length);
+			var quantity = mui('#insuranceProduct-'+produceId+"-quantity")[0].value
+			var product ={
+				actualPrice:actualPrice,
+				code:produceId,
+				price:price,
+				quantity:quantity
+			}
+			insuranceProduct.push(product);
+		})
+		console.log(insuranceProduct);
+		//卡券
+		var coupon = [];
+		mui('.coupon input[type=checkbox]:checked').each(function(){
+			
+			var produceId = this.getAttribute("data-code");
+			var name = this.getAttribute("data-name");
+			var price = this.getAttribute("data-price");
+			var actualPriceStr = mui('#coupon-'+produceId+"-actualPrice")[0].innerHTML;
+			var actualPrice = actualPriceStr.substring(1,actualPriceStr.length);
+			var quantity = mui('#coupon-'+produceId+"-quantity")[0].value
+			var product ={
+				actualPrice:actualPrice,
+				code:produceId,
+				price:price,
+				quantity:quantity
+			}
+			coupon.push(product);
+		})
+		console.log(coupon);
+		//延保
+		var extendedWarrantyProduct = [];
+		mui('.extendedWarrantyProduct input[type=checkbox]:checked').each(function(){
+			
+			var produceId = this.getAttribute("data-code");
+			var name = this.getAttribute("data-name");
+			var price = this.getAttribute("data-price");
+			var actualPriceStr = mui('#extendedWarrantyProduct-'+produceId+"-actualPrice")[0].innerHTML;
+			var actualPrice = actualPriceStr.substring(1,actualPriceStr.length);
+			var quantity = mui('#extendedWarrantyProduct-'+produceId+"-quantity")[0].value
+			var product ={
+				actualPrice:actualPrice,
+				code:produceId,
+				price:price,
+				quantity:quantity
+			}
+			extendedWarrantyProduct.push(product);
+		})
+		console.log(extendedWarrantyProduct);
+		//其他
+		var serviceInfo = document.getElementById('serviceInfo').value;
+		var servicePrice = document.getElementById('servicePrice').value;
+		var otherIncomInfo = document.getElementById('otherIncomInfo').value;
+		var otherPrice = document.getElementById('otherPrice').value;
+		
+		var params1 = {
+			opportunityCode: opportunityCode,
+			deposit: deposit,
+			lineItemName: orderType,
+			vehicleBrand: brands,
+			vehicle: vehicle,
+			carModel: carModel,
+			carColor: outColors,
+			carInsideColor: innerColors,
+			deliveryDate: deliveryDate,
+			paymentType: paymentType,
+			carPrice: carPrice,
+			carSalesPrice: carSalesPrice,
+			optionalProduct:optionalProduct, 
+			upholsteryProduct:upholsteryProduct,
+			secondHandCarMortgage:secondHandCarMortgage,
+			secondHandCarMileage:secondHandCarMileage,
+			secondHandCarPurchasedDated:secondHandCarPurchasedDate,
+			secondHandCarBrand:secondHandCarBrand,
+			secondHandCarVhicle:secondHandCarVhicle,
+			secondHandCarEvaluationOfPrice:secondHandCarEvaluationOfPrice,
+			secondHandCarRecycleType:secondHandCarRecycleType,
+			secondHandCarRemark:secondHandCarRemark,
+			licensePlateTax:licensePlateTax,
+			licensePlatePurchaseMethod:licensePlatePurchaseMethod,
+			vehicleTypeForLicensePlate:vehicleTypeForLicensePlate,
+			licensePlateServiceCharge:licensePlateServiceCharge,
+			licensePlateRemake:licensePlateRemake,
+			province:province,
+			city:city,
+			financeType:financeType,
+			financeCycle:financeCycle,
+			financeCompany:financeCompany,
+			financeProduct:financeProduct,
+			financeStartTime:financeStartTime,
+			financeUnitPrice:financeUnitPrice,
+			financeServiceCharge:financeServiceCharge,
+			financeRate:financeRate,
+			financeMortgage:financeMortgage,
+			financeRemark:financeRemark,
+			insuranceProduct:insuranceProduct,
+			coupon: coupon,
+			extendedWarrantyProduct:extendedWarrantyProduct,
+			serviceInfo:serviceInfo,
+			servicePrice:servicePrice,
+			otherIncomInfo:otherIncomInfo,
+			otherPrice:otherPrice
+		};
+		console.log(JSON.stringify(params1));
+		var params = {
+			"opportunityCode":"OP0000012",
+			"lineItemName":"type1",
+			"vehicleBrand":"bmw",
+			"vehicle":"G30",
+			"carModel":"B0003",
+			"carColor":"B0003_B",
+			"carSalesPrice":"3000",
+			"carPrice":"1017",
+			"optionalProduct":[{"code":"M0001","price":"590","actualPrice":"500","quantity":"4"},{"code":"M0002","price":"591","actualPrice":"591","quantity":"1"}],
+			"secondHandCarRecycleType":"1",
+			"licensePlatePurchaseMethod":"license1",
+			"vehicleTypeForLicensePlate":"国内",
+			"financeType":"financeType1",
+			"financeCycle":"24"
+		}
+		mui.ajax({
+			url:serviceBaseUrl+"alpssalewebservices/quotaion/create",
+			type:"POST",
+			dataType:"json",
+			contentType: 'application/json',
+	        data: JSON.stringify(params1),
+	        beforeSend: function (xhr) {
+		       xhr.setRequestHeader("Authorization","Bearer " + token);
+		    },
+			success: function (data) {
+				console.log("quotation create result:"+JSON.stringify(data));
+				console.log("--------------------------------------------------------------");
+				if(data.success==true){
+					mui.back();
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("textStatus");
+				console.log(jqXHR); 
+				console.log("textStatus");
+				console.log(textStatus);
+				console.log("errorThrown");
+				console.log(errorThrown);
+				plus.nativeUI.toast('quotation create出错了，请稍后再试！');
+				common.baseOption.goToLogin();
+			}
+		})
+		
 	})
 	
-	}
+
+	
+	
 	

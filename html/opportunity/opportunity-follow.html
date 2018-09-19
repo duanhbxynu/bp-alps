@@ -189,6 +189,8 @@
 				var opporCode = "";
 				var type = "";
 				var typeCode = ""; 
+				var name = ""; 
+				var mobile = ""; 
 				if(!localStorage.getItem('$state')) {
 					plus.nativeUI.toast('登陆过期，请重新登陆！');
 					return;
@@ -199,8 +201,10 @@
 						opporCode = event.detail.opporCode;
 						type = event.detail.type;
 						typeCode = event.detail.typeCode;
+						name = event.detail.name;
+						mobile = event.detail.mobile;
 						document.getElementById('mui-title').innerHTML = event.detail.type;
-						if(typeCode == 'outsideActivity'||typeCode == 'inshop'){//店外活动,到店面谈
+						if(typeCode == 'outsideActivity'||typeCode == 'inshop'||typeCode == 'quotation'){//店外活动,到店面谈,商谈报价
 							doc.getElementById('connectCustomer_row').classList.add('mui-hidden');
 						}
 					});
@@ -356,7 +360,18 @@
 						console.log("follow append content result:"+JSON.stringify(data));
 						console.log("--------------------------------------------------------------");
 						if(data.success==true){
-//							alert("success");
+							if(typeCode =='quotation'){
+								mui.openWindow({
+									url: '../quotation/add-quotation.html',
+									id: "add-quotation",//默认使用当前页面的url作为id
+									extras: {
+										oppoCode: opporCode,
+										name:name,
+										mobile:mobile
+									}, //自定义扩展参数
+									createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+								})
+							}
 							$.back();
 						}else if(data.messageCode == '403'){//token过期，重新登录
 							plus.nativeUI.toast(data.message);

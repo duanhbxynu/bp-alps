@@ -12,6 +12,9 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
 		<style>
+			.mui-content{
+				bottom: 51px;
+			}
 			.mui-table-view-cell{
 				font-size: 13px;
 				padding-left: 20px;
@@ -174,7 +177,8 @@
 		</header>
 
 		<div class="mui-content mui-scroll-wrapper" id="mui-content">
-			<div class="mui-card leads-scroll">
+			<div class="mui-scroll">
+				<div class="mui-card">
 					<div class="mui-card-header" id="oppor_code">
 						<label>意向编号</label>
 						<span>已试乘试驾</span>
@@ -206,57 +210,58 @@
 					</div>
 				</div>
 			
-			<div class="mui-card" id="follow_record">
-				<div class="mui-card-header follow-record">
-					<label class="mui-icon-footer">跟进记录</label>
-					<i class="mui-icon mui-icon-arrowright" id="record_size">4</i>
+				<div class="mui-card" id="follow_record">
+					<div class="mui-card-header follow-record">
+						<label class="mui-icon-footer">跟进记录</label>
+						<i class="mui-icon mui-icon-arrowright" id="record_size">4</i>
+					</div>
 				</div>
-			</div>
-			<div class="mui-card">
-				<div class="mui-card-content">
-					<ul class="mui-table-view mui-grid-view mui-grid-9 oppor-detail-grid-9">
-			            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 phone-invitation">
-			            	<a href="#" data-typeCode="invitation" data-type="邀约到店">
-			                    <span class="mui-icon mui-icon-phone"></span>
-			                    <div class="mui-media-body">邀约到店</div>
-			            	</a>
-			            </li>
-			            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
-			            	<a href="#" data-typeCode="outsideActivity" data-type="店外活动">
-			                    <span class="mui-icon mui-icon-email"></span>
-			                    <div class="mui-media-body">店外活动</div>
-			            	</a>
-			            </li>
-			            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 face-talking">
-			            	<a href="#" data-typeCode="inshop" data-type="到店面谈">
-			                    <!--<span class="mui-icon-extra mui-icon-extra-people"></span>-->
-			                    <span class="mui-icon mui-icon-person"></span>
-			                    <div class="mui-media-body">到店面谈</div>
-			            	</a>
-			            </li>
-			            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 try-driving">
-			            	<a href="#" data-typeCode="testDrive" data-type="试乘试驾">
-			                    <span class="mui-icon mui-icon-location"></span>
-			                    <div class="mui-media-body">试乘试驾</div>
-			            	</a>
-			            </li>
-			            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
-			            	<a href="#" data-typeCode="quotation" data-type="商谈报价">
-			                    <span class="mui-icon mui-icon-search"></span>
-			                    <div class="mui-media-body">商谈报价</div>
-			            	</a>
-			            </li>
-			           
-			           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 more">
-			           		<a href="#">
-			                    <span class="mui-icon mui-icon-more" data-type="其他"></span>
-			                    <div class="mui-media-body">其他</div>
-			           		</a>
-			           </li>
-			        </ul> 
-		        </div>
-			</div>
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<ul class="mui-table-view mui-grid-view mui-grid-9 oppor-detail-grid-9">
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 phone-invitation">
+				            	<a href="#" data-typeCode="invitation" data-type="邀约到店">
+				                    <span class="mui-icon mui-icon-phone"></span>
+				                    <div class="mui-media-body">邀约到店</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				            	<a href="#" data-typeCode="outsideActivity" data-type="店外活动">
+				                    <span class="mui-icon mui-icon-email"></span>
+				                    <div class="mui-media-body">店外活动</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 face-talking">
+				            	<a href="#" data-typeCode="inshop" data-type="到店面谈">
+				                    <!--<span class="mui-icon-extra mui-icon-extra-people"></span>-->
+				                    <span class="mui-icon mui-icon-person"></span>
+				                    <div class="mui-media-body">到店面谈</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 try-driving">
+				            	<a href="#" data-typeCode="testDrive" data-type="试乘试驾">
+				                    <span class="mui-icon mui-icon-location"></span>
+				                    <div class="mui-media-body">试乘试驾</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				            	<a href="#" data-typeCode="quotation" data-type="商谈报价">
+				                    <span class="mui-icon mui-icon-search"></span>
+				                    <div class="mui-media-body">商谈报价</div>
+				            	</a>
+				            </li>
+				           
+				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 more">
+				           		<a href="#">
+				                    <span class="mui-icon mui-icon-more" data-type="其他"></span>
+				                    <div class="mui-media-body">其他</div>
+				           		</a>
+				           </li>
+				        </ul> 
+			        </div>
+				</div>
 			
+			</div>
 		</div>
 		<footer class="mui-bar mui-bar-tab">
 		    <a class="mui-tab-item mui-active" id="order" href="#">下订</a>
@@ -285,11 +290,11 @@
 		         </div> 
 				<div class="mui-button-row">
 					<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-outlined-sm" id="btn_cancel">取消</button>
-					<button type="button" class="mui-btn mui-btn-danger btn-create-intention btn-lined-lg" id="btn_save_create">提交</button>
+					<button type="button" class="mui-btn mui-btn-danger btn-create-intention btn-lined-sm" id="btn_modal_create">提交</button>
 				</div>
 			</div>
 		</div>
-
+		
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js"></script>
 		<script src="../../js/oppor/oppor.js"></script>
@@ -313,7 +318,7 @@
 						}
 					]
 				});
-				$('.mui-scroll-wrapper').scroll();
+				
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -381,13 +386,20 @@
 					
 				}, false);
 				
+				//再加入这段代码
+				(function($){
+				    $(".mui-scroll-wrapper").scroll({
+				        bounce: true,//滚动条是否有弹力默认是true
+				        indicators: true, //是否显示滚动条,默认是true
+				    }); 
+				})(mui);
 
 				$.plusReady(function() {
-
+					$('.mui-scroll-wrapper').scroll();
 					/*---------关闭滚动条------*/
-//					plus.webview.currentWebview().setStyle({
-//						scrollIndicator: 'none'
-//					});
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
 
 					//获取父级页面查询过来的参数
 //					var self = plus.webview.currentWebview();
@@ -426,7 +438,7 @@
 //////						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
 ////					})
 //				})
-				var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
+//				var mask = $.createMask(callback);//callback为用户点击蒙版时自动执行的回调；
 				//申请战败
 				doc.getElementById('apply_fail').addEventListener('tap',function(){
 					
@@ -434,17 +446,18 @@
 					
 					doc.getElementById("modal").setAttribute('style','min-height: auto;')
 					
-					mask.show();//显示遮罩
+					var backdrop = document.createElement('div');
+					backdrop.className = 'mui-backdrop mui-active';
+					document.body.appendChild(backdrop);
+//					mask.show();//显示遮罩
 				})
 				//modal 取消
-				
 				doc.getElementById("btn_cancel").addEventListener('tap', function(event) {
 					if (doc.getElementById("modal")) {
-						
 						event.detail.gesture.preventDefault(); //fixed hashchange
 						doc.getElementById("modal").classList.remove('mui-active');
 						doc.getElementById("modal").removeAttribute("style");
-						mask.close();//显示遮罩
+						document.body.removeChild(document.body.querySelector('.mui-backdrop'));
 					}
 				});
 				
@@ -461,6 +474,21 @@
 					})
 					
 				});
+				//下订单
+				doc.getElementById("order").addEventListener('tap', function(event) {
+						
+					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
+					mui.openWindow({
+						url: '../order/creatCarloadOrder.html',
+						id: "creatCarloadOrder",//默认使用当前页面的url作为id
+						extras: {
+							opporCode: opporCode
+						}, //自定义扩展参数
+						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					})
+					
+				});
+				
 				
 				
 				
@@ -472,7 +500,8 @@
 					var vehicleTypeCode = doc.getElementById('oppor_code').getAttribute("data-vehicleTypeCode");
 					var vehicleCategoryCode = doc.getElementById('oppor_code').getAttribute("data-vehicleCategoryCode");
 					var vehicleCode = doc.getElementById('oppor_code').getAttribute("data-vehicleCode");
-								
+					var name = doc.getElementById('name').innerHTML;
+					var mobile = doc.getElementById('tel').innerHTML;		
 								
 					console.log(type);
 					console.log(typeCode);
@@ -482,9 +511,8 @@
 							type: type,
 							typeCode:typeCode,
 							opporCode:opporCode,
-							vehicleTypeCode:vehicleTypeCode,
-							vehicleCategoryCode:vehicleCategoryCode,
-							vehicleCode:vehicleCode
+							name:name,
+							mobile:mobile
 						});
 						mui.openWindow({
 							url:'../quotation/quotation-list.html',
@@ -514,7 +542,9 @@
 						mui.fire(plus.webview.getWebviewById('opporFollow'), 'showTitle', {
 							type: type,
 							typeCode:typeCode,
-							opporCode:opporCode
+							opporCode:opporCode,
+							name:name,
+							mobile:mobile
 						});
 	//					打开相关页面
 						mui.openWindow({

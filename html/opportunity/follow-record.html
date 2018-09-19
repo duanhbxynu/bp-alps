@@ -180,13 +180,14 @@
 			$('.timeline').on('tap','.timeline-item',function(){
 				var followCode = this.getAttribute('data-code');
 				var typeCode = this.getAttribute('data-typeCode');
+				console.log(typeCode);
 //				if(typeCode == 'invitation'||typeCode == 'outsideActivity'||typeCode == 'inshop'){
 					mui.openWindow({
 						url: 'follow-record-detail.html',
 						id: "followRecordDetail",//默认使用当前页面的url作为id
 						extras: {
 							followCode: followCode,
-							typeCode:typeCode,
+							typeCode:typeCode
 							
 						}, //自定义扩展参数
 						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示

@@ -291,9 +291,12 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title" id="mui-title">跟进记录详情</h1>
 		</header>
+		
+		
 
-		<div class="mui-content detail-scroll" id="mui-content">
-			<div class="mui-card ">
+		<div class="mui-content mui-scroll-wrapper detail-scroll" id="mui-content">
+			<div class="mui-scroll">
+				<div class="mui-card ">
 				<div class="mui-card-header">跟进记录</div>
 				<div class="mui-card-content">
 					<div class="mui-input-row"> 
@@ -373,7 +376,31 @@
 				</div>
 				
 			</div>
-
+			<div class="mui-card mui-hidden" id="quotationList">
+				<div class="mui-card-header">报价单详情</div>
+				<div class="mui-card-content">
+					<div class="mui-input-row"> 
+						<label>报价单编号 </label>
+						<var id="customerName">电话邀约</var>
+					</div>
+					<div class="mui-input-row">
+						<label>报价单状态 </label>
+						<var id="licenseNumber">王丽</var>
+					</div>
+					<div class="mui-input-row">
+						<label>报价单时间</label>
+						<var id="vehicleCategory">activity1</var>
+					</div>
+					<div class="mui-input-row">
+						<label>总价 </label>
+						<var id="vehicle">是</var>
+					</div>
+				</div>
+				
+			</div>
+		
+			</div>
+			
 		</div>
 		<footer id="footer">
 			<div class="footer-left">
@@ -458,21 +485,23 @@
 						            "contentList": followOpportunity.contentList 
 						        }); 
 						        doc.getElementById('content').innerHTML =  str;
-								
+								console.log("followOpportunity.typeCode="+followOpportunity.typeCode);
+								doc.getElementById('footer').classList.remove('mui-hidden');
 								if(typeCode == 'invitation'){
 									doc.getElementById('connectCustomer_row').classList.remove('mui-hidden');
 									doc.getElementById('connectCustomer').innerHTML = followOpportunity.connectCustomer?'是':'否';
 								}else if(typeCode == 'testDrive'){
 									doc.getElementById('dirver_info').classList.remove('mui-hidden');
+									doc.getElementById('footer').classList.add('mui-hidden');
 									doc.getElementById('customerName').innerHTML = followOpportunity.customerName||'';
 									doc.getElementById('licenseNumber').innerHTML = followOpportunity.licenseNumber||'';
 									doc.getElementById('vehicleCategory').innerHTML = followOpportunity.vehicleCategory||'';
 									doc.getElementById('vehicle').innerHTML = followOpportunity.vehicle||'';
 									doc.getElementById('bookingCartSTime').innerHTML = followOpportunity.bookingCartSTime||'';
 									doc.getElementById('bookingCartNTime').innerHTML = followOpportunity.bookingCartNTime||'';
-									doc.getElementById('footer').classList.add('mui-hidden');
 								}else if(typeCode == 'quotation'){
-									doc.getElementById('dirver_info').classList.remove('mui-hidden');
+									doc.getElementById('quotationList').classList.remove('mui-hidden');
+									doc.getElementById('dirver_info').classList.add('mui-hidden');
 									doc.getElementById('footer').classList.add('mui-hidden');
 								}
 								
@@ -542,7 +571,7 @@
 					}
 				};
 				
-				mui('.detail-scroll').scroll();
+				mui('.mui-scroll-wrapper').scroll();
 				var followCode = '';
 				$.plusReady(function() {
 					
@@ -552,6 +581,7 @@
 					
 					var self = plus.webview.currentWebview();
 					followCode = self.followCode;
+					
 					showDetail(followCode);
 					initNativeObjects();
 					showKeyboard();	
