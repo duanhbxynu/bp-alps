@@ -503,3 +503,130 @@
     position: relative;
     top: 5px;
 }
+/*试乘试驾*/
+.mui-bar-nav~.confirm{
+	padding: 16px 27px 0 27px;
+}
+.confirm{
+	margin-top: 52px;
+	background: #ffffff;
+	height: 100%;
+}
+.confirm > p{
+	margin-bottom: 0;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #E4E4E4;
+}
+.confirm > p span{
+	font-size: 15px;
+	color: #212121;
+}
+.confirm > p span:nth-of-type(1){
+	font-weight: bold;
+	margin-right: 20px;
+}
+.confirm > p a{
+	font-size: 13px;
+	color: #C71B1E;
+	float: right;
+}
+.confirm .undertake{
+	padding-top: 16px;
+	padding-bottom: 40px;
+}
+.confirm .undertake p{
+	text-align: center;
+	font-size: 18px;
+	color: #212121;
+	line-height: 25px;
+	margin-bottom: 12px;
+}
+.confirm .undertake div.matter{
+	border: 1px solid #E4E4E4;
+	border-radius: 2px;
+	padding: 16px;
+	margin: 0 -11px 0 -11px;
+	color: #212121;
+	font-size: 13px;
+	text-align: justify;
+	line-height: 26px;
+}
+.confirm .undertake div.check{
+	margin-left: -11px;
+	margin-top: 14px;
+}
+.confirm .undertake div.check span{
+	font-size: 12px;
+	color: #666666;
+	line-height: 15px;
+	margin-left: 3.8px;
+}
+.confirm .undertake div.check input{
+	position: relative;
+	top: 2px;
+}
+.confirm .certificate{
+	margin: 0 -11px 0 -11px;
+	padding-bottom: 40px;
+}
+.confirm .certificate p{
+	font-size: 15px;
+	color: #212121;
+	margin-bottom: 20px;
+	line-height: 21px;
+}
+.confirm .certificate > div{
+	margin: 0 auto;
+}
+.confirm .certificate > div div{
+	text-align: center;
+	width:100%;
+	height: 100%;
+}
+.confirm .certificate > div div img{
+	width: 62px;
+	height: 62px;
+	margin: 49px 0 8px;
+}
+.confirm .certificate > div div p{
+	font-size: 18px;
+	color: #212121;
+	line-height: 25px;
+}
+.confirm .certificate .front{
+	margin-bottom: 20px;
+}
+.confirm .certificate .front div{
+	background: url(../../images/IDcard.png) no-repeat;
+	background-size: 100% 100%;
+}
+.confirm .certificate .end div{
+	background: url(../../images/ID2Card.png) no-repeat;
+	background-size: 100% 100%;
+}
+.confirm .signature{
+	margin: 0 -11px 0 -11px;
+	padding-bottom: 67px;
+}
+.confirm .signature p{
+	font-size: 15px;
+	color: #212121;
+	margin-bottom: 12px;
+	line-height: 21px;
+}
+.confirm .signature div{
+	border: 1px solid #E4E4E4;
+	border-radius: 2px;
+	height: 227px;
+	position: relative;
+}
+.confirm .signature div button{
+	position: absolute;
+	bottom: 12px;
+	right: 12px;
+	border-radius: 100px;
+	color: #C71B1E;
+	font-size: 15px;
+	border-color:  #C71B1E;
+	padding: 8px 28px;
+}
