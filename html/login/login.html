@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/login/login.css"/>
+	</head>
+
+	<body>
+		<div class="logo">
+			<div></div>
+			<p>登录</p>
+		</div>
+		<div class="mui-content login">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<input type="text" class="mui-input-clear" placeholder="用户名/手机">
+				</div>
+				<div class="mui-input-row">
+					<input type="password" placeholder="密码">
+				</div>
+				<div class="mui-input-row code">
+					<label for="">kyed</label>
+					<input type="password" placeholder="输入验证码">
+				</div>
+				<button type="button" class="mui-btn mui-btn-block">登录</button>
+			</form>
+			<div class="msgCode mui-clearfix">
+				<a href="#">短信验证码登录</a>
+				<a href="#" style="float: right;">忘记密码</a>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+//			mui.toast("网络异常<br>请检查一下网络设置");
+//			mui.toast("用户不存在");
+//			mui.toast("用户名或密码错误");
+//          mui.toast("密码修改成功");
+		</script>
+	</body>
+
+</html>

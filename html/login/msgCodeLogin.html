@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/login/login.css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		</header>
+		<div class="logo">
+			<div></div>
+			<p>登录</p>
+		</div>
+		<div class="mui-content login findpsw">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<input type="text" class="mui-input-clear" placeholder="用户名/手机">
+				</div>
+				<div class="mui-input-row code">
+					<!--<label for="">获取验证码</label>-->
+					<label for="">重新获取(60)</label>
+					<input type="text" placeholder="请输入验证码">
+				</div>
+				<button type="button" class="mui-btn mui-btn-block">登录</button>
+			</form>
+			<div class="msgCode mui-clearfix">
+				<a href="#" style="float: right;">密码登录</a>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

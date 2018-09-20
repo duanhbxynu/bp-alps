@@ -23,7 +23,8 @@
 	},
 	"html/opportunity/index-opportunity.html": {
 		"refer": [
-			"html/opportunity/opportunity-detail.html"
+			"html/opportunity/opportunity-detail.html",
+			"html/login.html"
 		]
 	},
 	"html/leads/instore-customerstream-detail.html": {
