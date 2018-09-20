@@ -586,12 +586,13 @@
 .confirm .certificate > div div img{
 	width: 62px;
 	height: 62px;
-	margin: 49px 0 8px;
+	margin: 54px 0 8px;
 }
 .confirm .certificate > div div p{
 	font-size: 18px;
 	color: #212121;
 	line-height: 25px;
+	margin-bottom: 53px;
 }
 .confirm .certificate .front{
 	margin-bottom: 20px;
