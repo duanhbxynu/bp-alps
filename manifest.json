@@ -150,7 +150,8 @@
 				"resources": [],
 				"refer": [
 					"html/reg.html",
-					"html/index.html"
+					"html/index.html",
+					"html/forget_password.html"
 				],
 				"priority": 0
 			},
@@ -256,7 +257,6 @@
 				"js/common/common-database.js",
 				"js/common/select.data.js",
 				"html/leads/instore-customerstream.html",
-				"html/forget_password.html",
 				"css/icons-extra.css",
 				"html/opportunity/discuss-price.html",
 				"js/common/car.data-3.js",
