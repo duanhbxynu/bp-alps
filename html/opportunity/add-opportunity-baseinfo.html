@@ -83,12 +83,12 @@
 						<div class="radio-list radio-multiple-list radio-type-list">	
 							<div class="mui-radio mui-left customer-type customer-type-personal active">
 								<label class="">个人</label>
-								<input id="type_personal" name="type" class="type" type="radio" checked="true" />
+								<input id="type_personal" name="type" value="personal" type="radio" checked="true" />
 						    </div>
 							<!--<span class="spliter">|</span>--> 
 							<div class="mui-radio mui-left customer-type customer-type-company">
 								<label class="company">公司</label>
-								<input id="type_company" name="type" class="type"  type="radio">
+								<input id="type_company" name="type" value="company"  type="radio">
 							</div>
 						</div>
 					</div>
@@ -368,7 +368,7 @@
 				addressPicker.show(function(items) {
 //					showAddressPicker.innerHTML =addressPicker.getParam(items[0], 'text') + " " + addressPicker.getParam(items[1], 'text') + " " + addressPicker.getParam(items[2], 'text');
 					showAddressPicker.innerHTML =(items[0] || {}).text + " "+(items[1] || {}).text + " "+(items[2] || {}).text;
-					showAddressPicker.setAttribute("data-value",(items[0] || {}).value+(items[1] || {}).id+(items[2] || {}).id);
+					showAddressPicker.setAttribute("data-value",(items[0] || {}).value+(items[1] || {}).value+(items[2] || {}).value);
 						//返回 false 可以阻止选择框的关闭
 						//return false;
 						
@@ -379,9 +379,9 @@
 			
 			doc.getElementById("next_step").addEventListener('tap',function(){
 				
-				var type = doc.querySelector('[name="type"]:checked').value;//客户性质
+				var type = doc.querySelector('input[name="type"]:checked').value;//客户性质
 				var name = doc.getElementById('input_name').value;//姓名
-				var gender = doc.querySelector('[name="gender"]:checked').value;//性别
+				var gender = doc.querySelector('input[name="gender"]:checked').value;//性别
 				var mobilestr = doc.getElementById('input_mobile').value;//电话
 				
 				if(!name){
@@ -391,7 +391,7 @@
 					return plus.nativeUI.toast("请输入正确的电话");
 				}
 				var otherContact = doc.getElementById('input_other_mobile').value;//其他联系方式
-				var addressCode = doc.getElementById('showAddressPicker').getAttribute("data-value");//电话
+				var addressCode = doc.getElementById('showAddressPicker').getAttribute("data-value");
 				var address = doc.getElementById('input_address').value;//其他联系方式
 				var code = doc.getElementById("mui-content").getAttribute("data-code");
 				var baseOpportunity = {

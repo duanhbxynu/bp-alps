@@ -1,53 +1,53 @@
 {
-	"html/login.html": {
-		"refer": [
-			"html/reg.html",
-			"html/index.html"
-		]
-	},
-	"html/leads/index-leads.html": {
-		"refer": [
-			"html/leads/instore-customerstream-detail.html",
-			"html/login.html"
-		]
-	},
-	"html/index.html": {
-		"resources": [
-			"html/leads/index-leads.html"
-		],
-		"refer": [
-			"html/order/index-order.html",
-			"html/leads/index-leads.html",
-			"html/opportunity/index-opportunity.html"
-		]
-	},
-	"html/opportunity/index-opportunity.html": {
-		"refer": [
-			"html/opportunity/opportunity-detail.html",
-			"html/login.html"
-		]
-	},
-	"html/leads/instore-customerstream-detail.html": {
-		"refer": [
-			"html/opportunity/add-opportunity-baseinfo.html"
-		]
-	},
-	"html/opportunity/add-opportunity-baseinfo.html": {
-		"refer": [
-			"html/opportunity/add-opportunity-bussinessinfo.html"
-		]
-	},
-	"html/opportunity/add-opportunity-bussinessinfo.html": {
-		"refer": [
-			"html/opportunity/add-opportunity-workfamilyinfo.html"
-		]
-	},
-	"html/opportunity/opportunity-detail.html": {
-		"refer": [
-			"html/opportunity/opportunity-follow.html",
-			"html/quotation/quotation-list.html",
-			"html/opportunity/test-driving.html",
-			"html/opportunity/follow-record.html"
-		]
-	}
+  "html/login.html": {
+    "refer": [
+      "html/reg.html",
+      "html/index.html"
+    ]
+  },
+  "html/leads/index-leads.html": {
+    "refer": [
+      "html/leads/instore-customerstream-detail.html",
+      "html/login.html"
+    ]
+  },
+  "html/index.html": {
+    "resources": [
+      "html/leads/index-leads.html"
+    ],
+    "refer": [
+      "html/order/index-order.html",
+      "html/leads/index-leads.html",
+      "html/opportunity/index-opportunity.html"
+    ]
+  },
+  "html/opportunity/index-opportunity.html": {
+    "refer": [
+      "html/opportunity/opportunity-detail.html",
+      "html/login.html"
+    ]
+  },
+  "html/leads/instore-customerstream-detail.html": {
+    "refer": [
+      "html/opportunity/add-opportunity-baseinfo.html"
+    ]
+  },
+  "html/opportunity/add-opportunity-baseinfo.html": {
+    "refer": [
+      "html/opportunity/add-opportunity-bussinessinfo.html"
+    ]
+  },
+  "html/opportunity/add-opportunity-bussinessinfo.html": {
+    "refer": [
+      "html/opportunity/add-opportunity-workfamilyinfo.html"
+    ]
+  },
+  "html/opportunity/opportunity-detail.html": {
+    "refer": [
+      "html/opportunity/opportunity-follow.html",
+      "html/quotation/quotation-list.html",
+      "html/opportunity/test-driving.html",
+      "html/opportunity/follow-record.html"
+    ]
+  }
 }

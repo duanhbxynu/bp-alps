@@ -24,7 +24,7 @@
 	            </div>
 				<div class="mui-slider-group">
 					 <div class="mui-slider-item mui-control-content">
-	                    <div id="orderPullrefresh" class="mui-scroll-wrapper">	                    	
+	                    <div id="pullrefresh" class="mui-scroll-wrapper">	                    	
 	                        <div class="mui-scroll" >
 	                        	<script id='content-template' type="text/template">
 									<% for(var i in contentList){ var item=contentList[i]; %>
@@ -127,7 +127,7 @@
 			mui.init({
 				swipeBack: false,
 				pullRefresh: {
-					container: '#orderPullrefresh',
+					container: '#pullrefresh',
 					down: {
 						contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
 			            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
@@ -142,37 +142,42 @@
 					}
 				}
 			});
+			template.config('escape', false);
 			var count = 0;
 			var orderList = null;
+			var orderType = '';
 			function pullupRefresh() {
 				
 				setTimeout(function() {
 					var params = {
 						currentPage:0,
-						pagesize:10
+						pagesize:10,
+						orderType:orderType
 					}
 					console.log("订单列表");
 					order.qryOrderList(params,function(data) {
-//						var data = JSON.parse(data);
 						console.log(data);
+						var data = JSON.parse(data);
+						console.log(data);
+						
 						console.log("订单列表data.success"+data.success);
 						if(data.success) {
 							orderList = data.orderList;
 							console.log(orderList);
 							var str = template('content-template', { 
 						            "contentList": orderList,
-						            
 						        }); 
 							
 							
 						}else {
+							
 							plus.nativeUI.toast(data.error);
 						}
 					});
 					
-						mui('#orderPullrefresh').pullRefresh().refresh(true);
+						mui('#pullrefresh').pullRefresh().refresh(true);
 						
-						mui('#orderPullrefresh').pullRefresh().endPullupToRefresh();
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						
 				}, 500);
 			}
@@ -181,7 +186,8 @@
 				setTimeout(function() {
 					var params = {
 						currentPage:0,
-						pagesize:10
+						pagesize:10,
+						orderType:orderType
 					}
 					order.qryOrderList(params,function(data) {
 //						var data = JSON.parse(data);
@@ -195,9 +201,9 @@
 						}
 					});
 					
-						mui('#orderPullrefresh').pullRefresh().refresh(true);
+						mui('#pullrefresh').pullRefresh().refresh(true);
 						
-						mui('#orderPullrefresh').pullRefresh().endPulldownToRefresh();
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						
 				}, 500);
 			}

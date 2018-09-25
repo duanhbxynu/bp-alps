@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
+		<style>
+			.mui-btn-fail {
+				font-size: 18px;
+				display: block;
+				width: 90%;
+				margin: 10px auto;
+				color: #fff;
+				border: 1px solid rgba(0, 0, 0, 0.50);
+				background-color: rgba(0, 0, 0, 0.50);
+				text-align: center;
+				margin-left: 5%!important;
+				height: 45px;
+				line-height: 15px;
+				padding: 15px auto;
+				border-radius: 2px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">增值订单-车辆列表</h1>
+		</header>
+
+		<div class="mui-content orderList customerList" id="vehicleList">
+			<script id='vehicle-template' type="text/template">
+				<% for(var i in vehicleList){ var item=vehicleList[i]; %>
+				<div class="mui-card">
+					<div class="mui-card-header">
+						车辆编号
+						<%= item.code||''%>
+						<input type="radio" name="code" data-code="<%= item.code||''%>" />
+
+					</div>
+					<div class="mui-card-content">
+						<p class="clearfix"><span>车牌号</span><span><%= item.licensePlateNumber||''%></span></p>
+						<p class="clearfix"><span>车架号</span><span><%= item.vinNumber||''%></span></p>
+						<p class="clearfix"><span>车主姓名</span><span><%= item.customerName||''%></span></p>
+						<p class="clearfix"><span>联系方式</span><span><%= item.customerMobileNumber||''%></span></p>
+						<p class="clearfix"><span>创建时间</span><span><%= item.creationtime||''%></span></p>
+					</div>
+				</div>
+
+				<% } %>
+			</script>
+			<button type="button" id="createCar" class="mui-btn mui-btn-fail mui-btn-block ">
+				您查找的车辆不存在？去新建
+			</button>
+		</div>
+
+		<footer class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-action-back mui-active" id="preStep" href="#">上一步</a>
+			<a class="mui-tab-item" id="nextStep" href="#">下一步</a>
+		</footer>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/common/arttmpl.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				template.config('escape', false);
+				console.log("vehicleList");
+				$.plusReady(function() {
+					//关闭等待框
+					plus.nativeUI.closeWaiting();
+					//显示当前页面
+					var self = plus.webview.currentWebview();
+					var vehicleList = self.vehicleList;
+					doc.getElementById('vehicleList').innerHTML = doc.getElementById('vehicleList').innerHTML + template('vehicle-template', {
+						"vehicleList": vehicleList
+					});
+					document.getElementById('createCar').addEventListener('tap', function() {
+						console.log(111);
+						mui.openWindow({
+							id: 'createCar', //b页面id
+							url: 'create_car.html'
+						})
+					})
+				});
+				
+
+				document.getElementById('nextStep').addEventListener('tap', function() {
+					var radioIsChecked = document.body.querySelector('input[type=radio]:checked');
+					if(!radioIsChecked) {
+						plus.nativeUI.toast("请选择车辆！");
+						return;
+					}
+					var carCode = document.body.querySelector('input[type=radio]:checked').getAttribute("data-code");
+					console.log(customerUid);
+					localStorage.setItem("carCode", carCode);
+					mui.openWindow({
+						id: 'createIncrementOrder', //b页面id
+						url: 'create_incrementOrder.html',
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							aniShow: "slide-in-right"
+						}
+					})
+				})
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

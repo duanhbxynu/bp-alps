@@ -1,5 +1,5 @@
 .orderList{
-	margin-bottom: 60px;
+	margin-bottom: 50px;
 }
 .orderList .mui-segmented-control.mui-scroll-wrapper .mui-scroll{
 	width: 100%;
@@ -216,7 +216,7 @@
 /*增值订单-原厂选装*/
 .original  .mui-search{
 	display: inline-block;
-	width: 86%;
+	width: 100%;
 }
 .original  .mui-search:before{
 	top: 24px;
@@ -234,7 +234,7 @@
 .original .mui-table-view-cell > p{
 	float: right;
 	color: #666666;
-	line-height: 32px;
+	/*line-height: 32px;*/
 }
 .original .mui-icon-search:before{
 	position: relative;
@@ -252,7 +252,8 @@
     padding-right: 0; 
 }
 .original .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{
-	margin: 14px 0px;
+	/*margin: 14px 0px;*/
+	margin:14px 0px -11px 0px;
 }
 .original .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after{
 	background-color: transparent;
@@ -379,7 +380,7 @@
 	color: #212121;
 }
 /*整车订单-客户信息*/
-.carDetails .mui-table-view-cell > span {
+.carDetails .mui-table-view-cell > span:not(.mui-radio) {
 	float: left;
 	display: inline-block;
 	margin-right: 5px;
@@ -418,8 +419,8 @@
 }
 .carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments{
 	padding-right: 0;
-	padding-bottom: 25px;
-	margin-top: 20px;
+	/*padding-bottom: 25px;
+	margin-top: 20px;*/
 }
 .carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments textarea{
 	margin-top: 12px;

@@ -36,6 +36,14 @@ var common = {
 			return selectText;
 			
 		},
+		getToken:function(){
+			if(!localStorage.getItem('$state')) {
+				plus.nativeUI.toast('获取token出错了，请稍后再试！');
+				goToLogin();
+			}
+			var token = JSON.parse(localStorage.getItem('$state')).token;
+			return token;
+		},
 		goToLogin:function(){
 			/*
 			 *用户登录

@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>增值订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/order/order.css"/>
+		<style>
+			input[type=search]{
+				width: calc(100% - 40px);
+				/*margin-bottom: 0px!important;*/
+			}
+			.mui-icon-plus-filled {
+			    font-size: 14px;
+			    word-break: keep-all;
+			    line-height: 100%;
+			    padding-top: 6px;
+			    color: #666666;
+			    padding-left: 5px;
+		    }
+			.mui-icon-plus-filled:before {
+				content: "搜索";
+			}
+			.mui-placeholder{
+				margin-right: 0px!important;
+				width: calc(100% - 45px);
+			}
+			.mui-icon-clear{
+				margin-right: 0px!important;
+				width: 20px!important;
+				height: 20px!important;
+				right: 45px!important;
+			}
+			.otherCard .mui-table-view-cell.mui-collapse .mui-table-view-chevron .guideMoney input {
+			    width: auto;
+			    float: right;
+			    margin: 0;
+			    padding: 0;
+			    height: 20px;
+			    text-align: right;
+			    border: none;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">增值订单</h1>
+		</header>
+		<div class="mui-content carload">
+			<div class="mui-card">
+				<div class="mui-card-header">李先生  13809767865</div>
+				<div class="mui-card-content">
+					<div class="types">
+						<p>客户类型&#X3000;<span>个人</span></p>
+						<p>订单类型&#X3000;<span>正式客户</span></p>
+					</div>
+					<div class="address">
+						<p><span>上海市浦东区新区浦东新区郭守敬路2380号9弄402室</span></p>
+					</div>
+				</div>
+			</div>
+			<!--原厂选装-->
+			<div class="mui-card original checkbox-card">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">原厂选装<span id="checkboxCount"></span></a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" data-productType='optionalProduct' data-categoryCode="decor" placeholder="请输入原装选厂关键字">
+									<i id='optionalProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
+								</div>
+							</li>
+							<!--<li class="mui-table-view-cell mui-table-view-cell-scroll products">
+								<p class="">产品编号001</p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft"><input type="checkbox" /></div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p>带等速万向节的摆动半轴</p>
+										<p>参考价格 ¥1000.00元</p>
+										<div class="prices mui-clearfix">
+											<p contenteditable="true">￥899.54</p>
+											<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0'>
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" />
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+							                     备注：<p contenteditable="true">某某零件多配一件</p>
+							    </div
+							</li>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll products">
+								<p class="">产品编号001</p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft"><input type="checkbox" /></div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p>带等速万向节的摆动半轴</p>
+										<p>参考价格 ¥1000.00元</p>
+										<div class="prices mui-clearfix">
+											<p contenteditable="true">￥899.54</p>
+											<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0'>
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" />
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+							                     备注：<p contenteditable="true">某某零件多配一件</p>
+							    </div
+							</li>-->
+							<comment id='optionalProduct-comment'>
+							<script id='optionalProduct-template' type="text/template">
+							<% for(var i in productList){ var item=productList[i]; %>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll products optionalProduct">
+								<p data-productCode="<%= (item.code) %>"><%= (item.code) %></p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft">
+										<input type="checkbox" name="optionalProduct" data-name="<%= (item.name) %>" data-code="<%= (item.code) %>" data-price="<%= (item.price) %>"/>
+									</div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p class="optionalProduct-name"><%= (item.name) %></p>
+										<p class="optionalProduct-price">参考价格 ¥<%= (item.price) %>元</p>
+										<div class="prices mui-clearfix">
+											<p id="optionalProduct-<%= (item.code) %>-actualPrice" contenteditable="true">￥<%= (item.price) %></p>
+											<div class="mui-numbox" data-numbox-step="1'" data-numbox-min="1">
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" id="optionalProduct-<%= (item.code) %>-quantity" name="optionalProduct-quantity"/>
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+										<div>
+								                                 备注：<p contenteditable="true">某某零件多配一件</p>
+								   		</div>
+									</div>
+								</div>
+							</li>
+							<% } %>
+						</script>
+						</comment>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--装潢-->
+			<div class="mui-card original checkbox-card">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">装潢</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" data-productType="upholsteryProduct" data-categoryCode="parts"  placeholder="请输入装潢关键字">
+								    <i id='upholsteryProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
+								</div>
+							</li>
+							<comment id='upholsteryProduct-comment'>
+							<script id='upholsteryProduct-template' type="text/template">
+							<% for(var i in productList){ var item=productList[i]; %>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll products upholsteryProduct">
+								<p data-productCode="<%= (item.code) %>"><%= (item.code) %></p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft">
+										<input type="checkbox" name="upholsteryProduct" data-name="<%= (item.name) %>" data-code="<%= (item.code) %>" data-price="<%= (item.price) %>"/>
+									</div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p class="upholsteryProduct-name"><%= (item.name) %></p>
+										<p class="upholsteryProduct-price">参考价格 ¥<%= (item.price) %>元</p>
+										<div class="prices mui-clearfix">
+											<p id="upholsteryProduct-<%= (item.code) %>-actualPrice" contenteditable="true">￥<%= (item.price) %></p>
+											<div class="mui-numbox" data-numbox-step="1'" data-numbox-min="1">
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" id="upholsteryProduct-<%= (item.code) %>-quantity" name="upholsteryProduct-quantity"/>
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+										<div>
+								                                 备注：<p contenteditable="true">某某零件多配一件</p>
+								   		</div>
+									</div>
+								</div>
+							</li>
+							<% } %>
+						</script>
+						</comment>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--新车车险-->
+			<div class="mui-card original checkbox-card">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">车险</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" data-productType="insuranceProduct" data-categoryCode="vinsurance" placeholder="请输入新车车险关键字">
+								    <i id='insuranceProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
+								</div>
+							</li>
+							<comment id='insuranceProduct-comment'>
+							<script id='insuranceProduct-template' type="text/template">
+							<% for(var i in productList){ var item=productList[i]; %>
+							<li class="mui-table-view-cell mui-table-view-cell-scroll products insuranceProduct">
+								<p data-productCode="<%= (item.code) %>"><%= (item.code) %></p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft">
+										<input type="checkbox" name="insuranceProduct" data-name="<%= (item.name) %>" data-code="<%= (item.code) %>" data-price="<%= (item.price) %>"/>
+									</div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p class="insuranceProduct-name"><%= (item.name) %></p>
+										<p class="insuranceProduct-price">参考价格 ¥<%= (item.price) %>元</p>
+										<div class="prices mui-clearfix">
+											<p id="insuranceProduct-<%= (item.code) %>-actualPrice" contenteditable="true">￥<%= (item.price) %></p>
+											<div class="mui-numbox" data-numbox-step="1'" data-numbox-min="1">
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" id="insuranceProduct-<%= (item.code) %>-quantity" name="insuranceProduct-quantity"/>
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+										<div>
+								                                 备注：<p contenteditable="true">某某零件多配一件</p>
+								   		</div>
+									</div>
+								</div>
+							</li>
+							<% } %>
+						</script>
+						</comment>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--卡券-->
+			<div class="mui-card original checkbox-card">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">卡券</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" data-productType="coupon" data-categoryCode="voucher" placeholder="请输入卡券关键字">
+								    <i id='couponSearchA' class="mui-icon mui-icon-plus-filled "></i>
+								</div>
+							</li>
+							<comment id='coupon-comment'>
+							<script id='coupon-template' type="text/template">
+							<% for(var i in productList){ var item=productList[i]; %>	
+							<li class="mui-table-view-cell mui-table-view-cell-scroll products coupon">
+								<p data-productCode="<%= (item.code) %>"><%= (item.code) %></p>
+								<div class="mui-clearfix pro">
+									<div class="proLeft">
+										<input type="checkbox" name="coupon" data-name="<%= (item.name) %>" data-code="<%= (item.code) %>" data-price="<%= (item.price) %>"/>
+									</div>
+									<div class="proMiddle"><img src="" alt="" /></div>
+									<div class="proRight">
+										<p class="coupon-name"><%= (item.name) %></p>
+										<p class="coupon-price">参考价格 ¥<%= (item.price) %>元</p>
+										<div class="prices mui-clearfix">
+											<p id="coupon-<%= (item.code) %>-actualPrice" contenteditable="true">￥<%= (item.price) %></p>
+											<div class="mui-numbox" data-numbox-step="1'" data-numbox-min="1">
+											    <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+											    <input class="mui-numbox-input" type="number" id="coupon-<%= (item.code) %>-quantity" name="coupon-quantity"/>
+											    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+											</div>
+										</div>
+										<div>
+								                                 备注：<p contenteditable="true">某某零件多配一件</p>
+								   		</div>
+									</div>
+								</div>
+							</li>
+							<% } %>
+						</script>
+						</comment>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--其他-->
+			<div class="mui-card otherCard original ">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse orderSearch">
+			            <a class="mui-navigate-right" href="#">其他</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell  predictTime guideMoney">
+								<label class="require">综合服务内容</label>
+								<p class="">
+									<input type="text" id="serviceInfo" name="serviceInfo"  placeholder="请填写内容"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">综合服务费</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" id="servicePrice" name="servicePrice" placeholder="请填写服务费"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell  predictTime guideMoney">
+								<label class="require">其他收入描述</label>
+								<p class="">
+									<input type="text" id="otherIncomInfo" name="otherIncomInfo" placeholder="请填写内容"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell predictTime guideMoney">
+								<label class="require">其他收入</label>
+								<p style="float:right;margin-left: 12px;color: black;">元</p>
+								<p class="">
+									<input type="number" id="otherPrice" name="otherPrice" placeholder="请填写"/>
+								</p>
+							</li>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--附件上传-->
+			<div class="mui-card original">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">附件</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<div class="uploadAccessory">
+									<img src="../../images/camera.png"/>
+									<p>请上传身份证</p>
+								</div>
+							</li>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+		</div>	
+		<footer class="mui-bar mui-bar-tab">
+		    <a class="mui-tab-item mui-active" id="cancelOrder" href="#">取消</a>
+		    <a class="mui-tab-item creatOrder" id="creatOrder" href="#">创建</a>
+		</footer>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/arttmpl.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js"></script>
+		<script src="../../js/common/city.data-3.js"></script>
+		<script src="../../js/common/car.data-3.js"></script>
+		<script src="../../js/order/order-picker.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/order/incrementOrder-event-option.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				
+				//交强险下方内容是否展开
+				var selectRadio = document.getElementsByClassName('trafficInsurance')[0];
+				var insuranceDetail = document.getElementsByClassName('insuranceDetail')[0];
+				mui(".insurance").on('click','.insurance input',function(){		
+					if (selectRadio.checked == true) {
+						insuranceDetail.style.display = 'block';
+					} else{
+						insuranceDetail.style.display = 'none';
+					}
+				});
+				
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+					var self = plus.webview.currentWebview();
+					var customerId = localStorage.customerId;
+					console.log("customerId:"+customerId);
+					var carCode = localStorage.carCode;
+					console.log("carCode:"+carCode);
+				});
+
+			
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

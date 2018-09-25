@@ -106,58 +106,48 @@
 			.second-cell var:last-child{
 				color: #444444;
 			}
+			.mui-icon-search-filled {
+			    font-size: 12px!important;
+			    word-break: keep-all;
+			    line-height: 100%;
+			    padding-top: 16px!important;
+			    
+			    padding-left: 5px;
+		    }
+			.mui-icon-search-filled:before {
+				content: "搜索";
+			}
+			.mui-search .mui-placeholder{
+				line-height: 44px!important;
+			}
+			.mui-search.mui-active:before{
+				margin-top:-12px!important
+			}
+			.mui-icon-clear{
+				top:12px!important;
+				right:0px;
+			}
+			header .mui-icon,.mui-search.mui-active{
+				color:#333!important
+			}
 		</style>
 	</head>
 
 	<body>
-		<!--<header class="mui-bar mui-bar-nav">
-			<a class="mui-icon mui-icon-search mui-pull-right" id="icon-search"></a>
-			<h1 class="mui-title">意向</h1>
-		</header>-->
-		<!--<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" href="#">
-				<span class="mui-icon mui-icon-home"></span>
-				<span class="mui-tab-label">线索</span>
-			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-email"></span>
-				<span class="mui-tab-label">意向</span>
-			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-contact"></span>
-				<span class="mui-tab-label">订单</span>
-			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-gear"></span>
-				<span class="mui-tab-label">发现</span>
-			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-gear"></span>
-				<span class="mui-tab-label">我的</span>
-			</a>
-		</nav>-->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<div class="mui-title">
+				<div class="mui-input-row mui-search">
+			
+					<input type="search" id="searchMobileText" class="mui-input-clear" placeholder="请输入手机号">
+				</div>	
+			</div>
+			<a id="searchOppor"  class="mui-icon mui-icon-search-filled mui-pull-right" style="color: #C71B1E!important;"></a>
+		</header>
 		<div class="mui-content oppor-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted oppor-tab">
-					<a class="mui-control-item mui-active" href="#" data-levelType="H">
-						H
-					</a>
-					<a class="mui-control-item" href="#" data-levelType="A">
-						A
-					</a>
-					<a class="mui-control-item " href="#" data-levelType="B">
-						B
-					</a>
-					<a class="mui-control-item"  href="#" data-levelType="C">
-						C
-					</a>
-					<a class="mui-control-item"  href="#" data-levelType="Today">
-						T
-					</a>
-				</div>
-
 				<div id="pullrefresh" class="mui-scroll-wrapper oppor-scroll-wrapper">
 					<div class="mui-scroll oppor-scroll" >
+							<!--<p style="text-align: center;margin-top: 20px;">1111</p>-->
 						<!--数据列表-->
 						<!--<div class="mui-card clear" data-opporCode="OP0000009">
 							<div class="mui-card-header">
@@ -225,7 +215,6 @@
 			var detailPage = "";
 			
 			//查询参数
-			var level = 'H';
 			var mobile = '';
 			
 			//下拉刷新初始化动作	
@@ -259,12 +248,6 @@
 					showOpporDetail();
 			}
 			
-//			window.addEventListener('refresh', function(e){//执行刷新
-////						location.reload();
-//				console.log("第二次进入");
-//			    var level = e.detail.level;
-//					    
-//			});
 					
 			/**
 			 * 下拉刷新具体业务实现
@@ -281,16 +264,18 @@
 				setTimeout(function() {
 					var opporScroll = document.body.querySelector('.oppor-scroll');
 					var params = {
-//						level:level,
-						mobile:mobile,
+						mobile:document.getElementById('searchMobileText').value||'',
 						currentPage:0,
 						pagesize:10
 					}
 					oppor.qryOpporList(params,function(data) {
+						console.log(data);
 						var data = JSON.parse(data);
 						console.log(data);
 						if(data.success) {
 							//成功返回数据，
+							opportunityList = data.opportunityList;
+							console.log(opportunityList);
 							//1.清空原ul下的子节点全部清空
 							while(opporScroll.hasChildNodes()) {
 								console.log('清理列表数据...');
@@ -298,8 +283,16 @@
 							}
 							count = 0;
 							//2.将数据前2条填充到列表中
-							opportunityList = data.opportunityList;
-							fillingData("pulldown",opportunityList);
+							
+							if(opportunityList){
+								fillingData("pulldown",opportunityList);
+							}else{
+								var card = doc.createElement('p');
+								card.style='text-align: center;margin-top: 20px;'
+								card.innerHTML = '没有查到您要的结果';
+								opporScroll.appendChild(card);
+							}
+							
 							
 						} else if(data.messageCode == '403'){//token过期，重新登录
 							plus.nativeUI.toast(data.message);
@@ -389,8 +382,7 @@
 				
 				setTimeout(function() {
 					var params = {
-//						level:level,
-						mobile:mobile,
+						mobile:document.getElementById('searchMobileText').value||'',
 						currentPage:0,
 						pagesize:10
 					}
@@ -417,11 +409,6 @@
 						showOpporDetail();
 				}, 500);
 			}
-			mui('.mui-segmented-control').on('tap', 'a', function(e) {
-				level = this.getAttribute('data-levelType');
-				console.log(level);
-				pulldownRefresh();
-			})
 			
 			
 			function showOpporDetail(){
@@ -449,6 +436,9 @@
 					});
 				})
 			}
+			doc.getElementById('searchOppor').addEventListener('tap',function(){
+				pulldownRefresh();
+			})
 		})(mui, document);	
 		</script>
 	</body>

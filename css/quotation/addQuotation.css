@@ -165,8 +165,8 @@
 }
 .carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments{
 	padding-right: 0;
-	padding-bottom: 25px;
-	margin-top: 20px;
+	/*padding-bottom: 25px;
+	margin-top: 20px;*/
 }
 .carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments textarea{
 	margin-top: 12px;

@@ -1,6 +1,6 @@
 (function($, order) {
 	/* 
-	 * 订单 - 订单列表
+	 * 增值订单 - 订单列表
 	 * */
 	order.qryOrderList = function(values,callback){
 		callback = callback || $.noop;
@@ -13,12 +13,12 @@
 		console.log("token:"+token);
 		console.log("order list request:"+JSON.stringify(values));
 		console.log(values);
-		console.log(JSON.stringify(values));
 		$.ajax({
 			url: serviceBaseUrl+"alpssalewebservices/order/list",
 			type:"POST",
 			contentType: 'application/json',
-			dataType:"json",
+			dataType:"jsonp",
+			jsonp:"callback",
             data: JSON.stringify(values),
             beforeSend: function (xhr) {
 		       xhr.setRequestHeader("Authorization","Bearer " + token);
@@ -42,7 +42,7 @@
 		callback = callback || $.noop;
 		
 		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('获取意向详情token出错了，请稍后再试！');
+			plus.nativeUI.toast('获取订单详情token出错了，请稍后再试！');
 			return;
 		}
 		

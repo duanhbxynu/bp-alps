@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
+		<style>
+			.mui-btn-fail {
+				font-size: 18px;
+				display: block;
+				width: 90%;
+				margin: 10px auto;
+				color: #fff;
+				border: 1px solid rgba(0, 0, 0, 0.50);
+				background-color: rgba(0, 0, 0, 0.50);
+				text-align: center;
+				margin-left: 5%!important;
+				height: 45px;
+				line-height: 15px;
+				padding: 15px auto;
+				border-radius: 2px;
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			p {
+				text-indent: 22px;
+			}
+			
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			
+			.mui-off-canvas-right {
+				color: #fff;
+				background: #ffffff;
+				width: 80%;
+			}
+			
+			.title {
+				margin: 35px 15px 10px;
+			}
+			
+			.title+.content {
+				margin: 10px 15px 35px;
+				color: #bbb;
+				text-indent: 1em;
+				font-size: 14px;
+				line-height: 24px;
+			}
+			
+			input {
+				color: #000;
+			}
+			
+			.seek {
+				padding: 7px 0px!important;
+			}
+			
+			#offCanvasSideScroll .mui-table-view-cell:after {
+				height: 0px!important;
+			}
+			
+			#offCanvasSideScroll label {
+				color: #333333;
+			}
+			#customerSearchBtn{
+				margin-left: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper orderSearch orderSearchValueAdd">
+					<div class="mui-scroll">
+						<div class="mui-card ">
+							<div class="mui-card-header">搜索客户</div>
+							<ul class="mui-table-view mui-table-view-chevron">
+								<li class="mui-table-view-cell">
+									<p class="seek"><input type="search" id="searchText" placeholder="请填写姓名或联系方式" /></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label>客户性质</label>
+									<div class="tab">
+										<ul class="mui-table-view mui-table-view-radio customerType-select">
+											<li class="mui-table-view-cell mui-selected" data-customerType="">
+												<a class="mui-navigate-right">所有</a>
+											</li>
+											<li class="mui-table-view-cell" data-customerType="个人">
+												<a class="mui-navigate-right">个人</a>
+											</li>
+											<li class="mui-table-view-cell" data-customerType="公司">
+												<a class="mui-navigate-right">公司</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="mui-table-view-cell">
+									<label>客户类型</label>
+									<div class="tab">
+										<ul class="mui-table-view mui-table-view-radio attribute-select">
+											<li class="mui-table-view-cell mui-selected" data-attribute="">
+												<a class="mui-navigate-right">所有</a>
+											</li>
+											<li class="mui-table-view-cell" data-attribute="潜客">
+												<a class="mui-navigate-right">潜客</a>
+											</li>
+											<li class="mui-table-view-cell" data-attribute="正式">
+												<a class="mui-navigate-right">正式</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="mui-table-view-cell">
+									<label>时间</label>
+									<div class="tab">
+										<ul class="mui-table-view mui-table-view-radio beforetimeKey-select">
+											<li class="mui-table-view-cell mui-selected" data-beforetimeKey="">
+												<a class="mui-navigate-right">所有</a>
+											</li>
+											<li class="mui-table-view-cell" data-beforetimeKey="type1">
+												<a class="mui-navigate-right">一个月</a>
+											</li>
+											<li class="mui-table-view-cell" data-beforetimeKey="type2">
+												<a class="mui-navigate-right">二个月</a>
+											</li>
+											<li class="mui-table-view-cell" data-beforetimeKey="type2">
+												<a class="mui-navigate-right">三个月</a>
+											</li>
+											<li class="mui-table-view-cell" data-beforetimeKey="type2">
+												<a class="mui-navigate-right">六个月</a>
+											</li>
+											<li class="mui-table-view-cell" data-beforetimeKey="type2">
+												<a class="mui-navigate-right">一年</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+
+							</ul>
+							<div class="mui-button-row">
+								<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-cancel" id="customerSearchCancelBtn">取消</button>
+								<button type="button" class="mui-btn mui-btn-danger btn-save" id="customerSearchBtn">搜索</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+
+				<header class="mui-bar mui-bar-nav">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<a id="offCanvasBtn" href="#offCanvasSide" class="mui-icon mui-icon-search mui-pull-right"></a>
+					<!--<a id="offCanvasBtn" href="#" class="mui-icon mui-icon-search mui-pull-right"></a>-->
+					
+					<h1 class="mui-title" id="mui-title">增值订单-客户列表</h1>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper orderList customerList">
+					
+					<div class="mui-scroll">
+						<button type="button" id="createCustomer" class="mui-btn mui-btn-fail mui-btn-block ">
+							您查找的客户不存在？去新建
+						</button>
+						<div id="customerList">
+							<script id='msg-template' type="text/template">
+								<% for(var i in customerList){ var item=customerList[i]; %>
+								<div class="mui-card">
+									<div class="mui-card-header">
+										客户编号
+										<%= item.uid||''%>
+										<input type="radio" name="customerUid" data-uid="<%= item.uid||''%>" />
+	
+									</div>
+									<div class="mui-card-content">
+										<p class="clearfix"><span>客户姓名</span><span><%= item.name||''%></span></p>
+										<p class="clearfix"><span>客户性质</span><span><%= item.customerType||''%></span></p>
+										<p class="clearfix"><span>客户类型</span><span><%= item.attribute||''%></span></p>
+										<p class="clearfix"><span>联系方式</span><span><%= item.mobileNumber||''%></span></p>
+										<p class="clearfix"><span>创建时间</span><span><%= item.creationtime||''%></span></p>
+									</div>
+								</div>
+	
+								<% } %>
+							</script>
+						</div>	
+					</div>
+				</div>
+				<footer class="mui-bar mui-bar-tab">
+					<a class="mui-tab-item mui-action-back mui-active" id="cancelOrder" href="#">取消</a>
+					<a class="mui-tab-item" id="nextStep" href="#">下一步</a>
+				</footer>
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/common/arttmpl.js"></script>
+		<script src="../../js/order/increment-order.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+
+				//侧滑容器父节点
+				var offCanvasWrapper = mui('#offCanvasWrapper');
+				//主界面容器
+				var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+				//菜单容器
+				var offCanvasSide = document.getElementById("offCanvasSide");
+				//Android暂不支持整体移动动画
+				if(!mui.os.android) {
+					var spans = document.querySelectorAll('.android-only');
+					for(var i = 0, len = spans.length; i < len; i++) {
+						spans[i].style.display = "none";
+					}
+				}
+				//移动效果是否为整体移动
+				var moveTogether = false;
+				//侧滑容器的class列表，增加.mui-slide-in即可实现菜单移动、主界面不动的效果；
+				var classList = offCanvasWrapper[0].classList;
+//				document.getElementById('offCanvasBtn').addEventListener('tap', function() {
+//					offCanvasWrapper.offCanvas('show');
+//				});
+				document.getElementById('customerSearchBtn').addEventListener('tap', function() {
+					showCustomerList();
+					offCanvasWrapper.offCanvas('close');
+					
+				});
+				document.getElementById('customerSearchCancelBtn').addEventListener('tap', function() {
+					offCanvasWrapper.offCanvas('close');
+				});
+				
+				//主界面和侧滑菜单界面均支持区域滚动；
+				mui('#offCanvasSideScroll').scroll();
+				mui('#offCanvasContentScroll').scroll();
+				//实现ios平台的侧滑关闭页面；
+				if(mui.os.plus && mui.os.ios) {
+					offCanvasWrapper[0].addEventListener('shown', function(e) { //菜单显示完成事件
+						plus.webview.currentWebview().setStyle({
+							'popGesture': 'none'
+						});
+					});
+					offCanvasWrapper[0].addEventListener('hidden', function(e) { //菜单关闭完成事件
+						plus.webview.currentWebview().setStyle({
+							'popGesture': 'close'
+						});
+					});
+				}
+
+				template.config('escape', false);
+				$.plusReady(function() {
+					//关闭等待框
+					plus.nativeUI.closeWaiting();
+					//显示当前页面
+					//获取父级页面查询过来的参数
+//					var self = plus.webview.currentWebview();
+//					var customerList = self.customerList;
+//					doc.getElementById('customerList').innerHTML = doc.getElementById('customerList').innerHTML + template('msg-template', {
+//						"customerList": customerList
+//					});
+//					document.getElementById('createCustomer').addEventListener('tap', function() {
+//						console.log(111);
+//						mui.openWindow({
+//							id: 'createCustomer', //b页面id
+//							url: 'create_customer.html'
+//						})
+//					})
+					showCustomerList();
+					document.getElementById('nextStep').addEventListener('tap', function() {
+						var radioIsChecked = document.body.querySelector('input[type=radio]:checked');
+						if(!radioIsChecked) {
+							plus.nativeUI.toast("请选择客户！");
+							return;
+						}
+						var customerUid = document.body.querySelector('input[type=radio]:checked').getAttribute("data-uid");
+						console.log(customerUid);
+						//TODO 存储选中的客户id
+						localStorage.setItem("customerId", customerUid);
+						mui.openWindow({
+							id: 'searchCarList', //b页面id
+							url: 'incrementOrder_carList_search.html',
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								aniShow: "slide-in-right"
+							}
+						})
+					})
+					
+					
+				})
+				function showCustomerList(){
+					var params = {
+						searchText:document.getElementById('searchText').value,
+						customerType:'',
+						attribute:'',
+						beforetimeKey:''
+					}
+					increment.searchCustomer(params,function(data){
+						console.log("search user result:"+JSON.stringify(data));
+						console.log("--------------------------------------------------------------");
+					
+						if(data.success==true){
+							var customerList = data.customerList;
+							if(customerList.length<1){
+								plus.nativeUI.toast('您查找的客户不存在，请重新输入查询条件！')
+								return;
+							}else{
+								doc.getElementById('customerList').innerHTML = template('msg-template', {
+									"customerList": customerList
+								});
+							}
+						}
+					})
+				}
+				document.getElementById('createCustomer').addEventListener('tap', function() {
+					console.log(111);
+					mui.openWindow({
+						id: 'createCustomer', //b页面id
+						url: 'create_customer.html'
+					})
+				})
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

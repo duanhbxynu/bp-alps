@@ -307,16 +307,18 @@
 				$.init({
 					//预加载详情页
 					preloadPages: [{
-							id: 'opporFollow',//b页面id
-							url:'opportunity-follow.html',
+						id: 'opporFollow',//b页面id
+						url:'opportunity-follow.html',
 					},{
-							url: 'test-driving.html',//b页面url路径
-							id: 'testDrive'//b页面id
-						},{
-							url:'../quotation/quotation-list.html',
-							id: 'quotation-list'//b页面id
-						}
-					]
+						url: 'test-driving.html',//b页面url路径
+						id: 'testDrive'//b页面id
+					},{
+						url:'../quotation/quotation-list.html',
+						id: 'quotation-list'//b页面id
+					},{
+						url:'../order/creat_wholeVehicleOrder.html',
+						id: 'creatWholeVehicleOrder'//b页面id
+					}]
 				});
 				
 				var aniShow = "pop-in";
@@ -476,15 +478,20 @@
 				});
 				//下订单
 				doc.getElementById("order").addEventListener('tap', function(event) {
-						
 					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
+					var name = doc.getElementById('name').innerHTML;
+					var mobile = doc.getElementById('tel').innerHTML;	
+					var platform = doc.getElementById('platform').innerHTML;
+					var level = doc.getElementById('level').innerHTML;
+					mui.fire(plus.webview.getWebviewById('creatCarloadOrder'), 'show', {
+						opporCode:opporCode,
+						name:name,
+						mobile:mobile,
+						platform:platform,
+						level:level
+					});
 					mui.openWindow({
-						url: '../order/creatCarloadOrder.html',
-						id: "creatCarloadOrder",//默认使用当前页面的url作为id
-						extras: {
-							opporCode: opporCode
-						}, //自定义扩展参数
-						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+						id: 'creatWholeVehicleOrder'//b页面id
 					})
 					
 				});

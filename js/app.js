@@ -19,34 +19,8 @@
 		if (loginInfo.password.length < 4) {
 			return callback('密码最短为 4 个字符');
 		}
-//		var users = JSON.parse(localStorage.getItem('$users') || '[]');
-
-//		var authed = null;
-		
-//		$.ajax({
-//			url:baseConfig.serviceBaseUrl+"alpssalewebservices/oauth/token",
-//			type:"POST",
-//			dataType:"json",
-//          data: values,
-//			success: function (data) {
-//				console.log("login result:"+JSON.stringify(data));
-//				console.log("--------------------------------------------------------------");
-//				token = data.token;
-//				location.href = "index.html?token="+token;
-//		    }
-//		})
-		
-//		for (var item in params) {
-//		   values[params[item].name] = params[item].value;
-//		}
-//		values = $.extend(values,baseConfig.baseClientParameter);
-//		console.log("login request:"+JSON.stringify(values));
 		
 		$.ajax(common.URL.accountLogin(), {
-//			data: {
-//				"account": loginInfo.account,
-//				"password": loginInfo.password
-//			},
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
 			data:loginInfo,
@@ -117,13 +91,14 @@
 		loginInfo = $.extend(loginInfo,common.baseClientParameter);
 		console.log(loginInfo);
 		console.log("login request121:"+JSON.stringify(loginInfo));
+		console.log("common.URL.accountLogin():"+common.URL.accountLogin());
 		$.ajax(common.URL.accountLogin(), {
-			dataType:'jsonp', //服务器返回json格式数据
+			type:"POST",
+			dataType:"JSONP",
 			jsonp:"callback",
 			crossDomain: true,
-			type:'POST', //HTTP请求类型
-			data:loginInfo,
-//			timeout: 10000, //超时时间设置为10秒；
+            data: loginInfo,
+//          timeout: 10000, //超时时间设置为10秒；
 			success: function(data) {
 				var jsonData = JSON.parse(data);
 				var token = jsonData.token;

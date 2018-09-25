@@ -17,13 +17,13 @@
 		console.log(JSON.stringify(params));
 		var qryUrl = common.URL.opporList();
 		$.ajax(qryUrl, {
-			data: params,
-			dataType: 'jsonp', //服务器返回json格式数据
+			data: JSON.stringify(params),
+			dataType: 'JSONP', //服务器返回json格式数据
 			contentType: 'application/json',
 			jsonp:'callback',
-			crossDomain: true,//强制使用5+跨域
+//			crossDomain: true,//强制使用5+跨域
 			type: 'POST', //HTTP请求类型
-			timeout: 10000, //超时时间设置为10秒；
+//			timeout: 10000, //超时时间设置为10秒；
 			beforeSend: function (xhr) {
 			    xhr.setRequestHeader("Authorization","Bearer " + token);
 			},

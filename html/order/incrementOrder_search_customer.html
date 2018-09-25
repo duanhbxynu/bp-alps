@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>订单搜索</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/order/order.css"/>
+		<style>
+			.mui-btn-fail{
+				font-size: 18px;
+				display: block;
+				width: 90%;
+				margin-bottom: 10px;
+				color: #fff;
+				border: 1px solid rgba(0,0,0,0.50);
+				background-color: rgba(0,0,0,0.50);
+				text-align: center;
+				margin-left: 5%!important;
+				height: 45px;
+				line-height: 15px;
+				padding: 15px auto;
+				border-radius: 2px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">增值订单</h1>
+		</header>
+		<div class="mui-content orderSearch orderSearchValueAdd mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="mui-card ">
+					<div class="mui-card-header">搜索客户</div>
+	                <ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<p class="seek"><input type="search" id="searchText" placeholder="请填写姓名或联系方式进行匹配"/></p>
+						</li>
+						<li class="mui-table-view-cell">
+							<label>客户性质</label>
+							<div class="tab">
+								<ul class="mui-table-view mui-table-view-radio customerType-select">
+									<li class="mui-table-view-cell mui-selected" data-customerType="">
+										<a class="mui-navigate-right">所有</a>
+									</li>
+									<li class="mui-table-view-cell" data-customerType="个人">
+										<a class="mui-navigate-right">个人</a>
+									</li>
+									<li class="mui-table-view-cell" data-customerType="公司">
+										<a class="mui-navigate-right">公司</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<label>客户类型</label>
+							<div class="tab">
+								<ul class="mui-table-view mui-table-view-radio attribute-select">
+									<li class="mui-table-view-cell mui-selected" data-attribute="">
+										<a class="mui-navigate-right">所有</a>
+									</li>
+									<li class="mui-table-view-cell" data-attribute="潜客">
+										<a class="mui-navigate-right">潜客</a>
+									</li>
+									<li class="mui-table-view-cell" data-attribute="正式">
+										<a class="mui-navigate-right">正式</a>
+									</li>
+								</ul>
+							</div>
+						</li>					
+						<li class="mui-table-view-cell">
+							<label>时间</label>
+							<div class="tab">
+								<ul class="mui-table-view mui-table-view-radio beforetimeKey-select">
+									<li class="mui-table-view-cell mui-selected" data-beforetimeKey="">
+										<a class="mui-navigate-right">所有</a>
+									</li>
+									<li class="mui-table-view-cell" data-beforetimeKey="type1">
+										<a class="mui-navigate-right">一个月</a>
+									</li>
+									<li class="mui-table-view-cell" data-beforetimeKey="type2">
+										<a class="mui-navigate-right">二个月</a>
+									</li>
+									<li class="mui-table-view-cell" data-beforetimeKey="type2">
+										<a class="mui-navigate-right" >三个月</a>
+									</li>
+									<li class="mui-table-view-cell" data-beforetimeKey="type2">
+										<a class="mui-navigate-right">六个月</a>
+									</li>
+									<li class="mui-table-view-cell" data-beforetimeKey="type2">
+										<a class="mui-navigate-right">一年</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						
+					</ul>			      
+				</div>
+				<button type="button" id="createCustomer" class="mui-btn mui-btn-fail mui-btn-block mui-hidden">客户不存在，去新建</button>
+		
+			</div>
+		</div>	
+		<footer class="mui-bar mui-bar-tab">
+		    <a class="mui-tab-item mui-action-back mui-active" id="cancelOrder" href="#">取消</a>
+		    <a class="mui-tab-item" id="nextStep" href="#">下一步</a>
+		</footer>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/order/increment-order.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();	
+			mui(".mui-scroll-wrapper").scroll({
+		        //bounce: false,//滚动条是否有弹力默认是true
+		        //indicators: false, //是否显示滚动条,默认是true
+		    }); 
+//			mui.toast('客户查找不存在，去新建');
+
+			document.getElementById('createCustomer').addEventListener('tap',function(data){
+				mui.openWindow({
+					id: 'createCustomer',//b页面id
+					url:'create_customer.html',
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						aniShow: "slide-in-right"
+					}
+				})
+			})
+			
+			document.getElementById('nextStep').addEventListener('tap',function(){
+				
+				var params = {
+					searchText:document.getElementById('searchText').value,
+					customerType:'',
+					attribute:'',
+					beforetimeKey:''
+					
+				}
+				increment.searchCustomer(params,function(data){
+					console.log("search user result:"+JSON.stringify(data));
+					console.log("--------------------------------------------------------------");
+				
+					if(data.success==true){
+						var customerList = data.customerList;
+						if(customerList.length<1){
+							document.getElementById('createCustomer').classList.remove('mui-hidden');
+							
+						}else{
+							//有客户,跳到客户列表页面
+							mui.openWindow({
+								id: 'customerList',//b页面id
+								url:'incrementOrder_customerList.html',
+								extras:{
+									customerList:customerList
+								},
+								show: {
+									autoShow: true, //页面loaded事件发生后自动显示，默认为true
+									aniShow: "slide-in-right"
+								}
+							})
+							
+						}
+					}
+				})
+				
+			})
+		</script>
+	</body>
+
+</html>

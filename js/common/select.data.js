@@ -118,14 +118,11 @@ var budgetData = [{
 
 /*付款方式*/
 /*请选择付款方式
-全款
-贷款
-融资租赁
-其他*/
+全款1
+贷款2
+融资租赁3
+其他4*/
 var paymentMethodData = [{
-	value: '',
-	text: '请选择付款方式'
-}, {
 	value: '1',
 	text: '全款'
 }, {
@@ -151,9 +148,6 @@ var paymentMethodData = [{
 业务用车
 其他*/
 var purposeData = [{
-	value: '',
-	text: '请选择购车用途'
-}, {
 	value: '家用',
 	text: '家用'
 }, {
@@ -555,5 +549,22 @@ var financeCompany = [{
 }, {
     value: "融资租赁有限公司",
 	text: "融资租赁有限公司"
+}]
+
+var idType = [{
+	value: "身份证",
+	text: "身份证"
+},{
+	value: "护照",
+	text: "护照"
+},{
+	value: "驾驶证",
+	text: "驾驶证"
+},{
+	value: "军官证",
+	text: "军官证"
+},{
+	value: "纳税人识别号",
+	text: "纳税人识别号"
 }]
 

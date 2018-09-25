@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<style>
+			
+			
+		
+			
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">增值订单-新建客户</h1>
+		</header>
+
+		<div class="mui-content detail-scroll" id="mui-content">
+
+			<form class="mui-card">
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="require">姓名</label>
+						<input id="input_name" type="text" class="mui-input-clear" placeholder="请输入姓名" value="">
+					</div>
+					<div class="mui-input-row radio-multiple-row">
+						<label class="radio-multiple-label require">客户类型</label>
+						<div class="radio-list radio-multiple-list radio-type-list">	
+							<div class="mui-radio mui-left customer-type customer-type-personal active">
+								<label class="">个人</label>
+								<input id="type_personal" name="type" value="personal" type="radio" checked="true" />
+						    </div>
+							<div class="mui-radio mui-left customer-type customer-type-company">
+								<label class="company">公司</label>
+								<input id="type_company" name="type" value="company"  type="radio">
+							</div>
+						</div>
+					</div>
+					
+					<!--<div class="mui-input-row">
+						<label class="require">性别</label>
+						<div class="radio-list radio-single-list radio-gender-list">
+						    <div class="mui-radio mui-left mui-radio-male active">
+								<label class="male">男</label>
+								<input id="male" name="gender" class="gender" value="MALE" type="radio" checked="true" />
+							</div>
+							<div class="mui-radio mui-left mui-radio-female">
+								<label class="female">女</label>
+								<input id="female" name="gender" class="gender" value="FEMALE"  type="radio">
+							</div>
+					    </div>
+					</div>-->
+					
+					<div class="mui-input-row">
+						<label class="require">电话</label>
+						<input id="input_mobile" type="text" class="mui-input-clear" placeholder="请输入电话" value="">
+					</div>
+					<div class="mui-input-row">
+						<label>其他联系方式</label>
+						<input id="input_other_mobile" type="text" class="mui-input-clear" placeholder="请输入其他联系方式" value="">
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>证件类型</label>
+						<span class="mui-select" id="showIdTypePicker">
+							请选择
+						</span>
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>证件号 </label>
+						<input id="identityNumber" type="text" class="mui-input-clear" placeholder="请输入证件号" value="">
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>联系地址 </label>
+						<span class="mui-select" id="showAddressPicker">
+							请选择
+						</span>
+					</div>
+					<div class="mui-input-row">
+						<label>详细地址</label>
+						<input id="input_address" type="text" class="mui-input-clear" placeholder="请输入详细地址" value="">
+					</div>		
+				</div>	
+						
+				<div class="mui-input-group">	
+					<div class="mui-button-row">
+						<button type="button" class="mui-btn mui-action-back mui-btn-danger mui-btn-outlined btn-cancel" id="btn_cancel">取消</button>
+						<button type="button" class="mui-btn mui-btn-danger btn-save" id="nextStep">下一步</button>
+					</div>
+				</div>	
+			</form>
+		</div>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/regex.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+
+			
+				
+//				//业务数据获取完毕，并已插入当前页面DOM；
+				//注意：若为ajax请求，则需将如下代码放在处理完ajax响应数据之后；
+				mui.plusReady(function() {
+					//关闭等待框
+					plus.nativeUI.closeWaiting();
+					//显示当前页面
+				});
+		
+			
+			
+			
+			
+				var addressPicker = new $.PopPicker({
+						layer: 3
+					});
+				addressPicker.setData(provinceDataList3);
+				
+				var showAddressPicker = doc.getElementById('showAddressPicker');
+					
+				showAddressPicker.addEventListener('tap', function(event) {
+					
+					addressPicker.show(function(items) {
+						showAddressPicker.innerHTML =(items[0] || {}).text + " "+(items[1] || {}).text + " "+(items[2] || {}).text;
+						showAddressPicker.setAttribute("data-value",(items[0] || {}).text+(items[1] || {}).value+(items[2] || {}).value);
+						showAddressPicker.setAttribute("data-provinceCode",(items[0] || {}).text);
+						showAddressPicker.setAttribute("data-cityCode",(items[1] || {}).value);
+						showAddressPicker.setAttribute("data-districtCode",(items[1] || {}).value);
+					});
+				}, false);
+			
+				var idTypePick = new $.PopPicker();
+				idTypePick.setData(idType);
+				var showIdTypePicker = doc.getElementById('showIdTypePicker');
+					
+				showIdTypePicker.addEventListener('tap', function(event) {
+					
+					idTypePick.show(function(items) {
+						showIdTypePicker.innerHTML =(items[0] || {}).text ;
+						showIdTypePicker.setAttribute("data-idType",(items[0] || {}).text);
+					});
+				}, false);
+			
+			
+			
+			
+			
+					
+				//性别切换
+				$('.radio-gender-list').on('tap','.gender',function(){
+					var gender = this;
+					
+					if (this) {
+							
+						this.checked = !this.checked;
+						$.trigger(this, 'change');
+							
+						$(".radio-gender-list .mui-radio").each(function () {
+							this.classList.remove('active');
+						}) 
+						gender.parentNode.classList.add('active');
+							
+					}
+				})	
+				
+				//类型切换
+				$('.radio-type-list').on('tap','.type',function(){
+					var type = this;
+					
+					if (this) {
+							
+						this.checked = !this.checked;
+						$.trigger(this, 'change');
+							
+						$(".radio-type-list .mui-radio").each(function () {
+							this.classList.remove('active');
+						}) 
+						type.parentNode.classList.add('active');
+							
+					}
+				})	
+			
+				document.getElementById('nextStep').addEventListener('tap',function(){
+					var type = doc.querySelector('input[name="type"]:checked').value;//客户性质
+					var name = doc.getElementById('input_name').value;//姓名
+//					var gender = doc.querySelector('input[name="gender"]:checked').value;//性别
+					var mobilestr = doc.getElementById('input_mobile').value;//电话
+					
+					if(!name){
+						return plus.nativeUI.toast("请输入姓名");
+					}
+					if(!RegCheck.mobile(mobilestr)){
+						return plus.nativeUI.toast("请输入正确的电话");
+					}
+					var otherContact = doc.getElementById('input_other_mobile').value;//其他联系方式
+					var provinceCode = doc.getElementById('showAddressPicker').getAttribute("data-provinceCode");
+					var cityCode = doc.getElementById('showAddressPicker').getAttribute("data-cityCode");
+					var districtCode = doc.getElementById('showAddressPicker').getAttribute("data-districtCode");
+					var address = doc.getElementById('input_address').value;//详细地址
+					var identityType = doc.getElementById('showIdTypePicker').getAttribute("data-idType");
+					var identityNumber = doc.getElementById('identityNumber').value;//其他联系方式
+					var code = doc.getElementById("mui-content").getAttribute("data-code");
+					var values = {
+						customerType:type,
+						customerTypeCode:type,
+						name:name,
+						customerSource:'到店客流',
+//						gender:gender,
+						mobileNumber:mobilestr,
+						otherContactNumber:otherContact,
+						identityType:identityType,
+						identityNumber:identityNumber,
+						cityCode:cityCode,
+						provinceCode:provinceCode,
+						districtCode:districtCode,
+						address:address
+					}
+					var jsonvalue = JSON.stringify(values);
+					console.log("create customer request:"+jsonvalue);
+					$.ajax({
+						url:serviceBaseUrl+"alpssalewebservices/customer/createOrUpdate",
+						type:"POST",
+						dataType:"json",
+						contentType: 'application/json',
+				        data: jsonvalue,
+				        beforeSend: function (xhr) {
+					       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
+					    },
+						success: function (data) {
+							console.log("create create result:"+JSON.stringify(data));
+							console.log("--------------------------------------------------------------");
+							if(data.success==true){
+//								localStorage.setItem("customerId",customerUid);
+								//TODO 回到客户列表？搜索车辆？
+//								mui.openWindow({
+//									id: 'searchCar',//b页面id
+//									url:'incrementOrder_search_car.html',
+//									show: {
+//										autoShow: true, //页面loaded事件发生后自动显示，默认为true
+//										aniShow: "slide-in-right"
+//									}
+//								})
+								$.back();
+							}else{
+								return plus.nativeUI.toast("新建客户失败！");
+							}
+							
+						},
+						error: function(xhr, type, errorThrown) {
+							console.log("xhr");
+							console.log(xhr);
+							console.log("type");
+							console.log(type);
+							console.log("errorThrown");
+							console.log(errorThrown);
+							plus.nativeUI.toast('新建增值订单 --搜索客户出错了，请稍后再试！');
+							common.baseOption.goToLogin();
+						}
+					})
+//					
+//					
+				})
+				
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

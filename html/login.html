@@ -299,7 +299,7 @@
 							username: accountBox.value,
 							password: passwordBox.value
 						};
-						console.log("loginInfo");
+						console.log("loginInfo302");
 						console.log(loginInfo);
 						app.loginValidate(loginInfo, function(err) {
 							if (err) {
@@ -389,6 +389,45 @@
 						return false;
 					};
 				});
+				
+//				var loginButton = doc.getElementById('login');
+//					var accountBox = doc.getElementById('account');
+//					var passwordBox = doc.getElementById('password');
+//					var autoLoginButton = doc.getElementById("autoLogin");
+//					var regButton = doc.getElementById('reg');
+//					var forgetButton = doc.getElementById('forgetPassword');
+//					loginButton.addEventListener('tap', function(event) {
+//						var loginInfo = {
+//							username: accountBox.value,
+//							password: passwordBox.value
+//						};
+//						console.log("loginInfo404");
+//						console.log(loginInfo);
+//						app.loginValidate(loginInfo, function(err) {
+//							if (err) {
+//								plus.nativeUI.toast(err);
+//								return;
+//							}
+//							var state = localStorage.getItem('$state') || "{}";
+//							var settings = app.getSettings();
+//							var appstate = app.getState();
+////							toMain();
+////							var indexLeads = plus.webview.getWebviewById("main");
+////							indexLeads.reload(true);
+//							
+//							$.openWindow({
+//								id: 'main',
+//								url:'index.html',
+//								show: {
+//									aniShow: 'pop-in'
+//								},
+//								waiting: {
+//									autoShow: false
+//								}
+//							});
+//							
+//						});
+//					});
 			}(mui, document));
 		</script>
 	</body>
