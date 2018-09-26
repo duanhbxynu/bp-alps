@@ -1,5 +1,10 @@
+html{
+	height: 100%;
+	width: 100%;
+}
 body{
 	background: #FFFFFF;
+	position: relative;
 }
 .logo{
 	padding-top: 45px;
@@ -9,8 +14,7 @@ body{
 	width: 193px;
 	height: 42px;
 	margin: 0 auto;
-	/*background: url(../../images/logo.png) no-repeat;*/
-	background: #C71B1E;
+	background: url(../../images/logo.png) no-repeat;
 	background-size: 100% 100%;
 }
 .logo p{
@@ -20,13 +24,14 @@ body{
 }
 .login{
 	padding: 58px 37px 0 37px;
-	background: #FFFFFF;
+	background: transparent;
 }
 .login .mui-input-group:before,.login .mui-input-group:after{
 	background: transparent;
 }
 .login  .mui-input-group{
-	padding-bottom: 25px;
+	padding-bottom: 5px;
+	background-color: transparent;
 }
 .login .mui-input-group input{
 	padding-left: 0;
@@ -86,4 +91,75 @@ body{
     line-height: 38px;
 	margin: 6px 0;
 	background: transparent;
+}
+.bpCar{
+	position: absolute;
+	bottom: 0;
+}
+.bpCar img{
+	height: 149px;
+	opacity: 0.45;
+	margin-bottom: -5px;
+}
+/*启动页*/
+.start{
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+.start .mark {
+	text-align: center;
+	padding-top: 124px;
+}
+.start .mark img{
+	width: 208px;
+}
+.start .startCar{
+	position: absolute;
+	bottom: 0;
+}
+.start .startCar img{
+	height: 149px;
+	margin-bottom: -5px;
+}
+.start .mark {
+	animation: mymove1 1s 1;
+	-webkit-animation: mymove1 1s 1;
+}
+@keyframes mymove1 {
+	from {
+		padding-top: 156px;
+	}
+	to {
+		padding-top: 124px;
+	}
+}
+@-webkit-keyframes mymove1{
+	from {
+		padding-top: 156px;
+	}
+	to {
+		padding-top: 124px;
+	}
+}
+.start .startCar {
+	animation: mymove2 1s 1;
+	-webkit-animation: mymove2 1s 1;
+}
+@keyframes mymove2 {
+	from {
+		left: -100%;
+	}
+	to {
+		left: 0%;
+	}
+}
+@-webkit-keyframes mymove2{
+	from {
+		left: -100%;
+	}
+	to {
+		left: 0%;
+	}
 }
