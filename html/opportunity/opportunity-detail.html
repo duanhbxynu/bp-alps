@@ -1,3 +1,4 @@
+<<<<<<< 1194cadd3b3798c5a1a9e1f86f30d7c104a4fe19
 <!doctype html>
 <html>
 
@@ -572,4 +573,580 @@
 		</script>
 	</body>
 
+=======
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<style>
+			.mui-content{
+				bottom: 51px;
+			}
+			.mui-table-view-cell{
+				font-size: 13px;
+				padding-left: 20px;
+				padding-right:20px;
+			}
+			.mui-table-view-cell:after{
+				height:0px!important;
+			}
+			
+			.mui-table-view-cell var{
+				float: right;
+				color:#212121;
+			}
+			.mui-table-view-cell var.active{
+				font-size: 13px;
+				color: #618DF6;
+				letter-spacing: 0.46px;
+				font-weight: 400;
+			}
+			
+			.mui-icon-clear {
+				height: 1.6rem!important;
+				top: 0.78rem!important;
+				line-height: 1.2;
+			}
+			
+			
+			
+			
+			.mui-button-row{
+				padding-top: 0px;
+				margin: 26px;
+				
+			}
+			
+			.mui-btn {
+				border-radius: 25px;
+				width: 4rem;
+				height: 28px;
+				padding: 2px;
+			}
+			
+			.btn-create-intention {
+				margin-left: 2rem;
+			}
+			
+			.mui-icon-arrowright{
+				width: 7px;
+				height: 20px;
+				padding-right: 20px;
+				line-height: 21px;
+				font-size: 14px;
+			}
+			.mui-icon-arrowright:after {
+			    content: '\e583';
+			}
+			.mui-icon-arrowright:before {
+			    content: '';
+			}
+			.follow-record {
+				font-size: 14px;
+			}
+			.follow-record:after{
+				height: 0px;
+			}
+			.mui-grid-view.mui-grid-9{
+				background-color: #FFFFFF;
+				border-top: 0px;
+				border-left: 0px;
+			}
+			.oppor-detail-grid-9 .mui-table-view-cell .mui-media-body{
+				font-size: 12px!important;
+			}
+			.oppor-detail-grid-9 .mui-icon{
+				float: none;
+				font-size: 2rem!important;
+				color: #C71B1E;
+				font-weight: 600;
+			}
+			footer{
+				font-size: 17px!important;
+			}
+			footer .mui-active{
+				background-color: #C71B1E ;
+				color: #FFFFFF!important;
+			}
+			.apply-fail-modal{
+				width: 90%;
+				margin-left: 5%;
+				max-height: 320px;
+				top:calc((100% - 320px)/2);
+				top:-webkit-calc((100% - 320px)/2);
+				top: -moz-calc((100% - 320px)/2);
+				/*margin-top:calc((100% - 320px)/2);
+				margin-top:-webkit-calc((100% - 320px)/2);
+				margin-top: -moz-calc((100% - 320px)/2);*/
+			}
+			.apply-fail-modal header{
+				background: #F7F7F7;
+			}
+			.apply-fail-modal .mui-content{
+				background: #FFFFFF;
+				font-size: 13px!important;
+				
+			}
+			.apply-fail-modal label{
+			    line-height:2!important;
+			    padding-bottom: 0px!important;
+			    padding-left: 20px;
+			    width: 45%;
+			    /*width: -webkit-calc((95% - 20px))/2!important;
+				width: -moz-calc((95% - 20px))/2!important;
+				width: calc((95% - 20px))/2!important;*/
+			    font-size: 13px!important;
+			    height: 35px;
+			    color: #212121;
+			}
+			
+			.apply-fail-modal .mui-card,.apply-fail-modal .mui-card:first-child{
+				margin: 0px;
+			}
+			.apply-fail-modal .mui-input-row:after{
+				height: 0px;
+			}
+			.mui-icon-arrowdown {
+				float: right;
+				line-height: 2;
+				font-size: 13px;
+				height: 35px;
+				padding: 11px 20px 0px 0px;
+				color: #212121;
+			}
+			.mui-icon-arrowdown:after {
+			    content: '\e581';
+			}
+			.mui-icon-arrowdown:before {
+			    content: '';
+			}
+			textarea{
+				border: 1px solid #E4E4E4!important ;
+				font-size: 13px;
+				width: -webkit-calc(95% - 20px)!important;
+				width: -moz-calc(95% - 20px)!important;
+				width: calc(95% - 20px)!important;
+				height: 80px;
+				padding: 5px 5px;
+				margin-top: 11px;
+				margin-left: 20px;
+				border-radius: 2px;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">意向详情</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper" id="mui-content">
+			<div class="mui-scroll">
+				<div class="mui-card">
+					<div class="mui-card-header" id="oppor_code">
+						<label>意向编号</label>
+						<span>已试乘试驾</span>
+					</div>
+					<div class="mui-card-content">
+							<ul class="mui-table-view mui-clearfix">
+								<li class="mui-table-view-cell">
+									姓名<var id="name"></var>
+								</li>
+								<li class="mui-table-view-cell">
+									电话<var id="tel"></var>
+								</li>
+								<li class="mui-table-view-cell">
+									意向车型<var id="vehicle_car"></var>
+								</li>
+								<li class="mui-table-view-cell">
+									线索来源 <var id="platform"></var>
+								</li>
+								<li class="mui-table-view-cell">
+									意向级别<var id="level"></var>
+								</li>
+								<li class="mui-table-view-cell">
+									创建时间<var id="create_time"></var>
+								</li>
+								<li class="mui-table-view-cell">
+									<var class="mui-icon-extra mui-icon-extra-outline active" id="last_follow_time">剩余时间2小时15分</var>
+								</li>
+							</ul>
+					</div>
+				</div>
+			
+				<div class="mui-card" id="follow_record">
+					<div class="mui-card-header follow-record">
+						<label class="mui-icon-footer">跟进记录</label>
+						<i class="mui-icon mui-icon-arrowright" id="record_size">4</i>
+					</div>
+				</div>
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<ul class="mui-table-view mui-grid-view mui-grid-9 oppor-detail-grid-9">
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 phone-invitation">
+				            	<a href="#" data-typeCode="invitation" data-type="邀约到店">
+				                    <span class="mui-icon mui-icon-phone"></span>
+				                    <div class="mui-media-body">邀约到店</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				            	<a href="#" data-typeCode="outsideActivity" data-type="店外活动">
+				                    <span class="mui-icon mui-icon-email"></span>
+				                    <div class="mui-media-body">店外活动</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 face-talking">
+				            	<a href="#" data-typeCode="inshop" data-type="到店面谈">
+				                    <!--<span class="mui-icon-extra mui-icon-extra-people"></span>-->
+				                    <span class="mui-icon mui-icon-person"></span>
+				                    <div class="mui-media-body">到店面谈</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 try-driving">
+				            	<a href="#" data-typeCode="testDrive" data-type="试乘试驾">
+				                    <span class="mui-icon mui-icon-location"></span>
+				                    <div class="mui-media-body">试乘试驾</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				            	<a href="#" data-typeCode="quotation" data-type="商谈报价">
+				                    <span class="mui-icon mui-icon-search"></span>
+				                    <div class="mui-media-body">商谈报价</div>
+				            	</a>
+				            </li>
+				           
+				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 more">
+				           		<a href="#">
+				                    <span class="mui-icon mui-icon-more" data-type="其他"></span>
+				                    <div class="mui-media-body">其他</div>
+				           		</a>
+				           </li>
+				        </ul> 
+			        </div>
+				</div>
+			
+			</div>
+		</div>
+		<footer class="mui-bar mui-bar-tab">
+		    <a class="mui-tab-item mui-active" id="order" href="#">下订</a>
+		    <a class="mui-tab-item" id="apply_fail" href="#modal">申请战败</a>
+		</footer>
+		
+		<!--申请战败-->
+		<div id="modal" class="mui-modal apply-fail-modal">
+			<header class="mui-bar mui-bar-nav">
+				<h1 class="mui-title">申请战败</h1>
+			</header>
+			<div class="mui-content">
+				
+				<div class="mui-input-group mui-card mui-clearfix">
+						<div class="mui-input-row">
+							<label>战败原因 </label>
+							<div class="popover-group">
+								<a href="#middlePopover" class="mui-icon mui-icon-arrowdown" id="failReasonPicker">请选择</a>
+								
+							</div>
+						</div>
+						<div class="mui-input-row" >
+							<label>备注 </label>
+						</div>
+						<textarea id="textarea" rows="2" placeholder="多行文本框">1111</textarea>
+		         </div> 
+				<div class="mui-button-row">
+					<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-outlined-sm" id="btn_cancel">取消</button>
+					<button type="button" class="mui-btn mui-btn-danger btn-create-intention btn-lined-sm" id="btn_modal_create">提交</button>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/oppor/oppor.js"></script>
+		<script src="../../js/follow/follow.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init({
+					//预加载详情页
+					preloadPages: [{
+						id: 'opporFollow',//b页面id
+						url:'opportunity-follow.html',
+					},{
+						url: 'test-driving.html',//b页面url路径
+						id: 'testDrive'//b页面id
+					},{
+						url:'../quotation/quotation-list.html',
+						id: 'quotation-list'//b页面id
+					},{
+						url:'../order/create_wholeVehicleOrder.html',
+						id: 'creatWholeVehicleOrder'//b页面id
+					}]
+				});
+				
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = doc.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				
+				//添加show自定义事件监听
+				window.addEventListener('show', function(event) {
+					
+					var opporCode = event.detail;
+					
+					oppor.getOpporDetail(opporCode,function(data){
+						var data = JSON.parse(data);
+						if(data.success==true) {
+							var opportunityList = data.opportunityList[0];
+							if(opportunityList){
+								doc.getElementById('oppor_code').innerHTML = '意向编号'+opportunityList.code;
+								doc.getElementById('oppor_code').setAttribute("data-code",opportunityList.code);
+								doc.getElementById('oppor_code').setAttribute("data-vehicleTypeCode",opportunityList.vehicleTypeCode);
+								doc.getElementById('oppor_code').setAttribute("data-vehicleCategoryCode",opportunityList.vehicleCategoryCode);
+								doc.getElementById('oppor_code').setAttribute("data-vehicleCode",opportunityList.vehicleCode);
+								doc.getElementById('name').innerHTML = opportunityList.name||'';
+								doc.getElementById('tel').innerHTML = opportunityList.mobile||'';
+								doc.getElementById('vehicle_car').innerHTML = opportunityList.vehicleTypeCode||''+"&nbsp;&nbsp;&nbsp;"+opportunityList.vehicleCategoryCode||''+"&nbsp;&nbsp;&nbsp;"+opportunityList.vehicleCode||'';
+								doc.getElementById('platform').innerHTML = opportunityList.platform||'';
+								doc.getElementById('level').innerHTML = opportunityList.levelCode||'';
+								doc.getElementById('create_time').innerHTML = opportunityList.creationtime||'';
+								doc.getElementById('last_follow_time').innerHTML = '剩余时间'+opportunityList.lastFollowTime||'';
+							}
+							
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+						
+					});
+					var params = {
+						opportunityCode :opporCode
+					}
+					follow.getOpporFollow(params,function(data){
+						if(data.success==true) {
+							var followOpportunityList = data.followOpportunityList;
+							doc.getElementById('record_size').innerHTML = followOpportunityList.length;
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+						
+					});
+					
+					
+					
+				}, false);
+				
+				//再加入这段代码
+				(function($){
+				    $(".mui-scroll-wrapper").scroll({
+				        bounce: true,//滚动条是否有弹力默认是true
+				        indicators: true, //是否显示滚动条,默认是true
+				    }); 
+				})(mui);
+
+				$.plusReady(function() {
+					$('.mui-scroll-wrapper').scroll();
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+//					var self = plus.webview.currentWebview();
+//					var code = self.code;
+
+				});
+
+//				//下拉选项卡
+//				var streamTypePicker = new mui.PopPicker();
+//
+//				streamTypePicker.setData(streamTypeData);
+//
+//				var showTypePicker = doc.getElementById('showTypePicker');
+//				var streamType = doc.getElementById('streamType');
+//
+//				showTypePicker.addEventListener('tap', function(event) {
+//
+//					streamTypePicker.show(function(items) {
+//						streamType.innerText = (items[0] || {}).text;
+//						var streamTypeValue = (items[0] || {}).value;
+//						streamType.setAttribute("data-value",streamTypeValue);
+//					
+//						//返回 false 可以阻止选择框的关闭
+//						//return false;
+//					});
+//				}, false);
+
+//				doc.getElementById('apply_fail').addEventListener('tap',function(){
+//					//打开关于页面
+////					mui.openWindow({
+////						url: 'leads-tel-invitation.html',
+////						id: "telInvitation"//默认使用当前页面的url作为id
+//////						extras: {
+//////							customerId: customerId
+//////						}, //自定义扩展参数
+//////						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+////					})
+//				})
+//				var mask = $.createMask(callback);//callback为用户点击蒙版时自动执行的回调；
+				//申请战败
+				doc.getElementById('apply_fail').addEventListener('tap',function(){
+					
+					this.classList.remove('mui-active');
+					
+					doc.getElementById("modal").setAttribute('style','min-height: auto;')
+					
+					var backdrop = document.createElement('div');
+					backdrop.className = 'mui-backdrop mui-active';
+					document.body.appendChild(backdrop);
+//					mask.show();//显示遮罩
+				})
+				//modal 取消
+				doc.getElementById("btn_cancel").addEventListener('tap', function(event) {
+					if (doc.getElementById("modal")) {
+						event.detail.gesture.preventDefault(); //fixed hashchange
+						doc.getElementById("modal").classList.remove('mui-active');
+						doc.getElementById("modal").removeAttribute("style");
+						document.body.removeChild(document.body.querySelector('.mui-backdrop'));
+					}
+				});
+				
+				doc.getElementById("follow_record").addEventListener('tap', function(event) {
+						
+					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
+					mui.openWindow({
+						url: 'follow-record.html',
+						id: "followRecord",//默认使用当前页面的url作为id
+						extras: {
+							opporCode: opporCode
+						}, //自定义扩展参数
+						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					})
+					
+				});
+				//下订单
+				doc.getElementById("order").addEventListener('tap', function(event) {
+					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
+					var name = doc.getElementById('name').innerHTML;
+					var mobile = doc.getElementById('tel').innerHTML;	
+					var platform = doc.getElementById('platform').innerHTML;
+					var level = doc.getElementById('level').innerHTML;
+					mui.fire(plus.webview.getWebviewById('creatWholeVehicleOrder'), 'show', {
+						opporCode:opporCode,
+						name:name,
+						mobile:mobile,
+						platform:platform,
+						level:level
+					});
+					mui.openWindow({
+						id: 'creatWholeVehicleOrder'//b页面id
+					})
+					
+				});
+				
+				
+				
+				
+							
+				mui('.oppor-detail-grid-9').on('tap','a',function(){
+					var type = this.getAttribute("data-type");
+					var typeCode = this.getAttribute("data-typeCode");
+					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
+					var vehicleTypeCode = doc.getElementById('oppor_code').getAttribute("data-vehicleTypeCode");
+					var vehicleCategoryCode = doc.getElementById('oppor_code').getAttribute("data-vehicleCategoryCode");
+					var vehicleCode = doc.getElementById('oppor_code').getAttribute("data-vehicleCode");
+					var name = doc.getElementById('name').innerHTML;
+					var mobile = doc.getElementById('tel').innerHTML;		
+								
+					console.log(type);
+					console.log(typeCode);
+					console.log(vehicleTypeCode);
+					if(typeCode == 'quotation'){
+						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
+							type: type,
+							typeCode:typeCode,
+							opporCode:opporCode,
+							name:name,
+							mobile:mobile
+						});
+						mui.openWindow({
+							url:'../quotation/quotation-list.html',
+							id: 'quotation-list'//b页面id
+						})
+					}else if(typeCode == 'testDrive'){
+						
+						mui.fire(plus.webview.getWebviewById('testDrive'), 'showTitle', {
+							type: type,
+							typeCode:typeCode,
+							opporCode:opporCode,
+							vehicleTypeCode:vehicleTypeCode,
+							vehicleCategoryCode:vehicleCategoryCode,
+							vehicleCode:vehicleCode
+						});
+	//					打开相关页面
+						mui.openWindow({
+							id: 'testDrive',//b页面id
+							url:'test-driving',
+						    show: {
+						        autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							    aniShow: "slide-in-right"
+						    },
+	
+						})
+					}else{
+						mui.fire(plus.webview.getWebviewById('opporFollow'), 'showTitle', {
+							type: type,
+							typeCode:typeCode,
+							opporCode:opporCode,
+							name:name,
+							mobile:mobile
+						});
+	//					打开相关页面
+						mui.openWindow({
+							id: 'opporFollow',//b页面id
+							url:'opportunity-follow.html',
+						    show: {
+						        autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							    aniShow: "slide-in-right"
+						    },
+	
+						})
+					}
+					
+				})
+				
+
+			}(mui, document));
+		</script>
+	</body>
+
+>>>>>>> 107de00d67a45d0d116354a8cc5d23adef6dca1e
 </html>

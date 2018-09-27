@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/quotation/addQuotation.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">增值订单详情</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab tabBar">
+			<a class="mui-tab-item mui-active" href="#">
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">编辑</span>
+			</a>
+			<a class="mui-tab-item" href="#messages">
+				<!--<span class="mui-icon"><span class="mui-badge">9</span></span>-->
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">功能</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">更多</span>
+			</a>
+		</nav>
+
+		<div id="messages" class="mui-popover mui-bar-popover" style="display: none;">
+			<div class="mui-popover-arrow mui-bottom" style="left:41.5px"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">提交审批</label><input type="radio" /></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">申请配车</label><input type="radio" /></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">申请开票</label><input type="radio" /></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">申请出库</label><input type="radio" /></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="mui-content price-content orderDetail" id="orderDetail">
+			<!--订单编号-->
+			<comment id="orderBaseComment">
+			<script id='orderBase-template' type="text/template">
+			<div class="mui-card mui-clearfix price-card">
+				<div class="mui-card-header">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" id="quotationCode">
+							订单编号：<%=order.code %>
+						</li>
+						<!--<li class="mui-table-view-cell" id="creationtime" style="font-weight: 400;">
+							<%=order.status %>
+						</li>-->
+						<li class="mui-table-view-cell" id="creationtime" style="font-weight: 400;">
+							<%=order.creationtime %>
+						</li>
+						
+					</ul>	
+				</div>
+			
+				<div class="mui-card-content">
+					<ul class="mui-table-view mui-clearfix">
+						<li class="mui-table-view-cell">
+							<label>定金金额</label>
+							<var><%=order.deposit %></var>
+							<!--<input type="text" name="name" id="flow_name" class="mui-input-clear" placeholder="请输入姓名" value="￥100,000">-->
+						</li>
+						<li class="mui-table-view-cell">
+							<label>订单总金额</label>
+							<var><%=order.totalPrice %></var>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+			</script>
+			</comment>
+			
+			<!--客户信息-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">客户信息</a>
+					
+						<ul class="mui-table-view mui-table-view-chevron">
+							<comment id="customerComment">
+							<script id='customer-template' type="text/template">
+							<li class="mui-table-view-cell">
+								<label class="require">姓名</label>
+								<p><span><%=customer.name||''%></span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">客户类型</label>
+								<p class="detailRed"><span><%=customer.customerType||''%></span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">客户性质</label>
+								<p><span><%=customer.attributeCode||''%></span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">客户联系电话</label>
+								<p><span><%=customer.mobileNumber%></span></p>
+							</li>
+							</script>
+							</comment>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--配件信息-->
+			<comment id="optionalComment">
+			<script id='optional-template' type="text/template">
+			<!--原厂选装-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">原厂选装</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+						 <% if(order.optionalProduct) { %>
+							<% for(var i in order.optionalProduct){ var item=order.optionalProduct[i]; %>
+			                	<li class="mui-table-view-cell titles">
+									<label>产品编号：<%=( item.code|| '&nbsp;&nbsp;') %></label>
+								</li>
+								<li class="mui-table-view-cell detailWidth">
+									<label class="require">产品描述</label>
+									<p><span><%=( item.name|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">数量</label>
+									<p><span><%=( item.quantity|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">参考价格</label>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">销售价格</label>
+									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<!--<li class="mui-table-view-cell detailWidth">
+									<label class="require">备注</label>
+									<p class=""><span>整车销售，享受夏日清新一夏保养¥1999活动，6个月免费维护保养</span></p>
+								</li>-->
+							<% } %>
+							<p class="line total">合计：<%=( order.optionalProductTotalPrice|| '&nbsp;&nbsp;') %></p>
+						<% }else{ %>	
+							<p style="text-align: center;padding-bottom: 20px;">暂无</p>
+							<% } %>
+						</ul>
+						
+					</li>
+				</ul>
+			</div>
+			<!--装潢-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">装潢</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<!--<li class="mui-table-view-cell">
+								<div class="mui-input-row mui-search">
+								    <input type="search" class="mui-input-clear" data-productType="upholsteryProduct" data-categoryCode="parts"  placeholder="请输入装潢关键字">
+								    <i id='upholsteryProductSearchA' class="mui-icon mui-icon-plus-filled "></i>
+								</div>
+							</li>-->
+							<% if(order.upholsteryProduct) { %>
+			                <% for(var i in order.upholsteryProduct){ var item=order.upholsteryProduct[i]; %>
+			                	<li class="mui-table-view-cell titles">
+									<label>产品编号：<%=( item.code|| '&nbsp;&nbsp;') %></label>
+								</li>
+								<li class="mui-table-view-cell detailWidth">
+									<label class="require">产品描述</label>
+									<p><span><%=( item.name|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">数量</label>
+									<p><span><%=( item.quantity|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">参考价格</label>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">销售价格</label>
+									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
+							<% } %>
+							<p class="line total">
+								<span>合计：<%=( order.decorProductTotalPrice|| '&nbsp;&nbsp;') %></span>
+								<span>共 <%= (order.upholsteryProduct.length||'0') %>件</span>
+							</p>
+						<% }else{ %>	
+							<p style="text-align: center;padding-bottom: 20px;">暂无</p>
+							<% } %>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--保险-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">保险</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+		                	<% if(order.insuranceProduct) { %>
+			                <% for(var i in order.insuranceProduct){ var item=order.insuranceProduct[i]; %>
+			                	<li class="mui-table-view-cell titles">
+									<label>产品编号：<%=( item.code|| '&nbsp;&nbsp;') %></label>
+								</li>
+								<li class="mui-table-view-cell detailWidth">
+									<label class="require">产品描述</label>
+									<p><span><%=( item.name|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">数量</label>
+									<p><span><%=( item.quantity|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">参考价格</label>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">销售价格</label>
+									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
+							<% } %>
+							<p class="line total">
+								<span>合计：<%=( order.insuranceProductTotalPrice|| '&nbsp;&nbsp;') %></span>
+							</p>
+						<% }else{ %>	
+							<p style="text-align: center;padding-bottom: 20px;">暂无</p>
+							<% } %>
+							<!--<li class="mui-table-view-cell">
+								<label class="require">保险单号</label>
+								<p><span>B123456</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">缴纳方式</label>
+								<p><span>本店代缴</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">保险公司</label>
+								<p><span>中国平安保险</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">保险险种</label>
+								<p><span>交强险/机动车损失险/不计免赔率</span></p>
+							</li>-->
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--卡券-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">卡券</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+		                	<% if(order.coupon) { %>
+			                <% for(var i in order.coupon){ var item=order.coupon[i]; %>
+			                	<li class="mui-table-view-cell titles">
+									<label>产品编号：<%=( item.code|| '&nbsp;&nbsp;') %></label>
+								</li>
+								<li class="mui-table-view-cell detailWidth">
+									<label class="require">产品描述</label>
+									<p><span><%=( item.name|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">数量</label>
+									<p><span><%=( item.quantity|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">参考价格</label>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">销售价格</label>
+									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
+							<% } %>
+							<p class="line total">
+								<span>合计：<%=( order.voucherTotalPrice|| '&nbsp;&nbsp;') %></span>
+							</p>
+						<% }else{ %>	
+							<p style="text-align: center;padding-bottom: 20px;">暂无</p>
+							<% } %>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			<!--自营延保产品，延保2年-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">延保</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<% if(order.extendedWarrantyProduct) { %>
+			                <% for(var i in order.extendedWarrantyProduct){ var item=order.extendedWarrantyProduct[i]; %>
+			                	<li class="mui-table-view-cell titles">
+									<label>产品编号：<%=( item.code|| '&nbsp;&nbsp;') %></label>
+								</li>
+								<li class="mui-table-view-cell detailWidth">
+									<label class="require">产品描述</label>
+									<p><span><%=( item.name|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">数量</label>
+									<p><span><%=( item.quantity|| '&nbsp;&nbsp;') %></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">参考价格</label>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">销售价格</label>
+									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
+								</li>
+								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
+							<% } %>
+							<p class="line total">
+								<span>合计：<%=( order.extendedWarrantyTotalPrice|| '&nbsp;&nbsp;') %></span>
+							</p>
+						<% }else{ %>	
+							<p style="text-align: center;padding-bottom: 20px;">暂无</p>
+							<% } %>
+							<!--<li class="mui-table-view-cell">
+								<label class="require">￥6000元</label>
+							</li>
+							<li class="mui-table-view-cell">
+								<p><span>自营延保产品说明自营延保产品着名自营延保产品说明自营延保产品说明自营延保</span></p>
+							</li>-->
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--其他项目-->
+			<div class="mui-card car-card carDetails particulars">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">其他项目</a>
+		                <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<label class="require">综合服务内容</label>
+								<p><span><%=( order.serviceInfo|| '&nbsp;&nbsp;') %></span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">综合服务费</label>
+								<p><span><%=( order.servicePrice|| '&nbsp;&nbsp;') %>元</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">其他收入描述</label>
+								<p><span><%=( order.otherIncomInfo|| '&nbsp;&nbsp;') %></span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">其他收入</label>
+								<p><span><%=( order.otherPrice|| '&nbsp;&nbsp;') %>元</span></p>
+							</li>
+						</ul>
+			        </li>
+			    </ul>
+			</div>	
+			
+			</script>
+			</comment>
+			
+			
+		</div>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/arttmpl.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				template.config('escape', false);
+				//添加show自定义事件监听
+				window.addEventListener('show', function(event) {
+					
+					var order = event.detail.order;
+					var creationtime = event.detail.creationtime;
+					console.log(order);
+					mui.extend(order,{creationtime:creationtime});
+					console.log(order);
+					var baseView = template('orderBase-template', {
+									"order": order});
+					document.getElementById('orderBaseComment').innerHTML = baseView;
+					var customerView = template('customer-template', {
+									"customer": order.customer});
+					document.getElementById('customerComment').innerHTML = customerView;
+				
+				    var optionalView = template('optional-template', {
+									"order": order});
+					document.getElementById('optionalComment').innerHTML = optionalView;
+					
+				}, false);
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+				});
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

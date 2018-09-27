@@ -1,3 +1,4 @@
+<<<<<<< 1194cadd3b3798c5a1a9e1f86f30d7c104a4fe19
 <!doctype html>
 <html>
 
@@ -380,4 +381,407 @@
 		</script>
 	</body>
 
+=======
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/quotation/addQuotation.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">订单</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab tabBar">
+			<a class="mui-tab-item mui-active" href="#">
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">编辑</span>
+			</a>
+			<a class="mui-tab-item" href="#messages">
+				<!--<span class="mui-icon"><span class="mui-badge">9</span></span>-->
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">功能</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="#">
+				<span class="mui-icon"></span>
+				<span class="mui-tab-label">更多</span>
+			</a>
+		</nav>
+
+		<div id="messages" class="mui-popover mui-bar-popover" style="display: none;">
+			<div class="mui-popover-arrow mui-bottom" style="left:41.5px"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">提交审批</label><input type="radio" /></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">申请配车</label><input type="radio" /></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">申请开票</label><input type="radio" /></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#"><label for="">申请出库</label><input type="radio" /></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="mui-content price-content orderDetail">
+			<!--订单编号-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">订单编号DD001004</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<label class="require">员工姓名</label>
+								<p><span>张明科</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">员工工号</label>
+								<p><span>098</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">合同编号</label>
+								<p><span>928012</span></p>
+							</li>
+							<p class="lines"></p>
+							<li class="mui-table-view-cell">
+								<label class="require">订单类型</label>
+								<p class="detailRed"><span>零售</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">订单总金额</label>
+								<p class="detailRed"><span>29.83万元</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">订单金额</label>
+								<p class="detailBlue"><span>3万元</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">整车优惠金额</label>
+								<p class="detailBlue"><span>3万元</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">付款方式</label>
+								<p><span>全款</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">预计交车时间</label>
+								<p><span>2018-09-30</span></p>
+							</li>
+							<p class="lines"></p>
+							<li class="mui-table-view-cell">
+								<label class="require">订单状态</label>
+								<p class="detailRed"><span>进行中</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">订单业务状态</label>
+								<p class="detailBlue"><span>订单未提交</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">财务状态</label>
+								<p class="detailBlue"><span>未收款</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">车辆状态</label>
+								<p class="detailBlue"><span>待预留</span></p>
+							</li>
+							<p class="lines"></p>
+							<li class="mui-table-view-cell">
+								<label class="require">订单创建日期</label>
+								<p><span>2018-09-30</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">创建人</label>
+								<p><span>张明科</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">最近修改日期</label>
+								<p><span>2018-09-30</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">修改人</label>
+								<p><span>张明科</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">备注</label>
+								<p class=""><span>整车销售，享受夏日清新一夏保养¥1999活动，6个月免费维护保养</span></p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--客户信息-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">客户信息</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<label class="require">姓名</label>
+								<p><span>刘先生</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">客户类型</label>
+								<p class="detailRed"><span>公司客户</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">客户证件类型</label>
+								<p><span>纳税人识别号</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">客户证件号码</label>
+								<p><span>125000005699091207</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">客户联系电话</label>
+								<p><span>13709878763</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">详细地址</label>
+								<p class=""><span>上海市浦东区新区浦东新区郭守敬路2380号9弄402室</span></p>
+							</li>
+							<p class="lines"></p>
+							<li class="mui-table-view-cell">
+								<label class="require">购车经办人</label>
+								<p><span>张明科</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">经办人电话</label>
+								<p><span>13709878763</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">经办人证件类型</label>
+								<p><span>身份证</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">经办人证件号码</label>
+								<p><span>420030198001102030</span></p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--购车信息-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">购车信息</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">品牌</label>
+								<p><span>奥迪</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">车系</label>
+								<p class=""><span>A4L</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">车型</label>
+								<p><span>奥迪A4L-400 TSFI运动型</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">外观颜色</label>
+								<p><span>黑色</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">内饰颜色</label>
+								<p class=""><span>白色</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">车牌号码</label>
+								<p class=""><span>沪GT8899</span></p>
+							</li>
+							<p class="lines"></p>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">车架号</label>
+								<p><span>1234568966</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">厂方指导价</label>
+								<p class=""><span>23.96万</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">车辆销售价</label>
+								<p class=""><span>20.33万</span></p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--原厂选装-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">原厂选装</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell titles">
+								<label>产品编号：A003456098</label>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">产品描述</label>
+								<p><span>阿尔卡塔纳/真皮组合面料</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">数量</label>
+								<p><span>1</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">参考价格</label>
+								<p><span>680元</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">销售价格</label>
+								<p class=""><span>600元</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">备注</label>
+								<p class=""><span>整车销售，享受夏日清新一夏保养¥1999活动，6个月免费维护保养</span></p>
+							</li>
+							<p class="line" style="padding: 0; margin-bottom: 23px;"></p>
+							<li class="mui-table-view-cell titles">
+								<label>产品编号：A003456098</label>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">产品描述</label>
+								<p><span>阿尔卡塔纳/真皮组合面料</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">数量</label>
+								<p><span>1</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">参考价格</label>
+								<p><span>680元</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">销售价格</label>
+								<p class=""><span>600元</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">备注</label>
+								<p class=""><span>整车销售，享受夏日清新一夏保养¥1999活动，6个月免费维护保养</span></p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--保险-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">保险</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<label class="require">保险单号</label>
+								<p><span>B123456</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">缴纳方式</label>
+								<p><span>本店代缴</span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">保险公司</label>
+								<p><span>中国平安保险</span></p>
+							</li>
+							<li class="mui-table-view-cell detailWidth">
+								<label class="require">保险险种</label>
+								<p><span>交强险/机动车损失险/不计免赔率</span></p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--自营延保产品，延保2年-->
+			<div class="mui-card car-card particulars">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">自营延保产品，延保2年</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<label class="require">￥6000元</label>
+							</li>
+							<li class="mui-table-view-cell">
+								<p><span>自营延保产品说明自营延保产品着名自营延保产品说明自营延保产品说明自营延保</span></p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+
+					//获取父级页面查询过来的参数
+					var self = plus.webview.currentWebview();
+					orderCode = self.orderCode;
+					var jsonvalue = {orderCode:orderCode};
+					$.ajax({
+						url: serviceBaseUrl+"alpssalewebservices/order/detail",
+						type: "POST",
+						dataType: "json",
+						contentType: 'application/json',
+						data: JSON.stringify(jsonvalue),
+						beforeSend: function(xhr) {
+							xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+						},
+						success: function(data) {
+							
+							console.log("order detail result:" + JSON.stringify(data));
+							var	order = data.order;
+							console.log("--------------------------------------------------------------");
+							
+						}
+					})
+				});
+
+			}(mui, document));
+		</script>
+	</body>
+
+>>>>>>> 107de00d67a45d0d116354a8cc5d23adef6dca1e
 </html>

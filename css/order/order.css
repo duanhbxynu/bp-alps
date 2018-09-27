@@ -1,3 +1,4 @@
+<<<<<<< 1194cadd3b3798c5a1a9e1f86f30d7c104a4fe19
 .orderList{
 	margin-bottom: 50px;
 }
@@ -506,3 +507,518 @@
     text-align: right;
     border: none;
 }
+=======
+.orderList{
+	margin-bottom: 50px;
+}
+.orderList .mui-segmented-control.mui-scroll-wrapper .mui-scroll{
+	width: 100%;
+}
+.orderList .mui-segmented-control.mui-scroll-wrapper .mui-scroll a{
+	width: 33.3%;
+}
+.orderList .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+	background: #f5f5f5;
+}
+.orderList .mui-segmented-control.mui-scroll-wrapper{
+	height: 41px;	
+}
+.orderList .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+	border: none;
+}
+.orderList .mui-slider .mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+	border-bottom:2px solid transparent;
+}
+.orderList .mui-slider .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+	border-bottom: 2px solid #C71B1E;
+}
+.orderList  .mui-card{
+	margin: 8px;
+	background: #FFFFFF;
+}
+.orderList  .mui-card .mui-card-header{
+	padding: 15px 20px;
+}
+.orderList  .mui-card .mui-card-content{
+	padding: 15px 20px;
+}
+.orderList  .mui-card .mui-card-content p span{
+	color: #666666;
+}
+.orderList .mui-card .mui-card-content p span:last-child{
+	float: right;
+	color: #212121;
+}
+.orderList .mui-card .mui-card-content p span.reds{
+	color: #C71B1E;
+}
+.orderList .mui-card .mui-card-content p span.blus{
+	color: #618DF6;
+}
+/*订单搜索*/
+.orderSearch  .mui-table-view-chevron  > .mui-table-view-cell{
+	padding: 15px;
+}
+.orderSearch .mui-table-view-cell:after{
+	right: 15px;
+}
+.orderSearch .mui-table-view-cell> p{
+	float: right;
+}
+.orderSearch .mui-table-view-cell> p.sel> input{
+	width: auto;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    text-align: right;
+    border: none;
+}
+.orderSearch .mui-table-view-cell> p > span{
+	margin-right: 15px;
+}
+.orderSearch .mui-table-view-cell> p > span:after{
+	position: absolute;
+    display: inline-block;
+    font-family: Muiicons;
+    content: '\e581';
+    color: #8f8f94;
+    right: 13px;
+}
+.orderSearch .tab ul li{
+	float: left;
+	width: 33%;
+	padding: 0;
+	text-align: center;
+	margin-bottom: 14px;
+	margin-top: 10px;
+}
+.orderSearch .tab ul li a{
+	border: 1px solid #C9C9C9;
+	border-radius: 100px;
+	width: 67px;
+	line-height: 32px;
+	font-size: 13px;
+	color: #999999;
+}
+.orderSearch .mui-table-view-cell>a:not(.mui-btn){
+	margin: 0 auto;
+	padding: 0;
+}
+.orderSearch .mui-table-view-cell:after{
+	position: relative;
+}
+.orderSearch .mui-table-view-radio .mui-table-view-cell .mui-navigate-right:after{
+	content: "";
+}
+.orderSearch .mui-table-view-radio li.mui-selected a{
+	font-size: 13px;
+	color: #C71B1E;
+	border-color: #C71B1E;
+}
+.orderSearch .mui-card > button{
+	padding: 0;
+    width: calc(100% - 40px);
+    margin: 20px auto 40px auto;
+}
+.orderSearchValueAdd .mui-card .mui-table-view-cell .seek{
+	background: #F5F5F5;
+	border-radius: 100px;
+	color: #999999;
+	text-align: center;
+	padding: 7px 20px;
+	float: none;
+}
+.orderSearchValueAdd .mui-card .mui-table-view-cell .seek input{
+	background: transparent;
+	height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	text-align: left;
+}
+.orderSearchValueAdd .mui-card > ul > .mui-table-view-cell:nth-of-type(1){
+	padding: 22px 20px 10px 20px;
+}
+.orderSearchValueAdd .tab ul li a{
+	width: 65px;
+	line-height: 26px;
+	font-size: 13px;
+	color: #999999;
+}
+.orderSearchValueAdd  .tab ul li{
+	margin-bottom: 0;
+}
+.orderSearchValueAdd .mui-card{
+	margin-bottom: 35px;
+}
+#nextStep,.creatOrder{
+	background: #C71B1E;
+    color: #FFFFFF !important;
+}
+/*整车订单*/
+.carload .mui-card-header{
+	color: #333333;
+	font-weight: 400;
+	padding: 15px;
+}
+.carload .mui-card-header:after{
+	background-color: transparent;
+}
+.carload .mui-card-content{
+	padding: 0 15px;
+}
+.carload .mui-card-content div p{
+	color: #666666;
+}
+.carload .mui-card-content div p span{
+	color: #212121;
+}
+.carload .mui-card-content div.types p{
+	display: inline-block;
+	margin-bottom: 15px;
+	line-height: 14px;
+}
+.carload .mui-card-content div.types p:nth-of-type(1){
+    margin-right: 22px;
+    padding-right: 22px;
+    border-right: 1px solid #E4E4E4;
+}
+.carload .mui-table-view-cell>a:not(.mui-btn) {
+	font-size: 15px;
+	color: #333333;
+	font-weight: 600;
+	height: 45px;
+}
+.carload .mui-navigate-right:after,
+.carload .mui-push-left:after,
+.carload .mui-push-right:after {
+	color: #333333;
+}
+.carload .mui-table-view-cell.mui-active {
+	background: #FFFFFF!important;
+}
+.carload .mui-table-view-cell.mui-active a {
+	color: #C71B1E;
+}
+.carload .mui-table-view-cell.mui-active a:before {
+	height: 24px;
+	width: 2px;
+	box-shadow: 0 2px 4px 0 rgba(199, 27, 30, 0.40);
+	position: absolute;
+	right: 0;
+	left: 0px;
+	top: 9px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #C71B1E;
+}
+.carload .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {
+    padding-left: 15px;
+}
+.carload .mui-card .mui-navigate-right span{
+	color: #CE575A;
+	font-weight: 400;
+	margin-right: 20px;
+	float: right;
+}
+/*增值订单-原厂选装*/
+.original  .mui-search{
+	display: inline-block;
+	width: 100%;
+}
+.original  .mui-search:before{
+	top: 24px;
+}
+.original .mui-search input{
+	height: 32px;
+	border-radius: 20px;
+	margin-bottom: 0;
+}
+.original .mui-table-view-cell span{
+	float: left;
+	margin-right: 15px;
+    font-size: 14px;
+}
+.original .mui-table-view-cell > p{
+	float: right;
+	color: #666666;
+	/*line-height: 32px;*/
+}
+.original .mui-icon-search:before{
+	position: relative;
+	top: 6px;
+	left: 5px;
+}
+.original .mui-input-row .mui-input-clear~.mui-icon-clear{
+	top: 6px !important;
+}
+.original .mui-table-view-cell.mui-collapse .mui-collapse-content{
+	padding-right: 0;
+}
+.original .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
+	margin-left: -15px;
+    padding-right: 0; 
+}
+.original .mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{
+	margin: 14px 0px;
+	margin:14px 0px -11px 0px;
+}
+.original .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after{
+	background-color: transparent;
+}
+/*选装商品*/
+.original:last-child{
+	margin-bottom: 60px;
+}
+.original  .mui-collapse .mui-table-view .products:after{
+	left: 15px;
+	border: 1px dotted #E4E4E4;
+}
+.original  .mui-collapse .mui-table-view .products:last-child:after{
+	border: none;
+}
+.original .products > p:nth-of-type(1){
+	float: none;
+	font-size: 10px;
+	color: #333333;
+	margin-bottom: 11px;
+	line-height: 14px;
+	margin-left: 24px;
+}
+.original .products .pro .proRight > div:nth-of-type(2){
+	margin-top: 12px;
+	font-size: 10px;
+	color: #999999;
+	line-height: 14px;
+}
+.original .products .pro .proRight > div:nth-of-type(2) p{
+	display: inline;
+	font-size: 10px;
+	 -webkit-user-select:text;
+       -moz-user-select:text;
+        -ms-user-select:text;
+            user-select:text;
+}
+.original .products .pro > div{
+	float: left;
+}
+.original .products .pro .proLeft{
+	height: 64px;
+	margin-right: 10px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.original .products .pro .proMiddle{
+	width: 64px;
+	height: 64px;
+	background: #D8D8D8;
+	margin-right: 10px;
+}
+.original .products .pro .proMiddle img{
+	width: 64px;
+	height: 64px;
+}
+.original .products .pro .proRight{
+	width: calc(100% - 100px);
+}
+.original .products .pro .proRight > p:nth-of-type(1){
+	font-size: 13px;
+	color: #212121;
+	line-height: 13px;
+	margin-bottom: 8px;
+}
+.original .products .pro .proRight > p:nth-of-type(2){
+	font-size: 11px;
+	color: #CE575A;
+	line-height: 16px;
+	margin-bottom: 6px;
+}
+.original .products .pro .proRight .prices > p{
+	display: inline-block;
+	width: 80px;
+	height: 22px;
+	border: 1px solid #CE575A;
+	border-radius: 2px;
+	font-size: 12px;
+	color: #CE575A;
+	text-align: center;
+	 -webkit-user-select:text;
+       -moz-user-select:text;
+        -ms-user-select:text;
+            user-select:text;
+}
+.original .products .pro .proRight .prices .mui-numbox{
+	border-color: #CE575A;
+	width: 80px;
+	height: 22px;
+	padding: 0;
+    float: right;
+}
+.original .products .pro .proRight .prices .mui-numbox [class*=btn-numbox], .mui-numbox [class*=numbox-btn]{
+	width: 25px;
+}
+.original .products .pro .proRight .prices  .mui-numbox [class*=btn-numbox],
+.original .products .pro .proRight .prices  .mui-numbox [class*=numbox-btn]{
+	font-size: 14px;
+}
+/*其他*/
+.original .orderSearch.mui-collapse .mui-table-view .mui-table-view-cell:after{
+	background-color: #c8c7cc;
+	left: 15px;
+}
+/*附件上传*/
+.original .uploadAccessory{
+	width: 289px;
+	height: 178px;
+	margin: 0 auto;
+	text-align: center;
+	border: 1px dotted #999999;
+	border-radius: 4px;
+	background: url(../../images/IDcard.png) no-repeat;
+	background-size: 100% 100%;
+}
+.original .uploadAccessory img{
+	width: 64px;
+	height: 64px;
+	margin: 42px 0 8px;
+}
+.original .uploadAccessory p{
+	font-size: 18px;
+	color: #212121;
+}
+/*整车订单-客户信息*/
+.carDetails .mui-table-view-cell > span:not(.mui-radio) {
+	float: left;
+	display: inline-block;
+	margin-right: 5px;
+	position: relative;
+	top: 2px;
+	color: #C71B1E;
+}
+.carDetails .mui-table-view .mui-table-view-chevron li:not(:last-child){
+	border-bottom: 1px solid #E4E4E4;
+}
+.mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron {
+    margin-right: 0;
+}
+.carDetails .mui-table-view-cell p{
+	display: inline;
+}
+.carDetails .mui-table-view-chevron .brand p span:after{
+	position: absolute;
+    display: inline-block;
+    font-family: Muiicons;
+    content: '\e581';
+    color: #8f8f94;
+    right: -2px;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .predictTime{
+	padding-right: 0;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .guideMoney input{
+	width: auto;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    text-align: right;
+    border: none;
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments{
+	padding-right: 0;
+	/*padding-bottom: 25px;
+	margin-top: 20px;*/
+}
+.carDetails .mui-table-view-cell.mui-collapse .mui-table-view-chevron .comments textarea{
+	margin-top: 12px;
+}
+.car_load .mui-table-view-cell.mui-collapse .mui-table-view-chevron .mui-table-view-cell{
+	margin-left: 0; 
+	background-position: 0px 100%;
+    padding: 15px 0;
+    font-size: 14px;
+    /*padding-right: 15px;*/
+}
+
+.car_load .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell{
+	padding-left: 0;
+}
+.secondHand .radio_inline{
+    display: inline-block;
+    width: 65%;
+    margin-right: 0;
+    text-align: right !important;
+}
+ .secondHand .radio_inline label{
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    top: -17px;
+}
+.secondHand .radio_inline input[type=radio]{
+    width: 15%;             
+    right: auto;
+    top: -4px;
+    z-index: 1000;
+}
+.secondHand .mui-radio > label.require{
+	margin:0;
+	padding: 0;
+	width: 22%;
+	float: left;
+}
+/*车险*/
+.original .insurance > label{
+	margin-left: 14px;
+	color: #333333;
+}
+.original .insurance > label:after{
+	font-family: Muiicons;
+	content: '\e581';
+	margin-left: 10px;
+	color: #666666;
+}
+.original .insurance .insuranceDetail{
+	display: none;
+}
+.original .insurance .insuranceDetail > div{
+	clear: both;
+	padding: 11px 0;
+	border-bottom: 1px solid #E4E4E4;
+}
+.original .insurance .insuranceDetail > div:last-child{
+	border: none;
+	margin-top: 20px;
+}
+.original .insurance .insuranceDetail > div:last-child textarea{
+	margin-top: 15px;
+}
+.original .insurance .insuranceDetail > div > span{
+	margin-right: 5px;
+    color: #C71B1E;
+}
+.original .insurance .insuranceDetail > div > p{
+	float: right;
+}
+.original .insurance .insuranceDetail > div > p > span{
+	margin-right: 0;
+}
+.original .insurance .insuranceDetail > div > p > span:after{
+	font-family: Muiicons;
+	content: '\e581';
+	margin-left: 5px;
+}
+.original .insurance .insuranceDetail > div > p > input{
+	width: auto;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    text-align: right;
+    border: none;
+}
+>>>>>>> 107de00d67a45d0d116354a8cc5d23adef6dca1e

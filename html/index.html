@@ -1,3 +1,4 @@
+<<<<<<< 1194cadd3b3798c5a1a9e1f86f30d7c104a4fe19
 <!DOCTYPE html>
 <html>
 
@@ -269,4 +270,293 @@
 		</script>
 	</body>
 
+=======
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link href="../css/reset.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			/*html,
+			body {
+				background-color: #efeff4;
+			}*/
+			.mui-tab-item.mui-active{
+				color: #0062CC!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>
+			<!--<h1 id="title" class="mui-title">线索</h1>-->
+			<h1 id="title" class="mui-title">客流</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="leadsTab" class="mui-tab-item mui-active" href="#" data-wid='leads/index-leads.html'>
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">线索</span>
+			</a>
+			<a id="opporTab" class="mui-tab-item" href="#" data-wid="opportunity/index-opportunity.html">
+				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-tab-label">意向</span>
+			</a>
+			<a id="orderTab" class="mui-tab-item" href="#" data-wid="order/index-order.html">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>
+			<a id="findTab" class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
+			<a id="mineTab" class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			 //mui初始化
+			//初始化mui
+			mui.init({
+				gestureConfig: {
+					doubletap: true
+				},
+				preloadPages:[{
+					id: 'incrementCustomerListSearch',//b页面id
+					url:'order/incrementOrder_customerList_search.html'
+				},{
+					id: 'opporSearchResult',//b页面id
+					url:'opportunity/opportunity-search-result.html'
+				},{
+					id: 'orderSearch',//b页面id
+					url:'order/order_search.html',
+				}]
+				
+	
+			});
+			var subpages = ['leads/index-leads.html','opportunity/index-opportunity.html','order/index-order.html'];
+			var subpage_style = {
+				top: '45px',
+				bottom: '51px'
+			};
+			
+			var aniShow = {};
+			//下拉刷新/上拉加载
+			var pageFlag = 0;
+			 //创建子页面，首个选项卡页面显示，其它均隐藏；
+			mui.plusReady(function() {
+				if(!localStorage.getItem('$state')) {
+					plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+					common.baseOption.goToLogin();
+					return;
+				}
+				console.log("创建子页面");
+				var self = plus.webview.currentWebview();
+				for (var i = 0; i < subpages.length; i++) {
+					console.log(subpages[i]);
+					var temp = {};
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if (i > 0) {
+						sub.hide();
+					}else{
+						temp[subpages[i]] = "true";
+						mui.extend(aniShow,temp);
+					}
+					self.append(sub);
+				}
+			});
+			 //当前激活选项
+			var activeTab = subpages[0];
+			var header = document.getElementById("header");
+			var title = document.getElementById("title");
+			 //选项卡点击事件
+			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				
+				console.log("模拟点击");
+				var targetTab = this.getAttribute('data-wid');
+				console.log(targetTab);
+				console.log(activeTab);
+				
+				var wvs=plus.webview.all();
+				for(var i=0;i<wvs.length;i++){
+					console.log('webview'+i+': '+wvs[i].getURL());
+					console.log('webview'+i+': '+wvs[i].id);
+				}
+				if(!plus.webview.getWebviewById(targetTab)){
+					console.log("重新加载页面");
+					var sub = plus.webview.create(targetTab, targetTab, subpage_style);
+					var self = plus.webview.currentWebview();
+					self.append(sub);
+				}
+				
+				
+				if (targetTab == activeTab) {
+//					var headerHtml = '';
+//					//线索
+//					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
+//								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
+//			 						+'<h1 id="title" class="mui-title">线索</h1>';
+//	
+//					header.innerHTML = headerHtml;
+//					pageFlag = 0;
+					
+					return;
+				}
+				
+				//更换标题
+				//删除header下面所有的old子节点
+				while(header.hasChildNodes()) {
+					console.log(header.firstChild);
+					header.removeChild(header.firstChild);
+				}
+				console.log("header.firstChild");
+				
+				//更换header样式
+				if(targetTab == "leads/index-leads.html") {
+					var headerHtml = '';
+					//线索
+					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
+								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">客流</h1>';
+	
+					header.innerHTML = headerHtml;
+					pageFlag = 0;
+					
+				}else if(targetTab == "opportunity/index-opportunity.html"){
+					
+					var headerHtml = '';
+					//意向
+					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="oppo-search"></a>'
+			 						+'<h1 id="title" class="mui-title">意向</h1>';
+	
+					header.innerHTML = headerHtml;
+					showOpporSearchPage();
+					pageFlag = 1;
+				}else if(targetTab == "order/index-order.html"){
+					var headerHtml = '';
+					//订单
+					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left" id="increment-icon-add"></a>'
+								 +'<a class="mui-icon mui-icon-search mui-pull-right" id="increment-icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">订单</h1>';	
+					header.innerHTML = headerHtml;
+					showPage();
+					pageFlag = 2;
+				}
+				
+				//显示目标选项卡
+				//若为iOS平台或非首次显示，则直接显示
+				if(mui.os.ios||aniShow[targetTab]){
+					plus.webview.show(targetTab);
+				}else{
+					//否则，使用fade-in动画，且保存变量
+					var temp = {};
+					temp[targetTab] = "true";
+					mui.extend(aniShow,temp);
+					plus.webview.show(targetTab,"fade-in",300);
+				}
+				//隐藏当前;
+				plus.webview.hide(activeTab);
+				//更改当前活跃的选项卡
+				activeTab = targetTab;
+			});
+//			 //自定义事件，模拟点击“首页选项卡”
+			document.addEventListener('gohome', function() {
+				var defaultTab = document.getElementById("leadsTab");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if (defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+			});
+			
+			//自定义事件，模拟点击“某一个选项卡”，从而实现首页选项卡切换
+			document.addEventListener('tabSwith', function(e){//执行刷新
+				//模拟首页点击
+				
+				var id=e.detail.id;	
+				var gotab = document.getElementById(id);	
+				mui.trigger(gotab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if (gotab !== current) {
+					current.classList.remove('mui-active');
+					gotab.classList.add('mui-active');
+				}
+				var targetTab = document.getElementById(id).getAttribute('data-wid');
+				var contentWebview = plus.webview.getWebviewById(targetTab);
+				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().pulldownLoading()");
+//				//下拉刷新/上拉加载
+//				if(targetTab == "leads/index-leads.html"){
+//					console.log("//下拉刷新/上拉加载");
+//					var contentWebview = plus.webview.getWebviewById(targetTab);
+//					contentWebview.evalJS("mui('#flowPullrefresh').pullRefresh().pullupLoading()");
+////					var self = plus.webview.currentWebview();
+////					self.append(contentWebview);
+//					
+//				}else if(targetTab == "opportunity/index-opportunity.html"){
+//					var contentWebview = plus.webview.getWebviewById(targetTab);
+//					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().pullupLoading();");
+////					contentWebview.evalJS("mui('#opporPullrefresh').pullRefresh().scrollTo(0,0,100)");
+//				}
+////				console.log("targetTab");
+////				console.log(targetTab);
+//				plus.webview.show(targetTab);
+				
+			});
+			function showPage(){
+				document.getElementById('increment-icon-add').addEventListener('tap',function(){
+				console.log("increment-icon-add");
+			//		打开客户列表页面
+					mui.openWindow({
+						id: 'incrementCustomerListSearch',//b页面id
+						url:'order/incrementOrder_customerList_search.html',
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							aniShow: "slide-in-right"
+						}
+					})
+				})	
+				document.getElementById('increment-icon-search').addEventListener('tap',function(){
+			//		打开客户列表页面
+					mui.openWindow({
+						id: 'orderSearch',//b页面id
+						url:'order/order_search.html',
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							aniShow: "slide-in-right"
+						}
+					})
+				})
+				
+				
+			}
+			function showOpporSearchPage(){
+				document.getElementById('oppo-search').addEventListener('tap',function(){
+					mui.openWindow({
+						id: 'opporSearchResult',//b页面id
+						url:'opportunity/opportunity-search-result.html'
+					})
+				})
+			}
+			
+			
+			
+		</script>
+	</body>
+
+>>>>>>> 107de00d67a45d0d116354a8cc5d23adef6dca1e
 </html>
