@@ -95,7 +95,7 @@
 		params = {
 			orderType:"wholeVehicle",
 			customer:customer,
-			lineItemName:document.getElementById('lineItemName').getAttribute('data-value')||'';
+			lineItemName:document.getElementById('lineItemName').getAttribute('data-value')||''
 		}
 //		params.push(customer);
 		console.log(JSON.stringify(params));
