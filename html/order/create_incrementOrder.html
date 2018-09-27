@@ -358,7 +358,7 @@
 		                <ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<div class="uploadAccessory" id="uploadAccessory">
-									<img src="../../images/camera.png"/>
+									<img src="../../images/camera.png" id="head-img1"/>
 									<p>请上传身份证</p>
 								</div>
 							</li>
@@ -383,6 +383,7 @@
 		<script src="../../js/order/order-picker.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script src="../../js/order/incrementOrder-event-option.js"></script>
+		<script src="../../js/order/img-upload.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -440,23 +441,6 @@
 					
 					
 				});
-				
-				
-				
-				// 从相册中选择图片 
-				function galleryImg() {
-					// 从相册中选择图片
-					console.log("从相册中选择图片:");
-				    plus.gallery.pick( function(path){
-				    	console.log(path);
-				    }, function ( e ) {
-				    	console.log( "取消选择图片" );
-				    }, {filter:"image"} );
-				}
-				
-				doc.getElementById('uploadAccessory').addEventListener('tap',function(){
-					galleryImg();
-				})
 
 			
 
@@ -464,5 +448,4 @@
 		</script>
 	</body>
 
->>>>>>> 107de00d67a45d0d116354a8cc5d23adef6dca1e
 </html>

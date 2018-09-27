@@ -266,7 +266,7 @@
 						pagesize: 10,
 						orderType: orderType
 					}
-					
+					var orderScroll = document.body.querySelector('.mui-scroll-list');
 					order.qryOrderList(params, function(data) {
 						console.log("订单列表");
 						console.log(data);
@@ -283,8 +283,6 @@
 								libDiv.setAttribute("style", "font-size:18px;text-align: center;line-height: 100px;");
 								var item = "没有订单";
 								libDiv.innerHTML = item;
-									//下拉刷新，新纪录插到最前面；
-								console.log("下拉刷新，新纪录插到最前面");
 								orderScroll.appendChild(libDiv);
 								mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 								return;
@@ -313,7 +311,6 @@
 						orderType: orderType
 					}
 					var orderScroll = document.body.querySelector('.mui-scroll-list');
-					var orderCard = document.body.querySelectorAll('.mui-card-list');
 					order.qryOrderList(params, function(data) {
 						console.log("订单列表");
 						console.log(data);

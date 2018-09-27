@@ -136,10 +136,13 @@
 					console.log(data.followOpportunityList);
 					console.log("follow oppo list result:"+JSON.stringify(data));
 //					var data = JSON.parse(data);
+					var timeline = document.body.querySelector('.timeline');
 					if(data.success==true) {
 						var followOpportunityList = data.followOpportunityList;
 						console.log(followOpportunityList);
-						var timeline = document.body.querySelector('.timeline');
+						while(timeline.hasChildNodes()){
+							timeline.removeChild(timeline.firstChild);
+						}
 						if(followOpportunityList.length>0){
 							$.each(followOpportunityList,function(index,followOpportunity){
 								
@@ -150,16 +153,22 @@
 													'</p>'+
 													'<p class="timeline-body-time font-12-666">'+content.creationtime+'<p>';
 						        })
+								var bodyContent = followOpportunity.salesConsultantName;
+								console.log(bodyContent);
+								if(followOpportunity.contentList.length<1){
+									bodyContent = followOpportunity.type+'&nbsp;&nbsp;&nbsp;'+bodyContent;
+								}
 						
 								var timelineItem = document.createElement('div');
 								timelineItem.className = 'timeline-item';
 								timelineItem.setAttribute("data-code",followOpportunity.code);
+								timelineItem.setAttribute("data-opporCode",opporCode);
 								timelineItem.setAttribute("data-typeCode",followOpportunity.typeCode );
 								timelineItem.innerHTML ='<div class="timeline-badge"></div>'+
 												'<div class="timeline-body">'+
 													'<div class="timeline-body-head">'+contentHtml+'</div>'+
 													'<div class="timeline-body-content">'+
-														'<p class="font-12-333">'+followOpportunity.storeName+'&nbsp;&nbsp;&nbsp;'+followOpportunity.salesConsultantName+'</p>'+
+														'<p class="font-12-333">'+bodyContent+'</p>'+
 													'</div>'+
 												'</div>';
 								console.log("=============line 123================");
@@ -167,7 +176,9 @@
 								timeline.appendChild(timelineItem);
 							})
 						}else{
-							doc.getElementById('demo1').innerHTML="<p>没有跟进记录</p>"
+							var p = document.createElement('p');
+							p.innerHTML="没有跟进记录";
+							timeline.appendChild(p);
 						}
 					} else if(data.messageCode == '403'){//token过期，重新登录
 						plus.nativeUI.toast(data.message);
@@ -179,6 +190,7 @@
 			}
 			$('.timeline').on('tap','.timeline-item',function(){
 				var followCode = this.getAttribute('data-code');
+				var opporCode = this.getAttribute('data-opporCode');
 				var typeCode = this.getAttribute('data-typeCode');
 				console.log(typeCode);
 //				if(typeCode == 'invitation'||typeCode == 'outsideActivity'||typeCode == 'inshop'){
@@ -187,7 +199,8 @@
 						id: "followRecordDetail",//默认使用当前页面的url作为id
 						extras: {
 							followCode: followCode,
-							typeCode:typeCode
+							typeCode:typeCode,
+							opporCode:opporCode
 							
 						}, //自定义扩展参数
 						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示

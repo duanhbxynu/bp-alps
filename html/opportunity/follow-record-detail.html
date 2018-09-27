@@ -374,32 +374,35 @@
 						<var id="bookingCartNTime">是</var>
 					</div>
 				</div>
-				
 			</div>
-			<div class="mui-card mui-hidden" id="quotationList">
+			<comment class="mui-hidden" id="quotationList">
+				<script id='quotation-template' type="text/template">
+				<% for(var i in contentList){ var item=contentList[i]; %>
+			<div class="mui-card">
 				<div class="mui-card-header">报价单详情</div>
 				<div class="mui-card-content">
 					<div class="mui-input-row"> 
 						<label>报价单编号 </label>
-						<var id="customerName">电话邀约</var>
+						<var id="customerName"><%=item.code%></var>
 					</div>
 					<div class="mui-input-row">
 						<label>报价单状态 </label>
-						<var id="licenseNumber">王丽</var>
+						<var id="licenseNumber"><%=item.status||'草稿'%></var>
 					</div>
 					<div class="mui-input-row">
 						<label>报价单时间</label>
-						<var id="vehicleCategory">activity1</var>
+						<var id="vehicleCategory"><%=item.creationtime%></var>
 					</div>
 					<div class="mui-input-row">
 						<label>总价 </label>
-						<var id="vehicle">是</var>
+						<var id="vehicle"><%=item.totalPrice%></var>
 					</div>
-				</div>
+				</div>	
 				
 			</div>
-		
-			</div>
+				<% } %>
+				</script>
+			</comment>
 			
 		</div>
 		<footer id="footer">
@@ -455,7 +458,7 @@
 					});
 				}
 				
-				function showDetail(followCode){
+				function showDetail(followCode,opporCode){
 					follow.getFollowDetail(followCode,function(data){
 						console.log(data);
 						var data = JSON.parse(data);
@@ -514,6 +517,36 @@
 							plus.nativeUI.toast(data.message);
 						}
 					})
+					
+					$.ajax({
+						url:serviceBaseUrl+"alpssalewebservices/quotaion/list",
+						type:"POST",
+						dataType:"json",
+						contentType: 'application/json',
+			            data: JSON.stringify({oppoCode:opporCode}),
+			            beforeSend: function (xhr) {
+						       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
+						},
+						success: function (data) {
+							console.log("quotation list result:"+JSON.stringify(data));
+							console.log("--------------------------------------------------------------");
+							if(data.success){
+								var quotationList = data.quotationList;
+								if(quotationList){
+									//追加模板消息 
+							        var str = template('quotation-template', { 
+							            "contentList": quotationList
+							        }); 
+							        doc.getElementById('quotationList').innerHTML =  str;
+								}
+							}
+					    },
+					    error: function(jqXHR, textStatus, errorThrown){
+					    	//location.href = baseConfig.baseUrl+baseConfig.login_page;
+					    }
+					})
+					
+					
 					
 				}
 				doc.getElementById("msg-send").addEventListener('tap',function(){
@@ -581,8 +614,8 @@
 					
 					var self = plus.webview.currentWebview();
 					followCode = self.followCode;
-					
-					showDetail(followCode);
+					opporCode = self.opporCode;
+					showDetail(followCode,opporCode);
 					initNativeObjects();
 					showKeyboard();	
 					

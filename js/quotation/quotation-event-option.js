@@ -54,7 +54,7 @@
 	})
 	
 	document.getElementById('creatQuotation').addEventListener('tap',function(){
-		
+		var page = this.getAttribute('data-page');
 		var opportunityCode = document.getElementById('customerName').getAttribute('data-oppoCode');
 		var deposit = document.getElementById('deposit').value;
 		var orderType = document.getElementById('order_type').getAttribute('data-value');
@@ -67,7 +67,7 @@
 		var deliveryDate = document.getElementsByClassName("preTime")[0].getAttribute("data-value");
 		var carPrice = document.getElementById('carPrice').value;
 		var carSalesPrice = document.getElementById('carSalesPrice').value;
-		var paymentType = document.getElementsByClassName("payWay")[0].getAttribute("data-value");
+//		var paymentType = document.getElementsByClassName("payWay")[0].getAttribute("data-value");
 		//原厂选装
 		var optionalProduct = [];
 		mui('.optionalProduct input[type=checkbox]:checked').each(function(){
@@ -200,19 +200,19 @@
 		var otherIncomInfo = document.getElementById('otherIncomInfo').value;
 		var otherPrice = document.getElementById('otherPrice').value;
 		
-		var params1 = {
-			opportunityCode: opportunityCode,
-			deposit: deposit,
-			lineItemName: orderType,
-			vehicleBrand: brands,
-			vehicle: vehicle,
-			carModel: carModel,
-			carColor: outColors,
-			carInsideColor: innerColors,
-			deliveryDate: deliveryDate,
-			paymentType: paymentType,
-			carPrice: carPrice,
-			carSalesPrice: carSalesPrice,
+		var params = {
+			opportunityCode:opportunityCode,
+			deposit:deposit,
+			lineItemName:orderType,
+			vehicleBrand:brands,
+			vehicle:vehicle,
+			carModel:carModel,
+			carColor:outColors,
+			carInsideColor:innerColors,
+			deliveryDate:deliveryDate,
+//			paymentType:paymentType,
+			carPrice:carPrice,
+			carSalesPrice:carSalesPrice,
 			optionalProduct:optionalProduct, 
 			upholsteryProduct:upholsteryProduct,
 			secondHandCarMortgage:secondHandCarMortgage,
@@ -248,29 +248,64 @@
 			otherIncomInfo:otherIncomInfo,
 			otherPrice:otherPrice
 		};
-		console.log(JSON.stringify(params1));
-		var params = {
-			"opportunityCode":"OP0000012",
-			"lineItemName":"type1",
-			"vehicleBrand":"bmw",
-			"vehicle":"G30",
-			"carModel":"B0003",
-			"carColor":"B0003_B",
-			"carSalesPrice":"3000",
-			"carPrice":"1017",
-			"optionalProduct":[{"code":"M0001","price":"590","actualPrice":"500","quantity":"4"},{"code":"M0002","price":"591","actualPrice":"591","quantity":"1"}],
-			"secondHandCarRecycleType":"1",
-			"licensePlatePurchaseMethod":"license1",
-			"vehicleTypeForLicensePlate":"国内",
-			"financeType":"financeType1",
-			"financeCycle":"24"
+		console.log(JSON.stringify(params));
+		var params1 ={
+			carColor: "A0002_B",
+			carInsideColor: "A0001_B",
+			carModel: "A0002",
+			carPrice: "1005",
+			carSalesPrice: "1000",
+			coupon:[{code: "V0001", price: "595", actualPrice: "5", quantity: "5"},
+					{code: "V0002", price: "596", actualPrice: "5", quantity: "5"}],
+			deliveryDate: null,
+			deposit: "500",
+			extendedWarrantyProduct:[{code: "I0004", price: "593", actualPrice: "5", quantity: "5"}],
+			financeCompany: "5",
+			financeCycle: "12",
+			financeMortgage: "true",
+			financeProduct: "5",
+			financeRate: "5",
+			financeRemark: "5",
+			financeServiceCharge: "5",
+			financeStartTime: "2018-09-27",
+			financeType: "financeType1",
+			financeUnitPrice: "5",
+			insuranceProduct:[{code: "I0001", price: "590", actualPrice: "5", quantity: "5"},
+							 {code: "I0002", price: "591", actualPrice: "5", quantity: "5"}],
+			licensePlatePurchaseMethod: "license1",
+			licensePlateRemake: "5",
+			licensePlateServiceCharge: "5",
+			licensePlateTax: "5",
+			lineItemName: "type1",
+			opportunityCode: "OP0000000",
+			optionalProduct:[{code: "M0001", price: "590", actualPrice: "5", quantity: "5"},
+							 {code: "M0002", price: "591", actualPrice: "5", quantity: "5"}],
+			otherIncomInfo: "5",
+			otherPrice: "5",
+			secondHandCarBrand: "5",
+			secondHandCarMileage: "5",
+			secondHandCarMortgage: "true",
+			secondHandCarRecycleType: "1",
+			secondHandCarVhicle: "5",
+			serviceInfo: "5",
+			servicePrice: "5",
+			upholsteryProduct:[{code: "M0004", price: "593", actualPrice: "5", quantity: "5"},
+								{code: "M0003", price: "592", actualPrice: "5", quantity: "5"}],
+			vehicle: "a7",
+			vehicleBrand: "audi",
+			vehicleTypeForLicensePlate: "国内",
+			province:null,
+			city:null,
+			financeRemark:"",
+			licensePlateRemake: "",
+			secondHandCarEvaluationOfPrice: ""
 		}
 		mui.ajax({
 			url:serviceBaseUrl+"alpssalewebservices/quotaion/create",
 			type:"POST",
 			dataType:"json",
 			contentType: 'application/json',
-	        data: JSON.stringify(params1),
+	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
 		       xhr.setRequestHeader("Authorization","Bearer " + token);
 		    },
@@ -278,7 +313,22 @@
 				console.log("quotation create result:"+JSON.stringify(data));
 				console.log("--------------------------------------------------------------");
 				if(data.success==true){
-					mui.back();
+					if(page=='add'){
+						mui.back();
+					}else if(page=='clone'){
+						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
+							type: "商谈报价",
+							typeCode:"quotation",
+							opporCode:opportunityCode,
+							name:document.getElementById('customerName').getAttribute('data-name'),
+							mobile:document.getElementById('customerName').getAttribute('data-mobile'),
+						});
+						mui.openWindow({
+							url:'quotation-list.html',
+							id: 'quotation-list'//b页面id
+						})
+					}
+					
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {

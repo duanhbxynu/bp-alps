@@ -66,7 +66,7 @@
 											报价单号<var id="name"><%=( item.code|| '&nbsp;&nbsp;') %></var>
 										</li>	
 										<li class="mui-table-view-cell">
-											状态<var id="tel" class="status"><%=( item.status|| '&nbsp;&nbsp;') %></var>
+											状态<var id="tel" class="status"><%=( item.status|| '草稿') %></var>
 										</li>
 										<li class="mui-table-view-cell">
 											报价时间<var id="intent_car"><%=( item.creationtime|| '&nbsp;&nbsp;') %></var>
@@ -185,44 +185,35 @@
 						mobile = event.detail.mobile;
 						var values = {oppoCode:oppoCode};
 						console.log("quotation list request:"+JSON.stringify(values));
+						
 						$.ajax({
 							url:serviceBaseUrl+"alpssalewebservices/quotaion/list",
 							type:"POST",
 							dataType:"json",
 							contentType: 'application/json',
-				            data: JSON.stringify(values),
+				            data: JSON.stringify({oppoCode:oppoCode}),
 				            beforeSend: function (xhr) {
-							       xhr.setRequestHeader("Authorization","Bearer " + token);
+							       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 							},
 							success: function (data) {
-								console.log(data)
 								console.log("quotation list result:"+JSON.stringify(data));
 								console.log("--------------------------------------------------------------");
-								console.log(data.success);
 								if(data.success){
-									
 									var quotationList = data.quotationList;
-									if(quotationList.length>0){
+									if(quotationList){
 										//追加模板消息 
-										console.log("追加模板消息");
 								        var str = template('content-template', { 
-								            "quotationList": quotationList 
+								            "quotationList": quotationList
 								        }); 
 								        doc.getElementById('mui-content').innerHTML = str;
-									}else{
-										console.log("暂无报价");
-										doc.getElementById('mui-content').innerHTML =  "暂无报价";
 									}
 								}
 						    },
-						    error: function(jqXHR, textStatus, errorThrown){
+					    	error: function(jqXHR, textStatus, errorThrown){
 						    	console.log(jqXHR);
 						    	console.log(textStatus);
 						    	console.log(errorThrown);
 						    	common.baseOption.goToLogin();
-						    },
-						    complete:function(){
-						    	
 						    }
 						})
 					});

@@ -462,6 +462,16 @@
 						document.body.removeChild(document.body.querySelector('.mui-backdrop'));
 					}
 				});
+				//modal 提交
+				doc.getElementById("btn_modal_create").addEventListener('tap', function(event) {
+					plus.nativeUI.toast("提交成功");
+					if (doc.getElementById("modal")) {
+						event.detail.gesture.preventDefault(); //fixed hashchange
+						doc.getElementById("modal").classList.remove('mui-active');
+						doc.getElementById("modal").removeAttribute("style");
+						document.body.removeChild(document.body.querySelector('.mui-backdrop'));
+					}
+				});
 				
 				doc.getElementById("follow_record").addEventListener('tap', function(event) {
 						

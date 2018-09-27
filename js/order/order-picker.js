@@ -18,7 +18,7 @@
 	});
 	
 	//选择订单类型
-	document.getElementById('order_type').addEventListener('tap',function(){
+	document.getElementById('lineItemName').addEventListener('tap',function(){
 		customerPicker.setData(orderType);
 		customerPicker.show(function(SelectedItem) {
 			document.getElementById('lineItemName').innerHTML = SelectedItem[0].text;

@@ -280,12 +280,21 @@
 				
 				setTimeout(function() {
 					var opporScroll = document.body.querySelector('.oppor-scroll');
+					console.log(level);
 					var params = {
-//						level:level,
+						level:level,
 						mobile:mobile,
 						currentPage:0,
 						pagesize:10
 					}
+					if(level == 'H'|| level == 'Today'){
+						params = {
+							mobile:mobile,
+							currentPage:0,
+							pagesize:10
+						}
+					}
+					
 					oppor.qryOpporList(params,function(data) {
 						var data = JSON.parse(data);
 						console.log(data);
@@ -299,7 +308,20 @@
 							count = 0;
 							//2.将数据前2条填充到列表中
 							opportunityList = data.opportunityList;
-							fillingData("pulldown",opportunityList);
+							if(!opportunityList){
+								var libDiv = document.createElement('p');
+								libDiv.setAttribute("style", "font-size:18px;text-align: center;line-height: 100px;");
+								var item = "暂无意向";
+								libDiv.innerHTML = item;
+									//下拉刷新，新纪录插到最前面；
+								console.log("下拉刷新，新纪录插到最前面");
+								opporScroll.insertBefore(libDiv, opporScroll.firstChild);
+								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+								return;
+							}else{
+								fillingData("pulldown",opportunityList);
+							}
+							
 							
 						} else if(data.messageCode == '403'){//token过期，重新登录
 							plus.nativeUI.toast(data.message);
@@ -394,6 +416,7 @@
 						currentPage:0,
 						pagesize:10
 					}
+					var opporScroll = document.body.querySelector('.oppor-scroll');
 					oppor.qryOpporList(params,function(data) {
 						var data = JSON.parse(data);
 						console.log(data);
@@ -403,7 +426,18 @@
 //							alert(data.customerFlowList.length);
 							opportunityList = data.opportunityList;
 //							alert(customerFlowList);
-							fillingData("pullup",opportunityList);
+							
+							if(!opportunityList){
+								var libDiv = document.createElement('p');
+								libDiv.setAttribute("style", "font-size:18px;text-align: center;line-height: 100px;");
+								var item = "暂无意向";
+								libDiv.innerHTML = item;
+								opporScroll.appendChild(libDiv);
+								mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+								return;
+							}else{
+								fillingData("pullup",opportunityList);
+							}
 						}else {
 							console.log('line220');
 							plus.nativeUI.toast(data.error);
