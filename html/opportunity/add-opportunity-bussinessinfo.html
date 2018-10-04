@@ -75,6 +75,9 @@
 			[data-type="year"] [data-id="title-m"] {
 			    display: none!important;
 			}
+			.replacementRow:after{
+				height: 0px!important;
+			}
 			
 		</style>
 
@@ -124,27 +127,21 @@
 			</div>
 			<div class="mui-card">
 				<div class="mui-input-group  mui-clearfix">
-					<div class="mui-input-row mui-select-row">
+					<div class="mui-input-row mui-select-row car">
 						<label class="require">意向品牌</label>
-						<!--<label style="float: right;text-align: right;padding-right: 20px;" class="vehicleTypeCode" value="奥迪">奥迪</label>-->
-						<span class="mui-select" data-desc="意向品牌" id="vehicleTypeCode">
+						<span class="mui-select vehicleBrand" data-desc="意向品牌" id="vehicleTypeCode">
 							请选择品牌
 						</span>
 					</div>
-					
-					<!--<div class="mui-input-row">
-						<label class="require">意向车系</label>
-						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择车系</i>
-					</div>-->
-					<div class="mui-input-row mui-select-row">
+					<div class="mui-input-row mui-select-row car">
 						<label class="require">意向车系 </label>
-						<span class="mui-select vehicleCategoryCode" data-desc="意向车系" id="vehicleCategoryCode">
+						<span class="mui-select vehicleCategory " data-desc="意向车系" id="vehicleCategoryCode">
 							请选择车系
 						</span>
 					</div>
-					<div class="mui-input-row mui-select-row">
+					<div class="mui-input-row mui-select-row car">
 						<label class="require">意向车型 </label>
-						<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
+						<span class="mui-select vehicle" data-desc="意向车型" id="vehicleCode">
 							请选择车型
 						</span>
 					</div>
@@ -152,9 +149,9 @@
 						<label class="require">意向车型</label>
 						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择车型</i>
 					</div>-->
-					<div class="mui-input-row mui-select-row">
+					<div class="mui-input-row mui-select-row car">
 						<label class="require">颜色偏好</label>
-						<span class="mui-select" id="color" data-desc="颜色偏好">
+						<span class="mui-select outColors" id="color" data-desc="颜色偏好">
 							请选择颜色偏好
 						</span>
 						<!--<input type="text" id="color" name="color" class="mui-input-clear" placeholder="请输入颜色偏好" value="红">-->
@@ -167,31 +164,20 @@
 						<label>竞品车型</label>
 						<input type="text" id="competitiveVehicle" name="competitiveVehicle" class="mui-input-clear" placeholder="请输入竞品车型" value="">
 					</div>
-					<div class="mui-input-row">
+					<div class="mui-input-row" id="replacementRow">
 						<label class="require">是否置换</label>
-						<!--<span class="radio-list radio-single-list">
-							<div class="mui-radio mui-left ">
-								<label class="active">是</label>
-								<input id="Gender_male" name="gender" class="gender" type="radio" checked="true" />
-							</div> 
-							<span class="spliter" style="margin-right: 8px;">|</span> 
-							<div class="mui-radio mui-left ">
-								<label class="female">否</label>
-								<input id="Gender_female" name="gender" class="gender"  type="radio">
-							</div>
-						</span>-->
 						<div class="radio-list radio-single-list ">
-						    <div class="mui-radio mui-left active">
-								<label class="">是</label>
+						    <div class="mui-radio mui-left">
+								<label for="replacement_true" class="">是</label>
 								<input id="replacement_true" value="true" name="replacement" class="replacement" type="radio" checked="true" />
 							</div>
 							<div class="mui-radio mui-left">
-								<label class="">否</label>
+								<label for="replacement_false" class="">否</label>
 								<input id="replacement_false" value="false" name="replacement" class="replacement"  type="radio">
 							</div>
 					    </div>
 					</div>
-					<div class="mui-input-row">
+					<div class="mui-input-row" id="replacementVehicleRow">
 						<label>置换车辆信息</label>
 						<input type="text" name="replacementVehicle" id="replacementVehicle" class="mui-input-clear" placeholder="请输入置换车辆信息" value="">
 					</div>
@@ -199,19 +185,15 @@
 			</div>
 			<div class="mui-card">
 				<div class="mui-input-group">
-					<!--<div class="mui-input-row ">
-						<label class="require">购车类型</label>
-						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择购车类型</i>
-					</div>-->
 					<div class="mui-input-row mui-select-row">
 						<label class="require">购车类型 </label>
-						<span class="mui-select" id="purchaseTypeCode" data-desc="购车类型">
+						<span class="mui-select purchaseType" id="purchaseTypeCode" data-desc="购车类型">
 							请选择购车类型
 						</span>
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label class="require">预购日期</label>
-						<span class="mui-select" name="purchaseTimeTypeCode" data-desc="预购日期" id="purchaseTimeTypeCode">
+						<span class="mui-select purchaseTime" name="purchaseTimeTypeCode" data-desc="预购日期" id="purchaseTimeTypeCode">
 							请选择预购日期
 						</span>
 						<!--<input type="date" name="purchaseTimeTypeCode" id="purchaseTimeTypeCode">-->
@@ -219,13 +201,13 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label class="require">意向级别 </label>
-						<span class="mui-select" name="levelCode" data-desc="意向级别" id="levelCode">
+						<span class="mui-select level" name="levelCode" data-desc="意向级别" id="levelCode">
 							请选择意向级别
 						</span>
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label class="require">购车预算 </label>
-						<span class="mui-select" name="budget" data-desc="购车预算" id="budget">
+						<span class="mui-select budget" name="budget" data-desc="购车预算" id="budget">
 							请选择购车预算
 						</span>
 					</div>
@@ -239,7 +221,7 @@
 					</div>-->
 					<div class="mui-input-row mui-select-row">
 						<label>付款方式</label>
-						<span class="mui-select" id="paymentMethod">
+						<span class="mui-select paymentMethod" id="paymentMethod">
 							请选择付款方式
 						</span>
 						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择付款方式</i>-->
@@ -250,14 +232,14 @@
 				<div class="mui-input-group">	
 					<div class="mui-input-row mui-select-row">
 						<label>购车用途</label>
-						<span class="mui-select" name="purpose" id="purpose">
+						<span class="mui-select purpose" name="purpose" id="purpose">
 							请选择购车用途
 						</span>
 						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择购车用途</i>-->
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>驾照颁发年份</label>
-						<span class="mui-select"  name="licenseYear" id="licenseYear">
+						<span class="mui-select year"  name="licenseYear" id="licenseYear">
 							请选择驾照颁发年份
 						</span>
 						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择驾照颁发年份</i>-->
@@ -350,7 +332,9 @@
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.min.js"></script>
-		<script src="../../js/oppor/oppor-bussiness-picker.js"></script>
+		<script src="../../js/common/common-picker.js"></script>
+		<!--<script src="../../js/oppor/oppor-bussiness-picker.js"></script>-->
+		
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -369,6 +353,33 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				
+				//动态获取购车关注点
+				var buyerPointBtnGroup = doc.body.querySelector('.buyerPoint-btn-group');
+				$.each(buyPointGroup, function(i, buyPoint) {
+					var buyerPointbtn = doc.createElement('button');
+					buyerPointbtn.className = 'mui-btn mui-btn-outlined';
+					buyerPointbtn.setAttribute("data-value", buyPoint.value);
+					buyerPointbtn.setAttribute("name", "buyerPoint");
+					buyerPointbtn.innerText = buyPoint.text;
+					buyerPointBtnGroup.appendChild(buyerPointbtn);
+				})
+				
+				//动态获取服务需求
+				var servicesTypesBtnGroup = doc.body.querySelector('.servicesTypes-btn-group');
+				$.each(servicesTypesGroup, function(i, servicesTypes) {
+					var servicesTypesbtn = doc.createElement('button');
+					servicesTypesbtn.className = 'mui-btn mui-btn-outlined';
+					servicesTypesbtn.setAttribute("data-value", servicesTypes.value);
+					servicesTypesbtn.setAttribute("name", "buyerPoint");
+					servicesTypesbtn.innerText = servicesTypes.text;
+					servicesTypesBtnGroup.appendChild(servicesTypesbtn);
+				})
+				
+				//购车关注点监听事件,服务需求监听事件
+				$('.buyerPoint-btn-group,.servicesTypes-btn-group').on('tap','button',function(e){
+					this.classList.add('mui-btn-outlined-active');
+				})
 				
 				var baseOpportunity = null;
 
@@ -511,7 +522,7 @@
 					$.back();
 				})
 				
-				//性别切换
+				//是否置换
 				$('.radio-single-list').on('tap','.replacement',function(){
 					var replacementVehicle = this;
 					
@@ -520,11 +531,20 @@
 						this.checked = !this.checked;
 						$.trigger(this, 'change');
 							
-						$(".radio-single-list .mui-radio").each(function () {
-							this.classList.remove('active');
-						}) 
-						replacementVehicle.parentNode.classList.add('active');
+//						$(".radio-single-list .mui-radio").each(function () {
+//							this.classList.remove('active');
+//						}) 
+//						replacementVehicle.parentNode.classList.add('active');
 							
+					}
+					var replacementValue = replacementVehicle.value;
+					console.log("replacementVehicle.value="+replacementValue);
+					if(replacementValue == 'true'){
+						doc.getElementById('replacementVehicleRow').classList.remove('mui-hidden');
+						doc.getElementById('replacementRow').classList.remove('replacementRow')
+					}else{
+						doc.getElementById('replacementRow').classList.add('replacementRow');
+						doc.getElementById('replacementVehicleRow').classList.add('mui-hidden');
 					}
 				})	
 				

@@ -1,8 +1,9 @@
-	if(!localStorage.getItem('$state')) {
-		plus.nativeUI.toast('登陆过期，请重新登陆！');
-		common.baseOption.goToLogin();
-	}
-	var token = JSON.parse(localStorage.getItem('$state')).token;
+//	if(!localStorage.getItem('$state')) {
+//		plus.nativeUI.toast('登陆过期，请重新登陆！');
+//		return;
+//		common.baseOption.goToLogin();
+//	}
+//	var token = JSON.parse(localStorage.getItem('$state')).token;
 	var searchAResultPicker = new mui.PopPicker();
 	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
 	var count = 0;
@@ -25,7 +26,7 @@
 			contentType: 'application/json',
 			data: JSON.stringify(values),
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + token);
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: function(data) {
 				console.log("product list result:" + JSON.stringify(data));
@@ -46,8 +47,8 @@
 				console.log(type);
 				console.log("errorThrown");
 				console.log(errorThrown);
-				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+//				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//				common.baseOption.goToLogin();
 			}
 		})
 	
@@ -307,14 +308,24 @@
 			contentType: 'application/json',
 	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
-		       xhr.setRequestHeader("Authorization","Bearer " + token);
+		       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 		    },
 			success: function (data) {
 				console.log("quotation create result:"+JSON.stringify(data));
 				console.log("--------------------------------------------------------------");
 				if(data.success==true){
 					if(page=='add'){
-						mui.back();
+						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
+							type: "商谈报价",
+							typeCode:"quotation",
+							opporCode:opportunityCode,
+							name:document.getElementById('customerName').getAttribute('data-name'),
+							mobile:document.getElementById('customerName').getAttribute('data-mobile'),
+						});
+						mui.openWindow({
+							url:'quotation-list.html',
+							id: 'quotation-list'//b页面id
+						})
 					}else if(page=='clone'){
 						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
 							type: "商谈报价",
@@ -338,8 +349,8 @@
 				console.log(textStatus);
 				console.log("errorThrown");
 				console.log(errorThrown);
-				plus.nativeUI.toast('quotation create出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+//				plus.nativeUI.toast('quotation create出错了，请稍后再试！');
+//				common.baseOption.goToLogin();
 			}
 		})
 		

@@ -117,18 +117,18 @@
 	});
 
 	//选择预计交车时间
-	mui(".predictTime").on('tap', '.selPreTime .preTime', function() {
-		var dDate = new Date();
-		this.picker = new $.DtPicker({
-			type: "date", //设置日历初始视图模式 
-			beginDate: new Date() //设置开始日期 
-		});
-		this.picker.show(function(rs) {
-			document.getElementsByClassName("preTime")[0].value = rs.text;
-			document.getElementsByClassName("preTime")[0].setAttribute("data-value", rs.value);
-			this.picker = null;
-		});
-	});
+//	mui(".predictTime").on('tap', '.selPreTime .preTime', function() {
+//		var dDate = new Date();
+//		this.picker = new $.DtPicker({
+//			type: "date", //设置日历初始视图模式 
+//			beginDate: new Date() //设置开始日期 
+//		});
+//		this.picker.show(function(rs) {
+//			document.getElementsByClassName("preTime")[0].value = rs.text;
+//			document.getElementsByClassName("preTime")[0].setAttribute("data-value", rs.value);
+//			this.picker = null;
+//		});
+//	});
 	
 	//金融类型
 	var financePicker = new mui.PopPicker();

@@ -39,9 +39,10 @@
 				console.log(type);
 				console.log("errorThrown");
 				console.log(errorThrown);
-//				return callback('哎哟，出错了，请稍后再试！');
-				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+				//TODO
+				plus.nativeUI.toast('customer flow list出错了，请稍后再试！');
+				$.back();
+//				common.baseOption.goToLogin();
 			}
 		});
 	}
@@ -63,7 +64,8 @@
 			success: callback,
 		    error: function(xhr, textStatus, errorThrown){
 		    	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			   	common.baseOption.goToLogin();
+		    	$.back();
+//			   	common.baseOption.goToLogin();
 		    }
 		});
 	}
@@ -91,8 +93,10 @@
 			},
 			success: callback,
 			error: function(xhr, textStatus, errorThrown){
-			   	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			   	common.baseOption.goToLogin();
+				//TODO
+//			   	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//			   	common.baseOption.goToLogin();
+				$.back();
 			}
 		})
 	}
@@ -100,11 +104,11 @@
 	//创建意向
 	lead.checkOppor = function(params,callback){
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 		var currentUser = JSON.parse(localStorage.getItem('$state')).username;
 		
 		console.log("customer flow update request51:"+JSON.stringify(params));
@@ -117,11 +121,12 @@
 //			timeout: 1000, //超时时间设置为10秒；
 	        data: params,
 	        beforeSend: function (xhr) {
-			    xhr.setRequestHeader("Authorization","Bearer " + token);
+			    xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown){
-			    common.baseOption.goToLogin();
+				$.back();
+//			    common.baseOption.goToLogin();
 			}
 		});
 	}

@@ -26,7 +26,7 @@
 				console.log("errorThrown");
 				console.log(errorThrown);
 				plus.nativeUI.toast('新建增值订单 --搜索客户出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 			}
 		})
 
@@ -53,7 +53,7 @@
 				console.log("errorThrown");
 				console.log(errorThrown);
 				plus.nativeUI.toast('新建增值订单 --搜索客户出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 			}
 		})
 

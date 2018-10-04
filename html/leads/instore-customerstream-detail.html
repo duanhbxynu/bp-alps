@@ -182,8 +182,8 @@
 					<h1 class="mui-title">意向列表</h1>
 				</header>
 				<div class="mui-content">
-					<p class="modal-self mui-hidden">查询到本人名下存在未完结意向</p>
-					<p class="modal-other">查询到其他销售顾问名下存在未完结意向</p>
+					<!--<p class="modal-self mui-hidden">查询到本人名下存在未完结意向</p>
+					<p class="modal-other">查询到其他销售顾问名下存在未完结意向</p>-->
 					<div class="mui-input-row">
 						<!--<label id="oppor_code">意向编号</label>
 						<label id="oppor_name">客户姓名</label>
@@ -194,11 +194,11 @@
 						<label id="oppor_sales"></label>
 						<label id="oppor_create_time"></label>
 					</div>
-					<div class="modal-self mui-button-row mui-hidden">
-						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" id="btn_cancel">取消</button>
-						<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_save_create">提交</button>
+					<div class="modal-self mui-button-row mui-hidden" id="btn_continue_modal">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" id="btn_cancel_modal">取消</button>
+						<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_continue">继续跟进</button>
 					</div>
-					<div class="modal-other mui-button-row">
+					<div class="modal-other mui-button-row" id="btn_edit_modal">
 						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-outlined-sm" id="btn_cancel">取消</button>
 						<button type="button" class="mui-btn mui-btn-danger btn-create-intention btn-lined-lg" id="btn_save_create">获取意向编辑权限</button>
 					</div>
@@ -326,14 +326,19 @@
 					
 				}, false);
 				
-				
+				var detailPage = "";
+				var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
 				$.plusReady(function() {
 
 					/*---------关闭滚动条------*/
 					plus.webview.currentWebview().setStyle({
 						scrollIndicator: 'none'
 					});
-					
+					/*预加载详情页*/
+					detailPage = mui.preload({
+						url:'opportunity/opportunity-detail.html',
+						id:'opporDetail',//默认使用当前页面的url作为id
+					});
 					
 					
 //					$.oldBack = mui.back;
@@ -448,7 +453,46 @@
 				//创建意向
 				
 				doc.getElementById('btn_create').addEventListener('tap',function(){
-//					
+					
+					//保存意向
+					var id = document.getElementById('flow_id').getAttribute("data-id");
+					var name = document.getElementById('flow_name').value;
+					var gender = document.querySelector('[name="gender"]:checked').value;
+					var phone = document.getElementById('flow_phone').value;
+					var inMan = document.getElementById("flow_inMan").value;
+					var inWoman = document.getElementById("flow_inWoman").value;
+					if(!RegCheck.mobile(phone)){
+						return plus.nativeUI.toast("请输入正确的电话");
+					}
+					if(!RegCheck.number(inMan)){
+						return plus.nativeUI.toast("请输入正确的到店人数(男)");
+					}
+					if(!RegCheck.number(inWoman)){
+						return plus.nativeUI.toast("请输入正确的到店人数(女)");
+					}
+					
+					var typeCode = doc.getElementById('showTypePicker').getAttribute("data-value");
+					var typeName = doc.getElementById('showTypePicker').innerText;
+					var statusCode = document.querySelector('.stream-status-row .active').getAttribute("data-value");
+					var statusName = document.querySelector('.stream-status-row .active').innerText;
+					var paramsCustomer = {
+						"id": id,
+						"name": name,
+						"gender": gender,
+						"genderCode": gender,
+						"phone": phone,
+						"inMan": inMan,
+						"inWoman": inWoman,
+						"typeCode": typeCode,
+						"typeName": typeName,
+						"statusCode": statusCode,
+						"statusName": statusName
+					};
+					lead.updateCustomerDetail(paramsCustomer,function(data){
+						if(data.success==true) {
+							console.log(111);
+						} 
+					});
 					var name = document.getElementById('flow_name').value;
 					var gender = document.querySelector('[name="gender"]:checked').value;
 					var mobilestr = doc.getElementById('flow_phone').value;
@@ -481,10 +525,12 @@
 //							location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"&id="+opportunity.code);
 							}else{
 							//3.查询到其他销售顾问名下的未完结意向	
-								document.getElementById("modal").classList.add('mui-active')
+								document.getElementById("modal").classList.add('mui-active');
+								document.getElementById("btn_edit_modal").classList.remove('mui-hidden');
+								document.getElementById("btn_continue_modal").classList.add('mui-hidden');
 								document.getElementById("modal").setAttribute('style','min-height: auto;')
-								var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
-								$('#oppor_code').setAttribute('data-opprcode',opportunity.code);
+//								var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
+								document.getElementById('oppor_code').setAttribute('data-opporcode',opportunity.code);
 								document.getElementById('oppor_code').innerHTML = '意向编号'+opportunity.code;
 								document.getElementById('oppor_name').innerHTML = '客户姓名'+opportunity.name;
 								document.getElementById('oppor_sales').innerHTML = '销售人员'+opportunity.createdPerson;
@@ -591,32 +637,74 @@
 					
 				})
 				
-				function openOpporPage(code,flowToOppor){
-					console.log("创建意向");
-//					console.log("code = "+code);
-//					//打开关于页面
+				document.getElementById('btn_continue').addEventListener('tap',function(){
+					var opporCode = document.getElementById('oppor_code').getAttribute('data-opporcode');
+					if(!detailPage){
+					    detailPage = plus.webview.getWebviewById('opporDetail');
+					}
+					  //触发详情页面的show事件
+					mui.fire(detailPage,'show',opporCode);
+					//打开详情页面          
 					mui.openWindow({
-						url: '../opportunity/add-opportunity-baseinfo.html',
-						id: "oppor-baseinfo", //默认使用当前页面的url作为id
-						styles: { //窗口参数
-							popGesture: 'hide'
-							},
-						extras: {
-							code: code,
-							flowToOppor:flowToOppor
-						}, //自定义扩展参数
+						id: 'opporDetail',
+						url:'opportunity/opportunity-detail.html',
 						show: {
-							autoShow: true, //页面loaded事件发生后自动显示，默认为true
-							//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
-							//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+							aniShow: 'pop-in'
 						},
 						waiting: {
-							autoShow: true, //自动显示等待框，默认为true
-							title: '正在加载...' //等待对话框上显示的提示内容
-						},
-						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
-					})
+							autoShow: false
+						}
+					});
+					
+				})
+				function openOpporPage(code,flowToOppor){
+					console.log("创建意向");
+					if(code){
+						document.getElementById("modal").classList.add('mui-active');
+						document.getElementById("btn_edit_modal").classList.add('mui-hidden');
+						document.getElementById("btn_continue_modal").classList.remove('mui-hidden');
+						document.getElementById("modal").setAttribute('style','min-height: auto;')
+//						var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
+						document.getElementById('oppor_code').setAttribute('data-opporcode',flowToOppor.code);
+						document.getElementById('oppor_code').innerHTML = '意向编号   '+flowToOppor.code;
+						document.getElementById('oppor_name').innerHTML = '客户姓名   '+flowToOppor.name;
+						document.getElementById('oppor_sales').innerHTML = '销售人员   '+flowToOppor.createdPerson;
+//						document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
+						mask.show();//显示遮罩
+					}else{
+						mui.openWindow({
+							url: '../opportunity/add-opportunity-baseinfo.html',
+							id: "oppor-baseinfo", //默认使用当前页面的url作为id
+							styles: { //窗口参数
+								popGesture: 'hide'
+								},
+							extras: {
+								code: code,
+								flowToOppor:flowToOppor
+							}, //自定义扩展参数
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
+								//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+							},
+							waiting: {
+								autoShow: true, //自动显示等待框，默认为true
+								title: '正在加载...' //等待对话框上显示的提示内容
+							},
+							createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+						})
+					}
+//					console.log("code = "+code);
+//					//打开关于页面
+					
 				}
+				
+				doc.getElementById('btn_cancel_modal').addEventListener('tap',function(){
+					document.getElementById("modal").classList.remove('mui-active');
+						document.getElementById("modal").removeAttribute('style');
+						
+						mask.close();//显示遮罩
+				})
 				
 				
 

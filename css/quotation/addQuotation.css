@@ -633,3 +633,42 @@
 	border-color:  #C71B1E;
 	padding: 8px 28px;
 }
+#share {
+    width: 130px;
+}
+#share, #share .mui-table-view, #messages .mui-popover-arrow.mui-bottom:after {
+    background: #FFFFFF;
+}
+
+#share.mui-bar-popover .mui-table-view{
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+}
+#share.mui-bar-popover .mui-table-view li{
+	padding: 0;
+}
+#share.mui-bar-popover .mui-table-view li a{
+    /*width: 90%;*/
+    margin: 0 auto;
+    border-bottom: 1px solid #E4E4E4;
+}
+#share.mui-bar-popover .mui-table-view li:last-child a{
+	border-bottom: none;
+	padding-bottom: 7px;
+}
+#share.mui-bar-popover .mui-table-view li a label{
+	font-size: 13px;
+}
+#share .mui-icon{
+	color:#C71B1E;
+	
+}
+#share .mui-icon-redo:before{
+	margin-right:5px;
+	font-weight: 800;
+	font-size: 18px;
+}
+.mui-icon .mui-badge{
+	background:#C71B1E!important;
+}

@@ -119,15 +119,15 @@
 						</span>
 					</div>
 					<div class="mui-input-row mui-select-row">
-						<label>提车时间 </label>
-						<input class="mui-select" type="date" name="bookingCartSTime" id="bookingCartSTime">
+						<label>提车日期 </label>
+						<input class="mui-select date" type="date" name="bookingCartSTime" id="bookingCartSTime" value="">
 						<!--<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
 							请选择车型
 						</span>-->
 					</div>
 					<div class="mui-input-row mui-select-row">
-						<label>预计还车时间 </label>
-						<input class="mui-select" type="date" name="bookingCartNTime" id="bookingCartNTime">
+						<label>预计还车日期 </label>
+						<input class="mui-select date" type="date" name="bookingCartNTime" id="bookingCartNTime" value="">
 						<!--<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
 							请选择车型
 						</span>-->
@@ -194,7 +194,7 @@
 		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script src="../../js/follow/follow.js"></script>
-		
+		<script src="../../js/common/common-picker.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				var MIN_SOUND_TIME = 800;
@@ -224,35 +224,73 @@
 				var vehicleCategoryCode = "";
 				var vehicleCode = "";
 				var categoryData = "";
+				var vehicleData = "";
 				var vehicleCategoryCodePicker = "";
-				if(!localStorage.getItem('$state')) {
-					plus.nativeUI.toast('登陆过期，请重新登陆！');
-					return;
-				}
-				var username = JSON.parse(localStorage.getItem('$state')).username;
+				var vehicleCodePicker = "";
+				var username = JSON.parse(localStorage.getItem('$state')).username||'';
 				$.plusReady(function() {
 					window.addEventListener('showTitle', function(event) {
 						opporCode = event.detail.opporCode;
 						type = event.detail.type;
 						typeCode = event.detail.typeCode;
 						vehicleTypeCode = event.detail.vehicleTypeCode;
-						vehicleCode  = event.detail.vehicleCode;
 						vehicleCategoryCode = event.detail.vehicleCategoryCode;
+						vehicleCode  = event.detail.vehicleCode;
+						console.log(vehicleTypeCode);
+						console.log(vehicleCategoryCode);
+						console.log(vehicleCode);
+						
 						document.getElementById('mui-title').innerHTML = event.detail.type;
 						document.getElementById('vehicleTypeCode').innerHTML = vehicleTypeCode;
 						//车系
 						vehicleCategoryCodePicker = new $.PopPicker();
+						//车型
+						vehicleCodePicker = new $.PopPicker();
 						mui.each(categoryList, function(i, category) {
 							if(vehicleTypeCode == category.value) {
 								console.log(i);
 								console.log(category);
 								console.log(category.children);
 								categoryData = category.children;
-//								categoryData.push(category.children);
 								console.log(categoryData);
 								vehicleCategoryCodePicker.setData(categoryData);
 								return;
 							}
+						})
+						document.getElementById('vehicleCategoryCode').innerHTML = vehicleCategoryCode;
+						document.getElementById('vehicleCategoryCode').setAttribute("data-vehicleCategoryCode", vehicleCategoryCode);
+						
+						
+						
+						mui.each(categoryData, function(i, item) {
+							if(vehicleCategoryCode == item.value) {
+								document.getElementById('vehicleCategoryCode').setAttribute("data-vehicleCategory", item.text);
+								return;
+							}
+						})
+						mui.each(productList, function(i, product) {
+							if(vehicleCode == product.value) {
+								document.getElementById('vehicleCode').setAttribute("data-vehicle", product.text);
+								document.getElementById('vehicleCode').innerHTML = product.text;
+								document.getElementById('vehicleCode').setAttribute("data-vehicleCode", vehicleCode);
+								return;
+							}
+						})
+						
+						var now = new Date();
+						//格式化日，如果小于9，前面补0
+						var day = ("0" + now.getDate()).slice(-2);
+						//格式化月，如果小于9，前面补0
+						var month = ("0" + (now.getMonth() + 1)).slice(-2);
+						//拼装完整日期格式
+						var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+						//完成赋值
+						console.log(today);
+						mui('input[type=date]').each(function(){
+							this.value = today;
+							this.setAttribute('data-value',today);
+							this.setAttribute('data-text',today);
+							
 						})
 					});
 				})
@@ -315,7 +353,7 @@
 		if(!categoryCode) {
 //			alert("请选择意向车系");
 			//TODO
-			plus.nativeUI.toast("请选择意向车系");
+			plus.nativeUI.toast("请选择车系");
 			return;
 		}
 		var productData = [];
@@ -343,58 +381,46 @@
 
 	}, false);
 	
-		doc.getElementById('bookingCartSTime').addEventListener('tap', function() {
-			var dDate = new Date();
-	//		dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
-			/*
-			 * 首次显示时实例化组件
-			 * 示例为了简洁，将 options 放在了按钮的 dom 上
-			 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
-			 */
-
-			this.picker = new $.DtPicker({
-				type: "date", //设置日历初始视图模式 
-				beginDate: new Date() //设置开始日期 
-				//				    labels: ['Year', 'Mon', 'Day', 'Hour', 'min'],//设置默认标签区域提示语 
-				//				    customData: { 
-				//				        h: [
-				//				            { value: 'AM', text: 'AM' },
-				//				            { value: 'PM', text: 'PM' }
-				//				        ] 
-				//				    }//时间/日期别名 
-			});
-				this.picker.show(function(rs) {
-				doc.getElementById('bookingCartSTime').value = rs.text;
-				doc.getElementById('bookingCartSTime').setAttribute("data-value",rs.value )
-				this.picker = null;
-			});
-		});	
-		doc.getElementById('bookingCartNTime').addEventListener('tap', function() {
-			var dDate = new Date();
-	//		dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
-			/*
-			 * 首次显示时实例化组件
-			 * 示例为了简洁，将 options 放在了按钮的 dom 上
-			 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
-			 */
-
-			this.picker = new $.DtPicker({
-				type: "date", //设置日历初始视图模式 
-				beginDate: new Date() //设置开始日期 
-				//				    labels: ['Year', 'Mon', 'Day', 'Hour', 'min'],//设置默认标签区域提示语 
-				//				    customData: { 
-				//				        h: [
-				//				            { value: 'AM', text: 'AM' },
-				//				            { value: 'PM', text: 'PM' }
-				//				        ] 
-				//				    }//时间/日期别名 
-			});
-			this.picker.show(function(rs) {
-				doc.getElementById('bookingCartNTime').value = rs.text;
-				doc.getElementById('bookingCartNTime').setAttribute("data-value",rs.value )
-				this.picker = null;
-			});
-		});
+	
+	
+//		doc.getElementById('bookingCartSTime').addEventListener('tap', function() {
+//			this.picker = new $.DtPicker({
+//				type: "date", //设置日历初始视图模式 
+//				beginDate: new Date() //设置开始日期 
+//			});
+//			this.picker .show(function(rs) {
+//				doc.getElementById('bookingCartSTime').value = rs.text;
+//				doc.getElementById('bookingCartSTime').setAttribute("data-value",rs.value )
+//				this.picker = null;
+//			});
+//		});	
+//		doc.getElementById('bookingCartNTime').addEventListener('tap', function() {
+//			var dDate = new Date();
+//	//		dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
+//			/*
+//			 * 首次显示时实例化组件
+//			 * 示例为了简洁，将 options 放在了按钮的 dom 上
+//			 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+//			 */
+//
+//			this.picker = new $.DtPicker({
+//				type: "date", //设置日历初始视图模式 
+//				beginDate: new Date() //设置开始日期 
+//				//				    labels: ['Year', 'Mon', 'Day', 'Hour', 'min'],//设置默认标签区域提示语 
+//				//				    customData: { 
+//				//				        h: [
+//				//				            { value: 'AM', text: 'AM' },
+//				//				            { value: 'PM', text: 'PM' }
+//				//				        ] 
+//				//				    }//时间/日期别名 
+//			});
+//			this.picker.show(function(rs) {
+//				console.log(111);
+//				doc.getElementById('bookingCartNTime').value = rs.text;
+//				doc.getElementById('bookingCartNTime').setAttribute("data-value",rs.value );
+//				this.picker = null;
+//			});
+//		});
 
 				doc.getElementById('icon_search').addEventListener('tap',function(){
 					var info = doc.getElementById('inputMarketActivity').value;
@@ -506,6 +532,7 @@
 					$.back();
 				})
 				doc.getElementById('btn_save').addEventListener('tap',function(){
+					var vehicleTypeCode = doc.getElementById('vehicleTypeCode').innerHTML;
     				var vehicleCategoryCode = doc.getElementById('vehicleCategoryCode').getAttribute('data-vehicleCategoryCode');
     				var vehicleCategory = doc.getElementById('vehicleCategoryCode').getAttribute('data-vehicleCategory');
 					var vehicleCode = doc.getElementById('vehicleCode').getAttribute('data-vehicleCode');
@@ -522,15 +549,18 @@
 						opportunityCode:opporCode,
 						followOpportunity:{
 							salesConsultantName:username,
-							type:type,
+//							type:type,
 							typeCode:typeCode,
+							vehicleBrand:vehicleTypeCode,
 							vehicleCategoryCode:vehicleCategoryCode,
-							vehicleCategory:vehicleCategory,
+//							vehicleCategory:vehicleCategory,
 							vehicleCode:vehicleCode,
-							vehicle:vehicle,
-//							connectCustomer:connectCustomer,
+//							vehicle:vehicle,
+							connectCustomer:true,
+							bookingCartSTime:bookingCartSTime,
+							bookingCartNTime:bookingCartNTime,
 							marketActivityCode:marketActivityCode,
-							marketActivityName:marketActivityName,
+//							marketActivityName:marketActivityName,
 							contentList: [
 						      {
 						        content: content
@@ -545,41 +575,54 @@
 						console.log("follow append content result:"+JSON.stringify(data));
 						console.log("--------------------------------------------------------------");
 						if(data.success==true){
-							
-							//微信分享
-							plus.share.getServices(function(ss) {
-							//		s = ss[0];sinaweibo
-							//		s = ss[1];tencentweibo
-							//		s = ss[2];qq
-							//		s = ss[3];weixin
-								for(var i in ss) {
-	
-									var s = ss[i];
-									if(s.id == "weixin") {
-										var msg = {
-											href:"#",
-											title: username + '为您服务',
-											content: "您进行试乘试驾需要上传驾驶证，并进行签名确认！",
-	//										thumbs: ['../../image/logo.png'],
-//											pictures: ['../../image/logo.png'],
-											//"WXSceneSession";/*微信好友*/"WXSceneTimeline" /*微信朋友圈*/
-											extra: {
-												scene: "WXSceneSession"
-											} /*微信好友*/
-										};
-										s.send(msg, function() {
-											plus.nativeUI.alert("分享成功");
-											$.back();
-	
-										}, function(e) {
-											plus.nativeUI.alert("分享失败!");
-										});
-										break;
-									}
+							  //触发详情页面的show事件
+							mui.fire(plus.webview.getWebviewById('opporDetail'),'show',opporCode);
+							//打开详情页面          
+							mui.openWindow({
+								id: 'opporDetail',
+								url:'opportunity-detail.html',
+								show: {
+									aniShow: 'pop-in'
+								},
+								waiting: {
+									autoShow: false
 								}
-							}, function(e) {
-								plus.nativeUI.alert("获取分享服务列表失败：" + e.message);
 							});
+//							$.back();
+							//微信分享
+//							plus.share.getServices(function(ss) {
+//							//		s = ss[0];sinaweibo
+//							//		s = ss[1];tencentweibo
+//							//		s = ss[2];qq
+//							//		s = ss[3];weixin
+//								for(var i in ss) {
+//	
+//									var s = ss[i];
+//									if(s.id == "weixin") {
+//										var msg = {
+//											href:"#",
+//											title: username + '为您服务',
+//											content: "您进行试乘试驾需要上传驾驶证，并进行签名确认！",
+//	//										thumbs: ['../../image/logo.png'],
+////											pictures: ['../../image/logo.png'],
+//											//"WXSceneSession";/*微信好友*/"WXSceneTimeline" /*微信朋友圈*/
+//											extra: {
+//												scene: "WXSceneSession"
+//											} /*微信好友*/
+//										};
+//										s.send(msg, function() {
+//											plus.nativeUI.alert("分享成功");
+//											$.back();
+//	
+//										}, function(e) {
+//											plus.nativeUI.alert("分享失败!");
+//										});
+//										break;
+//									}
+//								}
+//							}, function(e) {
+//								plus.nativeUI.alert("获取分享服务列表失败：" + e.message);
+//							});
 							
 //							alert("success");
 						

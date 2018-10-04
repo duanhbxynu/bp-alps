@@ -20,6 +20,7 @@
 				color: #0062CC!important;
 			}
 			.mui-bar-tab .mui-tab-item .mui-icon-clue{
+<<<<<<< 50653d47f7457d6c974fee09f7fee11815d30447
 				background: url(../images/clue1.png);
 				background-size: 100% 100%;
 			}
@@ -57,6 +58,45 @@
 			}
 			.mui-bar-tab .mui-tab-item.mui-active .mui-icon-mine{
 				background: url(../images/mine2.png);
+=======
+				background: url(../images/clue1.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active .mui-icon-clue{
+				background: url(../images/clue2.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item .mui-icon-intention{
+				background: url(../images/intention1.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active .mui-icon-intention{
+				background: url(../images/intention2.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item .mui-icon-order{
+				background: url(../images/order1.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active .mui-icon-order{
+				background: url(../images/order2.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item .mui-icon-discover{
+				background: url(../images/discover1.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active .mui-icon-discover{
+				background: url(../images/discover2.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item .mui-icon-mine{
+				background: url(../images/mine1.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active .mui-icon-mine{
+				background: url(../images/mine2.png) no-repeat;
+>>>>>>> 92c7592234d8542d6c4e8e599300628981225ed9
 				background-size: 100% 100%;
 			}
 		</style>
@@ -72,7 +112,11 @@
 		<nav class="mui-bar mui-bar-tab">
 			<a id="leadsTab" class="mui-tab-item mui-active" href="#" data-wid='leads/index-leads.html'>
 				<span class="mui-icon mui-icon-clue"></span>
+<<<<<<< 50653d47f7457d6c974fee09f7fee11815d30447
 				<span class="mui-tab-label">线索</span>
+=======
+				<span class="mui-tab-label">客流</span>
+>>>>>>> 92c7592234d8542d6c4e8e599300628981225ed9
 			</a>
 			<a id="opporTab" class="mui-tab-item" href="#" data-wid="opportunity/index-opportunity.html">
 				<span class="mui-icon mui-icon-intention"></span>
@@ -123,11 +167,11 @@
 			var pageFlag = 0;
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
-				if(!localStorage.getItem('$state')) {
-					plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-					common.baseOption.goToLogin();
-					return;
-				}
+//				if(!localStorage.getItem('$state')) {
+//					plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//					common.baseOption.goToLogin();
+//					return;
+//				}
 				console.log("创建子页面");
 				var self = plus.webview.currentWebview();
 				for (var i = 0; i < subpages.length; i++) {
@@ -213,8 +257,7 @@
 				}else if(targetTab == "order/index-order.html"){
 					var headerHtml = '';
 					//订单
-					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left" id="increment-icon-add"></a>'
-								 +'<a class="mui-icon mui-icon-search mui-pull-right" id="increment-icon-search"></a>'
+					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="increment-icon-search"></a>'
 			 						+'<h1 id="title" class="mui-title">订单</h1>';	
 					header.innerHTML = headerHtml;
 					showPage();
@@ -285,18 +328,20 @@
 				
 			});
 			function showPage(){
-				document.getElementById('increment-icon-add').addEventListener('tap',function(){
-				console.log("increment-icon-add");
+				if(document.getElementById('increment-icon-add')){
+					document.getElementById('increment-icon-add').addEventListener('tap',function(){
 			//		打开客户列表页面
-					mui.openWindow({
-						id: 'incrementCustomerListSearch',//b页面id
-						url:'order/incrementOrder_customerList_search.html',
-						show: {
-							autoShow: true, //页面loaded事件发生后自动显示，默认为true
-							aniShow: "slide-in-right"
-						}
-					})
-				})	
+						mui.openWindow({
+							id: 'incrementCustomerListSearch',//b页面id
+							url:'order/incrementOrder_customerList_search.html',
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								aniShow: "slide-in-right"
+							}
+						})
+					})	
+				}
+				
 				document.getElementById('increment-icon-search').addEventListener('tap',function(){
 			//		打开客户列表页面
 					mui.openWindow({
@@ -320,7 +365,25 @@
 				})
 			}
 			
-			
+			document.addEventListener('addIcon', function(e){//执行刷新
+				//模拟首页点击
+				var isAdd=e.detail;	
+				var header = document.getElementById('header');
+				if(isAdd){
+					var headerHtml = '';
+					//订单
+					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left" id="increment-icon-add"></a>'
+								 +'<a class="mui-icon mui-icon-search mui-pull-right" id="increment-icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">订单</h1>';	
+					header.innerHTML = headerHtml;
+				}else{
+					var headerHtml = '';
+					//订单
+					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="increment-icon-search"></a>'
+			 						+'<h1 id="title" class="mui-title">订单</h1>';	
+					header.innerHTML = headerHtml;
+				}
+			});
 			
 		</script>
 	</body>

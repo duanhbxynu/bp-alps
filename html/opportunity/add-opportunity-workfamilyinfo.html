@@ -87,12 +87,12 @@
 						<label>所属行业</label>
 						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择所属行业</i>
 					</div>-->
-					<div class="mui-input-row mui-select-row">
+					<!--<div class="mui-input-row mui-select-row">
 						<label class="require">所属行业 </label>
-						<span class="mui-select" id="industry">
+						<span class="mui-select industry" id="industry">
 							请选择所属行业
 						</span>
-					</div>
+					</div>-->
 					<div class="mui-input-row mui-select-row">
 						<label>公司名称</label>
 						<!--<span class="mui-select" id="showCarPicker">
@@ -103,14 +103,14 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>学历</label>
-						<span class="mui-select" id="education">
+						<span class="mui-select education" id="education">
 							请选择学历
 						</span>
 						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择学历</i>-->
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>工作类型</label>
-						<span class="mui-select" id="workType">
+						<span class="mui-select workType" id="workType">
 							请选择工作类型
 						</span>
 						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择工作类型</i>-->
@@ -121,7 +121,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row mui-select-row">
 						<label>婚姻状况</label>
-						<span class="mui-select" id="maritalStatus">
+						<span class="mui-select maritalStatus" id="maritalStatus">
 							请选择婚姻状况
 						</span>
 						<!--<div class="mui-btn-group maritalStatus-btn-group">
@@ -142,7 +142,7 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>家庭成员数量 </label>
-						<span class="mui-select" id="numberOfFamily">
+						<span class="mui-select numberOfFamily" id="numberOfFamily">
 							请选择家庭成员数量
 						</span>
 						<!--<div class="mui-btn-group numberOfFamily-btn-group">
@@ -162,7 +162,7 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>子女数量 </label>
-						<span class="mui-select" id="numberOfChildren">
+						<span class="mui-select numberOfChildren" id="numberOfChildren">
 							请选择子女数量
 						</span>
 						<!--<div class="mui-btn-group numberOfChildren-btn-group">
@@ -187,14 +187,14 @@
 				<div class="mui-input-group ">
 					<div class="mui-input-row mui-select-row income">
 						<label>个人年收入</label>
-						<span class="mui-select" id="personalncome">
+						<span class="mui-select personalncome" id="personalncome">
 							请选择个人年收入
 						</span>
 						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择个人年收入</i>-->
 					</div>
 					<div class="mui-input-row mui-select-row income">
 						<label>家庭年收入</label>
-						<span class="mui-select" id="familylncome">
+						<span class="mui-select familylncome" id="familylncome">
 							请选择家庭年收入
 						</span>
 						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择家庭年收入</i>-->
@@ -218,7 +218,7 @@
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/oppor/oppor-family-picker.js"></script>
+		<script src="../../js/common/common-picker.js"></script>
 		<script src="../../js/oppor/oppor.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
@@ -257,12 +257,11 @@
 				
 				document.getElementById("btn_save").addEventListener('tap',function(){
 					
-					var industry = doc.getElementById("industry").getAttribute('data-value');
-					if(!industry){
-//						alert("请选择所属行业");
-						plus.nativeUI.toast('请选择所属行业！');
-						return;
-					}
+//					var industry = doc.getElementById("industry").getAttribute('data-value');
+//					if(!industry){
+//						plus.nativeUI.toast('请选择所属行业！');
+//						return;
+//					}
 					var companyName = doc.getElementById("companyName").value;
 					var education = doc.getElementById("education").getAttribute('data-value');
 					var workType = doc.getElementById("workType").getAttribute('data-value');
@@ -275,7 +274,7 @@
 					
 					
 					var familyOppor ={
-						industry:industry,
+//						industry:industry,
 						companyName:companyName,
 						education:education,
 						workType:workType,

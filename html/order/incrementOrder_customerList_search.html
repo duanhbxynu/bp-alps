@@ -175,7 +175,7 @@
 				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper orderList customerList">
 					
 					<div class="mui-scroll">
-						<button type="button" id="createCustomer" class="mui-btn mui-btn-fail mui-btn-block ">
+						<button type="button" id="createCustomer" class="mui-btn mui-btn-fail mui-btn-block mui-hidden">
 							您查找的客户不存在？去新建
 						</button>
 						<div id="customerList">
@@ -356,8 +356,9 @@
 						if(data.success==true){
 							var customerList = data.customerList;
 							if(customerList.length<1){
-								plus.nativeUI.toast('您查找的客户不存在，请重新输入查询条件！')
-								return;
+								document.getElementById('createCustomer').classList.remove('mui-hidden');
+//								plus.nativeUI.toast('您查找的客户不存在，请重新输入查询条件！')
+//								return;
 							}else{
 								doc.getElementById('customerList').innerHTML = template('msg-template', {
 									"customerList": customerList

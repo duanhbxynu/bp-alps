@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/reset.css">
+		<link rel="stylesheet" href="../../css/timeline.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+		<style>
+		
+			
+			.mui-demo-container {
+				padding: 20px 20px 10px 15px;
+			}
+			
+		
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">消息</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-demo-container">
+				<div id="demo1" class="mui-text-left">
+					<div class="timeline">
+						<!-- TIMELINE ITEM -->
+						<div class="timeline-item ">
+							<div class="timeline-badge">
+							</div>
+							<div class="timeline-body">
+								<div class="timeline-body-head">
+									<p class="timeline-body-head-caption">
+										【商谈报价】
+										<span class="timeline-body-desc">客户再次报价</span>
+									</p>
+									
+								</div>
+								<div class="timeline-body-content">
+									<p class="timeline-body-time font-12-666">2018-09-05</span>
+									<p class="timeline-body-time font-13-333">浦东店 王丽</span>
+								</div>
+							</div>
+						</div>
+						<!-- END TIMELINE ITEM -->
+						<!-- TIMELINE ITEM -->
+						<div class="timeline-item ">
+							<div class="timeline-badge">
+							</div>
+							<div class="timeline-body">
+								<div class="timeline-body-head">
+									<p class="timeline-body-head-caption">
+										【商谈报价】
+										<span class="timeline-body-desc">电话沟通报价</span>
+									</p>
+									
+								</div>
+								<div class="timeline-body-content">
+									<p class="timeline-body-time font-12-666">2018-09-03</span>
+									<p class="timeline-body-time font-13-333">浦东店 王丽</span>
+								</div>
+							</div>
+						</div>
+						<!-- END TIMELINE ITEM -->
+					<!-- TIMELINE ITEM -->
+						<div class="timeline-item">
+							<div class="timeline-badge">
+							</div>
+							<div class="timeline-body">
+								<div class="timeline-body-head">
+									<p class="timeline-body-head-caption">
+										【商谈报价】
+										<span class="timeline-body-desc">客户答应商谈报价，到店面谈</span>
+									</p>
+									<p class="timeline-body-time font-12-666">2018-09-03</span>
+								</div>
+								<div class="timeline-body-head">
+									<p class="timeline-body-head-caption">
+										【邀约到店】
+										<span class="timeline-body-desc">客户上午到店</span>
+									</p>
+									<p class="timeline-body-time font-12-666">2018-09-02</span>
+								</div>
+								<div class="timeline-body-content">
+									<p class="font-13-333">浦东店 王丽</span>
+								</div>
+							</div>
+						</div>
+						<!-- END TIMELINE ITEM -->
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		
+		
+		
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/order/order.js"></script>
+		<script>
+		(function($, doc) {
+			
+			$.init();
+			$.plusReady(function() {
+
+				/*---------关闭滚动条------*/
+				plus.webview.currentWebview().setStyle({
+					scrollIndicator: 'none'
+				});
+				//获取父级页面查询过来的参数
+				var self = plus.webview.currentWebview();
+				var orderCode = self.orderCode;
+				showOrderRecord(orderCode);
+			});
+			function showOrderRecord(orderCode){
+				
+				var params = {
+					orderCode :orderCode
+				}
+				orderjs.getOrderMessage(params,function(data){
+					console.log(data);
+					console.log(data.success);
+					console.log(data.followOpportunityList);
+					console.log("follow oppo list result:"+JSON.stringify(data));
+//					var data = JSON.parse(data);
+					var timeline = document.body.querySelector('.timeline');
+					if(data.success==true) {
+						var followOpportunityList = data.followOpportunityList;
+						console.log(followOpportunityList);
+						while(timeline.hasChildNodes()){
+							timeline.removeChild(timeline.firstChild);
+						}
+						if(followOpportunityList.length>0){
+							$.each(followOpportunityList,function(index,followOpportunity){
+								
+								var contentHtml = '';
+								$.each(followOpportunity.contentList,function(i,content){
+						        	contentHtml += '<p class="timeline-body-head-caption">【'+followOpportunity.type+'】'+
+														'<span class="timeline-body-desc">'+content.content+'</span>'+
+													'</p>'+
+													'<p class="timeline-body-time font-12-666">'+content.creationtime+'<p>';
+						        })
+								var bodyContent = followOpportunity.salesConsultantName;
+								console.log(bodyContent);
+								if(followOpportunity.contentList.length<1){
+									bodyContent = followOpportunity.type+'&nbsp;&nbsp;&nbsp;'+bodyContent;
+								}
+						
+								var timelineItem = document.createElement('div');
+								timelineItem.className = 'timeline-item';
+								timelineItem.setAttribute("data-code",followOpportunity.code);
+								timelineItem.setAttribute("data-opporCode",opporCode);
+								timelineItem.setAttribute("data-typeCode",followOpportunity.typeCode );
+								timelineItem.innerHTML ='<div class="timeline-badge"></div>'+
+												'<div class="timeline-body">'+
+													'<div class="timeline-body-head">'+contentHtml+'</div>'+
+													'<div class="timeline-body-content">'+
+														'<p class="font-12-333">'+bodyContent+'</p>'+
+													'</div>'+
+												'</div>';
+								console.log("=============line 123================");
+								console.log(timelineItem);
+								timeline.appendChild(timelineItem);
+							})
+						}else{
+							var p = document.createElement('p');
+							p.innerHTML="没有跟进记录";
+							timeline.appendChild(p);
+						}
+					} else if(data.messageCode == '403'){//token过期，重新登录
+						plus.nativeUI.toast(data.message);
+						common.baseOption.goToLogin();
+					}else{
+						plus.nativeUI.toast(data.message);
+					}
+				})
+			}
+			$('.timeline').on('tap','.timeline-item',function(){
+				var followCode = this.getAttribute('data-code');
+				var opporCode = this.getAttribute('data-opporCode');
+				var typeCode = this.getAttribute('data-typeCode');
+				console.log(typeCode);
+//				if(typeCode == 'invitation'||typeCode == 'outsideActivity'||typeCode == 'inshop'){
+					mui.openWindow({
+						url: 'follow-record-detail.html',
+						id: "followRecordDetail",//默认使用当前页面的url作为id
+						extras: {
+							followCode: followCode,
+							typeCode:typeCode,
+							opporCode:opporCode
+							
+						}, //自定义扩展参数
+						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					})
+//				}
+				
+			})
+			
+		}(mui, document));
+		</script>
+	</body>
+
+</html>

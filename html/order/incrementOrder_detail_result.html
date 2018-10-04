@@ -24,34 +24,56 @@
 				<span class="mui-tab-label">编辑</span>
 			</a>
 			<a class="mui-tab-item" href="#messages">
-				<!--<span class="mui-icon"><span class="mui-badge">9</span></span>-->
+				<!--<span class="mui-icon"><span class="mui-badge" id="messagesCount">9</span></span>-->
 				<span class="mui-icon"></span>
 				<span class="mui-tab-label">功能</span>
 			</a>
 			<a class="mui-tab-item" href="#">
-				<span class="mui-icon"></span>
+				<span class="mui-icon"><span class="mui-badge" id="messagesCount">0</span></span>
 				<span class="mui-tab-label">消息</span>
 			</a>
-			<a class="mui-tab-item" href="#">
+			<a class="mui-tab-item" href="#share">
 				<span class="mui-icon"></span>
 				<span class="mui-tab-label">更多</span>
 			</a>
 		</nav>
-
+		<div id="share" class="mui-popover mui-bar-popover" style="display: none;">
+			<div class="mui-popover-arrow mui-bottom" style="right:15.5px"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#" id="sendMessage">
+						<label class="mui-icon mui-icon-redo">分享给好友</label>
+					</a>
+				</li>
+			</ul>
+		</div>
 		<div id="messages" class="mui-popover mui-bar-popover" style="display: none;">
 			<div class="mui-popover-arrow mui-bottom" style="left:41.5px"></div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">提交审批</label><input type="radio" /></a>
+					<a href="#" data-status="SUBMITAPPROVAL" data-statusText="提交审批">
+						<label for="">提交审批</label><input type="radio" name="status" />
+					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">申请配车</label><input type="radio" /></a>
+					<a href="#" data-status="APPLICATION_FOR_VEHICLE" data-statusText="申请配车">
+						<label for="">申请配车</label><input type="radio" name="status"/>
+					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">申请开票</label><input type="radio" /></a>
+					<a href="#" data-status="APPLICATION_FOR_TICKET" data-statusText="申请开票">
+						<label for="">申请开票</label><input type="radio" name="status" />
+					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">申请出库</label><input type="radio" /></a>
+					<a href="#" data-status="APPLICATION_FOR_OUTOFWAREHOUSE" data-statusText="申请出库">
+						<label for="">申请出库</label><input type="radio" name="status" >
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" data-status="APPLICATION_FOR_DELIVERY" data-statusText="申请交车">
+						<label for="">申请交车</label><input type="radio" name="status" >
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -388,28 +410,46 @@
 		</div>
 
 		<script src="../../js/mui.js"></script>
+		<script src="../../js/common/share.js"></script>
 		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/arttmpl.js"></script>
+		<script src="../../js/order/order.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
 				var aniShow = "pop-in";
-				//只有ios支持的功能需要在Android平台隐藏；
-				if(mui.os.android) {
-					var list = document.querySelectorAll('.ios-only');
-					if(list) {
-						for(var i = 0; i < list.length; i++) {
-							list[i].style.display = 'none';
+				
+				
+				if ($.os.plus) {
+					$.plusReady(function() {
+						setTimeout(function() {
+//							share.updateSerivces();
+						}, 1000);
+					});
+				} else {
+					$.ready(function() {
+						//只有ios支持的功能需要在Android平台隐藏；
+						var list = document.querySelectorAll('.ios-only');
+						if(list) {
+							for(var i = 0; i < list.length; i++) {
+								list[i].style.display = 'none';
+							}
 						}
-					}
-					//Android平台暂时使用slide-in-right动画
-					if(parseFloat(mui.os.version) < 4.4) {
-						aniShow = "slide-in-right";
-					}
+						//Android平台暂时使用slide-in-right动画
+						if(parseFloat(mui.os.version) < 4.4) {
+							aniShow = "slide-in-right";
+						}
+//						updateSerivces();
+						var main = plus.android.runtimeMainActivity();
+		                var Intent = plus.android.importClass("android.content.Intent");
+		                var File = plus.android.importClass("java.io.File");
+		                var Uri = plus.android.importClass("android.net.Uri");
+						
+					});
 				}
 				template.config('escape', false);
 				//添加show自定义事件监听
@@ -420,6 +460,7 @@
 					console.log(order);
 					mui.extend(order,{creationtime:creationtime});
 					console.log(order);
+					doc.getElementById('messages').setAttribute('data-orderCode',order.code);
 					var baseView = template('orderBase-template', {
 									"order": order});
 					document.getElementById('orderBaseComment').innerHTML = baseView;
@@ -430,16 +471,11 @@
 				    var optionalView = template('optional-template', {
 									"order": order});
 					document.getElementById('optionalComment').innerHTML = optionalView;
+					orderjs.getOrderMessage(order.code);
 					
 				}, false);
-
-				$.plusReady(function() {
-
-					/*---------关闭滚动条------*/
-					plus.webview.currentWebview().setStyle({
-						scrollIndicator: 'none'
-					});
-				});
+				
+				
 
 			}(mui, document));
 		</script>

@@ -12,11 +12,8 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/order/order.css"/>
 		<style>
-			
-			
-		
-			
 			
 		</style>
 
@@ -32,33 +29,41 @@
 
 			<form class="mui-card">
 				<div class="mui-input-group">
-					<div class="mui-input-row radio-multiple-row">
-						<label class="radio-multiple-label require">品牌</label>
-						<input id="vehicleBrand" type="text" class="mui-input-clear" placeholder="请输入品牌" value="">
+					<div class="mui-input-row mui-select-row car">
+						<label class="require">品牌</label>
+						<span class="mui-select vehicleBrand" data-desc="品牌" id="vehicleTypeCode">
+							请选择品牌
+						</span>
 					</div>
-					<div class="mui-input-row">
+					<div class="mui-input-row mui-select-row car">
 						<label class="require">车系</label>
-						<input id="vehicleCategory" type="text" class="mui-input-clear" placeholder="请输入车系" value="">
+						<span class="mui-select vehicleCategory" data-desc="车系" id="vehicleCategory">
+							请选择车系
+						</span>
+						<!--<input id="vehicleCategory" type="text" class="mui-input-clear vehicleCategory" placeholder="请输入车系" value="">-->
 					</div>
-					<div class="mui-input-row">
+					<div class="mui-input-row mui-select-row car">
 						<label class="require">车型</label>
-						<input id="vehicle" type="text" class="mui-input-clear" placeholder="请输入车型" value="">
+						<span class="mui-select vehicle" data-desc="车系" id="vehicle">
+							请选择车系
+						</span>
+						<!--<input id="vehicle" type="text" class="mui-input-clear vehicle" placeholder="请输入车型" value="">-->
 					</div>
 					<div class="mui-input-row">
-						<label class="require">购买年份</label>
+						<label>购买年份</label>
 						<input id="purchaseYear" type="text" class="mui-input-clear" placeholder="请输入购买年份" value="">
 					</div>
 					<div class="mui-input-row">
 						<label>行驶里程</label>
-						<input id="mileage" type="text" class="mui-input-clear" placeholder="请输入其他联系方式" value="">
+						<input id="mileage" type="text" class="mui-input-clear" placeholder="请输入行驶里程" value="">
 					</div>
 					<div class="mui-input-row">
 						<label>车牌号</label>
-						<input id="licensePlateNumber" type="text" class="mui-input-clear" placeholder="请输入其他联系方式" value="">
+						<input id="licensePlateNumber" type="text" class="mui-input-clear" placeholder="请输入车牌号" value="">
 					</div>
 					<div class="mui-input-row">
 						<label>车架号</label>
-						<input id="vinNumber" type="text" class="mui-input-clear" placeholder="请输入其他联系方式" value="">
+						<input id="vinNumber" type="text" class="mui-input-clear" placeholder="请输入车架号" value="">
 					</div>
 				</div>	
 						
@@ -75,8 +80,10 @@
 		<script src="../../js/app.js"></script>
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/regex.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/common-picker.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -111,9 +118,9 @@
 					
 					var values = {
 						customerId:JSON.parse(localStorage.getItem('customerItem')).customerId,
-						vehicleBrand:doc.getElementById('vehicleBrand').value,
-						vehicleCategory:doc.getElementById('vehicleCategory').value,
-						vehicle:doc.getElementById('vehicle').value,
+						vehicleBrand:doc.getElementById('vehicleBrand').getAttribute("data-vehicleBrandCode"),
+						vehicleCategory:doc.getElementById('vehicleCategory').getAttribute("data-vehicleCategoryCode"),
+						vehicle:doc.getElementById('vehicle').getAttribute("data-vehicleCode"),
 						purchaseYear:doc.getElementById('purchaseYear').value,
 						mileage:doc.getElementById('mileage').value,
 						licensePlateNumber:doc.getElementById('licensePlateNumber').value,
@@ -136,11 +143,10 @@
 							console.log("--------------------------------------------------------------");
 							if(data.success==true){
 								//TODO 增值页面 还是列表页面
-//								mui.openWindow({
-//									url:'creatCarAddValueOrder.html',
-//									id:"createIncrement"
-//								}) 
 								$.back();
+							}else if(data.messageCode == '403'){//token过期，重新登录
+								plus.nativeUI.toast(data.messageCode+"token过期，请重新登录！");
+								common.baseOption.goToLogin();
 							}
 						},
 						error: function(xhr, type, errorThrown) {
@@ -150,8 +156,8 @@
 							console.log(type);
 							console.log("errorThrown");
 							console.log(errorThrown);
-							plus.nativeUI.toast('create vehicle出错了，请稍后再试！');
-							common.baseOption.goToLogin();
+							plus.nativeUI.toast('新建车辆出错了，请稍后再试！');
+//							common.baseOption.goToLogin();
 						}
 					})
 				})

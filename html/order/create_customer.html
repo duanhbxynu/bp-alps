@@ -80,11 +80,11 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>证件号 </label>
-						<input id="identityNumber" type="text" class="mui-input-clear" placeholder="请输入证件号" value="">
+						<input id="identityNumber" type="text" class="mui-input-clear idType" placeholder="请输入证件号" value="">
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>联系地址 </label>
-						<span class="mui-select" id="showAddressPicker">
+						<span class="mui-select address" id="showAddressPicker">
 							请选择
 						</span>
 					</div>
@@ -110,6 +110,7 @@
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/regex.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/common-picker.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -139,44 +140,6 @@
 					//显示当前页面
 				});
 		
-			
-			
-			
-			
-				var addressPicker = new $.PopPicker({
-						layer: 3
-					});
-				addressPicker.setData(provinceDataList3);
-				
-				var showAddressPicker = doc.getElementById('showAddressPicker');
-					
-				showAddressPicker.addEventListener('tap', function(event) {
-					
-					addressPicker.show(function(items) {
-						showAddressPicker.innerHTML =(items[0] || {}).text + " "+(items[1] || {}).text + " "+(items[2] || {}).text;
-						showAddressPicker.setAttribute("data-value",(items[0] || {}).text+(items[1] || {}).value+(items[2] || {}).value);
-						showAddressPicker.setAttribute("data-provinceCode",(items[0] || {}).text);
-						showAddressPicker.setAttribute("data-cityCode",(items[1] || {}).value);
-						showAddressPicker.setAttribute("data-districtCode",(items[1] || {}).value);
-					});
-				}, false);
-			
-				var idTypePick = new $.PopPicker();
-				idTypePick.setData(idType);
-				var showIdTypePicker = doc.getElementById('showIdTypePicker');
-					
-				showIdTypePicker.addEventListener('tap', function(event) {
-					
-					idTypePick.show(function(items) {
-						showIdTypePicker.innerHTML =(items[0] || {}).text ;
-						showIdTypePicker.setAttribute("data-idType",(items[0] || {}).text);
-					});
-				}, false);
-			
-			
-			
-			
-			
 					
 				//性别切换
 				$('.radio-gender-list').on('tap','.gender',function(){
@@ -286,7 +249,7 @@
 							console.log("errorThrown");
 							console.log(errorThrown);
 							plus.nativeUI.toast('新建增值订单 --搜索客户出错了，请稍后再试！');
-							common.baseOption.goToLogin();
+//							common.baseOption.goToLogin();
 						}
 					})
 //					

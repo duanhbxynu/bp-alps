@@ -54,8 +54,10 @@
 		</header>
 
 		<div class="mui-content" id="mui-content">
+		
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll quotation-scroll">
+					
 					<script id='content-template' type="text/template">
 						<% for(var i in quotationList){ var item=quotationList[i]; %>
 							<div class="mui-card" id='mui-card-<%=item.code %>' data-code="<%=( item.code|| '&nbsp;&nbsp;') %>" 
@@ -168,12 +170,12 @@
 //				var vehicleCode = "";
 //				var categoryData = "";
 //				var vehicleCategoryCodePicker = "";
-				if(!localStorage.getItem('$state')) {
-					plus.nativeUI.toast('登陆过期，请重新登陆！');
-					return;
-				}
-				var username = JSON.parse(localStorage.getItem('$state')).username;
-				var token = JSON.parse(localStorage.getItem('$state')).token;
+//				if(!localStorage.getItem('$state')) {
+//					plus.nativeUI.toast('登陆过期，请重新登陆！');
+//					return;
+//				}
+				var username = JSON.parse(localStorage.getItem('$state')).username||'123456';
+//				var token = JSON.parse(localStorage.getItem('$state')).token;
 				$.plusReady(function() {
 					template.config('escape', false);
 					
@@ -200,20 +202,25 @@
 								console.log("--------------------------------------------------------------");
 								if(data.success){
 									var quotationList = data.quotationList;
-									if(quotationList){
+									if(quotationList.length>0){
 										//追加模板消息 
 								        var str = template('content-template', { 
 								            "quotationList": quotationList
 								        }); 
 								        doc.getElementById('mui-content').innerHTML = str;
+									}else{
+										doc.getElementById('mui-content').innerHTML = "<p style='margin: 10px auto;text-align: center;'>暂无报价</p>";
 									}
+								}else if(data.messageCode == '403'){//token过期，重新登录
+									plus.nativeUI.toast(data.message);
+									common.baseOption.goToLogin();
 								}
 						    },
 					    	error: function(jqXHR, textStatus, errorThrown){
 						    	console.log(jqXHR);
 						    	console.log(textStatus);
 						    	console.log(errorThrown);
-						    	common.baseOption.goToLogin();
+//						    	common.baseOption.goToLogin();
 						    }
 						})
 					});

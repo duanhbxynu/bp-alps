@@ -192,45 +192,45 @@
 			        <li class="mui-table-view-cell mui-collapse">
 			            <a class="mui-navigate-right" href="#">车辆信息</a>
 		                <ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell brand">
+							<li class="mui-table-view-cell brand car">
 								<span>*</span>
 								<label class="require">品牌</label>
 								<p class="selBrand">
-									<span class="brands">请选择品牌</span>
+									<span class="brands vehicleBrand" id="">请选择品牌</span>
 								</p>
 							</li>
-							<li class="mui-table-view-cell brand">
+							<li class="mui-table-view-cell brand car">
 								<span>*</span>
 								<label class="require">车系</label>
 								<p class="selseries">
-									<span class="series">请选择车系</span>
+									<span class="series vehicleCategory" id="vehicleCategoryCode">请选择车系</span>
 								</p>
 							</li>
-							<li class="mui-table-view-cell brand">
+							<li class="mui-table-view-cell brand car">
 								<span>*</span>
 								<label class="require">车型</label>
 								<p class="selCarType">
-									<span class="carType">请选择车型</span>
+									<span class="carType vehicle" id="vehicleCode">请选择车型</span>
 								</p>
 							</li>
-							<li class="mui-table-view-cell brand">
+							<li class="mui-table-view-cell brand car">
 								<span>*</span>
 								<label class="require">外观颜色</label>
 								<p class="selOutColors">
 									<span class="outColors">请选择外观颜色</span>
 								</p>
 							</li>
-							<li class="mui-table-view-cell brand">
+							<li class="mui-table-view-cell brand car">
 								<span>*</span>
 								<label class="require">内饰颜色</label>
 								<p class="selInnerColors">
 									<span class="innerColors">请选择内饰颜色</span>
 								</p>
 							</li>
-							<li class="mui-table-view-cell predictTime guideMoney">
+							<li class="mui-table-view-cell predictTime guideMoney mui-select-row">
 								<label class="require">预计交车时间</label>
 								<p class="selPreTime">
-									<input class="preTime" type="date" placeholder="请填写预计交车时间"/>
+									<input class="preTime date" type="date" placeholder="请填写预计交车时间"/>
 								</p>
 							</li>
 							<li class="mui-table-view-cell predictTime guideMoney">
@@ -247,10 +247,10 @@
 									<input type="number" id="carSalesPrice" name="carSalesPrice" placeholder="请填写车辆销售价"/>
 								</p>								
 							</li>							
-							<li class="mui-table-view-cell brand">
+							<li class="mui-table-view-cell brand mui-select-row ">
 								<label class="require">付款方式</label>
 								<p class="selPayWay">
-									<span class="payWay">请选择付款方式</span>
+									<span class="payWay paymentMethod">请选择付款方式</span>
 								</p>
 							</li>
 							<li class="mui-table-view-cell comments">
@@ -437,6 +437,7 @@
 		                            <label for="radio_no" style="padding-right: 0;">否</label>        
 		                        </span>               
 		           			</li>
+		           			<comment class="mui-hidden" id="secondHandInfo">
 							<li class="mui-table-view-cell predictTime guideMoney">
 								<label class="require">行驶里程</label>
 								<p style="float:right;margin-left: 12px;color: black;">公里</p>
@@ -482,6 +483,7 @@
 								<label class="require">备注</label>
 								<textarea id="secondHandCarRemark" name="secondHandCarRemark" placeholder="请填写备注信息"></textarea>
 							</li>
+							</comment>
 						</ul>
 			        </li>
 			    </ul>
@@ -576,11 +578,11 @@
 								</p>
 								
 							</li>
-							<li class="mui-table-view-cell guideMoney">
+							<li class="mui-table-view-cell guideMoney mui-select-row">
 								<span>*</span>
 								<label class="require">起租日期</label>
 								<p class="selFinanceStartTime">
-									<input id="financeStartTime" class="financeStartTime" type="date" placeholder="请填写预计交车时间"/>
+									<input id="financeStartTime" class="financeStartTime date" type="date" placeholder="请填写预计交车时间"/>
 								</p>
 							</li>
 							<li class="mui-table-view-cell predictTime guideMoney">
@@ -812,7 +814,8 @@
 		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/arttmpl.js"></script>
-		<script src="../../js/quotation/quotation-car-picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/common-picker.js"></script>
+		<!--<script src="../../js/quotation/quotation-car-picker.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="../../js/quotation/quotation-event-option.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
@@ -843,55 +846,6 @@
 					});
 				})
 				
-				
-				//选择车辆信息
-//				var picker = new mui.PopPicker();
-//				mui(".brand").on('tap','.selBrand .brands',function(){				
-//					picker.setData(selBrands);
-//					picker.show(function(SelectedItem) {
-//						document.getElementsByClassName("brands")[0].innerHTML = SelectedItem[0].text;
-//					});
-//				});
-//				mui(".brand").on('tap','.selseries .series',function(){				
-//					picker.setData(selSeries);
-//					picker.show(function(SelectedItem) {
-//						document.getElementsByClassName("series")[0].innerHTML = SelectedItem[0].text;
-//					});
-//				});
-//				mui(".brand").on('tap','.selCarType .carType',function(){				
-//					picker.setData(selCarType);
-//					picker.show(function(SelectedItem) {
-//						document.getElementsByClassName("carType")[0].innerHTML = SelectedItem[0].text;
-//					});
-//				});
-//				mui(".brand").on('tap','.selOutColors .outColors',function(){				
-//					picker.setData(selOutColors);
-//					picker.show(function(SelectedItem) {
-//						document.getElementsByClassName("outColors")[0].innerHTML = SelectedItem[0].text;
-//					});
-//				});
-//				mui(".brand").on('tap','.selInnerColors .innerColors',function(){				
-//					picker.setData(selInnerColors);
-//					picker.show(function(SelectedItem) {
-//						document.getElementsByClassName("innerColors")[0].innerHTML = SelectedItem[0].text;
-//					});
-//				});
-				mui(".brand").on('tap','.selPayWay .payWay',function(){				
-					picker.setData(paymentMethodData);
-					picker.show(function(SelectedItem) {
-						document.getElementsByClassName("payWay")[0].setAttribute("data-value",SelectedItem[0].text);
-						document.getElementsByClassName("payWay")[0].innerHTML = SelectedItem[0].text;
-					});
-				});
-				
-				//选择预计交车时间
-//				mui(".predictTime").on('tap','.selPreTime .preTime',function(){		
-//					picker.setData(purchaseTimeTypeCodeData);
-//					picker.show(function(SelectedItem) {
-//						document.getElementsByClassName("preTime")[0].value = SelectedItem[0].text;
-//					});
-//				});
-//			    
 			    //请选择上牌地址
 			    var picker2 = new mui.PopPicker({layer: 2});
 			    mui(".brand").on('tap','.selAddress .address',function(){				

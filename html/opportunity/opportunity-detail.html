@@ -335,11 +335,11 @@
 						aniShow = "slide-in-right";
 					}
 				}
-				
+				var opporCode = '';
 				//添加show自定义事件监听
 				window.addEventListener('show', function(event) {
 					
-					var opporCode = event.detail;
+					opporCode = event.detail;
 					
 					oppor.getOpporDetail(opporCode,function(data){
 						var data = JSON.parse(data);
@@ -404,8 +404,8 @@
 					});
 
 					//获取父级页面查询过来的参数
-//					var self = plus.webview.currentWebview();
-//					var code = self.code;
+					var self = plus.webview.currentWebview();
+					
 
 				});
 
@@ -523,6 +523,8 @@
 					console.log(type);
 					console.log(typeCode);
 					console.log(vehicleTypeCode);
+					console.log(vehicleCategoryCode);
+					console.log(vehicleCode);
 					if(typeCode == 'quotation'){
 						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
 							type: type,

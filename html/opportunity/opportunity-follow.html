@@ -191,11 +191,11 @@
 				var typeCode = ""; 
 				var name = ""; 
 				var mobile = ""; 
-				if(!localStorage.getItem('$state')) {
-					plus.nativeUI.toast('登陆过期，请重新登陆！');
-					return;
-				}
-				var username = JSON.parse(localStorage.getItem('$state')).username;
+//				if(!localStorage.getItem('$state')) {
+//					plus.nativeUI.toast('登陆过期，请重新登陆！');
+//					return;
+//				}
+				var username = JSON.parse(localStorage.getItem('$state')).username||'123456';
 				$.plusReady(function() {
 					window.addEventListener('showTitle', function(event) {
 						opporCode = event.detail.opporCode;

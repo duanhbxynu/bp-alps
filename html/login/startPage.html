@@ -11,6 +11,8 @@
 
 	<body style="height: 100%;">
 		<div class="start"  style="background: url(../../images/background.png) no-repeat;background-size: 100% 100%;">
+			<button class="mui-pull-right mui-btn-grey" id="setTimeout"
+				style="margin-right: 15px;margin-top: 15px;">跳过</button>
 			<div class="mark">
 				<img src="../../images/logo.png"/>
 			</div>
@@ -21,6 +23,32 @@
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
+			mui.plusReady(function(){
+				countdown(4);
+			})
+			
+			function countdown(s) {
+				s--;
+				if (s == 0) {
+					mui.openWindow({
+						url:'login.html',
+						id:'login.html',
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					})
+				} else {
+					document.getElementById('setTimeout').innerHTML = '跳过&nbsp;'+s;
+				}
+				setTimeout(function() {
+					
+					countdown(s);
+				}, 1000)
+			}
+					
 		</script>
 	</body>
 

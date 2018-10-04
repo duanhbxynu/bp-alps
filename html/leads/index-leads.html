@@ -12,14 +12,14 @@
 		<link href="../../css/reset.css" rel="stylesheet" />
 		<link href="../../css/style.css" rel="stylesheet" />
 		<style type="text/css">
-			.mui-fullscreen {
+			/*.mui-fullscreen {
 				background-color: #efeff4!important;
 			}
 			
 			.mui-bar~.mui-content .mui-fullscreen {
 				top: 44px;
 				height: auto;
-			}
+			}*/
 			
 			.flow-tab {
 				background: #ffffff;
@@ -74,7 +74,7 @@
 	<body>
 		<!--下拉刷新容器-->
 		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
+			<!--<div id="slider" class="mui-slider mui-fullscreen">-->
 				<!--<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted flow-tab">
 					<a class="mui-control-item mui-active" id="customerstream" href="#item1mobile" data-wid="leads/instore-customerstream.html">
 						到店客流
@@ -86,8 +86,8 @@
 				</div>-->
 				
 				<div id="pullrefresh" class="mui-scroll-wrapper flow-scroll-wrapper">
-					<div class="mui-scroll flow-scroll list-scroll" style="margin-top: 37px;">
-				
+					<!--<div class="mui-scroll flow-scroll list-scroll" style="margin-top: 37px;">-->
+				<div class="mui-scroll flow-scroll list-scroll">
 						<!--<div class="mui-card">
 					<div class="mui-card-header">
 						<label>客流编号 1</label>
@@ -144,7 +144,7 @@
 							</ul>
 					</div>
 				</div>-->
-					</div>
+					<!--</div>-->
 				</div>	
 
 			
@@ -206,7 +206,7 @@
 							
 						} else if(data.messageCode == '403'){//token过期，重新登录
 							plus.nativeUI.toast(data.message);
-							common.baseOption.goToLogin();
+//							common.baseOption.goToLogin();
 						}else{
 							plus.nativeUI.toast(data.message);
 						}
@@ -395,5 +395,4 @@
 		</script>	
 	</body>
 
->>>>>>> 107de00d67a45d0d116354a8cc5d23adef6dca1e
 </html>

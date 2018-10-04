@@ -3,11 +3,11 @@
 	//获取意向跟进
 	follow.getOpporFollow = function(params, callback) {
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 		//		var token = '7e6f7671-94dc-47bf-9f83-157691733a93';
 
 		console.log("follow oppo list request:" + JSON.stringify(params));
@@ -18,7 +18,7 @@
 			//			contentType: 'application/json',
 			data: params,
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + token);
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown) {
@@ -26,18 +26,18 @@
 				console.log(textStatus);
 				console.log(errorThrown);
 				plus.nativeUI.toast(jqXHR);
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 			}
 		});
 	}
 	//搜索市场活动
 	follow.searchMarketActivity = function(params, callback) {
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 		//		var token = '7e6f7671-94dc-47bf-9f83-157691733a93';
 
 		console.log("market activity request:" + JSON.stringify(params));
@@ -47,11 +47,11 @@
 			contentType: 'application/json',
 			data: JSON.stringify(params),
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + token);
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown) {
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 				//location.href = baseConfig.baseUrl+baseConfig.login_page;
 			}
 		})
@@ -59,11 +59,11 @@
 
 	follow.saveFollow = function(params, callback) {
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 		console.log("follow append content request:" + JSON.stringify(params));
 		console.log("follow append content request:" + params);
 		$.ajax(common.URL.createFollow(), {
@@ -72,14 +72,14 @@
 			contentType: 'application/json',
 			data: JSON.stringify(params),
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + token);
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown) {
 				console.log(jqXHR);
 				console.log(textStatus);
 				console.log(errorThrown);
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 			}
 		})
 	}
@@ -87,11 +87,11 @@
 	follow.getFollowDetail = function(followCode, callback) {
 		callback = callback || $.noop;
 
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('获取跟进记录详情token出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('获取跟进记录详情token出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 		var params = {
 			code: followCode
 		};
@@ -103,7 +103,7 @@
 			jsonp: 'callback',
 			data: params,
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + token);
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(xhr, textStatus, errorThrown) {
@@ -111,7 +111,7 @@
 				console.log(xhr);
 				console.log(textStatus);
 				console.log(errorThrown);
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 			}
 		});
 
@@ -120,11 +120,11 @@
 	follow.appendContent = function(followCode, contentlist, callback) {
 		callback = callback || $.noop;
 
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('获取跟进记录详情token出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('获取跟进记录详情token出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 
 		var followContentData = "";
 		console.log(followContentData);
@@ -143,17 +143,19 @@
 			contentType: 'application/json',
 			data: JSON.stringify(values),
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + token);
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: function(data) {
 				console.log("follow append content result:" + JSON.stringify(data));
 				console.log("--------------------------------------------------------------");
 				if(data.success == true) {
-					alert("success");
+//					alert("success");
+					$.back();
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				location.href = baseConfig.baseUrl + baseConfig.login_page;
+				$.back();
+//				location.href = baseConfig.baseUrl + baseConfig.login_page;
 			}
 		})
 	}

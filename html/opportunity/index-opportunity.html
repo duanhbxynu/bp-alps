@@ -328,6 +328,7 @@
 							common.baseOption.goToLogin();
 						}else{
 							plus.nativeUI.toast(data.message);
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						}
 					});
 					

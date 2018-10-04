@@ -154,7 +154,7 @@
 					orderType: orderType
 				}
 				
-				order.qryOrderList(params, function(data) {
+				orderjs.qryOrderList(params, function(data) {
 					console.log("订单列表");
 					console.log(data);
 					var data = JSON.parse(data);
@@ -233,7 +233,7 @@
 					item +='<p class="clearfix"><span>品牌</span><span>' + orderList[i].vehicleBrand + '</span></p>' +
 							'<p class="clearfix"><span>车系</span><span>' + orderList[i].vehicle + '</span></p>' +
 							'<p class="clearfix"><span>车型</span><span>' + orderList[i].carModel + '</span></p>' +
-							'<p class="clearfix"><span>订单类型</span><span class="reds">'+orderType+'-' + lineItemName + '</span></p>';
+							'<p class="clearfix"><span>订单类型</span><span class="reds">'+orderType + lineItemName + '</span></p>';
 							
 					item +='<p class="clearfix"><span>订单状态</span><span>' + orderList[i].orderStatus + '</span></p>' +
 					'<p class="clearfix"><span>订单金额</span><span class="reds">' + orderList[i].totalPrice + '</span></p>'+
@@ -267,7 +267,7 @@
 						orderType: orderType
 					}
 					var orderScroll = document.body.querySelector('.mui-scroll-list');
-					order.qryOrderList(params, function(data) {
+					orderjs.qryOrderList(params, function(data) {
 						console.log("订单列表");
 						console.log(data);
 						var data = JSON.parse(data);
@@ -311,7 +311,7 @@
 						orderType: orderType
 					}
 					var orderScroll = document.body.querySelector('.mui-scroll-list');
-					order.qryOrderList(params, function(data) {
+					orderjs.qryOrderList(params, function(data) {
 						console.log("订单列表");
 						console.log(data);
 						var data = JSON.parse(data);
@@ -336,7 +336,6 @@
 								console.log("下拉刷新，新纪录插到最前面");
 								orderScroll.insertBefore(libDiv, orderScroll.firstChild);
 								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-								return;
 							}else{
 								fillingData('pulldown',orderList);
 							}
@@ -344,6 +343,7 @@
 						} else {
 	
 							plus.nativeUI.toast(data.error);
+							
 						}
 					});
 					showOrderDetail();
@@ -361,7 +361,11 @@
 					
 					orderType = this.getAttribute('data-orderType');
 					console.log(orderType);
-//					mui('.mui-slider').slider().gotoItem(this.getAttribute('data-index'));
+					if(orderType == 'increment'){
+						mui.fire(plus.webview.getWebviewById('main'),'addIcon','true');
+					}else{
+						mui.fire(plus.webview.getWebviewById('main'),'addIcon','false');
+					}
 					mui('#pullrefresh').pullRefresh().pulldownLoading();
 					pulldownRefresh();
 				});

@@ -241,11 +241,11 @@
 	
 	owner.getRegion = function(callback){
 		
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('token过期，重新登录');
-			common.baseOption.goToLogin();
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('token过期，重新登录');
+////			common.baseOption.goToLogin();
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 //		var token = '3571ecbd-6eea-4c4c-a600-c61d3221215d';
 		
 		$.ajax(common.URL.getRegionList(),{
@@ -260,12 +260,12 @@
 //     		},
 	        beforeSend: function (xhr) {
 	        	console.log("Bearer " + token);
-		        xhr.setRequestHeader("Authorization","Bearer " + token);
+		        xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 		    },
 		    success: callback,
 		    error: function(xhr, textStatus, errorThrown){
-		    	plus.nativeUI.toast('=======error地址查询出错=======！');
-			   	common.baseOption.goToLogin();
+//		    	plus.nativeUI.toast('=======error地址查询出错=======！');
+//			   	common.baseOption.goToLogin();
 		    }
 		});
 		

@@ -119,7 +119,7 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>联系地址 </label>
-						<span class="mui-select" id="showAddressPicker">
+						<span class="mui-select address" id="showAddressPicker">
 							请选择
 						</span>
 					</div>
@@ -144,6 +144,7 @@
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/regex.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/common-picker.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -334,49 +335,6 @@
 			}
 			
 			
-			
-//			$.each(provinceDataList3,function(i,provinceData){
-//				console.log("========line327==========");
-//				console.log(provinceData.value);
-//				console.log(provinceData.text);
-//				console.log(provinceData.children);
-////				if($("#"+province).val() == provinceData.id){
-//				$.each(provinceData.children,function(i,citydata){
-//					console.log("========line333==========");
-//					console.log(citydata.value);
-//					console.log(citydata.text);
-//					console.log(citydata.children);
-////					if($("#"+cityCode).val() == citydata.id){
-//					$.each(citydata.children,function(i,districtsdata){
-//						console.log("========line338==========");
-//						console.log(districtsdata.value);
-//						console.log(districtsdata.text);
-//						console.log(districtsdata);
-//					});
-//				})
-//			});
-			
-			var addressPicker = new $.PopPicker({
-					layer: 3
-				});
-			addressPicker.setData(provinceDataList3);
-			
-			var showAddressPicker = doc.getElementById('showAddressPicker');
-				
-			showAddressPicker.addEventListener('tap', function(event) {
-				
-				addressPicker.show(function(items) {
-//					showAddressPicker.innerHTML =addressPicker.getParam(items[0], 'text') + " " + addressPicker.getParam(items[1], 'text') + " " + addressPicker.getParam(items[2], 'text');
-					showAddressPicker.innerHTML =(items[0] || {}).text + " "+(items[1] || {}).text + " "+(items[2] || {}).text;
-					showAddressPicker.setAttribute("data-value",(items[0] || {}).value+(items[1] || {}).value+(items[2] || {}).value);
-						//返回 false 可以阻止选择框的关闭
-						//return false;
-						
-//						document.getElementById("result").innerHTML = address;
-				});
-			}, false);
-			
-			
 			doc.getElementById("next_step").addEventListener('tap',function(){
 				
 				var type = doc.querySelector('input[name="type"]:checked').value;//客户性质
@@ -406,7 +364,6 @@
 				}
 //				var baseOppor = JSON.stringify(baseOpportunity);
 //				console.log(baseOppor);
-				
 				mui.openWindow({
 					url: '../opportunity/add-opportunity-bussinessinfo.html',
 					id: "oppor-bussinessinfo", //默认使用当前页面的url作为id

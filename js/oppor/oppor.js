@@ -3,14 +3,14 @@
 	 * 意向 - 到店客流
 	 * */
 	oppor.qryOpporList = function(params,callback){
-		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('获取意向列表token出错了，请稍后再试！');
-			common.baseOption.goToLogin();
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
-		
-		console.log("token:"+token);
+//		callback = callback || $.noop;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('获取意向列表token出错了，请稍后再试！');
+//			common.baseOption.goToLogin();
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		
+//		console.log("token:"+token);
 		console.log("opportunity list request:"+JSON.stringify(params));
 	
 		console.log(params);
@@ -25,7 +25,7 @@
 			type: 'POST', //HTTP请求类型
 //			timeout: 10000, //超时时间设置为10秒；
 			beforeSend: function (xhr) {
-			    xhr.setRequestHeader("Authorization","Bearer " + token);
+			    xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 			},
 			success:callback,
 //			success: function(data){
@@ -42,23 +42,24 @@
 				console.log(type);
 				console.log("errorThrown");
 				console.log(errorThrown);
-				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+//				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//				common.baseOption.goToLogin();
 			}
 		});
 	}
 	
 	//获取意向详情
 	oppor.getOpporDetail = function(opporId,callback){
-		callback = callback || $.noop;
-		
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('获取意向详情token出错了，请稍后再试！');
-			return;
-		}
-		
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		callback = callback || $.noop;
 //		
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('获取意向详情token出错了，请稍后再试！');
+//			return;
+//		}
+//		
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		
+		var token = common.baseOption.getToken();
 //		var getaccess = common.baseOption.getUrlParam('getaccess');
 //		var defaultData = {};
 //		if(getaccess){
@@ -81,7 +82,7 @@
 			success: callback,
 		    error: function(xhr, textStatus, errorThrown){
 		    	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			   	common.baseOption.goToLogin();
+//			   	common.baseOption.goToLogin();
 		    }
 		});
 		
@@ -90,11 +91,11 @@
 	//意向 保存
 	oppor.updateOpporDetail = function(params,callback){
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
 		console.log("customer flow update request51:"+JSON.stringify(params));
 		console.log(params);
 		console.log(common.URL.updateOppor());
@@ -107,12 +108,12 @@
 //			timeout: 1000, //超时时间设置为10秒；
 	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
-			    xhr.setRequestHeader("Authorization","Bearer " + token);
+			    xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(xhr, textStatus, errorThrown){
 			   	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			   	common.baseOption.goToLogin();
+//			   	common.baseOption.goToLogin();
 			}
 		})
 	}
@@ -149,12 +150,12 @@
 	//创建意向
 	oppor.createOppor = function(params,callback){
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
-		var currentUser = JSON.parse(localStorage.getItem('$state')).username;
+//		if(!localStorage.getItem('$state')) {
+//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//			return;
+//		}
+//		var token = JSON.parse(localStorage.getItem('$state')).token;
+		var currentUser = JSON.parse(localStorage.getItem('$state')).username||'123456';
 		
 		console.log("customer flow update request51:"+JSON.stringify(params));
 		console.log(params);
@@ -166,11 +167,11 @@
 			timeout: 1000, //超时时间设置为10秒；
 	        data: params,
 	        beforeSend: function (xhr) {
-			    xhr.setRequestHeader("Authorization","Bearer " + token);
+			    xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown){
-			    common.baseOption.goToLogin();
+//			    common.baseOption.goToLogin();
 			}
 		});
 	}

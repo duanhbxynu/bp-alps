@@ -19,39 +19,63 @@
 			<h1 class="mui-title" id="mui-title">整车订单详情</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab tabBar">
-			<a class="mui-tab-item mui-active" href="#">
+			<a class="mui-tab-item mui-disabled" href="#" id="editOrder" >
 				<span class="mui-icon"></span>
 				<span class="mui-tab-label">编辑</span>
 			</a>
 			<a class="mui-tab-item" href="#messages">
-				<!--<span class="mui-icon"><span class="mui-badge">9</span></span>-->
 				<span class="mui-icon"></span>
+				<!--<span class="mui-icon"></span>-->
 				<span class="mui-tab-label">功能</span>
 			</a>
 			<a class="mui-tab-item" href="#">
-				<span class="mui-icon"></span>
+				<span class="mui-icon"><span class="mui-badge" id="messagesCount">0</span></span>
 				<span class="mui-tab-label">消息</span>
 			</a>
-			<a class="mui-tab-item" href="#">
+			<a class="mui-tab-item" href="#share">
 				<span class="mui-icon"></span>
 				<span class="mui-tab-label">更多</span>
 			</a>
 		</nav>
+		
+		<div id="share" class="mui-popover mui-bar-popover" style="display: none;">
+			<div class="mui-popover-arrow mui-bottom" style="right:15.5px"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#" id="sendMessage">
+						<label class="mui-icon mui-icon-redo">分享给好友</label>
+					</a>
+				</li>
+			</ul>
+		</div>
 
 		<div id="messages" class="mui-popover mui-bar-popover" style="display: none;">
 			<div class="mui-popover-arrow mui-bottom" style="left:41.5px"></div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">提交审批</label><input type="radio" /></a>
+					<a href="#" data-status="SUBMITAPPROVAL" data-statusText="提交审批">
+						<label for="">提交审批</label><input type="radio" name="status" />
+					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">申请配车</label><input type="radio" /></a>
+					<a href="#" data-status="APPLICATION_FOR_VEHICLE" data-statusText="申请配车">
+						<label for="">申请配车</label><input type="radio" name="status"/>
+					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">申请开票</label><input type="radio" /></a>
+					<a href="#" data-status="APPLICATION_FOR_TICKET" data-statusText="申请开票">
+						<label for="">申请开票</label><input type="radio" name="status" />
+					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#"><label for="">申请出库</label><input type="radio" /></a>
+					<a href="#" data-status="APPLICATION_FOR_OUTOFWAREHOUSE" data-statusText="申请出库">
+						<label for="">申请出库</label><input type="radio" name="status" >
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" data-status="APPLICATION_FOR_DELIVERY" data-statusText="申请交车">
+						<label for="">申请交车</label><input type="radio" name="status" >
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -67,7 +91,7 @@
 				<div class="mui-card-header">
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell" id="quotationCode">
-							报价单编号：<%=order.code %>
+							订单编号：<%=order.code %>
 						</li>
 						<li class="mui-table-view-cell" id="creationtime" style="font-weight: 400;">
 							<%=order.creationtime %>
@@ -564,8 +588,8 @@
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
-		
 		<script src="../../js/common/arttmpl.js"></script>
+		<script src="../../js/order/order.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -588,6 +612,12 @@
 				window.addEventListener('showWholeVehicle', function(event) {
 					console.log("line587")
 					var order = event.detail.order;
+					doc.getElementById('messages').setAttribute('data-orderCode',order.code);
+					if(order.status=="已创建" || order.status=='' || order.status== undefined){
+						
+						doc.getElementById('editOrder').classList.remove('mui-disabled');
+					}
+					
 					var creationtime = event.detail.creationtime;
 					console.log(order);
 					vehicle = setCarLayer3Value(order.vehicleBrand,order.vehicle);
@@ -611,6 +641,7 @@
 				    var optionalView = template('optional-template', {
 									"order": order});
 					document.getElementById('optionalComment').innerHTML = optionalView;
+					orderjs.getOrderMessage(order.code);
 					
 				}, false);
 					
@@ -667,6 +698,25 @@
 					})
 					return vehicleModel;
 				}
+				
+				doc.getElementById('editOrder').addEventListener('tap',function(){
+//					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
+//					var name = doc.getElementById('name').innerHTML;
+//					var mobile = doc.getElementById('tel').innerHTML;	
+//					var platform = doc.getElementById('platform').innerHTML;
+//					var level = doc.getElementById('level').innerHTML;
+//					mui.fire(plus.webview.getWebviewById('creatWholeVehicleOrder'), 'show', {
+//						opporCode:opporCode,
+//						name:name,
+//						mobile:mobile,
+//						platform:platform,
+//						level:level
+//					});
+//					mui.openWindow({
+//						id: 'creatWholeVehicleOrder'//b页面id
+//						url:'create_WholeVehicleOrder.html',
+//					})
+				})
 
 			}(mui, document));
 		</script>

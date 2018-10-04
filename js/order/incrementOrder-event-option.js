@@ -1,8 +1,8 @@
-	if(!localStorage.getItem('$state')) {
-		plus.nativeUI.toast('登陆过期，请重新登陆！');
-		common.baseOption.goToLogin();
-	}
-	var token = JSON.parse(localStorage.getItem('$state')).token;
+//	if(!localStorage.getItem('$state')) {
+//		plus.nativeUI.toast('登陆过期，请重新登陆！');
+////		common.baseOption.goToLogin();
+//	}
+//	var token = JSON.parse(localStorage.getItem('$state')).token;
 	var searchAResultPicker = new mui.PopPicker();
 	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
 	var count = 0;
@@ -25,7 +25,7 @@
 			contentType: 'application/json',
 			data: JSON.stringify(values),
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + token);
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: function(data) {
 				console.log("product list result:" + JSON.stringify(data));
@@ -47,7 +47,7 @@
 				console.log("errorThrown");
 				console.log(errorThrown);
 				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 			}
 		})
 	
@@ -214,7 +214,7 @@
 				console.log("errorThrown");
 				console.log(errorThrown);
 				plus.nativeUI.toast('quotation create出错了，请稍后再试！');
-				common.baseOption.goToLogin();
+//				common.baseOption.goToLogin();
 			}
 		})
 		
