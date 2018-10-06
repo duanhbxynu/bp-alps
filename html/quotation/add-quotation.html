@@ -178,9 +178,9 @@
 							<!--<input type="text" name="name" id="flow_name" class="mui-input-clear" placeholder="请输入定金金额" value="">-->
 							<input type="number" step="0.01" min="0.01" max="100000000" name="deposit" id="deposit" class="mui-input-clear" placeholder="请输入定金金额" value="">
 						</li>
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell mui-select-row">
 							<label>订单类型</label>
-							<i class="mui-icon mui-icon-arrowdown" id="order_type">请选择订单类型    </i>
+							<i class="mui-icon mui-icon-arrowdown lineItemName" id="order_type">请选择订单类型  </i>
 						</li>
 
 					</ul>
@@ -519,10 +519,10 @@
 		                            <label for="radio_no" style="padding-right: 0;">进口</label>        
 		                        </span>               
 		           			</li>		           			
-							<li class="mui-table-view-cell brand">
+							<li class="mui-table-view-cell brand mui-select-row">
 								<label class="require">上牌地址</label>
 								<p class="selAddress">
-									<span class="address">请选择地址</span>
+									<span class="addressLayer2">请选择地址</span>
 								</p>
 							</li>							
 							<li class="mui-table-view-cell predictTime guideMoney">
@@ -836,26 +836,6 @@
 					}
 				}
 				
-				//选择订单类型
-				var picker = new mui.PopPicker();
-				document.getElementById('order_type').addEventListener('tap',function(){
-					picker.setData(orderType);
-					picker.show(function(SelectedItem) {
-						document.getElementById('order_type').innerHTML = SelectedItem[0].text;
-						document.getElementById('order_type').setAttribute("data-value",SelectedItem[0].text);
-					});
-				})
-				
-			    //请选择上牌地址
-			    var picker2 = new mui.PopPicker({layer: 2});
-			    mui(".brand").on('tap','.selAddress .address',function(){				
-					picker2.setData(provinceDataList3);
-					picker2.show(function(SelectedItem) {
-						document.getElementsByClassName("address")[0].innerHTML = SelectedItem[0].text+" "+SelectedItem[1].text;
-						document.getElementsByClassName("address")[0].setAttribute("data-province",(SelectedItem[0] || {}).value);
-						document.getElementsByClassName("address")[0].setAttribute("data-city",(SelectedItem[1] || {}).value);
-					});
-				});
 				
 				var productTypeList = {
 					parts:"optionalProduct", //原厂选装

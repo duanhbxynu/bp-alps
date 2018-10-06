@@ -3,55 +3,55 @@
 ////		common.baseOption.goToLogin();
 //	}
 //	var token = JSON.parse(localStorage.getItem('$state')).token;
-	var searchAResultPicker = new mui.PopPicker();
-	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
-	var count = 0;
-	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
-		
-		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
-		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
-		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
-		var values = {
-			currentPage: 0,
-			pagesize: 2000,
-			categoryCode: categoryCode,
-			searchText: searchText
-		};
-		console.log("product list request:" + JSON.stringify(values));
-		mui.ajax({
-			url: serviceBaseUrl + "alpssalewebservices/product/list",
-			type: "POST",
-			dataType: "json",
-			contentType: 'application/json',
-			data: JSON.stringify(values),
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
-			},
-			success: function(data) {
-				console.log("product list result:" + JSON.stringify(data));
-				console.log("--------------------------------------------------------------");
-				if(data.success == true) {
-					console.log("product list result:" + data.productList);
-					var productView = template(productType+'-template', {
-							"productList": data.productList
-						});
-					document.getElementById(productType+'-comment').innerHTML = productView;
-					mui('.mui-numbox').numbox();
-				}
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				console.log("xhr");
-				console.log(xhr); 
-				console.log("type");
-				console.log(type);
-				console.log("errorThrown");
-				console.log(errorThrown);
-				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-//				common.baseOption.goToLogin();
-			}
-		})
-	
-	})
+//	var searchAResultPicker = new mui.PopPicker();
+//	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
+//	var count = 0;
+//	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
+//		
+//		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
+//		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
+//		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
+//		var values = {
+//			currentPage: 0,
+//			pagesize: 2000,
+//			categoryCode: categoryCode,
+//			searchText: searchText
+//		};
+//		console.log("product list request:" + JSON.stringify(values));
+//		mui.ajax({
+//			url: serviceBaseUrl + "alpssalewebservices/product/list",
+//			type: "POST",
+//			dataType: "json",
+//			contentType: 'application/json',
+//			data: JSON.stringify(values),
+//			beforeSend: function(xhr) {
+//				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+//			},
+//			success: function(data) {
+//				console.log("product list result:" + JSON.stringify(data));
+//				console.log("--------------------------------------------------------------");
+//				if(data.success == true) {
+//					console.log("product list result:" + data.productList);
+//					var productView = template(productType+'-template', {
+//							"productList": data.productList
+//						});
+//					document.getElementById(productType+'-comment').innerHTML = productView;
+//					mui('.mui-numbox').numbox();
+//				}
+//			},
+//			error: function(jqXHR, textStatus, errorThrown) {
+//				console.log("xhr");
+//				console.log(xhr); 
+//				console.log("type");
+//				console.log(type);
+//				console.log("errorThrown");
+//				console.log(errorThrown);
+//				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+////				common.baseOption.goToLogin();
+//			}
+//		})
+//	
+//	})
 	
 	document.getElementById('creatOrder').addEventListener('tap',function(){
 		console.log(2);

@@ -96,7 +96,22 @@
 			showAddressPicker.setAttribute("data-districtCode",(items[1] || {}).value);
 		});
 	}, false);
-			
+	
+	//二级地址
+	
+	//请选择上牌地址
+	var picker2 = new mui.PopPicker({layer: 2});
+	mui(".mui-select-row").on('tap','.addressLayer2',function(){		
+		var showAddressPicker = this;
+		picker2.setData(provinceDataList3);
+		picker2.show(function(SelectedItem) {
+			showAddressPicker.innerHTML = SelectedItem[0].text+" "+SelectedItem[1].text;
+			showAddressPicker.setAttribute("data-value",(SelectedItem[0] || {}).text+(SelectedItem[1] || {}).value);
+			showAddressPicker.setAttribute("data-provinceCode",(SelectedItem[0] || {}).text);
+			showAddressPicker.setAttribute("data-cityCode",(SelectedItem[1] || {}).value);
+		});
+	});
+	/*证件类型*/		
 	var idTypePick = new $.PopPicker();
 	mui(".mui-select-row").on('tap', '.idType', function() {				
 	
@@ -110,6 +125,15 @@
 	}, false);
 	
 	var pickers = new $.PopPicker();
+	//选择订单类型
+	mui(".mui-select-row").on('tap', '.lineItemName', function() {
+		var picker = this;
+		pickers.setData(orderType);
+		pickers.show(function(SelectedItem) {
+			picker.innerHTML = SelectedItem[0].text;
+			picker.setAttribute("data-value",SelectedItem[0].text);
+		});
+	})
 	/*购车类型*/
 	mui(".mui-select-row").on('tap', '.purchaseType', function() {				
 	
@@ -287,6 +311,32 @@
 			//return false;
 		});
 	})
+	//金融类型
+	var financePicker = new mui.PopPicker();
+	mui(".brand").on('tap','.selFinanceType .financeType',function(){	
+		financePicker.setData(financeType);
+		financePicker.show(function(SelectedItem) {
+			document.getElementsByClassName("financeType")[0].setAttribute("data-value",SelectedItem[0].text);
+			document.getElementsByClassName("financeType")[0].innerHTML = SelectedItem[0].text;
+		});
+	});
+	//金融期限
+	mui(".brand").on('tap','.selFinanceCycle .financeCycle',function(){				
+		financePicker.setData(financeCycle);
+		financePicker.show(function(SelectedItem) {
+			document.getElementsByClassName("financeCycle")[0].setAttribute("data-value",SelectedItem[0].text);
+			document.getElementsByClassName("financeCycle")[0].innerHTML = SelectedItem[0].text;
+		});
+	});
+	//金融机构
+	mui(".brand").on('tap','.selFinanceCompany .financeCompany',function(){				
+		financePicker.setData(financeCompany);
+		financePicker.show(function(SelectedItem) {
+			document.getElementsByClassName("financeCompany")[0].setAttribute("data-value",SelectedItem[0].text);
+			document.getElementsByClassName("financeCompany")[0].innerHTML = SelectedItem[0].text;
+		});
+	});
+	
 	
 	
 	/*年份*/
@@ -334,6 +384,63 @@
 		
 
 	});
+	
+	//选择产品
+	var searchAResultPicker = new mui.PopPicker();
+	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
+	var count = 0;
+	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
+		
+		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
+		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
+		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
+		var values = {
+			currentPage: 0,
+			pagesize: 2000,
+			categoryCode: categoryCode,
+			searchText: searchText
+		};
+		console.log("product list request:" + JSON.stringify(values));
+		mui.ajax({
+			url: serviceBaseUrl + "alpssalewebservices/product/list",
+			type: "POST",
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify(values),
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+			},
+			success: function(data) {
+				console.log("product list result:" + JSON.stringify(data));
+				console.log("--------------------------------------------------------------");
+				if(data.success == true) {
+					console.log("product list result:" + data.productList);
+					console.log("product list result:" + data.productList.length);
+					if(data.productList.length<1){
+						document.getElementById(productType+'-comment').innerHTML = "<p style='text-align:center;magin:10px auto'>暂无数据</p>";
+					}else{
+						var productView = template(productType+'-template', {
+							"productList": data.productList
+						});
+						document.getElementById(productType+'-comment').innerHTML = productView;
+						mui('.mui-numbox').numbox();
+					}
+					 
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("xhr");
+				console.log(xhr); 
+				console.log("type");
+				console.log(type);
+				console.log("errorThrown");
+				console.log(errorThrown);
+//				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//				common.baseOption.goToLogin();
+			}
+		})
+	
+	})
 	
 	
 

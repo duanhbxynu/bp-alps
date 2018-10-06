@@ -4,55 +4,61 @@
 //		common.baseOption.goToLogin();
 //	}
 //	var token = JSON.parse(localStorage.getItem('$state')).token;
-	var searchAResultPicker = new mui.PopPicker();
-	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
-	var count = 0;
-	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
-		
-		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
-		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
-		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
-		var values = {
-			currentPage: 0,
-			pagesize: 2000,
-			categoryCode: categoryCode,
-			searchText: searchText
-		};
-		console.log("product list request:" + JSON.stringify(values));
-		mui.ajax({
-			url: serviceBaseUrl + "alpssalewebservices/product/list",
-			type: "POST",
-			dataType: "json",
-			contentType: 'application/json',
-			data: JSON.stringify(values),
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
-			},
-			success: function(data) {
-				console.log("product list result:" + JSON.stringify(data));
-				console.log("--------------------------------------------------------------");
-				if(data.success == true) {
-					console.log("product list result:" + data.productList);
-					var productView = template(productType+'-template', {
-							"productList": data.productList
-						});
-					document.getElementById(productType+'-comment').innerHTML = productView;
-					mui('.mui-numbox').numbox();
-				}
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				console.log("xhr");
-				console.log(xhr); 
-				console.log("type");
-				console.log(type);
-				console.log("errorThrown");
-				console.log(errorThrown);
-//				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-//				common.baseOption.goToLogin();
-			}
-		})
-	
-	})
+//	var searchAResultPicker = new mui.PopPicker();
+//	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
+//	var count = 0;
+//	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
+//		
+//		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
+//		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
+//		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
+//		var values = {
+//			currentPage: 0,
+//			pagesize: 2000,
+//			categoryCode: categoryCode,
+//			searchText: searchText
+//		};
+//		console.log("product list request:" + JSON.stringify(values));
+//		mui.ajax({
+//			url: serviceBaseUrl + "alpssalewebservices/product/list",
+//			type: "POST",
+//			dataType: "json",
+//			contentType: 'application/json',
+//			data: JSON.stringify(values),
+//			beforeSend: function(xhr) {
+//				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+//			},
+//			success: function(data) {
+//				console.log("product list result:" + JSON.stringify(data));
+//				console.log("--------------------------------------------------------------");
+//				if(data.success == true) {
+//					console.log("product list result:" + data.productList);
+//					console.log("product list result:" + data.productList.length);
+//					if(data.productList.length<1){
+//						document.getElementById(productType+'-comment').innerHTML = "<p style='text-align:center;magin:10px auto'>暂无数据</p>";
+//					}else{
+//						var productView = template(productType+'-template', {
+//							"productList": data.productList
+//						});
+//						document.getElementById(productType+'-comment').innerHTML = productView;
+//						mui('.mui-numbox').numbox();
+//					}
+//					 
+//				}
+//			},
+//			error: function(jqXHR, textStatus, errorThrown) {
+//				console.log("xhr");
+//				console.log(xhr); 
+//				console.log("type");
+//				console.log(type);
+//				console.log("errorThrown");
+//				console.log(errorThrown);
+////				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+////				common.baseOption.goToLogin();
+//			}
+//		})
+//	
+//	})
 	
 	document.getElementById('creatQuotation').addEventListener('tap',function(){
 		var page = this.getAttribute('data-page');
@@ -123,8 +129,8 @@
 		var licensePlateTax = document.getElementById('licensePlateTax').value;
 		var licensePlatePurchaseMethod = document.body.querySelector('input[name=licensePlatePurchaseMethod]:checked').value;
 		var vehicleTypeForLicensePlate = document.body.querySelector('input[name=vehicleTypeForLicensePlate]:checked').value;
-		var province = document.getElementsByClassName("address")[0].getAttribute("data-province");
-		var city = document.getElementsByClassName("address")[0].getAttribute("data-city");
+		var province = document.getElementsByClassName("addressLayer2")[0].getAttribute("data-provinceCode");
+		var city = document.getElementsByClassName("addressLayer2")[0].getAttribute("data-cityCode");
 		var licensePlateServiceCharge = document.getElementById('licensePlateServiceCharge').value;
 		var licensePlateRemake = document.getElementById('licensePlateRemake').value;
 		//金融产品

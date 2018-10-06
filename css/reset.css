@@ -172,4 +172,9 @@ input[type=email], input[type=month], input[type=number], input[type=password],
 }	
 .mui-radio input[type=radio]:checked:before {
 	color: #CB2924;
-}		
+}	
+
+.mui-icon-share{
+	color: #212121!important;
+	font-weight: 800;
+}	

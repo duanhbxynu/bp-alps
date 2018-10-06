@@ -11,18 +11,12 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/quotation/addQuotation.css"/>
-		<style>
-			.mui-icon-more-filled{
-				color: #212121!important;
-				font-weight: 800;
-			}
-		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class="mui-icon mui-icon-more-filled mui-pull-right"></a>
+			<a class="mui-icon mui-icon-more-filled mui-pull-right mui-icon-share"></a>
 			<h1 class="mui-title" id="mui-title">报价单详情</h1>
 		</header>
 		
@@ -620,6 +614,7 @@
 		<script src="../../js/common/car.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/arttmpl.js"></script>
+		<script src="../../js/common/share.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init();
@@ -861,6 +856,10 @@
 							}
 						}
 					})
+				})
+				
+				mui('.mui-bar-nav').on('tap','.mui-icon-more-filled',function(){
+					share.updateSerivces();
 				})
 				
 
