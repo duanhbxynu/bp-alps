@@ -160,6 +160,9 @@
 		console.log(coupon);
 		params.coupon = coupon;
 		console.log(JSON.stringify(params));
+		if(optionalProduct.length<1||upholsteryProduct.length<1||insuranceProduct.length<1||coupon.length<1){
+			return plus.nativeUI.toast("请至少选择一项配件产品！");
+		}
 		//其他
 		var serviceInfo = document.getElementById('serviceInfo').value;
 		var servicePrice = document.getElementById('servicePrice').value;
@@ -171,6 +174,7 @@
 			otherIncomInfo:otherIncomInfo,
 			otherPrice:otherPrice
 		}
+		
 		mui.extend(params,other);
 		console.log(JSON.stringify(params));
 		var params1 = {
@@ -196,7 +200,7 @@
 			contentType: 'application/json',
 	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
-		       xhr.setRequestHeader("Authorization","Bearer " + token);
+		       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 		    },
 			success: function (data) {
 				console.log("order create result:"+JSON.stringify(data));
@@ -213,7 +217,7 @@
 				console.log(textStatus);
 				console.log("errorThrown");
 				console.log(errorThrown);
-				plus.nativeUI.toast('quotation create出错了，请稍后再试！');
+				plus.nativeUI.toast('创建增值订单出错了，请稍后再试！');
 //				common.baseOption.goToLogin();
 			}
 		})

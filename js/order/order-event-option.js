@@ -38,6 +38,7 @@
 			provinceCode:provinceCode
 		}
 		params = {
+			opportunityCode:opportunityCode,
 			orderType:"wholeVehicle",
 			customer:customer,
 			lineItemName:document.getElementById('lineItemName').getAttribute('data-value')||''
@@ -45,12 +46,12 @@
 //		params.push(customer);
 		console.log(JSON.stringify(params));
 		//车辆信息
-		var vehicleBrand = document.getElementsByClassName("brands")[0].getAttribute('data-vehicleBrand');
-		var vehicleBrandCode = document.getElementsByClassName("brands")[0].getAttribute('data-vehicleBrandCode');
-		var vehicleCategory = document.getElementsByClassName("series")[0].getAttribute('data-vehicleCategory');
-		var vehicleCategoryCode = document.getElementsByClassName("series")[0].getAttribute('data-vehicleCategoryCode');
-		var vehicle = document.getElementsByClassName("carType")[0].getAttribute("data-vehicle");
-		var vehicleCode = document.getElementsByClassName("carType")[0].getAttribute("data-vehicleCode");
+		var vehicleBrand = document.getElementsByClassName("brands")[0].getAttribute('data-text');
+		var vehicleBrandCode = document.getElementsByClassName("brands")[0].getAttribute('data-value');
+		var vehicleCategory = document.getElementsByClassName("series")[0].getAttribute('data-text');
+		var vehicleCategoryCode = document.getElementsByClassName("series")[0].getAttribute('data-value');
+		var vehicle = document.getElementsByClassName("carType")[0].getAttribute("data-text");
+		var vehicleCode = document.getElementsByClassName("carType")[0].getAttribute("data-value");
 		var carColor = document.getElementsByClassName("outColors")[0].getAttribute("data-value");
 		var carInsideColor = document.getElementsByClassName("innerColors")[0].getAttribute("data-value");
 		var carPrice = document.getElementById('carPrice').value;
@@ -257,22 +258,65 @@
 		}
 		mui.extend(params,other);
 		console.log(JSON.stringify(params));
-		var params1 = {
-			"opportunityCode":"OP0000012",
-			"lineItemName":"type1",
-			"vehicleBrand":"bmw",
-			"vehicle":"G30",
-			"carModel":"B0003",
-			"carColor":"B0003_B",
-			"carSalesPrice":"3000",
-			"carPrice":"1017",
-			"optionalProduct":[{"code":"M0001","price":"590","actualPrice":"500","quantity":"4"},{"code":"M0002","price":"591","actualPrice":"591","quantity":"1"}],
+		
+		var parmas2 = {
+			"opportunityCode":"OP0000000",
+			"orderType":"wholeVehicle",
+			"customer":{
+				"address":"1111",
+				"cityCode":"上海市",
+				"districtCode":"上海市",
+				"identityNumber":"429006199001011010",
+				"identityType":"身份证",
+				"mobileNumber":"13320181014",
+				"name":"刘诗诗",
+				"otherContactNumber":"",
+				"provinceCode":"上海市"
+			},
+			"lineItemName":"零售订单",
+			"vehicleBrand":"audi",
+			"vehicleBrandCode":"audi",
+			"vehicleCategory":"a6",
+			"vehicleCategoryCode":"a6",
+			"vehicle":"TFSI 风尚版",
+			"vehicleCode":"A0001",
+			"carColor":"A0001_B",
+			"carInsideColor":"A0001_B",
+			"carPrice":"1003",
+			"carSalesPrice":"",
+			"optionalProduct":[],
+			"upholsteryProduct":[],
+			"secondHandCarMileage":"",
+			"secondHandCarPurchasedDate":"",
+			"secondHandCarBrand":"",
+			"secondHandCarVhicle":"",
+			"secondHandCarEvaluationOfPrice":"",
 			"secondHandCarRecycleType":"1",
-			"licensePlatePurchaseMethod":"license1",
-			"vehicleTypeForLicensePlate":"国内",
-			"financeType":"financeType1",
-			"financeCycle":"24"
-		}
+			"secondHandCarRemark":"",
+			"licensePlateTax":"",
+			"province":null,
+			"city":null,
+			"licensePlateServiceCharge":"",
+			"licensePlateRemake":"",
+			"financeType":null,
+			"financeCycle":null,
+			"financeCompany":null,
+			"financeProduct":"",
+			"financeStartTime":"",
+			"financeUnitPrice":"",
+			"financeServiceCharge":"",
+			"financeRate":"",
+			"financeMortgage":"true",
+			"financeRemark":"",
+			"insuranceProduct":[],
+			"coupon":[],
+			"extendedWarrantyProduct":[],
+			"serviceInfo":"",
+			"servicePrice":"",
+			"otherIncomInfo":"",
+			"otherPrice":""
+			}
+		console.log(JSON.stringify(parmas2));
 		mui.ajax({
 			url:serviceBaseUrl+"alpssalewebservices/order/create",
 			type:"POST",
@@ -297,8 +341,8 @@
 				console.log(textStatus);
 				console.log("errorThrown");
 				console.log(errorThrown);
-				common.baseOption.toIndex(2);
-//				plus.nativeUI.toast('quotation create出错了，请稍后再试！');
+//				common.baseOption.toIndex(2);
+//				plus.nativeUI.toast('order create出错了，请稍后再试！');
 //				common.baseOption.goToLogin();
 			}
 		})

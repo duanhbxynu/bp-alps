@@ -193,8 +193,8 @@
 				if(targetTab == "leads/index-leads.html") {
 					var headerHtml = '';
 					//线索
-					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="icon-add"></a>'
-								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>'
+					headerHtml += '<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden" id="leads-add"></a>'
+								 +'<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="leads-search"></a>'
 			 						+'<h1 id="title" class="mui-title">客流</h1>';
 	
 					header.innerHTML = headerHtml;
@@ -216,7 +216,7 @@
 					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="increment-icon-search"></a>'
 			 						+'<h1 id="title" class="mui-title">订单</h1>';	
 					header.innerHTML = headerHtml;
-					showPage();
+					showOrderPage();
 					pageFlag = 2;
 				}
 				
@@ -283,10 +283,11 @@
 //				plus.webview.show(targetTab);
 				
 			});
-			function showPage(){
-				if(document.getElementById('increment-icon-add')){
-					document.getElementById('increment-icon-add').addEventListener('tap',function(){
-			//		打开客户列表页面
+			function showOrderPage(){
+				
+				mui('header').on('tap','a',function(){
+					var idElement = this.getAttribute('id');
+					if("increment-icon-add" == idElement){
 						mui.openWindow({
 							id: 'incrementCustomerListSearch',//b页面id
 							url:'order/incrementOrder_customerList_search.html',
@@ -295,19 +296,17 @@
 								aniShow: "slide-in-right"
 							}
 						})
-					})	
-				}
-				
-				document.getElementById('increment-icon-search').addEventListener('tap',function(){
-			//		打开客户列表页面
-					mui.openWindow({
-						id: 'orderSearch',//b页面id
-						url:'order/order_search.html',
-						show: {
-							autoShow: true, //页面loaded事件发生后自动显示，默认为true
-							aniShow: "slide-in-right"
-						}
-					})
+					}else if("increment-icon-search" == idElement){
+						//	打开订单列表页面
+						mui.openWindow({
+							id: 'orderSearch',//b页面id
+							url:'order/order_search.html',
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								aniShow: "slide-in-right"
+							}
+						})
+					}
 				})
 				
 				
@@ -339,7 +338,10 @@
 			 						+'<h1 id="title" class="mui-title">订单</h1>';	
 					header.innerHTML = headerHtml;
 				}
+				showOrderPage();
 			});
+			
+			
 			
 		</script>
 	</body>

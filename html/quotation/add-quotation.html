@@ -145,7 +145,9 @@
 				height: 50px;
 				/*border: 1px solid rgba(0,0,0,.2)!important;*/
 			}
-			
+			.replacementRow{
+				border-bottom: 0px!important;
+			}
 			
 		</style>
 	</head>
@@ -427,7 +429,7 @@
 			        <li class="mui-table-view-cell mui-collapse">
 			            <a class="mui-navigate-right" href="#">二手车登记</a>
 		                <ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell mui-input-row mui-radio predictTime guideMoney">
+							<li id="replacementRow" class="mui-table-view-cell mui-input-row mui-radio predictTime guideMoney">
 		                       <span>*</span>
 								<label class="require" style="margin: 0;">是否置换</label>
 		                        <span class="radio_inline mui-radio" style="margin-right: 0;float: right;height: 18px;">
@@ -437,7 +439,7 @@
 		                            <label for="radio_no" style="padding-right: 0;">否</label>        
 		                        </span>               
 		           			</li>
-		           			<comment class="mui-hidden" id="secondHandInfo">
+		           			<comment class="" id="secondHandInfo">
 							<li class="mui-table-view-cell predictTime guideMoney">
 								<label class="require">行驶里程</label>
 								<p style="float:right;margin-left: 12px;color: black;">公里</p>
@@ -866,7 +868,25 @@
 					doc.getElementById('customerName').setAttribute('data-oppoCode',oppoCode);
 				});
 //				$('.mui-table-view-cell-scroll').scroll();
-				
+				//是否置换
+				$('#replacementRow').on('tap','input[type=radio]',function(){
+					
+					if (this) {
+						this.checked = !this.checked;
+						$.trigger(this, 'change');
+					}
+					var replacementVehicle = this;
+					console.log(this.checked);
+					var replacementValue = replacementVehicle.value;
+					console.log("replacementVehicle.value="+replacementValue);
+					if(replacementValue == 'true'){
+						doc.getElementById('secondHandInfo').classList.remove('mui-hidden');
+						doc.getElementById('replacementRow').classList.remove('replacementRow')
+					}else{
+						doc.getElementById('replacementRow').classList.add('replacementRow');
+						doc.getElementById('secondHandInfo').classList.add('mui-hidden');
+					}
+				})	
 
 			}(mui, document));
 		</script>
