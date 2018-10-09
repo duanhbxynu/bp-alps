@@ -165,7 +165,36 @@
 				margin-left: 20px;
 				border-radius: 2px;
 			}
-			
+			.mui-newicon{
+			 	display: block;
+			    width: 36px;
+			    height: 36px;
+			    margin: 0 auto;
+			 }
+			.mui-icon-newphone{
+			    background: url(../../images/newPhone.png) no-repeat;
+			    background-size: 100% 100%;
+			}
+			.mui-icon-activity{
+				background: url(../../images/activity.png) no-repeat;
+			    background-size: 100% 100%;
+			}
+			.mui-icon-chate{
+				background: url(../../images/chate.png) no-repeat;
+			    background-size: 100% 100%;
+			}
+			.mui-icon-car{
+				background: url(../../images/car.png) no-repeat;
+			    background-size: 100% 100%;
+			}
+			.mui-icon-price{
+				background: url(../../images/price.png) no-repeat;
+			    background-size: 100% 100%;
+			}
+			.mui-icon-others{
+				background: url(../../images/others.png) no-repeat;
+			    background-size: 100% 100%;
+			}
 		</style>
 
 	</head>
@@ -174,6 +203,7 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title" id="mui-title">意向详情</h1>
+			<a class="mui-icon mui-pull-right mui-icon-search" style="font-weight: bolder;"></a>
 		</header>
 
 		<div class="mui-content mui-scroll-wrapper" id="mui-content">
@@ -212,7 +242,7 @@
 			
 				<div class="mui-card" id="follow_record">
 					<div class="mui-card-header follow-record">
-						<label class="mui-icon-footer">跟进记录</label>
+						<label class="mui-icon-footer"><img src="../../images/records.png" style="width: 25px;position: relative;top: 7px;margin-right: 10px;"/>跟进记录</label>
 						<i class="mui-icon mui-icon-arrowright" id="record_size">4</i>
 					</div>
 				</div>
@@ -221,39 +251,39 @@
 						<ul class="mui-table-view mui-grid-view mui-grid-9 oppor-detail-grid-9">
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 phone-invitation">
 				            	<a href="#" data-typeCode="invitation" data-type="邀约到店">
-				                    <span class="mui-icon mui-icon-phone"></span>
+				                    <span class="mui-icon mui-newicon mui-icon-newphone"></span>
 				                    <div class="mui-media-body">邀约到店</div>
 				            	</a>
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
 				            	<a href="#" data-typeCode="outsideActivity" data-type="店外活动">
-				                    <span class="mui-icon mui-icon-email"></span>
+				                    <span class="mui-icon mui-newicon mui-icon-activity"></span>
 				                    <div class="mui-media-body">店外活动</div>
 				            	</a>
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 face-talking">
 				            	<a href="#" data-typeCode="inshop" data-type="到店面谈">
 				                    <!--<span class="mui-icon-extra mui-icon-extra-people"></span>-->
-				                    <span class="mui-icon mui-icon-person"></span>
+				                    <span class="mui-icon mui-newicon mui-icon-chate"></span>
 				                    <div class="mui-media-body">到店面谈</div>
 				            	</a>
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 try-driving">
 				            	<a href="#" data-typeCode="testDrive" data-type="试乘试驾">
-				                    <span class="mui-icon mui-icon-location"></span>
+				                    <span class="mui-icon mui-newicon mui-icon-car"></span>
 				                    <div class="mui-media-body">试乘试驾</div>
 				            	</a>
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
 				            	<a href="#" data-typeCode="quotation" data-type="商谈报价">
-				                    <span class="mui-icon mui-icon-search"></span>
+				                    <span class="mui-icon mui-newicon mui-icon-price"></span>
 				                    <div class="mui-media-body">商谈报价</div>
 				            	</a>
 				            </li>
 				           
 				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4 more">
 				           		<a href="#">
-				                    <span class="mui-icon mui-icon-more" data-type="其他"></span>
+				                    <span class="mui-icon mui-newicon mui-icon-others" data-type="其他"></span>
 				                    <div class="mui-media-body">其他</div>
 				           		</a>
 				           </li>
