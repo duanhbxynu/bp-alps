@@ -100,9 +100,15 @@
             data: loginInfo,
 //          timeout: 10000, //超时时间设置为10秒；
 			success: function(data) {
+				console.log(data);
 				var jsonData = JSON.parse(data);
+				console.log(jsonData);
+				var storeName = jsonData.storeName;
+				var storeUid = jsonData.storeUid;
 				var token = jsonData.token;
-				return owner.createState(loginInfo.username,token,callback);
+				var userCode = jsonData.userCode;
+				var userName = jsonData.userName;
+				return owner.createState(storeName,storeUid,token,userCode,userName,callback);
 			},
 			error: function(xhr, type, errorThrown) {
 				console.log("xhr");
@@ -118,9 +124,12 @@
 		
 	};
 
-	owner.createState = function(name,token,callback) {
+	owner.createState = function(storeName,storeUid,token,userCode,userName,callback) {
 		var state = owner.getState();
-		state.username = name;
+		state.storeName = storeName;
+		state.storeUid = storeUid;
+		state.userCode = userCode;
+		state.userName = userName;
 		state.token = "token123456789";
 		if(token){
 			state.token = token;

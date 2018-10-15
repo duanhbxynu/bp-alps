@@ -9,6 +9,13 @@
 		vehicleTypeCodePicker.setData(categoryList);
 		vehicleTypeCodePicker.show(function(SelectedItem) {
 			vehicleBrand.innerHTML = SelectedItem[0].text;
+			document.getElementById('vehicleCategoryCode').innerHTML = "请选择车系";
+			document.getElementById('vehicleCategoryCode').setAttribute('data-text', '');
+			document.getElementById('vehicleCategoryCode').setAttribute('data-value', '');
+			document.getElementById('vehicleCode').innerHTML = "请选择车型";
+			document.getElementById('vehicleCode').setAttribute('data-text', '');
+			document.getElementById('vehicleCode').setAttribute('data-value', '');
+			
 			vehicleBrand.setAttribute('data-text', SelectedItem[0].text);
 			vehicleBrand.setAttribute('data-value', SelectedItem[0].value);
 			vehicleCategoryCodePicker.setData(SelectedItem[0].children);
@@ -17,8 +24,12 @@
 	//车系
 	mui('.car').on('tap','.vehicleCategory', function() {
 		var vehicleCategory = this;
+		
 		vehicleCategoryCodePicker.show(function(SelectedItem) {
 			vehicleCategory.innerHTML = SelectedItem[0].text;
+			document.getElementById('vehicleCode').innerHTML = "请选择车型";
+			document.getElementById('vehicleCode').setAttribute('data-text', '');
+			document.getElementById('vehicleCode').setAttribute('data-value', '');
 			vehicleCategory.setAttribute("data-text", SelectedItem[0].text);
 			vehicleCategory.setAttribute("data-value", SelectedItem[0].value);
 		});
@@ -50,6 +61,12 @@
 
 		vehicleCodePicker.show(function(SelectedItem) {
 			vehicle.innerHTML = SelectedItem[0].text;
+			document.getElementsByClassName('outColors')[0].innerHTML = '请选择外观颜色';
+			document.getElementsByClassName('outColors')[0].setAttribute("data-text", SelectedItem[0].text);
+			document.getElementsByClassName('outColors')[0].setAttribute("data-value", SelectedItem[0].value);
+			document.getElementsByClassName('innerColors')[0].innerHTML = '请选择外观颜色';
+			document.getElementsByClassName('innerColors')[0].setAttribute("data-text", SelectedItem[0].text);
+			document.getElementsByClassName('innerColors')[0].setAttribute("data-value", SelectedItem[0].value);
 			vehicle.setAttribute("data-text", SelectedItem[0].text);
 			vehicle.setAttribute("data-value", SelectedItem[0].value);
 			outsideColorPicker.setData(SelectedItem[0].children);
@@ -93,7 +110,7 @@
 			showAddressPicker.setAttribute("data-value",(items[0] || {}).text+(items[1] || {}).value+(items[2] || {}).value);
 			showAddressPicker.setAttribute("data-provinceCode",(items[0] || {}).text);
 			showAddressPicker.setAttribute("data-cityCode",(items[1] || {}).value);
-			showAddressPicker.setAttribute("data-districtCode",(items[1] || {}).value);
+			showAddressPicker.setAttribute("data-districtCode",(items[2] || {}).value);
 		});
 	}, false);
 	
@@ -390,7 +407,7 @@
 	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
 	var count = 0;
 	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
-		
+		var page = this.getAttribute('data-page');
 		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
 		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
 		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
@@ -416,15 +433,34 @@
 				if(data.success == true) {
 					console.log("product list result:" + data.productList);
 					console.log("product list result:" + data.productList.length);
-					if(data.productList.length<1){
-						document.getElementById(productType+'-comment').innerHTML = "<p style='text-align:center;magin:10px auto'>暂无数据</p>";
-					}else{
-						var productView = template(productType+'-template', {
-							"productList": data.productList
-						});
-						document.getElementById(productType+'-comment').innerHTML = productView;
-						mui('.mui-numbox').numbox();
+					console.log(page);
+					if(page == 'add'){
+						if(data.productList.length<1){
+							document.getElementById(productType+'-comment').innerHTML = "<p style='text-align:center;magin:10px auto'>暂无数据</p>";
+						}else{
+							var productView = template(productType+'-template', {
+								"productList": data.productList
+							});
+							document.getElementById(productType+'-comment').innerHTML = productView;
+							mui('.mui-numbox').numbox();
+						}
+					}else if(page == 'clone'){
+						if(data.productList.length>0){
+							var cloneProductList =[];
+							mui.each(data.productList,function(i,product){
+								if(!(document.getElementById(productType+'-'+product.code))){
+									cloneProductList.push(product);
+								}
+							})
+							var productView = template(productType+'-template', {
+								"productList": cloneProductList
+							});
+							
+							document.getElementById(productType+'-comment').innerHTML = productView;
+							mui('.mui-numbox').numbox();
+						}
 					}
+					
 					 
 				}
 			},
@@ -441,6 +477,8 @@
 		})
 	
 	})
+	
+	
 	
 	
 

@@ -41,18 +41,9 @@
 	//获取订单详情
 	order.getOrderDetail = function(orderCode,callback){
 		callback = callback || $.noop;
-		
-//		if(!localStorage.getItem('$state')) {
-//			plus.nativeUI.toast('获取订单详情token出错了，请稍后再试！');
-//			return;
-//		}
-//		
-//		var token = JSON.parse(localStorage.getItem('$state')).token;
-		
-		var params = {code:'',orderCode:orderCode};
-		
+		var params = {orderCode:orderCode};
 		console.log("order detail request:"+params);
-		m.ajax({
+		mui.ajax({
 			url:serviceBaseUrl+"alpssalewebservices/order/detail",
 			type:"POST",
 			dataType:"json",

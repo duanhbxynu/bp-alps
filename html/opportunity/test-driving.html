@@ -5,6 +5,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="">
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/reset.css" rel="stylesheet" />
 		<link href="../../css/style.css" rel="stylesheet" />
@@ -215,6 +218,7 @@
 
 //1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
 				mui.back = function() {
+					//plus.webview.currentWebview().close();
 					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
 				}
 				var opporCode = "";
@@ -331,13 +335,16 @@
 		
 	var vehicleCategoryCodeButton = doc.getElementById('vehicleCategoryCode');
 	vehicleCategoryCodeButton.addEventListener('tap', function(event) {
-		console.log(vehicleCategoryCodePicker);
-		
+		var oldCode = vehicleCategoryCodeButton.innerHTML;
 		vehicleCategoryCodePicker.show(function(items) {
 			vehicleCategoryCodeButton.innerHTML = items[0].text;
 			vehicleCategoryCodeButton.setAttribute("data-vehicleCategoryCode", items[0].value);
 			vehicleCategoryCodeButton.setAttribute("data-vehicleCategory", items[0].text);
-
+			if(oldCode != items[0].text){
+				doc.getElementById('vehicleCode').innerHTML = "请选择车型";
+				doc.getElementById('vehicleCode').setAttribute("data-vehicleCode", '');
+				doc.getElementById('vehicleCode').setAttribute("data-vehicle", '');
+			}
 			//						modelsPicker.setData(items[0]);
 
 			//返回 false 可以阻止选择框的关闭
@@ -575,6 +582,7 @@
 						console.log("follow append content result:"+JSON.stringify(data));
 						console.log("--------------------------------------------------------------");
 						if(data.success==true){
+//							plus.webview.currentWebview().close();
 							  //触发详情页面的show事件
 							mui.fire(plus.webview.getWebviewById('opporDetail'),'show',opporCode);
 							//打开详情页面          

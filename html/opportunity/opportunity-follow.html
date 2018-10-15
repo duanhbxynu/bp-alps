@@ -5,6 +5,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="">
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/reset.css" rel="stylesheet" />
 		<link href="../../css/style.css" rel="stylesheet" />
@@ -182,9 +185,10 @@
 				
 //				以下为注意事项：
 
-//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
+			//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
 				mui.back = function() {
 					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
+//					plus.webview.currentWebview().close();
 				}
 				var opporCode = "";
 				var type = "";
@@ -204,8 +208,12 @@
 						name = event.detail.name;
 						mobile = event.detail.mobile;
 						document.getElementById('mui-title').innerHTML = event.detail.type;
+						document.getElementById('inputMarketActivity').value = '';
+						document.getElementById('textarea').value = '';
 						if(typeCode == 'outsideActivity'||typeCode == 'inshop'||typeCode == 'quotation'){//店外活动,到店面谈,商谈报价
 							doc.getElementById('connectCustomer_row').classList.add('mui-hidden');
+						}else{
+							doc.getElementById('connectCustomer_row').classList.remove('mui-hidden');
 						}
 					});
 				})
@@ -360,6 +368,8 @@
 						console.log("follow append content result:"+JSON.stringify(data));
 						console.log("--------------------------------------------------------------");
 						if(data.success==true){
+//							var self = plus.webview.currentWebview();
+//							self.close();
 							if(typeCode =='quotation'){
 								mui.openWindow({
 									url: '../quotation/add-quotation.html',
@@ -372,7 +382,19 @@
 									createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
 								})
 							}
-							$.back();
+							mui.fire(plus.webview.getWebviewById('opporDetail'),'show',opporCode);
+							//打开详情页面          
+							mui.openWindow({
+								id: 'opporDetail',
+								url:'opportunity-detail.html',
+								show: {
+									aniShow: 'pop-in'
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+//							$.back();
 						}else if(data.messageCode == '403'){//token过期，重新登录
 							plus.nativeUI.toast(data.message);
 							common.baseOption.goToLogin();

@@ -55,22 +55,35 @@
 	
 	document.getElementById('creatOrder').addEventListener('tap',function(){
 		console.log(2);
-		var params = '';
+		var page = this.getAttribute('data-page');
+		var params = {
+			orderType:'increment',
+		};
+		var customerId;
+		var carCode;
+		var requestUrl;
+		
+		if(page == 'clone'){
+			customerId = this.getAttribute('data-customerId');
+			carCode = this.getAttribute('data-carCode');
+			requestUrl = serviceBaseUrl+"alpssalewebservices/order/update";
+			params.code = this.getAttribute('data-orderCode');
+		}else{
+			customerId = JSON.parse(localStorage.getItem('customerItem')).uid;
+			carCode = localStorage.getItem('carCode');
+			requestUrl = serviceBaseUrl+"alpssalewebservices/order/create";
+		}
+		
 		//客户信息
-		var customerId = JSON.parse(localStorage.getItem('customerItem')).customerId;
 		var customer = {
 			uid:customerId
 		}
-		var carCode = localStorage.getItem('carCode');
+		
 		var vehicleInfo = {
 			code:carCode
 		}
-		params = {
-			orderType:'increment',
-			customer:customer,
-			vehicleInfo:vehicleInfo
-		}
-//		params.push(customer);
+		params.customer = customer;
+		params.vehicleInfo = vehicleInfo;
 		console.log(JSON.stringify(params));
 		//原厂选装
 		var optionalProduct = [];
@@ -193,8 +206,9 @@
 			"financeType":"financeType1",
 			"financeCycle":"24"
 		}
+		console.log(requestUrl);
 		mui.ajax({
-			url:serviceBaseUrl+"alpssalewebservices/order/create",
+			url:requestUrl,
 			type:"POST",
 			dataType:"json",
 			contentType: 'application/json',

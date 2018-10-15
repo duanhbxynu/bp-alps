@@ -16,7 +16,7 @@
 		<div id="flowPullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll stream-scroll list-scroll">
 				
-				<div class="mui-card">
+				<!--<div class="mui-card">
 					<div class="mui-card-header">
 						<label>客流编号 1</label>
 						<span>接待中</span>
@@ -68,7 +68,7 @@
 								</li>
 							</ul>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		<script src="../../js/mui.js"></script>
@@ -306,7 +306,7 @@
 							streamScroll.appendChild(card);
 						}else{
 							//下拉刷新，新纪录插到最前面；
-							streamScroll.insertBefore(card, streamScroll.firstChild);
+							streamScroll.insertBefore(card,streamScroll.firstChild);
 						}
 						
 						console.log("=============line 126================");
@@ -411,6 +411,9 @@
 					detailPage = mui.preload({
 						url:'instore-customerstream-detail.html',
 						id:'customerFlowDetail',//默认使用当前页面的url作为id
+						styles:{
+								cachemode:"noCache"
+							}
 					});
 					
 					showCustomerDetail();
@@ -423,6 +426,9 @@
 					detailPage = mui.preload({
 						url:'instore-customerstream-detail.html',
 						id:'customerFlowDetail',//默认使用当前页面的url作为id
+						styles:{
+								cachemode:"noCache"
+							}
 					});
 					showCustomerDetail();
 				});
@@ -451,6 +457,9 @@
 						show: {
 							aniShow: 'pop-in'
 						},
+						styles:{
+								cachemode:"noCache"
+							},
 						waiting: {
 							autoShow: false
 						}

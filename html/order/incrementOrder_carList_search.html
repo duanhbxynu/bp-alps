@@ -179,7 +179,7 @@
 						</div>	
 					</div>
 				</div>
-				<footer class="mui-bar mui-bar-tab">
+				<footer class="mui-bar mui-bar-tab" id="footer">
 					<a class="mui-tab-item mui-action-back mui-active" id="cancelOrder" href="#">上一步</a>
 					<a class="mui-tab-item" id="nextStep" href="#">下一步</a>
 				</footer>
@@ -195,7 +195,13 @@
 		<script src="../../js/order/increment-order.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init();
+				$.init({
+//					beforeback: function(){
+//			            plus.webview.currentWebview().hide();
+//			            //返回true，继续页面关闭逻辑
+//			            return true;
+//			        }
+				});
 
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
@@ -313,11 +319,15 @@
 					
 						if(data.success==true){
 							var vehicleList = data.vehicleList;
-							if(vehicleList.length<1){
+							if(!vehicleList){
 								document.getElementById('createCar').classList.remove('mui-hidden');
+								doc.getElementById('vehicleList').innerHTML = '';
+								doc.getElementById('footer').classList.add('mui-hidden');
 //								plus.nativeUI.toast('您查找的车辆不存在，请重新输入查询条件！')
 //								return;
 							}else{
+								document.getElementById('createCar').classList.add('mui-hidden');
+								doc.getElementById('footer').classList.remove('mui-hidden');
 								doc.getElementById('vehicleList').innerHTML = template('msg-template', {
 									"vehicleList": vehicleList
 								});

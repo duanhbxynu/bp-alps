@@ -1,14 +1,23 @@
 	document.getElementById('creatOrder').addEventListener('tap',function(){
+		var page = this.getAttribute('data-page');
+		var uid = this.getAttribute('data-customerId');
 		console.log(2);
 		var params = '';
+		
+		if(page == 'clone'){
+			var requestUrl = serviceBaseUrl+"alpssalewebservices/order/update";
+			params.code = this.getAttribute('data-orderCode');
+		}else{
+			var requestUrl = serviceBaseUrl+"alpssalewebservices/order/create";
+		}
 		var opportunityCode = document.getElementById('customerName').getAttribute('data-oppoCode');
 		var attribute = '正式';
 		var attributeCode = '正式';
 		var customerSource = document.getElementById('customerName').getAttribute('data-platform');
 		//客户信息
 		var name = document.getElementById('customerName').value;
-		var customerType = mui('.mui-radio input[name=customerType]:checked').value;
-		var customerTypeCode = mui('.mui-radio input[name=customerType]:checked').value;
+		var customerType = document.querySelector('input[name=customerType]:checked').getAttribute('data-text');
+		var customerTypeCode = document.querySelector('input[name=customerType]:checked').value;
 		var identityType =  document.getElementsByClassName("idType")[0].getAttribute('data-value');
 		var identityNumber =  document.getElementById('idNumber').value;
 		var mobileNumber =  document.getElementById('customerMobile').value;
@@ -22,9 +31,10 @@
 		var operatorMobile = document.getElementById('operatorMobile').value;
 		var operatorIdType = document.getElementById('operatorIdType').getAttribute('data-value');
 		var operatorIdNumber = document.getElementById('operatorIdNumber').value;
-		var paymentType = document.getElementsByClassName("payWay")[0].getAttribute('data-value');
-//		var deliveryDate = document.getElementsByClassName("preTime")[0].getAttribute("data-value");
+		var paymentType = document.getElementsByClassName("paymentMethod")[0].getAttribute('data-value');
+		var deliveryDate = document.getElementsByClassName("deliveryDate")[0].getAttribute("data-value");
 		var customer = {
+			uid:uid,
 			address:address,
 			cityCode:cityCode,
 			customerType:customerType,
@@ -41,6 +51,8 @@
 			opportunityCode:opportunityCode,
 			orderType:"wholeVehicle",
 			customer:customer,
+			deliveryDate:deliveryDate,
+			paymentType:paymentType,
 			lineItemName:document.getElementById('lineItemName').getAttribute('data-value')||''
 		}
 //		params.push(customer);
@@ -56,6 +68,9 @@
 		var carInsideColor = document.getElementsByClassName("innerColors")[0].getAttribute("data-value");
 		var carPrice = document.getElementById('carPrice').value;
 		var carSalesPrice = document.getElementById('carSalesPrice').value;
+		if(!carSalesPrice){
+			return plus.nativeUI.toast('请输入销售价格');
+		}
 		var vehicleInfo = {
 			vehicleBrand:vehicleBrand,
 			vehicleBrandCode:vehicleBrandCode,
@@ -318,7 +333,7 @@
 			}
 		console.log(JSON.stringify(parmas2));
 		mui.ajax({
-			url:serviceBaseUrl+"alpssalewebservices/order/create",
+			url:requestUrl,
 			type:"POST",
 			dataType:"json",
 			contentType: 'application/json',

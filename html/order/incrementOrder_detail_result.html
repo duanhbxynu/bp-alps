@@ -20,7 +20,7 @@
 			<h1 class="mui-title" id="mui-title">增值订单详情</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab tabBar">
-			<a class="mui-tab-item mui-active" href="#">
+			<a class="mui-tab-item mui-active" href="#" id='editOrder'>
 				<span class="mui-icon"></span>
 				<span class="mui-tab-label">编辑</span>
 			</a>
@@ -81,69 +81,43 @@
 
 		<div class="mui-content price-content orderDetail" id="orderDetail">
 			<!--订单编号-->
-			<comment id="orderBaseComment">
-			<script id='orderBase-template' type="text/template">
-			<div class="mui-card mui-clearfix price-card">
-				<div class="mui-card-header">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell" id="quotationCode">
-							订单编号：<%=order.code %>
-						</li>
-						<!--<li class="mui-table-view-cell" id="creationtime" style="font-weight: 400;">
-							<%=order.status %>
-						</li>-->
-						<li class="mui-table-view-cell" id="creationtime" style="font-weight: 400;">
-							<%=order.creationtime %>
-						</li>
-						
-					</ul>	
-				</div>
-			
-				<div class="mui-card-content">
-					<ul class="mui-table-view mui-clearfix">
-						<li class="mui-table-view-cell">
-							<label>定金金额</label>
-							<var><%=order.deposit %></var>
-							<!--<input type="text" name="name" id="flow_name" class="mui-input-clear" placeholder="请输入姓名" value="￥100,000">-->
-						</li>
-						<li class="mui-table-view-cell">
-							<label>订单总金额</label>
-							<var><%=order.totalPrice %></var>
-						</li>
-
-					</ul>
-				</div>
-			</div>
-			</script>
-			</comment>
-			
-			<!--客户信息-->
 			<div class="mui-card car-card particulars">
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">客户信息</a>
+						<a class="mui-navigate-right" id="orderCode" href="#">订单编号</a>
 					
 						<ul class="mui-table-view mui-table-view-chevron">
-							<comment id="customerComment">
-							<script id='customer-template' type="text/template">
+							
 							<li class="mui-table-view-cell">
-								<label class="require">姓名</label>
-								<p><span><%=customer.name||''%></span></p>
-							</li>
-							<li class="mui-table-view-cell">
-								<label class="require">客户类型</label>
-								<p class="detailRed"><span><%=customer.customerType||''%></span></p>
-							</li>
-							<li class="mui-table-view-cell">
-								<label class="require">客户性质</label>
-								<p><span><%=customer.attributeCode||''%></span></p>
+								<label class="require">客户姓名</label>
+								<p><span id="customerName"></span></p>
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">客户联系电话</label>
-								<p><span><%=customer.mobileNumber%></span></p>
+								<p><span id="customerMobile"></span></p>
 							</li>
-							</script>
-							</comment>
+							<li class="mui-table-view-cell">
+								<label class="require">订单类型</label>
+								<p><span class="detailRed">增值订单</span></p>
+							</li>
+							
+							<li class="mui-table-view-cell">
+								<label class="require">订单状态</label>
+								<p><span class="status" id="status"></span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">财务状态</label>
+								<p><span class="detailBlue" id="financeStatus">未收款</span></p>
+							</li>
+							
+							<li class="mui-table-view-cell">
+								<label class="require">订单金额</label>
+								<p><span class='detailRed totalPrice' id="totalPrice"></span></p>
+							</li>
+							<li class="mui-table-view-cell">
+								<label class="require">创建时间</label>
+								<p><span class='creationtime' id="creationtime"></span></p>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -229,7 +203,7 @@
 							<% } %>
 							<p class="line total">
 								<span>合计：<%=( order.decorProductTotalPrice|| '&nbsp;&nbsp;') %></span>
-								<span>共 <%= (order.upholsteryProduct.length||'0') %>件</span>
+								<span>共 <%= (order.upholsteryProduct.length||'0') %> 件</span>
 							</p>
 						<% }else{ %>	
 							<p style="text-align: center;padding-bottom: 20px;">暂无</p>
@@ -332,51 +306,7 @@
 			        </li>
 			    </ul>
 			</div>	
-			<!--自营延保产品，延保2年-->
-			<div class="mui-card car-card particulars">
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right" href="#">延保</a>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<% if(order.extendedWarrantyProduct) { %>
-			                <% for(var i in order.extendedWarrantyProduct){ var item=order.extendedWarrantyProduct[i]; %>
-			                	<li class="mui-table-view-cell titles">
-									<label>产品编号：<%=( item.code|| '&nbsp;&nbsp;') %></label>
-								</li>
-								<li class="mui-table-view-cell detailWidth">
-									<label class="require">产品描述</label>
-									<p><span><%=( item.name|| '&nbsp;&nbsp;') %></span></p>
-								</li>
-								<li class="mui-table-view-cell">
-									<label class="require">数量</label>
-									<p><span><%=( item.quantity|| '&nbsp;&nbsp;') %></span></p>
-								</li>
-								<li class="mui-table-view-cell">
-									<label class="require">参考价格</label>
-									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
-								</li>
-								<li class="mui-table-view-cell">
-									<label class="require">销售价格</label>
-									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
-								</li>
-								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
-							<% } %>
-							<p class="line total">
-								<span>合计：<%=( order.extendedWarrantyTotalPrice|| '&nbsp;&nbsp;') %></span>
-							</p>
-						<% }else{ %>	
-							<p style="text-align: center;padding-bottom: 20px;">暂无</p>
-							<% } %>
-							<!--<li class="mui-table-view-cell">
-								<label class="require">￥6000元</label>
-							</li>
-							<li class="mui-table-view-cell">
-								<p><span>自营延保产品说明自营延保产品着名自营延保产品说明自营延保产品说明自营延保</span></p>
-							</li>-->
-						</ul>
-					</li>
-				</ul>
-			</div>
+			
 			<!--其他项目-->
 			<div class="mui-card car-card carDetails particulars">
 				<ul class="mui-table-view"> 
@@ -422,7 +352,12 @@
 		<script src="../../js/common/share.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init();
+				$.init({
+					preloadPages: [{
+						url: 'modify_incrementOrder.html',
+						id: 'modifyIncrementOrder'
+					}]
+				});
 				var aniShow = "pop-in";
 				
 				
@@ -455,31 +390,72 @@
 				}
 				template.config('escape', false);
 				//添加show自定义事件监听
+				var creationtime;
 				window.addEventListener('show', function(event) {
-					
-					var order = event.detail.order;
+					var orderCode = event.detail.orderCode;
 					var creationtime = event.detail.creationtime;
-					console.log(order);
-					mui.extend(order,{creationtime:creationtime});
+					console.log(orderCode);
+					orderjs.getOrderDetail(orderCode, function(data) {
+						if(data.success) {
+							console.log(data);
+							console.log("order detail result:" + JSON.stringify(data));
+							order = data.order;
+							mui.extend(order,{creationtime:creationtime});
+							console.log("--------------------------------------------------------------");
+							console.log(order);
+							console.log(order.orderType);
+							showOrderDetail(order);
+						} else {
+							plus.nativeUI.toast(data.message);
+							return;
+						}
+					})
+					
+				}, false);
+				function showOrderDetail(order){
 					console.log(order);
 					doc.getElementById('messages').setAttribute('data-orderCode',order.code);
-					var baseView = template('orderBase-template', {
-									"order": order});
-					document.getElementById('orderBaseComment').innerHTML = baseView;
-					var customerView = template('customer-template', {
-									"customer": order.customer});
-					document.getElementById('customerComment').innerHTML = customerView;
-				
+					//订单状态，财务状态，订单金额，创建时间
+					var excludeList = ['status','totalPrice','creationtime'];
+					common.baseOption.setInnerHtml(order,excludeList);
+					document.getElementById('orderCode').setAttribute('data-orderCode',order.code);
+					document.getElementById('orderCode').innerHTML = '订单编号 '+order.code;
+					document.getElementById('customerName').innerHTML = order.customer.name;
+					document.getElementById('customerMobile').innerHTML = order.customer.mobileNumber;
 				    var optionalView = template('optional-template', {
 									"order": order});
 					document.getElementById('optionalComment').innerHTML = optionalView;
 					orderjs.getOrderMessage(order.code);
-					
-				}, false);
+					console.log(order.status);
+					if(order.status != "草稿") {
+						console.log(order.status);
+						doc.getElementById('editOrder').classList.add('mui-disabled');
+					}else{
+						doc.getElementById('editOrder').classList.remove('mui-disabled');
+					}
+				}
 				
 				mui('.mui-bar-nav').on('tap','.mui-icon-more-filled',function(){
 					share.updateSerivces();
 				})
+				
+				
+				doc.getElementById('editOrder').addEventListener('tap', function() {
+					var classList = this.classList;
+					if(classList.contains('mui-disabled')) {
+						return plus.nativeUI.toast('订单已提交，无法修改！')
+					}
+					//触发修改页面的orderCode事件
+					mui.fire(plus.webview.getWebviewById('modifyIncrementOrder'), 'orderCode', {
+						orderCode: orderCode,
+						order: order
+					});
+					//打开详情页面          
+					mui.openWindow({
+						id: 'modifyIncrementOrder'
+					});
+				})
+				
 				
 
 			}(mui, document));

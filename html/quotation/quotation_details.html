@@ -47,7 +47,8 @@
 						</li>
 						<li class="mui-table-view-cell">
 							<label>订单类型</label>
-							<i class="mui-icon mui-icon-arrowdown"><%=( quotation.lineItemName|| '销售订单') %></i>
+							<var><%=quotation.lineItemName %></var>
+							<!--<i class="mui-icon mui-icon-arrowdown"><%=( quotation.lineItemName|| '') %></i>-->
 						</li>
 
 					</ul>
@@ -145,10 +146,10 @@
 								<label class="require">整车辆销售价</label>
 								<p><span><%=( quotation.carSalesPrice||0) %></span></p>
 							</li>
-							<li class="mui-table-view-cell">
+							<!--<li class="mui-table-view-cell">
 								<label class="require">付款方式</label>
 								<p class="detailRed"><span><%=( quotation.paymentType||'全款') %></span></p>
-							</li>
+							</li>-->
 						</ul>
 			        </li>
 			    </ul>
@@ -188,7 +189,7 @@
 								</li>-->
 							<% } %>
 						
-							<p class="line total">合计：<%=( quotation.optionalProductTotalPrice|| '&nbsp;&nbsp;') %></p>
+							<p class="line total">合计：<%=( quotation.optionalProductTotalPrice|| '&nbsp;&nbsp;') %>元</p>
 						<% } %>	
 		                </ul>
 			        </li>
@@ -216,7 +217,7 @@
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">参考价格</label>
-									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元 </span></p>
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">销售价格</label>
@@ -225,7 +226,7 @@
 								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
 							<% } %>
 							<p class="line total">
-								<span>合计：<%=( quotation.decorProductTotalPrice|| '&nbsp;&nbsp;') %></span>
+								<span>合计：<%=( quotation.decorProductTotalPrice|| '&nbsp;&nbsp;') %>元</span>
 								<span>共 <%= (quotation.upholsteryProduct.length||'0') %>件</span>
 							</p>
 						<% } %>	
@@ -330,7 +331,7 @@
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">新车购置税</label>
-								<p><span><%= (quotation.licensePlateTax||'') %>元</span></p>
+								<p><span><%= (quotation.licensePlateTax||'') %></span></p>
 							</li>
 							<!--<li class="mui-table-view-cell">
 								<label class="require">上牌方式</label>
@@ -338,17 +339,18 @@
 							</li>-->
 							<li class="mui-table-view-cell">
 								<label class="require">车辆产地</label>
-								<p><span><%= (quotation.vehicleTypeForLicensePlate||'国产') %></span></p>
+								<p><span><%= (quotation.vehicleTypeForLicensePlate||'') %></span></p>
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">上牌服务费</label>
-								<p><span><%= (quotation.licensePlateServiceCharge||'0') %>元</span></p>
+								<p><span><%= (quotation.licensePlateServiceCharge||'') %></span></p>
 							</li>
 							<!--<li class="mui-table-view-cell detailWidth">
 								<label class="require">备注</label>
 								<p><span>本店上牌</span></p>
 							</li>-->
-							<p class="line total">合计：<%= (quotation.licensePlateServiceCharge||'0') %></p>
+							
+							<p class="line total">合计：<%= (quotation.licensePlateServiceCharge||'0') %>元</p>
 						</ul>
 					</li>
 				</ul>	
@@ -362,15 +364,15 @@
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<label class="require">金融类型</label>
-								<p><span><%= (quotation.financeType||'自营金融') %></span></p>
+								<p><span><%= (quotation.financeType||'') %></span></p>
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">金融期限</label>
-								<p><span><%= (quotation.financeCycle||'12期') %></span></p>
+								<p><span><%= (quotation.financeCycle||'') %></span></p>
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">金融机构</label>
-								<p><span><%= (quotation.financeCompany||'小额贷款有限公司') %></span></p>
+								<p><span><%= (quotation.financeCompany||'') %></span></p>
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">金融产品</label>
@@ -400,7 +402,7 @@
 								<label class="require">备注</label>
 								<p><span><%= (quotation.financeRemark||'') %></span></p>
 							</li>
-							<p class="line total">合计：<%= (quotation.financeServiceCharge||'') %></p>
+							<p class="line total">合计：<%= (quotation.financeServiceCharge||'0') %>元</p>
 						</ul>
 					</li>
 				</ul>	
@@ -427,7 +429,7 @@
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">参考价格</label>
-									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;')%>元</span></p>
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">销售价格</label>
@@ -436,7 +438,7 @@
 								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
 							<% } %>
 							<p class="line total">
-								<span>合计：<%=( quotation.insuranceProductTotalPrice|| '&nbsp;&nbsp;') %></span>
+								<span>合计：<%=( quotation.insuranceProductTotalPrice|| '&nbsp;&nbsp;') %>元</span>
 							</p>
 						<% } %>	
 							<!--<li class="mui-table-view-cell">
@@ -480,16 +482,16 @@
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">参考价格</label>
-									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %></span></p>
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">销售价格</label>
-									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
+									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %></span></p>
 								</li>
 								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
 							<% } %>
 							<p class="line total">
-								<span>合计：<%=( quotation.voucherTotalPrice|| '&nbsp;&nbsp;') %></span>
+								<span>合计：<%=( quotation.voucherTotalPrice|| '&nbsp;&nbsp;') %>元</span>
 							</p>
 						<% } %>	
 							<!--<li class="mui-table-view-cell">
@@ -529,16 +531,16 @@
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">参考价格</label>
-									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %>元</span></p>
+									<p><span>￥ <%=( item.price|| '&nbsp;&nbsp;') %></span></p>
 								</li>
 								<li class="mui-table-view-cell">
 									<label class="require">销售价格</label>
-									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %>元</span></p>
+									<p class=""><span>￥ <%=( item.actualPrice|| '&nbsp;&nbsp;') %></span></p>
 								</li>
 								<!--<p class="line" style="padding: 0; margin-bottom: 23px;"></p>-->
 							<% } %>
 							<p class="line total">
-								<span>合计：<%=( quotation.extendedWarrantyTotalPrice|| '&nbsp;&nbsp;') %></span>
+								<span>合计：<%=( quotation.extendedWarrantyTotalPrice|| '&nbsp;&nbsp;') %>元</span>
 							</p>
 						<% } %>	
 		                	<!--<li class="mui-table-view-cell titles">
@@ -581,7 +583,7 @@
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">综合服务费</label>
-								<p><span><%=( quotation.servicePrice|| '&nbsp;&nbsp;') %>元</span></p>
+								<p><span><%=( quotation.servicePrice|| '&nbsp;&nbsp;') %></span></p>
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">其他收入描述</label>
@@ -589,7 +591,7 @@
 							</li>
 							<li class="mui-table-view-cell">
 								<label class="require">其他收入</label>
-								<p><span><%=( quotation.otherPrice|| '&nbsp;&nbsp;') %>元</span></p>
+								<p><span><%=( quotation.otherPrice|| '&nbsp;&nbsp;') %></span></p>
 							</li>
 						</ul>
 			        </li>
@@ -617,7 +619,15 @@
 		<script src="../../js/common/share.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init();
+				$.init({
+					preloadPages:[{
+						url: 'clone-quotation.html',
+						id: "clone-quotation",
+						styles:{
+							cachemode:"noCache"
+						}
+					}]
+				});
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -809,16 +819,15 @@
 					//克隆
 					var customerName =  doc.getElementById('customer').getAttribute("data-customerName");
 					var customerMobile =  doc.getElementById('customer').getAttribute("data-customerMobile");
+					
+					mui.fire(plus.webview.getWebviewById('clone-quotation'),'showClonePage',{
+						oppoCode: oppoCode,
+						name:customerName,
+						mobile:customerMobile,
+						quotation:quotation
+					})
 					mui.openWindow({
-						url: 'clone-quotation.html',
-						id: "clone-quotation",//默认使用当前页面的url作为id
-						extras: {
-							oppoCode: oppoCode,
-							name:customerName,
-							mobile:customerMobile,
-							quotation:quotation
-						}, //自定义扩展参数
-						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+						id: "clone-quotation"//默认使用当前页面的url作为id
 					})
 					
 				})
@@ -835,7 +844,7 @@
 						contentType: 'application/json',
 				        data: JSON.stringify(updatedate),
 				        beforeSend: function (xhr) {
-					       xhr.setRequestHeader("Authorization","Bearer " + token);
+					       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 					    },
 						success: function (data) {
 							console.log("quotation update result:"+JSON.stringify(data));

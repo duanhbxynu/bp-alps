@@ -101,13 +101,22 @@
 				},
 				preloadPages:[{
 					id: 'incrementCustomerListSearch',//b页面id
-					url:'order/incrementOrder_customerList_search.html'
+					url:'order/incrementOrder_customerList_search.html',
+					styles:{
+						cachemode:"noCache"
+					}
 				},{
 					id: 'opporSearchResult',//b页面id
-					url:'opportunity/opportunity-search-result.html'
+					url:'opportunity/opportunity-search-result.html',
+					styles:{
+						cachemode:"noCache"
+					}
 				},{
 					id: 'orderSearch',//b页面id
 					url:'order/order_search.html',
+					styles:{
+						cachemode:"noCache"
+					}
 				}]
 				
 	
@@ -291,6 +300,9 @@
 						mui.openWindow({
 							id: 'incrementCustomerListSearch',//b页面id
 							url:'order/incrementOrder_customerList_search.html',
+							styles:{
+								cachemode:"noCache"
+							},
 							show: {
 								autoShow: true, //页面loaded事件发生后自动显示，默认为true
 								aniShow: "slide-in-right"
@@ -301,6 +313,9 @@
 						mui.openWindow({
 							id: 'orderSearch',//b页面id
 							url:'order/order_search.html',
+							styles:{
+								cachemode:"noCache"
+							},
 							show: {
 								autoShow: true, //页面loaded事件发生后自动显示，默认为true
 								aniShow: "slide-in-right"

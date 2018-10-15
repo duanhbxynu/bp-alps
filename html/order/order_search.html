@@ -18,12 +18,8 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title" id="mui-title">订单搜索</h1>
 		</header>
-		<div class="mui-content orderSearch" id="orderSearchList">
-			<script id='content-template' type="text/template">
-				<% for(var i in contentList){ var item=contentList[i]; %>
-				<% } %>
-			</script>
-			<div class="mui-card">
+		<div class="mui-content orderSearch orderList">
+			<div class="mui-card" id="orderSearchConditions">
 				<ul class="mui-table-view mui-table-view-chevron">
 					<li class="mui-table-view-cell">
 						<label>姓名</label>
@@ -95,7 +91,13 @@
 		<script src="../../js/common/arttmpl.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init();
+				$.init({
+					preloadPages:[{
+						url:'order_search_result.html',
+						id:'orderSearchResult'
+						
+					}]
+				});
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -110,46 +112,42 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				
 				template.config('escape', false);
 				var count = 0;
 				var orderList = null;
+				var incrementDetailPage = null;
+				var wholeDetailPage = null;
 				$.plusReady(function() {
 
 					/*---------关闭滚动条------*/
 					plus.webview.currentWebview().setStyle({
 						scrollIndicator: 'none'
 					});
+//					//预加载页面mui.preload必须放在plusReady事件中
+//					wholeDetailPage = mui.preload({
+//	                    id: 'wholeVehicleOrderDetail',
+//						url: 'wholeVehicleOrder_detail_result.html'
+//	                });;
+//	                incrementDetailPage = mui.preload({
+//	                    id: 'incrementOrderDetail',
+//						url: 'incrementOrder_detail_result.html'
+//	                });
+//					showOrderDetail();
 				});
 
 				doc.getElementById('orderSearch').addEventListener('tap', function() {
-
-					var params = {
+					mui.fire(plus.webview.getWebviewById('orderSearchResult'),'getParams',{
 						customerName:doc.getElementById('customerName').value,
-						customerMobileNumber:doc.getElementById('customerMobileNumber').value,
-						currentPage:0,
-						pagesize:10
-					}
-					order.qryOrderList(params,function(data) {
-						console.log(data);
-						var data = JSON.parse(data);
-						console.log(data);
-						
-						console.log("订单列表data.success"+data.success);
-						if(data.success) {
-							orderList = data.orderList;
-							console.log(orderList);
-							var str = template('content-template', { 
-						            "contentList": orderList,
-						        }); 
-							
-							
-						}else {
-							
-							plus.nativeUI.toast(data.error);
-						}
-					});
+						customerMobileNumber:doc.getElementById('customerMobileNumber').value
+					})
+					mui.openWindow({
+						id:'orderSearchResult'
+					})
 
 				})
+				
+				
 
 			}(mui, document));
 		</script>

@@ -287,7 +287,7 @@
 						currentPage:0,
 						pagesize:10
 					}
-					if(level == 'H'|| level == 'Today'){
+					if(level == 'Today'){
 						params = {
 							mobile:mobile,
 							currentPage:0,
@@ -412,10 +412,17 @@
 				
 				setTimeout(function() {
 					var params = {
-//						level:level,
+						level:level,
 						mobile:mobile,
 						currentPage:0,
 						pagesize:10
+					}
+					if(level == 'Today'){
+						params = {
+							mobile:mobile,
+							currentPage:0,
+							pagesize:10
+						}
 					}
 					var opporScroll = document.body.querySelector('.oppor-scroll');
 					oppor.qryOpporList(params,function(data) {

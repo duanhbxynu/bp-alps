@@ -54,7 +54,7 @@
 		</header>
 
 		<div class="mui-content" id="mui-content">
-		
+			<p id="listNo" class="mui-hidden" style='margin: 10px auto;text-align: center;'>暂无报价</p>
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll quotation-scroll">
 					
@@ -174,10 +174,11 @@
 //					plus.nativeUI.toast('登陆过期，请重新登陆！');
 //					return;
 //				}
-				var username = JSON.parse(localStorage.getItem('$state')).username||'123456';
+//				var username = JSON.parse(localStorage.getItem('$state')).username||'123456';
+				template.config('escape', false);
 //				var token = JSON.parse(localStorage.getItem('$state')).token;
 				$.plusReady(function() {
-					template.config('escape', false);
+					
 					
 					window.addEventListener('showList', function(event) {
 						oppoCode = event.detail.opporCode;
@@ -204,12 +205,37 @@
 									var quotationList = data.quotationList;
 									if(quotationList.length>0){
 										//追加模板消息 
+//										for(var i=0;i<quotationList.length;i++){
+//											var card = document.createElement('div');
+//							card.className = 'mui-card';
+//							card.setAttribute("data-opporCode",opportunityList[i].code );
+//							card.innerHTML ='<div class="mui-card-header"><label>意向编号' + opportunityList[i].code +'</label><span>'+ opportunityList[i].statusName +'</span></div>'+
+//											'<div class="mui-card-content">'+
+//												'<ul class="mui-table-view">'+
+//													'<li class="mui-table-view-cell">'+
+//														'<var>'+opportunityList[i].name+'</var> <var>'+gender+'</var><var>'+opportunityList[i].mobile+'</var><var class="mui-pull-right">'+opportunityList[i].platform+'</var>'+
+//													'</li>'+
+//													'<li class="mui-table-view-cell second-cell">'+
+//														'<var>'+opportunityList[i].levelName+'</var> <var>'+opportunityList[i].creationtime+'</var><var class="mui-pull-right">'+opportunityList[i].vehicleCategoryName+'&nbsp;&nbsp;&nbsp;'+opportunityList[i].vehicleName+'</var>'+
+//													'</li>'+
+//													'<li class="mui-table-view-cell">'+
+//														'<i class="mui-icon-extra mui-icon-extra-outline active"></i> <var class="active">'+ opportunityList[i].lastFollowTime +'</var>'+
+//													'</li>'+
+//												'</ul>'+
+//											'</div>';
+//							console.log("=============line 123================");
+//							console.log(card);
+//										}
 								        var str = template('content-template', { 
 								            "quotationList": quotationList
 								        }); 
 								        doc.getElementById('mui-content').innerHTML = str;
+								        if( doc.getElementById('listNo')){
+								        	doc.getElementById('listNo').classList.remove('mui-hidden');
+								        }
+								        
 									}else{
-										doc.getElementById('mui-content').innerHTML = "<p style='margin: 10px auto;text-align: center;'>暂无报价</p>";
+										doc.getElementById('listNo').classList.add('mui-hidden');
 									}
 								}else if(data.messageCode == '403'){//token过期，重新登录
 									plus.nativeUI.toast(data.message);

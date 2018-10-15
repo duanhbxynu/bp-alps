@@ -7,73 +7,101 @@
 //	var searchAResultPicker = new mui.PopPicker();
 //	var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
 //	var count = 0;
-//	mui('.mui-search').on('tap', '.mui-icon-plus-filled', function() {
-//		
-//		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
-//		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
-//		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
-//		var values = {
-//			currentPage: 0,
-//			pagesize: 2000,
-//			categoryCode: categoryCode,
-//			searchText: searchText
-//		};
-//		console.log("product list request:" + JSON.stringify(values));
-//		mui.ajax({
-//			url: serviceBaseUrl + "alpssalewebservices/product/list",
-//			type: "POST",
-//			dataType: "json",
-//			contentType: 'application/json',
-//			data: JSON.stringify(values),
-//			beforeSend: function(xhr) {
-//				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
-//			},
-//			success: function(data) {
-//				console.log("product list result:" + JSON.stringify(data));
-//				console.log("--------------------------------------------------------------");
-//				if(data.success == true) {
-//					console.log("product list result:" + data.productList);
-//					console.log("product list result:" + data.productList.length);
-//					if(data.productList.length<1){
-//						document.getElementById(productType+'-comment').innerHTML = "<p style='text-align:center;magin:10px auto'>暂无数据</p>";
-//					}else{
-//						var productView = template(productType+'-template', {
-//							"productList": data.productList
-//						});
-//						document.getElementById(productType+'-comment').innerHTML = productView;
-//						mui('.mui-numbox').numbox();
-//					}
-//					 
-//				}
-//			},
-//			error: function(jqXHR, textStatus, errorThrown) {
-//				console.log("xhr");
-//				console.log(xhr); 
-//				console.log("type");
-//				console.log(type);
-//				console.log("errorThrown");
-//				console.log(errorThrown);
-////				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-////				common.baseOption.goToLogin();
-//			}
-//		})
-//	
-//	})
+	mui('.mui-clone-search').on('tap', '.mui-icon-plus-filled', function() {
+		
+		var searchText = this.parentNode.getElementsByTagName('input')[0].value;
+		var categoryCode = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-categoryCode');
+		var productType = this.parentNode.getElementsByTagName('input')[0].getAttribute('data-productType');
+		var values = {
+			currentPage: 0,
+			pagesize: 2000,
+			categoryCode: categoryCode,
+			searchText: searchText
+		};
+		console.log("product list request:" + JSON.stringify(values));
+		mui.ajax({
+			url: serviceBaseUrl + "alpssalewebservices/product/list",
+			type: "POST",
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify(values),
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+			},
+			success: function(data) {
+				console.log("product list result:" + JSON.stringify(data));
+				console.log("--------------------------------------------------------------");
+				if(data.success == true) {
+					console.log("product list result:" + data.productList);
+					if(data.productList.length>0){
+						var cloneProductList =[];
+						mui.each(data.productList,function(i,product){
+							console.log(document.getElementById(productType+'-'+product.code));
+							if(!document.getElementById(productType+'-'+product.code)){
+								cloneProductList.push(product);
+							}
+						})
+						console.log(cloneProductList);
+						var productView = template(productType+'-template', {
+							"productList": cloneProductList
+						});
+						document.getElementById(productType+'-comment').innerHTML = productView;
+						mui('.mui-numbox').numbox();
+					}
+					 
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("xhr");
+				console.log(xhr); 
+				console.log("type");
+				console.log(type);
+				console.log("errorThrown");
+				console.log(errorThrown);
+//				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//				common.baseOption.goToLogin();
+			}
+		})
+	
+	})
 	
 	document.getElementById('creatQuotation').addEventListener('tap',function(){
 		var page = this.getAttribute('data-page');
 		var opportunityCode = document.getElementById('customerName').getAttribute('data-oppoCode');
 		var deposit = document.getElementById('deposit').value;
-		var orderType = document.getElementById('order_type').getAttribute('data-value');
+		var lineItemName = document.getElementById('lineItemName').getAttribute('data-value');
 		//车辆信息
 		var brands = document.getElementsByClassName("brands")[0].getAttribute('data-value');
+		var vehicleBrandName = document.getElementsByClassName("brands")[0].getAttribute('data-text');
+		
 		var vehicle = document.getElementsByClassName("series")[0].getAttribute('data-value');
+		var vehicleName = document.getElementsByClassName("series")[0].getAttribute('data-text');
+		
 		var carModel = document.getElementsByClassName("carType")[0].getAttribute("data-value");
+		var carModelName = document.getElementsByClassName("carType")[0].getAttribute("data-text");
+		
 		var outColors = document.getElementsByClassName("outColors")[0].getAttribute("data-value");
+		var carColorName = document.getElementsByClassName("outColors")[0].getAttribute("data-text");
+		
 		var innerColors = document.getElementsByClassName("innerColors")[0].getAttribute("data-value");
-		var deliveryDate = document.getElementsByClassName("preTime")[0].getAttribute("data-value");
+//		var deliveryDate = document.getElementsByClassName("deliveryDate")[0].getAttribute("data-value");
 		var carPrice = document.getElementById('carPrice').value;
 		var carSalesPrice = document.getElementById('carSalesPrice').value;
+		if(!brands){
+			return plus.nativeUI.toast('请选择品牌');
+		}
+		if(!vehicle){
+			return plus.nativeUI.toast('请选择车系');
+		}
+		if(!carModel){
+			return plus.nativeUI.toast('请选择车型');
+		}
+		if(!carPrice){
+			return plus.nativeUI.toast('请输入厂方指导价');
+		}
+		if(!carSalesPrice){
+			return plus.nativeUI.toast('请输入车辆销售价');
+		}
 //		var paymentType = document.getElementsByClassName("payWay")[0].getAttribute("data-value");
 		//原厂选装
 		var optionalProduct = [];
@@ -210,13 +238,17 @@
 		var params = {
 			opportunityCode:opportunityCode,
 			deposit:deposit,
-			lineItemName:orderType,
+			lineItemName:lineItemName,
 			vehicleBrand:brands,
+			vehicleBrandName:vehicleBrandName,
 			vehicle:vehicle,
+			vehicleName:vehicleName,
 			carModel:carModel,
+			carModelName:carModelName,
 			carColor:outColors,
+			carColorName:carColorName,
 			carInsideColor:innerColors,
-			deliveryDate:deliveryDate,
+//			deliveryDate:deliveryDate,
 //			paymentType:paymentType,
 			carPrice:carPrice,
 			carSalesPrice:carSalesPrice,

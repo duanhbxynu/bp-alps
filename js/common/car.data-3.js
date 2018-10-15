@@ -128,11 +128,11 @@ var productList = [{
 	children:[{
 		value:"B0001_B",
 		text:"黑",
-		price:1013
+		price:300000
 	},{
 		value:"B0001_W",
 		text:"白",
-		price:1014
+		price:310000
 	}]
 },{
 	id:"f22",
@@ -141,11 +141,11 @@ var productList = [{
 	children:[{
 		value:"B0002_B",
 		text:"黑",
-		price:1015
+		price:350000
 	},{
 		value:"B0002_W",
 		text:"白",
-		price:1016
+		price:400000
 	}]
 },{
 	id:"G30",
@@ -154,11 +154,11 @@ var productList = [{
 	children:[{
 		value:"B0003_B",
 		text:"黑",
-		price:1017
+		price:350000
 	},{
 		value:"B0003_W",
 		text:"白",
-		price:1018
+		price:350000
 	}]
 },{
 	id:"a7",
@@ -167,11 +167,11 @@ var productList = [{
 	children:[{
 		value:"A0002_B",
 		text:"黑",
-		price:1005
+		price:450000
 	},{
 		value:"A0002_W",
 		text:"白",
-		price:1006
+		price:450000
 	}]
 },{
 	id:"s3",
@@ -180,11 +180,11 @@ var productList = [{
 	children:[{
 		value:"A0004_B",
 		text:"黑",
-		price:1009
+		price:400000
 	},{
 		value:"A0004_W",
 		text:"白",
-		price:1010
+		price:400000
 	}]
 },{
 	id:"s5",
@@ -193,7 +193,7 @@ var productList = [{
 	children:[{
 		value:"A0005_W",
 		text:"白",
-		price:1012
+		price:400000
 	}]
 },{
 	id:"a8",
@@ -202,11 +202,11 @@ var productList = [{
 	children:[{
 		value:"A0003_B",
 		text:"黑",
-		price:1007
+		price:400000
 	},{
 		value:"A0003_W",
 		text:"白",
-		price:1008
+		price:410000
 	}]
 },{
 	id:"a6",
@@ -215,10 +215,10 @@ var productList = [{
 	children:[{
 		value:"A0001_B",
 		text:"黑",
-		price:1003
+		price:300000
 	},{
 		value:"A0001_W",
 		text:"白",
-		price:1004
+		price:310000
 	}]
 }]

@@ -154,6 +154,13 @@
 						</span>
 						<!--<input type="text" id="color" name="color" class="mui-input-clear" placeholder="请输入颜色偏好" value="红">-->
 					</div>
+					<div class="mui-input-row mui-select-row car mui-hidden">
+						<label class="require">内饰颜色</label>
+						<span class="mui-select innerColors" id="innerColors" data-desc="颜色偏好">
+							请选择颜色偏好
+						</span>
+						<!--<input type="text" id="color" name="color" class="mui-input-clear" placeholder="请输入颜色偏好" value="红">-->
+					</div>
 				</div>	
 			</div>
 			<div class="mui-card">
@@ -376,7 +383,13 @@
 				
 				//购车关注点监听事件,服务需求监听事件
 				$('.buyerPoint-btn-group,.servicesTypes-btn-group').on('tap','button',function(e){
-					this.classList.add('mui-btn-outlined-active');
+					var classList = this.classList;
+					if(classList.contains('mui-btn-outlined-active')){
+						this.classList.remove('mui-btn-outlined-active');
+					}else{
+						this.classList.add('mui-btn-outlined-active');
+					}
+					
 				})
 				
 				var baseOpportunity = null;
@@ -391,11 +404,14 @@
 					//获取父级页面查询过来的参数
 					var self = plus.webview.currentWebview();
 					baseOpportunity = self.baseOpportunity;
-					console.log(baseOpportunity);
-					
-					
+					flowToOppor = self.flowToOppor;
+					initData(flowToOppor);
 				});
+				function initData(oppor){
+					console.log("JSON.stringify(oppor)");
+					console.log(JSON.stringify(oppor));
 					
+				}
 				doc.getElementById("next_step").addEventListener('tap',function(){
 					var vehicleTypeCode = doc.getElementById("vehicleTypeCode").getAttribute('data-value');
 					if(!vehicleTypeCode){

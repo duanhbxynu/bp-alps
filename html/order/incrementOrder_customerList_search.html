@@ -112,7 +112,7 @@
 										</ul>
 									</div>
 								</li>
-								<li class="mui-table-view-cell">
+								<!--<li class="mui-table-view-cell">
 									<label>客户类型</label>
 									<div class="tab">
 										<ul class="mui-table-view mui-table-view-radio attribute-select">
@@ -127,7 +127,7 @@
 											</li>
 										</ul>
 									</div>
-								</li>
+								</li>-->
 								<li class="mui-table-view-cell">
 									<label>时间</label>
 									<div class="tab">
@@ -205,7 +205,7 @@
 						</div>	
 					</div>
 				</div>
-				<footer class="mui-bar mui-bar-tab">
+				<footer class="mui-bar mui-bar-tab" id="footer">
 					<a class="mui-tab-item mui-action-back mui-active" id="cancelOrder" href="#">取消</a>
 					<a class="mui-tab-item" id="nextStep" href="#">下一步</a>
 				</footer>
@@ -221,7 +221,13 @@
 		<script src="../../js/order/increment-order.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init();
+				$.init({
+					beforeback: function(){
+			            plus.webview.currentWebview().close();
+			            //返回true，继续页面关闭逻辑
+			            return true;
+			        }
+				});
 
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
@@ -343,11 +349,13 @@
 					
 				})
 				function showCustomerList(){
+					var customerType = document.body.querySelector('.customerType-select .mui-selected').getAttribute('data-customerType');
+					var beforetimeKey = document.body.querySelector('.beforetimeKey-select .mui-selected').getAttribute('data-customerType');
 					var params = {
 						searchText:document.getElementById('searchText').value,
-						customerType:'',
-						attribute:'',
-						beforetimeKey:''
+						customerType:customerType,
+//						attribute:attribute,
+						beforetimeKey:beforetimeKey
 					}
 					increment.searchCustomer(params,function(data){
 						console.log("search user result:"+JSON.stringify(data));
@@ -355,12 +363,17 @@
 					
 						if(data.success==true){
 							var customerList = data.customerList;
-							if(customerList.length<1){
+							if(!customerList){
 								document.getElementById('createCustomer').classList.remove('mui-hidden');
 //								plus.nativeUI.toast('您查找的客户不存在，请重新输入查询条件！')
 //								return;
+								document.getElementById('customerList').innerHTML = '';
+								
+								document.getElementById('footer').classList.add('mui-hidden');
 							}else{
-								doc.getElementById('customerList').innerHTML = template('msg-template', {
+								document.getElementById('footer').classList.remove('mui-hidden');
+								document.getElementById('createCustomer').classList.add('mui-hidden');
+								document.getElementById('customerList').innerHTML = template('msg-template', {
 									"customerList": customerList
 								});
 							}

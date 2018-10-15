@@ -208,7 +208,7 @@
 
 		<div class="mui-content mui-scroll-wrapper" id="mui-content">
 			<div class="mui-scroll">
-				<div class="mui-card">
+				<div class="mui-card" id="oppor_detail">
 					<div class="mui-card-header" id="oppor_code">
 						<label>意向编号</label>
 						<span>已试乘试驾</span>
@@ -339,9 +339,15 @@
 					preloadPages: [{
 						id: 'opporFollow',//b页面id
 						url:'opportunity-follow.html',
+						styles:{
+							cachemode:"noCache"
+						}
 					},{
 						url: 'test-driving.html',//b页面url路径
-						id: 'testDrive'//b页面id
+						id: 'testDrive',//b页面id
+						styles:{
+							cachemode:"noCache"
+						}
 					},{
 						url:'../quotation/quotation-list.html',
 						id: 'quotation-list'//b页面id
@@ -366,6 +372,7 @@
 					}
 				}
 				var opporCode = '';
+				var opportunityList;
 				//添加show自定义事件监听
 				window.addEventListener('show', function(event) {
 					
@@ -374,7 +381,7 @@
 					oppor.getOpporDetail(opporCode,function(data){
 						var data = JSON.parse(data);
 						if(data.success==true) {
-							var opportunityList = data.opportunityList[0];
+							opportunityList = data.opportunityList[0];
 							if(opportunityList){
 								doc.getElementById('oppor_code').innerHTML = '意向编号'+opportunityList.code;
 								doc.getElementById('oppor_code').setAttribute("data-code",opportunityList.code);
@@ -439,37 +446,6 @@
 
 				});
 
-//				//下拉选项卡
-//				var streamTypePicker = new mui.PopPicker();
-//
-//				streamTypePicker.setData(streamTypeData);
-//
-//				var showTypePicker = doc.getElementById('showTypePicker');
-//				var streamType = doc.getElementById('streamType');
-//
-//				showTypePicker.addEventListener('tap', function(event) {
-//
-//					streamTypePicker.show(function(items) {
-//						streamType.innerText = (items[0] || {}).text;
-//						var streamTypeValue = (items[0] || {}).value;
-//						streamType.setAttribute("data-value",streamTypeValue);
-//					
-//						//返回 false 可以阻止选择框的关闭
-//						//return false;
-//					});
-//				}, false);
-
-//				doc.getElementById('apply_fail').addEventListener('tap',function(){
-//					//打开关于页面
-////					mui.openWindow({
-////						url: 'leads-tel-invitation.html',
-////						id: "telInvitation"//默认使用当前页面的url作为id
-//////						extras: {
-//////							customerId: customerId
-//////						}, //自定义扩展参数
-//////						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
-////					})
-//				})
 //				var mask = $.createMask(callback);//callback为用户点击蒙版时自动执行的回调；
 				//申请战败
 				doc.getElementById('apply_fail').addEventListener('tap',function(){
@@ -519,23 +495,82 @@
 				//下订单
 				doc.getElementById("order").addEventListener('tap', function(event) {
 					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
-					console.log(opporCode);
-					var name = doc.getElementById('name').innerHTML;
-					var mobile = doc.getElementById('tel').innerHTML;	
-					var platform = doc.getElementById('platform').innerHTML;
-					var level = doc.getElementById('level').innerHTML;
-					mui.fire(plus.webview.getWebviewById('creatWholeVehicleOrder'), 'show', {
-						opporCode:opporCode,
-						name:name,
-						mobile:mobile,
-						platform:platform,
-						level:level
+					var quotation='';
+					var opportunity='';
+					oppor.getConfirmQuotaion(opporCode,function(data){
+						console.log(JSON.stringify(data));
+						//{"type":"quotationDetailsResponse","messageCode":"NOT FOUND","success":false}
+						if(data.success) {
+							console.log(JSON.stringify(data.quotation));
+							quotation = data.quotation;
+						} else {
+							console.log("opportunityList");
+							opportunity = opportunityList;
+						}
+						mui.fire(plus.webview.getWebviewById('creatWholeVehicleOrder'), 'show', {
+							opporCode:opporCode,
+							opportunity:opportunity,
+							quotation:quotation
+						});
+						mui.openWindow({
+							id: 'creatWholeVehicleOrder'//b页面id
+						})
 					});
-					mui.openWindow({
-						id: 'creatWholeVehicleOrder'//b页面id
-					})
+					
+					
+//					console.log(opporCode);
+//					var name = doc.getElementById('name').innerHTML;
+//					var mobile = doc.getElementById('tel').innerHTML;	
+//					var platform = doc.getElementById('platform').innerHTML;
+//					var level = doc.getElementById('level').innerHTML;
+//					mui.fire(plus.webview.getWebviewById('creatWholeVehicleOrder'), 'show', {
+//						opporCode:opporCode
+//					});
+//					mui.openWindow({
+//						id: 'creatWholeVehicleOrder'//b页面id
+//					})
 					
 				});
+				
+				mui('.mui-content').on('tap',"#oppor_detail",function(){
+					var opporCode = doc.getElementById('oppor_code').getAttribute('data-code');
+					oppor.getOpporDetail(opporCode,function(data){
+						var data = JSON.parse(data);
+						if(data.success==true) {
+							var opportunityList = data.opportunityList[0];
+							mui.openWindow({
+								url: 'add-opportunity-baseinfo.html',
+								id: "oppor-baseinfo", //默认使用当前页面的url作为id
+								styles: { //窗口参数
+									popGesture: 'hide'
+									},
+								extras: {
+									code: opporCode,
+									flowToOppor:opportunityList
+								}, //自定义扩展参数
+								show: {
+									autoShow: true, //页面loaded事件发生后自动显示，默认为true
+									//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
+									//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+								},
+								waiting: {
+									autoShow: true, //自动显示等待框，默认为true
+									title: '正在加载...' //等待对话框上显示的提示内容
+								},
+								createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+							})
+							
+						} else if(data.messageCode == '403'){//token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
+						}else{
+							plus.nativeUI.toast(data.message);
+						}
+						
+					});
+					
+				})
+				
 				
 				
 				
@@ -566,7 +601,16 @@
 						});
 						mui.openWindow({
 							url:'../quotation/quotation-list.html',
-							id: 'quotation-list'//b页面id
+							id: 'quotation-list',//b页面id
+							styles:{
+								cachemode:"noCache"
+							}
+//							 "default" - 根据cache-control决定是否使用缓存数据，如果存在缓存并且没有过期则使用本地缓存资源，否则从网络获取；
+//							 "cacheElseNetwork" - 只要存在缓存（即使过期）数据则使用，否则从网络获取；
+//							 "noCache" - 不使用缓存数据，全部从网络获取；
+//							 "cacheOnly" - 仅使用缓存数据，不从网络获取（注：如果没有缓存数据则会导致加载失败）。
+//							 默认使用"default"。
+							
 						})
 					}else if(typeCode == 'testDrive'){
 						
@@ -584,8 +628,9 @@
 							url:'test-driving',
 						    show: {
 						        autoShow: true, //页面loaded事件发生后自动显示，默认为true
-							    aniShow: "slide-in-right"
-						    },
+							    aniShow: "slide-in-right",
+							    cachemode:"noCache"
+						    }
 	
 						})
 					}else{
@@ -602,8 +647,10 @@
 							url:'opportunity-follow.html',
 						    show: {
 						        autoShow: true, //页面loaded事件发生后自动显示，默认为true
-							    aniShow: "slide-in-right"
-						    },
+							    aniShow: "slide-in-right",
+							    cachemode:"noCache"
+							    
+						    }
 	
 						})
 					}

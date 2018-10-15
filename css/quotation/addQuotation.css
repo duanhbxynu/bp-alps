@@ -398,7 +398,7 @@
 .particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p{
 	color: #333333;
 }
-.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p.detailRed{
+.particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p.detailRed,.detailRed{
 	color: #C71B1E;
 }
 .particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li.red label,
@@ -434,7 +434,7 @@
 	border-top: 1px dashed #E4E4E4;
     margin: 6px 0px 6px -20px;
 }
-.orderDetail .particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p.detailBlue{
+.orderDetail .particulars .mui-table-view-cell.mui-collapse .mui-table-view-chevron li p.detailBlue,.detailBlue{
 	color: #618DF6;
 }
 /*底部tabBar*/

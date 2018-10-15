@@ -73,6 +73,13 @@
 				text-align: center;    
 				
 			}
+			.mui-modal .mui-input-row{
+				margin:10px auto;
+				
+			}
+			.mui-modal .mui-input-row span{
+				margin-left:10px;
+			}
 			
 			
 		</style>
@@ -256,6 +263,8 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				var currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
+				var currentUserCode = JSON.parse(localStorage.getItem('$state')).userCode;
 				//添加show自定义事件监听
 				window.addEventListener('show', function(event) {
 					
@@ -271,6 +280,7 @@
 								var typeCode = customerFlowList[0].typeCode;
 								var statusCode = customerFlowList[0].statusCode;
 								var phone = customerFlowList[0].phone;
+								console.log(JSON.stringify(customerFlowList));
 					
 								document.getElementById('flow_id').innerHTML = '客流编号'+customerFlowList[0].id;
 								document.getElementById('flow_id').setAttribute("data-id",customerFlowList[0].id);
@@ -512,14 +522,14 @@
 						console.log("--------------------------------------------------------------");
 						if(data.success==true){
 							var opportunity = data.opportunityList[0];
-							var currentUser = JSON.parse(localStorage.getItem('$state')).username;
+							
 							//2.查询到本人名下存在未完结意向
-							console.log("currentUser");
-							console.log(currentUser);
+							console.log(currentUserCode);
+							console.log(currentUserName);
 							console.log("opportunity.code");
 							console.log(opportunity.code);
 							console.log(opportunity.createdPerson);
-							if(opportunity.createdPerson == currentUser){
+							if(opportunity.createdPerson == currentUserCode){
 								
 								openOpporPage(opportunity.code,opportunity);
 //							location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"&id="+opportunity.code);
@@ -531,9 +541,9 @@
 								document.getElementById("modal").setAttribute('style','min-height: auto;')
 //								var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
 								document.getElementById('oppor_code').setAttribute('data-opporcode',opportunity.code);
-								document.getElementById('oppor_code').innerHTML = '意向编号'+opportunity.code;
-								document.getElementById('oppor_name').innerHTML = '客户姓名'+opportunity.name;
-								document.getElementById('oppor_sales').innerHTML = '销售人员'+opportunity.createdPerson;
+								document.getElementById('oppor_code').innerHTML = '意向编号<span>'+opportunity.code+'</span>';
+								document.getElementById('oppor_name').innerHTML = '客户姓名<span>'+opportunity.name+'</span>';
+								document.getElementById('oppor_sales').innerHTML = '销售人员<span>'+opportunity.createdPerson+'</span>';
 //								document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
 								mask.show();//显示遮罩
 							}
@@ -666,9 +676,9 @@
 						document.getElementById("modal").setAttribute('style','min-height: auto;')
 //						var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
 						document.getElementById('oppor_code').setAttribute('data-opporcode',flowToOppor.code);
-						document.getElementById('oppor_code').innerHTML = '意向编号   '+flowToOppor.code;
-						document.getElementById('oppor_name').innerHTML = '客户姓名   '+flowToOppor.name;
-						document.getElementById('oppor_sales').innerHTML = '销售人员   '+flowToOppor.createdPerson;
+						document.getElementById('oppor_code').innerHTML = '意向编号<span>'+flowToOppor.code+'</span>';
+						document.getElementById('oppor_name').innerHTML = '客户姓名<span>'+flowToOppor.name+'</span>';
+						document.getElementById('oppor_sales').innerHTML = '销售人员<span>'+currentUserName+'</span>';
 //						document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
 						mask.show();//显示遮罩
 					}else{

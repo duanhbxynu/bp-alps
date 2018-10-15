@@ -81,14 +81,14 @@
 					<div class="mui-input-row radio-multiple-row">
 						<label class="radio-multiple-label require">客户类型</label>
 						<div class="radio-list radio-multiple-list radio-type-list">	
-							<div class="mui-radio mui-left customer-type customer-type-personal active">
+							<div class="mui-radio mui-left customer-type customer-type-personal">
 								<label class="">个人</label>
 								<input id="type_personal" name="type" value="personal" type="radio" checked="true" />
 						    </div>
 							<!--<span class="spliter">|</span>--> 
 							<div class="mui-radio mui-left customer-type customer-type-company">
 								<label class="company">公司</label>
-								<input id="type_company" name="type" value="company"  type="radio">
+								<input id="type_company" name="type" value="company" type="radio">
 							</div>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 					<div class="mui-input-row">
 						<label class="require">性别</label>
 						<div class="radio-list radio-single-list radio-gender-list">
-						    <div class="mui-radio mui-left mui-radio-male active">
+						    <div class="mui-radio mui-left mui-radio-male">
 								<label class="male">男</label>
 								<input id="male" name="gender" class="gender" value="MALE" type="radio" checked="true" />
 							</div>
@@ -248,7 +248,7 @@
 //					}
 //				});
 //				
-
+			var flowToOppor;
 			window.onload = function() {
 			
 				
@@ -262,7 +262,7 @@
 					//获取父级页面查询过来的参数
 					var self = plus.webview.currentWebview();
 					var code = self.code;
-					var flowToOppor = self.flowToOppor;
+					flowToOppor = self.flowToOppor;
 					
 					console.log(flowToOppor.mobile);
 					console.log(code);
@@ -272,31 +272,31 @@
 					doc.getElementById("input_mobile").setAttribute("value",flowToOppor.mobile);
 					
 					if(flowToOppor.gender == 'MALE'){
-						doc.getElementsByClassName("mui-radio-male")[0].classList.add('active');
+//						doc.getElementsByClassName("mui-radio-male")[0].classList.add('active');
 						doc.getElementById('male').setAttribute("checked",true); 
-						doc.getElementsByClassName("mui-radio-female")[0].classList.remove('active');
+//						doc.getElementsByClassName("mui-radio-female")[0].classList.remove('active');
 						doc.getElementById('female').removeAttribute("checked")
 					}else if(flowToOppor.gender == 'FEMALE'){
-						doc.getElementsByClassName("mui-radio-female")[0].classList.add('active');
+//						doc.getElementsByClassName("mui-radio-female")[0].classList.add('active');
 						doc.getElementById('female').setAttribute("checked",true); 
-						doc.getElementsByClassName("mui-radio-male")[0].classList.remove('active');
+//						doc.getElementsByClassName("mui-radio-male")[0].classList.remove('active');
 						doc.getElementById('male').removeAttribute("checked")
 					}
 					if(code){
 						console.log("不为空，继续跟进");
-						console.log(flowToOppor);
+						console.log(JSON.stringify(flowToOppor));
 						
 						
 						//客户性质
 						if(flowToOppor.buyerTypeCode == 'personal'){
-							doc.getElementsByClassName("customer-type-personal")[0].classList.add('active');
+//							doc.getElementsByClassName("customer-type-personal")[0].classList.add('active');
 							doc.getElementById('type_personal').setAttribute("checked",true); 
-							doc.getElementsByClassName("customer-type-company")[0].classList.remove('active');
+//							doc.getElementsByClassName("customer-type-company")[0].classList.remove('active');
 							doc.getElementById('type_company').removeAttribute("checked");
 						}else if(flowToOppor.gender == 'company'){
-							doc.getElementsByClassName("mui-radio-company")[0].classList.add('active');
+//							doc.getElementsByClassName("mui-radio-company")[0].classList.add('active');
 							doc.getElementById('type_company').setAttribute("checked",true); 
-							doc.getElementsByClassName("mui-radio-personal")[0].classList.remove('active');
+//							doc.getElementsByClassName("mui-radio-personal")[0].classList.remove('active');
 							doc.getElementById('type_personal').removeAttribute("checked");
 						}
 						if(flowToOppor.otherContact){
@@ -311,7 +311,10 @@
 							
 //							doc.getElementById('showAddressPicker').innerHTML =(items[0] || {}).text + " "+(items[1] || {}).text + " "+(items[2] || {}).text;
 							doc.getElementById('showAddressPicker').setAttribute("data-value",flowToOppor.provinceCode+flowToOppor.cityCode+flowToOppor.districtCode);
-							var provinceText = '';
+							doc.getElementById('showAddressPicker').setAttribute("data-provinceCode",flowToOppor.provinceCode);
+							doc.getElementById('showAddressPicker').setAttribute("data-cityCode",flowToOppor.cityCode);
+							doc.getElementById('showAddressPicker').setAttribute("data-districtCode",flowToOppor.districtCode);
+//							var provinceText = '';
 //							mui.each(addressData3,function(i,provinceData){
 //								console.log(provinceData);
 //								if(provinceData.value == flowToOppor.provinceCode){
@@ -349,21 +352,26 @@
 					return plus.nativeUI.toast("请输入正确的电话");
 				}
 				var otherContact = doc.getElementById('input_other_mobile').value;//其他联系方式
-				var addressCode = doc.getElementById('showAddressPicker').getAttribute("data-value");
+				var provinceCode = doc.getElementById('showAddressPicker').getAttribute("data-provinceCode");
+				var cityCode = doc.getElementById('showAddressPicker').getAttribute("data-cityCode");
+				var districtCode = doc.getElementById('showAddressPicker').getAttribute("data-districtCode");
 				var address = doc.getElementById('input_address').value;//其他联系方式
 				var code = doc.getElementById("mui-content").getAttribute("data-code");
 				var baseOpportunity = {
 					code:code,
-					type:type,
+					buyerTypeCode:type,
 					name:name,
 					gender:gender,
 					mobile:mobilestr,
 					otherContact:otherContact,
-					addressCode:addressCode,
+					provinceCode:provinceCode,
+					cityCode:cityCode,
+					districtCode:districtCode,
+//					addressCode:addressCode,
 					address:address
 				}
 //				var baseOppor = JSON.stringify(baseOpportunity);
-//				console.log(baseOppor);
+				console.log(JSON.stringify(baseOpportunity));
 				mui.openWindow({
 					url: '../opportunity/add-opportunity-bussinessinfo.html',
 					id: "oppor-bussinessinfo", //默认使用当前页面的url作为id
@@ -371,7 +379,8 @@
 						popGesture: 'hide'
 					},
 					extras: {
-						baseOpportunity:baseOpportunity
+						baseOpportunity:baseOpportunity,
+						flowToOppor:flowToOppor
 					}, //自定义扩展参数
 					show: {
 						autoShow: true, //页面loaded事件发生后自动显示，默认为true
@@ -419,36 +428,33 @@
 //				})
 					
 				//性别切换
-				$('.radio-gender-list').on('tap','.gender',function(){
-					var gender = this;
-					
-					if (this) {
-							
-						this.checked = !this.checked;
-						$.trigger(this, 'change');
-							
-						$(".radio-gender-list .mui-radio").each(function () {
-							this.classList.remove('active');
-						}) 
-						gender.parentNode.classList.add('active');
-							
+				$('.radio-gender-list').on('tap','.mui-radio',function(){
+					var gender = this.classList;
+					if(gender.contains('mui-radio-male')){
+						doc.getElementById('male').checked = !doc.getElementById('male').checked;
+					}else{
+						doc.getElementById('female').checked = !doc.getElementById('female').checked;
 					}
+//					if (this) {
+//							
+//						this.checked = !this.checked;
+//						$.trigger(this, 'change');
+//							
+//						$(".radio-gender-list .mui-radio").each(function () {
+//							this.classList.remove('active');
+//						}) 
+//						gender.parentNode.classList.add('active');
+//							
+//					}
 				})	
 				
 				//类型切换
-				$('.radio-type-list').on('tap','.type',function(){
-					var type = this;
-					
-					if (this) {
-							
-						this.checked = !this.checked;
-						$.trigger(this, 'change');
-							
-						$(".radio-type-list .mui-radio").each(function () {
-							this.classList.remove('active');
-						}) 
-						type.parentNode.classList.add('active');
-							
+				$('.radio-type-list').on('tap','.customer-type',function(){
+					var type = this.classList;
+					if(type.contains('customer-type-company')){
+						doc.getElementById('type_company').checked = !doc.getElementById('type_company').checked;
+					}else{
+						doc.getElementById('type_personal').checked = !doc.getElementById('type_personal').checked;
 					}
 				})	
 			
