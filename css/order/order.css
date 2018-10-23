@@ -8,10 +8,11 @@
 	width: 33.3%;
 }
 .orderList .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
-	background: #f5f5f5;
+	/*background: #f5f5f5;*/
+	background-color: #efeff4;
 }
 .orderList .mui-segmented-control.mui-scroll-wrapper{
-	height: 41px;	
+	height: 40px;	
 }
 .orderList .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
 	border: none;
@@ -22,7 +23,7 @@
 .orderList .mui-slider .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
 	border-bottom: 2px solid #C71B1E;
 }
-.orderList  .mui-card{
+.orderList .mui-card{
 	margin: 8px;
 	background: #FFFFFF;
 }
@@ -397,6 +398,10 @@
 .carDetails .mui-table-view-cell p{
 	display: inline;
 }
+.carDetails .mui-table-view-cell p span{
+	min-height: 20px;
+	min-width: 20px;
+}
 .carDetails .mui-table-view-chevron .brand p span:after{
 	position: absolute;
     display: inline-block;
@@ -413,6 +418,7 @@
     float: right;
     margin: 0;
     padding: 0;
+    padding-right: 5px;
     height: 20px;
     text-align: right;
     border: none;

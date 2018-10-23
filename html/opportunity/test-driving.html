@@ -78,10 +78,13 @@
 				left: 90%;
 				/*left:calc(95% - 20px)!important;*/
 			}
+			.dateTime-row label{
+				width: 30%!important;
+			}
 			input[type=date]{
 				width: auto!important;
+				/*max-width: 65%!important;*/
 				text-align: right;
-				padding-right: 20px;
 			}
 			
 			
@@ -123,14 +126,14 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>提车日期 </label>
-						<input class="mui-select date" type="date" name="bookingCartSTime" id="bookingCartSTime" value="">
+						<input class="mui-select date" type="date" name="bookingCartSTime" id="bookingCartSTime" value="2018-10-18 11:32:57">
 						<!--<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
 							请选择车型
 						</span>-->
 					</div>
 					<div class="mui-input-row mui-select-row">
-						<label>预计还车日期 </label>
-						<input class="mui-select date" type="date" name="bookingCartNTime" id="bookingCartNTime" value="">
+						<label>还车日期 </label>
+						<input class="mui-select date" type="date" name="bookingCartNTime" id="bookingCartNTime" value="2018-10-18 11:32:57">
 						<!--<span class="mui-select vehicleCode" data-desc="意向车型" id="vehicleCode">
 							请选择车型
 						</span>-->
@@ -212,13 +215,12 @@
 						release: true //默认为false，不监听
 					}
 				});
-				mui('.mui-scroll-wrapper').scroll();
+				
 				
 //				以下为注意事项：
 
 //1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
 				mui.back = function() {
-					//plus.webview.currentWebview().close();
 					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
 				}
 				var opporCode = "";
@@ -231,73 +233,95 @@
 				var vehicleData = "";
 				var vehicleCategoryCodePicker = "";
 				var vehicleCodePicker = "";
-				var username = JSON.parse(localStorage.getItem('$state')).username||'';
-				$.plusReady(function() {
-					window.addEventListener('showTitle', function(event) {
-						opporCode = event.detail.opporCode;
-						type = event.detail.type;
-						typeCode = event.detail.typeCode;
-						vehicleTypeCode = event.detail.vehicleTypeCode;
-						vehicleCategoryCode = event.detail.vehicleCategoryCode;
-						vehicleCode  = event.detail.vehicleCode;
-						console.log(vehicleTypeCode);
-						console.log(vehicleCategoryCode);
-						console.log(vehicleCode);
-						
-						document.getElementById('mui-title').innerHTML = event.detail.type;
-						document.getElementById('vehicleTypeCode').innerHTML = vehicleTypeCode;
-						//车系
-						vehicleCategoryCodePicker = new $.PopPicker();
-						//车型
-						vehicleCodePicker = new $.PopPicker();
-						mui.each(categoryList, function(i, category) {
-							if(vehicleTypeCode == category.value) {
-								console.log(i);
-								console.log(category);
-								console.log(category.children);
-								categoryData = category.children;
-								console.log(categoryData);
-								vehicleCategoryCodePicker.setData(categoryData);
-								return;
-							}
-						})
-						document.getElementById('vehicleCategoryCode').innerHTML = vehicleCategoryCode;
-						document.getElementById('vehicleCategoryCode').setAttribute("data-vehicleCategoryCode", vehicleCategoryCode);
-						
-						
-						
-						mui.each(categoryData, function(i, item) {
-							if(vehicleCategoryCode == item.value) {
-								document.getElementById('vehicleCategoryCode').setAttribute("data-vehicleCategory", item.text);
-								return;
-							}
-						})
-						mui.each(productList, function(i, product) {
-							if(vehicleCode == product.value) {
-								document.getElementById('vehicleCode').setAttribute("data-vehicle", product.text);
-								document.getElementById('vehicleCode').innerHTML = product.text;
-								document.getElementById('vehicleCode').setAttribute("data-vehicleCode", vehicleCode);
-								return;
-							}
-						})
-						
-						var now = new Date();
-						//格式化日，如果小于9，前面补0
-						var day = ("0" + now.getDate()).slice(-2);
-						//格式化月，如果小于9，前面补0
-						var month = ("0" + (now.getMonth() + 1)).slice(-2);
-						//拼装完整日期格式
-						var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-						//完成赋值
-						console.log(today);
-						mui('input[type=date]').each(function(){
-							this.value = today;
-							this.setAttribute('data-value',today);
-							this.setAttribute('data-text',today);
+//				var username = JSON.parse(localStorage.getItem('$state')).username||'';
+				window.addEventListener('showTitle', function(event) {
+							opporCode = event.detail.opporCode;
+							type = event.detail.type;
+							typeCode = event.detail.typeCode;
+							vehicleTypeCode = event.detail.vehicleTypeCode;
+							vehicleCategoryCode = event.detail.vehicleCategoryCode;
+							vehicleCode  = event.detail.vehicleCode;
+							console.log(vehicleTypeCode);
+							console.log(vehicleCategoryCode);
+							console.log(vehicleCode);
 							
-						})
-					});
-				})
+							document.getElementById('mui-title').innerHTML = event.detail.type;
+							document.getElementById('vehicleTypeCode').innerHTML = vehicleTypeCode;
+							//车系
+							vehicleCategoryCodePicker = new $.PopPicker();
+							//车型
+							vehicleCodePicker = new $.PopPicker();
+							mui.each(categoryList, function(i, category) {
+								if(vehicleTypeCode == category.value) {
+									console.log(i);
+									console.log(category);
+									console.log(category.children);
+									categoryData = category.children;
+									console.log(categoryData);
+									vehicleCategoryCodePicker.setData(categoryData);
+									return;
+								}
+							})
+							document.getElementById('vehicleCategoryCode').innerHTML = vehicleCategoryCode;
+							document.getElementById('vehicleCategoryCode').setAttribute("data-vehicleCategoryCode", vehicleCategoryCode);
+							
+							
+							
+							mui.each(categoryData, function(i, item) {
+								if(vehicleCategoryCode == item.value) {
+									document.getElementById('vehicleCategoryCode').setAttribute("data-vehicleCategory", item.text);
+									return;
+								}
+							})
+							mui.each(productList, function(i, product) {
+								if(vehicleCode == product.value) {
+									document.getElementById('vehicleCode').setAttribute("data-vehicle", product.text);
+									document.getElementById('vehicleCode').innerHTML = product.text;
+									document.getElementById('vehicleCode').setAttribute("data-vehicleCode", vehicleCode);
+									return;
+								}
+							})
+							
+							var myDate = new Date();
+							var seperator1 = "-";
+   							var seperator2 = ":";
+							//格式化日，如果小于9，前面补0
+							//arrayObject.slice(start,end)
+							//必需。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。
+							//也就是说，-1 指最后一个元素，-2 指倒数第二个元素，以此类推。
+							var day = ("0" + myDate.getDate()).slice(-2);
+							//格式化月，如果小于9，前面补0
+							var month = ("0" + (myDate.getMonth() + 1)).slice(-2);
+							
+							//拼装完整日期格式
+							var today = myDate.getFullYear()+"-"+(month)+"-"+(day);
+							
+							
+							var currentdate = myDate.getFullYear() + seperator1 + month + seperator1 + day
+					            + " " + ("0" + myDate.getHours()).slice(-2) + seperator2 + ("0" + myDate.getMinutes()).slice(-2) + seperator2 
+					            + ("0" + myDate.getSeconds()).slice(-2);
+					        console.log("currentdate = "+currentdate);  
+							var localeDate = myDate.toLocaleDateString(); //获取当前日期
+							Date.parse(localeDate.replace(/-/g,  "/"));
+							console.log(localeDate);
+							var mytime = myDate.toLocaleTimeString(); //获取当前时间
+							console.log(mytime);
+							var currentDate = myDate.toLocaleString(); //获取日期与时间
+							//完成赋值
+							mui('input[type=date]').each(function(){
+								this.value = today;
+								this.setAttribute('data-value',today);
+								this.setAttribute('data-text',today);
+								console.log(this.value);
+							})
+						});
+				window.onload = function(){
+					$.plusReady(function() {
+						mui('.mui-scroll-wrapper').scroll();
+						
+					})
+				}
+				
 				
 //				2.如果在IOS上，触摸屏幕边缘也是可以关闭页面，造成问题同上，所以处理IOS要做以下处理。（写在b页面）
 //				mui.plusReady(function() {
@@ -555,17 +579,17 @@
 					var params = {
 						opportunityCode:opporCode,
 						followOpportunity:{
-							salesConsultantName:username,
+							salesConsultantName:JSON.parse(localStorage.getItem('$state')).userName||'',
 //							type:type,
 							typeCode:typeCode,
-							vehicleBrand:vehicleTypeCode,
+//							vehicleBrand:vehicleTypeCode,
 							vehicleCategoryCode:vehicleCategoryCode,
-//							vehicleCategory:vehicleCategory,
+							vehicleCategory:vehicleCategory,
 							vehicleCode:vehicleCode,
-//							vehicle:vehicle,
+							vehicle:vehicle,
 							connectCustomer:true,
-							bookingCartSTime:bookingCartSTime,
-							bookingCartNTime:bookingCartNTime,
+							bookingCartSTime:bookingCartSTime+" 00:00:00",
+							bookingCartNTime:bookingCartNTime+" 00:00:00",
 							marketActivityCode:marketActivityCode,
 //							marketActivityName:marketActivityName,
 							contentList: [
@@ -576,7 +600,7 @@
 						}
 						
 					}
-					console.log(params);
+					console.log(JSON.stringify(params));
 					
 					follow.saveFollow(params,function(data){
 						console.log("follow append content result:"+JSON.stringify(data));

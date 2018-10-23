@@ -37,14 +37,14 @@
 					</div>
 					<div class="mui-input-row mui-select-row car">
 						<label class="require">车系</label>
-						<span class="mui-select vehicleCategory" data-desc="车系" id="vehicleCategory">
+						<span class="mui-select vehicleCategory" data-desc="车系" id="vehicleCategoryCode">
 							请选择车系
 						</span>
 						<!--<input id="vehicleCategory" type="text" class="mui-input-clear vehicleCategory" placeholder="请输入车系" value="">-->
 					</div>
 					<div class="mui-input-row mui-select-row car">
 						<label class="require">车型</label>
-						<span class="mui-select vehicle" data-desc="车系" id="vehicle">
+						<span class="mui-select vehicle" data-desc="车系" id="vehicleCode">
 							请选择车系
 						</span>
 						<!--<input id="vehicle" type="text" class="mui-input-clear vehicle" placeholder="请输入车型" value="">-->
@@ -60,6 +60,18 @@
 					<div class="mui-input-row">
 						<label>车牌号</label>
 						<input id="licensePlateNumber" type="text" class="mui-input-clear" placeholder="请输入车牌号" value="">
+					</div>
+					<div class="mui-input-row mui-select-row car mui-hidden">
+						<label class="require">外观颜色</label>
+						<span class="mui-select outColors" data-desc="请选外观颜色">
+							请选外观颜色
+						</span>
+					</div>
+					<div class="mui-input-row mui-select-row car mui-hidden">
+						<label class="require">内饰颜色</label>
+						<span class="mui-select innerColors" data-desc="请选内饰颜色">
+							请选内饰颜色
+						</span>
 					</div>
 					<div class="mui-input-row">
 						<label>车架号</label>
@@ -117,10 +129,10 @@
 					
 					
 					var values = {
-						customerId:JSON.parse(localStorage.getItem('customerItem')).customerId,
-						vehicleBrand:doc.getElementById('vehicleBrand').getAttribute("data-vehicleBrandCode"),
-						vehicleCategory:doc.getElementById('vehicleCategory').getAttribute("data-vehicleCategoryCode"),
-						vehicle:doc.getElementById('vehicle').getAttribute("data-vehicleCode"),
+						customerId:localStorage.getItem('customerId'),
+						vehicleBrand:doc.getElementById('vehicleTypeCode').getAttribute("data-vehicleBrandCode"),
+						vehicleCategory:doc.getElementById('vehicleCategoryCode').getAttribute("data-vehicleCategoryCode"),
+						vehicle:doc.getElementById('vehicleCode').getAttribute("data-vehicleCode"),
 						purchaseYear:doc.getElementById('purchaseYear').value,
 						mileage:doc.getElementById('mileage').value,
 						licensePlateNumber:doc.getElementById('licensePlateNumber').value,

@@ -348,34 +348,34 @@
 				<div class="mui-card-content">
 					<div class="mui-input-row"> 
 						<label>驾驶人姓名 </label>
-						<var id="customerName">电话邀约</var>
+						<var id="customerName"></var>
 					</div>
 					<div class="mui-input-row">
 						<label>驾驶证号 </label>
-						<var id="licenseNumber">王丽</var>
-					</div>
-					<div class="mui-input-row">
-						<img >
+						<var id="licenseNumber"></var>
 					</div>
 					<!--<div class="mui-input-row">
+						<img >
+					</div>-->
+					<!--<div class="mui-input-row">
 						<label>品牌 </label>
-						<var id="creationtime">2018-08-27</var>
+						<var id="vehicleType"></var>
 					</div>-->
 					<div class="mui-input-row">
 						<label>车系</label>
-						<var id="vehicleCategory">activity1</var>
+						<var id="vehicleCategory"></var>
 					</div>
 					<div class="mui-input-row">
 						<label>车型 </label>
-						<var id="vehicle">是</var>
+						<var id="vehicle"></var>
 					</div>
 					<div class="mui-input-row">
 						<label>提车时间</label>
-						<var id="bookingCartSTime">activity1</var>
+						<var id="bookingCartSTime"></var>
 					</div>
 					<div class="mui-input-row">
 						<label>还车时间 </label>
-						<var id="bookingCartNTime">是</var>
+						<var id="bookingCartNTime"></var>
 					</div>
 				</div>
 			</div>
@@ -499,11 +499,13 @@
 									doc.getElementById('connectCustomer').innerHTML = followOpportunity.connectCustomer?'是':'否';
 								}else if(typeCode == 'testDrive'){
 									doc.getElementById("shareIcon").classList.remove('mui-hidden');
+									doc.getElementById("shareIcon").setAttribute('data-shareUrl',followOpportunity.shareUrl||'');
 									doc.getElementById('dirver_info').classList.remove('mui-hidden');
 									doc.getElementById('footer').classList.add('mui-hidden');
+									console.log(JSON.stringify(followOpportunity));
 									doc.getElementById('customerName').innerHTML = followOpportunity.customerName||'';
 									doc.getElementById('licenseNumber').innerHTML = followOpportunity.licenseNumber||'';
-									doc.getElementById('vehicleCategory').innerHTML = followOpportunity.vehicleCategory||'';
+									doc.getElementById('vehicleCategory').innerHTML = followOpportunity.vehicleCode||'';
 									doc.getElementById('vehicle').innerHTML = followOpportunity.vehicle||'';
 									doc.getElementById('bookingCartSTime').innerHTML = followOpportunity.bookingCartSTime||'';
 									doc.getElementById('bookingCartNTime').innerHTML = followOpportunity.bookingCartNTime||'';
@@ -605,12 +607,24 @@
 						imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
 						//var view = ((ViewGroup)main.findViewById(android.R.id.content)).getChildAt(0);
 						imm.showSoftInput(main.getWindow().getDecorView(), InputMethodManager.SHOW_IMPLICIT);
+						var Intent = plus.android.importClass("android.content.Intent");
+		                var File = plus.android.importClass("java.io.File");
+		                var Uri = plus.android.importClass("android.net.Uri");
 						
 					}
 				};
+				var showShareInterface = function(){
+					 if(plus.os.name=="Android"){
+		                var main = plus.android.runtimeMainActivity();
+		                var Intent = plus.android.importClass("android.content.Intent");
+		                var File = plus.android.importClass("java.io.File");
+		                var Uri = plus.android.importClass("android.net.Uri");
+		            }
+				}
 				
 				mui('.mui-scroll-wrapper').scroll();
 				var followCode = '';
+				
 				$.plusReady(function() {
 					
 					plus.webview.currentWebview().setStyle({
@@ -623,8 +637,11 @@
 					showDetail(followCode,opporCode);
 					initNativeObjects();
 					showKeyboard();	
-					
+					showShareInterface();
+					share.updateSerivces();
 				});
+				
+				
 				//语音识别
 //				document.getElementById('msg-type').addEventListener('tap',function(){
 //					var content= document.getElementById('msg-text').value;
@@ -641,7 +658,16 @@
 //				})
 
 				mui('.mui-bar-nav').on('tap','.mui-icon-more-filled',function(){
-					share.updateSerivces();
+					var shareUrl = this.getAttribute("data-shareUrl");
+					var currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
+					var msg={
+						type:"web",
+						title:currentUserName+"为您服务",
+						content:"您进行试乘试驾需要上传驾驶证，并进行签名确认！",
+						href:shareUrl,
+						thumbs:'../../images/logo.png'
+					};
+					share.shareHref(msg);
 				})
 			}(mui, document));
 		</script>

@@ -50,30 +50,14 @@
 
 	//获取意向详情
 	oppor.getOpporDetail = function(opporId, callback) {
-		//		callback = callback || $.noop;
-		//		
-		//		if(!localStorage.getItem('$state')) {
-		//			plus.nativeUI.toast('获取意向详情token出错了，请稍后再试！');
-		//			return;
-		//		}
-		//		
-		//		var token = JSON.parse(localStorage.getItem('$state')).token;
-		//		
 		var token = common.baseOption.getToken();
-		//		var getaccess = common.baseOption.getUrlParam('getaccess');
-		//		var defaultData = {};
-		//		if(getaccess){
-		//			defaultData = {code:opporId,getAccess:'true'};
-		//		}else{
-		//			defaultData = {code:opporId};
-		//		}
 
 		var params = {
 			access_token: token,
 			code: opporId
 		};
 
-		console.log("customer flow detail request:" + JSON.stringify(params));
+		console.log("oppor detail request:" + JSON.stringify(params));
 		$.ajax(common.URL.getOpporDetail(), {
 			type: "POST",
 			dataType: "jsonp",

@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/timeline.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<style>
+			.mui-icon-arrowdown {
+				font-size: 14px;
+			}
+			
+			.mui-icon-arrowdown:after {
+				content: '\e581';
+				font-size: 18px;
+			}
+			
+			.mui-icon-arrowdown:before {
+				content: '';
+			}
+			
+			.family-group .mui-input-row {
+				height: auto;
+			}
+			
+			.family-group .mui-input-row:after {
+				height: 0px;
+			}
+			
+			.family-group .mui-input-row:last-child {
+				margin-bottom: 15px;
+			}
+			
+			.family-group label {
+				width: 100%;
+				display: block;
+			}
+			
+			.family-group .mui-btn-group {
+				display: inline-block;
+				padding-left: 20px;
+				padding-right: 20px;
+				width: 100%;
+			}
+			
+			.family-group .mui-btn-group .mui-btn {
+				float: none;
+				font-size: 12px;
+				padding: 0px;
+				height: 30px;
+				width: calc((100% - 16px)/4);
+				width: -moz-calc((100% - 16px)/4);
+				width: -webkit-calc((100% - 16px)/4);
+				margin-left: auto;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">维护意向</h1>
+		</header>
+
+		<div class="mui-content" id="mui-content">
+			<div class="mui-content-padded" id="progressBar">
+				<div class="progressBar progress-active"></div>
+				<div class="progressBar progress-active"></div>
+				<div class="course_nr course_nr_1">
+					<span class="mui-badge badge-active">1</span>
+					<span class="mui-badge-label badge-label-active">基本信息</span>
+				</div>
+				<div class="course_nr course_nr_2">
+					<span class="mui-badge badge-active">2</span>
+					<span class="mui-badge-label badge-label-active">业务信息</span></div>
+				<div class="course_nr course_nr_3">
+					<span class="mui-badge badge-active">3</span>
+					<span class="mui-badge-label badge-label-active">工作家庭信息</span></div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-input-group ">
+					<!--<div class="mui-input-row ">
+						<label>所属行业</label>
+						<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择所属行业</i>
+					</div>-->
+					<!--<div class="mui-input-row mui-select-row">
+						<label class="require">所属行业 </label>
+						<span class="mui-select industry" id="industry">
+							请选择所属行业
+						</span>
+					</div>-->
+					<div class="mui-input-row mui-select-row">
+						<label>公司名称</label>
+						<!--<span class="mui-select" id="showCarPicker">
+							请选择公司名称
+						</span>-->
+						<input type="text" name="companyName" id="companyName" class="mui-input-clear" placeholder="请输入公司名称" value="">
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择公司名称</i>-->
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>学历</label>
+						<span class="mui-select education" id="education">
+							请选择学历
+						</span>
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择学历</i>-->
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>工作类型</label>
+						<span class="mui-select workType" id="workType">
+							请选择工作类型
+						</span>
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择工作类型</i>-->
+					</div>
+				</div>
+			</div>
+			<div class="mui-card family-card">
+				<div class="mui-input-group">
+					<div class="mui-input-row mui-select-row">
+						<label>婚姻状况</label>
+						<span class="mui-select maritalStatus" id="maritalStatus">
+							请选择婚姻状况
+						</span>
+						<!--<div class="mui-btn-group maritalStatus-btn-group">
+							<button type="button" class="mui-btn mui-btn-outlined">
+								未婚
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								已婚
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								离婚
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								丧偶
+							</button>
+							
+						</div>	-->
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>家庭成员数量 </label>
+						<span class="mui-select numberOfFamily" id="numberOfFamily">
+							请选择家庭成员数量
+						</span>
+						<!--<div class="mui-btn-group numberOfFamily-btn-group">
+							<button type="button" class="mui-btn mui-btn-outlined">
+								1人
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								2人
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								3-5人
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								5人以上
+							</button>
+						</div>	-->
+					</div>
+					<div class="mui-input-row mui-select-row">
+						<label>子女数量 </label>
+						<span class="mui-select numberOfChildren" id="numberOfChildren">
+							请选择子女数量
+						</span>
+						<!--<div class="mui-btn-group numberOfChildren-btn-group">
+							<button type="button" class="mui-btn mui-btn-outlined">
+								0人
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								1人
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								2人
+							</button>
+							<button type="button" class="mui-btn mui-btn-outlined">
+								3人及以上
+							</button>
+						</div>	-->
+					</div>
+
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-input-group ">
+					<div class="mui-input-row mui-select-row income">
+						<label>个人年收入</label>
+						<span class="mui-select personalncome" id="personalncome">
+							请选择个人年收入
+						</span>
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择个人年收入</i>-->
+					</div>
+					<div class="mui-input-row mui-select-row income">
+						<label>家庭年收入</label>
+						<span class="mui-select familylncome" id="familylncome">
+							请选择家庭年收入
+						</span>
+						<!--<i class="mui-pull-right mui-inline mui-icon mui-icon-arrowdown">请选择家庭年收入</i>-->
+					</div>
+
+				</div>
+
+			</div>
+			<div class="mui-button-row">
+				<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-cancel" id="last_step">上一步</button>
+				<button type="button" class="mui-btn mui-btn-danger btn-save" id="btn_save">完成</button>
+			</div>
+
+		</div>
+
+		</div>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/common-picker.js"></script>
+		<script src="../../js/oppor/oppor.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				var baseOpportunity;
+				var title;
+				window.addEventListener('show', function(e) {
+					console.log("======自定义工作家庭信息start==========");
+					window.scrollTo(0,0);
+					baseOpportunity = e.detail.baseOpportunity;
+					console.log(JSON.stringify(baseOpportunity));
+					console.log("======自定义工作家庭信息end==========");
+					title = e.detail.title;
+					doc.getElementById('mui-title').innerHTML = title;
+					if(baseOpportunity.code) {
+						oppor.getOpporDetail(baseOpportunity.code, function(data) {
+							console.log(JSON.stringify(data));
+							console.log("======自定义工作家庭信息end==========");
+							var data = JSON.parse(data);
+							if(data.success == true) {
+								opportunityList = data.opportunityList[0];
+								if(opportunityList) {
+									doc.getElementById("companyName").value = opportunityList.companyName || '';
+									//学历
+									common.baseOption.setOptionHtml(educationData, opportunityList.education, 'education');
+									//工作类型
+									common.baseOption.setOptionHtml(workTypeData, opportunityList.workType, 'workType');
+									//收入
+									common.baseOption.setOptionHtml(incomeData, opportunityList.personalncome, 'personalncome');
+									common.baseOption.setOptionHtml(incomeData, opportunityList.familylncome, 'familylncome');
+
+									common.baseOption.setOptionHtml(maritalStatusData, opportunityList.maritalStatus, 'maritalStatus');
+									common.baseOption.setOptionHtml(numberOfFamilyData, opportunityList.numberOfFamily, 'numberOfFamily');
+									common.baseOption.setOptionHtml(numberOfChildrenData, opportunityList.numberOfChildren, 'numberOfChildren');
+								}
+
+							} else if(data.messageCode == '403') { //token过期，重新登录
+								plus.nativeUI.toast(data.message);
+								common.baseOption.goToLogin();
+							} else {
+								plus.nativeUI.toast(data.message);
+							}
+
+						});
+					}
+				})
+				window.onload = function() {
+					//获取父级页面查询过来的参数
+//					var self = plus.webview.currentWebview();
+//					baseOpportunity = self.baseOpportunity;
+//					title = self.title;
+//					doc.getElementById('mui-title').innerHTML = title;
+//					console.log("baseOpportunity.code = " + baseOpportunity.code);
+//					if(baseOpportunity.code) {
+//						oppor.getOpporDetail(baseOpportunity.code, function(data) {
+//							var data = JSON.parse(data);
+//							if(data.success == true) {
+//								opportunityList = data.opportunityList[0];
+//								if(opportunityList) {
+//									doc.getElementById("companyName").value = opportunityList.companyName || '';
+//									//学历
+//									common.baseOption.setOptionHtml(educationData, opportunityList.education, 'education');
+//									//工作类型
+//									common.baseOption.setOptionHtml(workTypeData, opportunityList.workType, 'workType');
+//									//收入
+//									common.baseOption.setOptionHtml(incomeData, opportunityList.personalncome, 'personalncome');
+//									common.baseOption.setOptionHtml(incomeData, opportunityList.familylncome, 'familylncome');
+//
+//									common.baseOption.setOptionHtml(maritalStatusData, opportunityList.maritalStatus, 'maritalStatus');
+//									common.baseOption.setOptionHtml(numberOfFamilyData, opportunityList.numberOfFamily, 'numberOfFamily');
+//									common.baseOption.setOptionHtml(numberOfChildrenData, opportunityList.numberOfChildren, 'numberOfChildren');
+//								}
+//
+//							} else if(data.messageCode == '403') { //token过期，重新登录
+//								plus.nativeUI.toast(data.message);
+//								common.baseOption.goToLogin();
+//							} else {
+//								plus.nativeUI.toast(data.message);
+//							}
+//
+//						});
+//					}
+
+					$.plusReady(function() {
+
+						/*---------关闭滚动条------*/
+						plus.webview.currentWebview().setStyle({
+							scrollIndicator: 'none'
+						});
+						//关闭等待框
+						plus.nativeUI.closeWaiting();
+						//显示当前页面
+//						mui.currentWebview.show();
+						
+					});
+				}
+
+				document.getElementById("btn_save").addEventListener('tap', function() {
+
+					//					var industry = doc.getElementById("industry").getAttribute('data-value');
+					//					if(!industry){
+					//						plus.nativeUI.toast('请选择所属行业！');
+					//						return;
+					//					}
+					var companyName = doc.getElementById("companyName").value;
+					var education = doc.getElementById("education").getAttribute('data-value');
+					var workType = doc.getElementById("workType").getAttribute('data-value');
+					var personalncome = doc.getElementById("personalncome").getAttribute('data-value');
+					var familylncome = doc.getElementById("familylncome").getAttribute('data-value');
+
+					var maritalStatus = doc.getElementById("maritalStatus").getAttribute('data-value');
+					var numberOfFamily = doc.getElementById("numberOfFamily").getAttribute('data-value');
+					var numberOfChildren = doc.getElementById("numberOfChildren").getAttribute('data-value');
+
+					var familyOppor = {
+						//						industry:industry,
+						companyName: companyName,
+						education: education,
+						workType: workType,
+						personalncome: personalncome,
+						familylncome: familylncome,
+						maritalStatus: maritalStatus,
+						numberOfFamily: numberOfFamily,
+						numberOfChildren: numberOfChildren
+					}
+					mui.extend(baseOpportunity, familyOppor);
+					console.log(baseOpportunity);
+					console.log(JSON.stringify(baseOpportunity));
+					oppor.updateOpporDetail(baseOpportunity, function(data) {
+						console.log(data);
+						console.log(data.success);
+						if(data.success == true) {
+//							plus.webview.getWebviewById('oppor-baseinfo').reload(true);
+//							plus.webview.getWebviewById('oppor-bussinessinfo').reload(true);
+//							plus.webview.currentWebview().reload(true);
+							common.baseOption.toIndex(1);
+							
+						} else {
+							plus.nativeUI.toast('创建意向出错！');
+							return;
+						}
+					})
+
+				})
+
+				document.getElementById("last_step").addEventListener('tap', function() {
+					$.back();
+				})
+
+				function openOpporList() {
+					//					var indexOppor = plus.webview.getWebviewById("opportunity/index-opportunity.html").opener();
+					// 获取所有Webview窗口
+					var wvs = plus.webview.all();
+					for(var i = 0; i < wvs.length; i++) {
+						console.log('webview' + i + ': ' + wvs[i].getURL());
+						console.log('webview' + i + ': ' + wvs[i].id);
+					}
+					var current = plus.webview.currentWebview();
+					console.log('current: ' + current.getURL());
+					console.log('current: ' + current.id);
+					var indexOppor = plus.webview.getWebviewById("main");
+					if(!indexOppor) {
+						indexOppor = plus.webview.getLaunchWebview();
+					}
+					indexOppor.show();
+
+					$.fire(indexOppor, 'refresh', {
+						level: 'H',
+						targetTab: 'opportunity/index-opportunity.html',
+						activeTab: 'opporTab'
+					});
+
+					//				    return true;
+				}
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

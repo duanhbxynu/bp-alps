@@ -440,7 +440,7 @@
 						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 					};
 					bindMsgList();
-					window.addEventListener('resize', function() {
+					document.addEventListener('resize', function() {
 						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 					}, false);
 					var send = function(msg) {

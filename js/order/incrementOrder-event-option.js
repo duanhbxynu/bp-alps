@@ -69,7 +69,7 @@
 			requestUrl = serviceBaseUrl+"alpssalewebservices/order/update";
 			params.code = this.getAttribute('data-orderCode');
 		}else{
-			customerId = JSON.parse(localStorage.getItem('customerItem')).uid;
+			customerId = JSON.parse(localStorage.getItem('customerItem')).customerId;
 			carCode = localStorage.getItem('carCode');
 			requestUrl = serviceBaseUrl+"alpssalewebservices/order/create";
 		}
@@ -173,9 +173,12 @@
 		console.log(coupon);
 		params.coupon = coupon;
 		console.log(JSON.stringify(params));
-		if(optionalProduct.length<1||upholsteryProduct.length<1||insuranceProduct.length<1||coupon.length<1){
+		if(!optionalProduct||!upholsteryProduct||!insuranceProduct||!coupon){
 			return plus.nativeUI.toast("请至少选择一项配件产品！");
 		}
+//		if(optionalProduct.length<1||upholsteryProduct.length<1||insuranceProduct.length<1||coupon.length<1){
+//			return plus.nativeUI.toast("请至少选择一项配件产品！");
+//		}
 		//其他
 		var serviceInfo = document.getElementById('serviceInfo').value;
 		var servicePrice = document.getElementById('servicePrice').value;

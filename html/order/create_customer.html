@@ -39,9 +39,9 @@
 					<div class="mui-input-row radio-multiple-row">
 						<label class="radio-multiple-label require">客户类型</label>
 						<div class="radio-list radio-multiple-list radio-type-list">	
-							<div class="mui-radio mui-left customer-type customer-type-personal active">
+							<div class="mui-radio mui-left customer-type customer-type-personal">
 								<label class="">个人</label>
-								<input id="type_personal" name="type" value="personal" type="radio" checked="true" />
+								<input id="type_personal" name="type" value="personal" type="radio" checked />
 						    </div>
 							<div class="mui-radio mui-left customer-type customer-type-company">
 								<label class="company">公司</label>
@@ -74,13 +74,13 @@
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>证件类型</label>
-						<span class="mui-select" id="showIdTypePicker">
+						<span class="mui-select idType" id="showIdTypePicker">
 							请选择
 						</span>
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>证件号 </label>
-						<input id="identityNumber" type="text" class="mui-input-clear idType" placeholder="请输入证件号" value="">
+						<input id="identityNumber" type="text" class="mui-input-clear " placeholder="请输入证件号" value="">
 					</div>
 					<div class="mui-input-row mui-select-row">
 						<label>联系地址 </label>
@@ -161,17 +161,9 @@
 				//类型切换
 				$('.radio-type-list').on('tap','.type',function(){
 					var type = this;
-					
 					if (this) {
-							
 						this.checked = !this.checked;
 						$.trigger(this, 'change');
-							
-						$(".radio-type-list .mui-radio").each(function () {
-							this.classList.remove('active');
-						}) 
-						type.parentNode.classList.add('active');
-							
 					}
 				})	
 			
@@ -235,6 +227,7 @@
 //										aniShow: "slide-in-right"
 //									}
 //								})
+								plus.webview.currentWebview().opener().reload(true);
 								$.back();
 							}else{
 								return plus.nativeUI.toast("新建客户失败！");

@@ -1,0 +1,426 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/timeline.css" rel="stylesheet" />
+		<!--<link href="../../css/form.css" rel="stylesheet" />-->
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<style>
+			/*.mui-icon-arrowdown {
+			   font-size: 14px;
+			}
+			.mui-icon-arrowdown:after {
+			    content: '\e581';
+			    font-size: 18px;
+			}
+			.mui-icon-arrowdown:before {
+			    content: '';
+			}*/
+			
+			.address-row {
+				min-height: 50px;
+				height: auto!important;
+			}
+			
+			.address {
+				width: 55%;
+				text-align: right;
+				word-wrap: break-word;
+				word-break: normal;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="mui-title">维护意向</h1>
+		</header>
+
+		<div class="mui-content detail-scroll" id="mui-content">
+			<!--<div class="mui-content-padded">
+				<div class="mui-padded-item mui-active">
+					<span class="mui-badge">1</span>
+					<span class="mui-badge-label">基本信息</span>
+				</div>
+				<div class="mui-padded-item">
+					<span class="progress-bar"></span>
+				</div>
+				<div class="mui-padded-item">
+					<span class="mui-badge">2</span>
+					<span class="mui-badge-label">业务信息</span>
+				</div>
+				<div class="mui-padded-item ">
+					<span class="progress-bar"></span>
+				</div>
+				<div class="mui-padded-item">
+					<span class="mui-badge">3</span>
+					<span class="mui-badge-label">工作家庭信息</span>
+				</div>
+			</div>-->
+
+			<div class="mui-content-padded" id="progressBar">
+				<div class="progressBar"></div>
+				<div class="progressBar"></div>
+				<div class="course_nr course_nr_1 ">
+					<span class="mui-badge badge-active">1</span>
+					<span class="mui-badge-label badge-label-active">基本信息</span>
+				</div>
+				<div class="course_nr course_nr_2">
+					<span class="mui-badge">2</span>
+					<span class="mui-badge-label">业务信息</span></div>
+				<div class="course_nr course_nr_3">
+					<span class="mui-badge">3</span>
+					<span class="mui-badge-label">工作家庭信息</span></div>
+			</div>
+			<form class="mui-card">
+				<div class="mui-input-group">
+					<div class="mui-input-row radio-multiple-row">
+						<label class="radio-multiple-label require">客户类型</label>
+						<div class="radio-list radio-multiple-list radio-type-list">
+							<div class="mui-radio mui-left customer-type customer-type-personal">
+								<label class="">个人</label>
+								<input id="type_personal" name="type" value="personal" type="radio" checked />
+							</div>
+							<!--<span class="spliter">|</span>-->
+							<div class="mui-radio mui-left customer-type customer-type-company">
+								<label class="company">公司</label>
+								<input id="type_company" name="type" value="company" type="radio" >
+							</div>
+						</div>
+					</div>
+					<div class="mui-input-row">
+						<label class="require">姓名</label>
+						<input id="input_name" type="text" class="mui-input-clear" placeholder="请输入姓名" value="">
+					</div>
+					<div class="mui-input-row">
+						<label class="require">性别</label>
+						<div class="radio-list radio-single-list radio-gender-list">
+							<div class="mui-radio mui-left mui-radio-male">
+								<label class="male">男</label>
+								<input id="male" name="gender" class="gender" value="MALE" type="radio" checked />
+							</div>
+							<div class="mui-radio mui-left mui-radio-female">
+								<label class="female">女</label>
+								<input id="female" name="gender" class="gender" value="FEMALE" type="radio">
+							</div>
+						</div>
+					</div>
+					<div class="mui-input-row">
+						<label class="require">电话</label>
+						<input id="input_mobile" type="text" class="mui-input-clear" placeholder="请输入电话" value="">
+					</div>
+					<div class="mui-input-row">
+						<label>其他联系方式</label>
+						<input id="input_other_mobile" type="text" class="mui-input-clear" placeholder="请输入其他联系方式" value="">
+					</div>
+					<div class="mui-input-row mui-select-row address-row">
+						<label>联系地址 </label>
+						<span class="mui-select address" id="showAddressPicker">
+							请选择联系地址
+						</span>
+					</div>
+					<div class="mui-input-row">
+						<label>详细地址</label>
+						<input id="input_address" type="text" class="mui-input-clear" placeholder="请输入详细地址" value="">
+					</div>
+				</div>
+
+				<div class="mui-input-group">
+					<div class="mui-button-row">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-cancel" id="btn_cancel">取消</button>
+						<button type="button" class="mui-btn mui-btn-danger btn-save" id="next_step">下一步</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/regex.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/common-picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/oppor/oppor.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init({
+					preloadPages:[{
+						url: 'modify-opportunity-bussinessinfo.html',
+						id: "oppor-bussinessinfo", //默认使用当前页面的url作为id
+						styles: { //窗口参数
+							popGesture: 'hide',
+							cachemode: "noCache"
+						}
+					}]
+				});
+
+				var aniShow = "pop-in";
+				//只有ios支持的功能需要在Android平台隐藏；
+				if(mui.os.android) {
+					var list = document.querySelectorAll('.ios-only');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							list[i].style.display = 'none';
+						}
+					}
+					//Android平台暂时使用slide-in-right动画
+					if(parseFloat(mui.os.version) < 4.4) {
+						aniShow = "slide-in-right";
+					}
+				}
+				//B页面onload从服务器获取列表数据；
+				//联系地址三级联动 动态获取联系地址的联动
+
+				var flowToOppor;
+				var title;
+				var code;
+				window.addEventListener('show', function(e) {
+					console.log("自定义事件显示");
+					code = e.detail.code;
+					title = e.detail.title;
+					doc.getElementById('mui-title').innerHTML = title;
+					flowToOppor = e.detail.flowToOppor;
+					console.log("code=" + code);
+					if(code == '' || code == null || code == undefined) {
+						doc.getElementById("mui-content").setAttribute("data-code", code || '');
+						//姓名，性别，联系方式，客流或意向，创建意向的时候都有值
+						doc.getElementById("input_name").value = flowToOppor.name;
+						doc.getElementById("input_mobile").value = flowToOppor.mobile;
+
+						if(flowToOppor.gender == 'FEMALE') {
+							doc.getElementById('female').checked = true;
+							doc.getElementById('male').removeAttribute("checked");
+						} else {
+							doc.getElementById('male').checked = true;
+							doc.getElementById('female').removeAttribute("checked");
+						}
+					} else {
+
+						oppor.getOpporDetail(code, function(data) {
+							console.log("JSON.parse(data) = " + JSON.parse(data));
+							var data = JSON.parse(data);
+							if(data.success == true) {
+								var opportunityList = data.opportunityList[0];
+
+								if(opportunityList) {
+									showOpportunity(opportunityList);
+								}
+
+							} else if(data.messageCode == '403') { //token过期，重新登录
+								plus.nativeUI.toast(data.message);
+								common.baseOption.goToLogin();
+							} else {
+								plus.nativeUI.toast(data.message);
+							}
+
+						});
+					}
+				})
+				window.onload = function() {
+					//业务数据获取完毕，并已插入当前页面DOM；
+					//注意：若为ajax请求，则需将如下代码放在处理完ajax响应数据之后；
+					mui.plusReady(function() {
+						//关闭等待框
+						plus.nativeUI.closeWaiting();
+						//显示当前页面
+						//  				mui.currentWebview.show();
+						var wvs=plus.webview.all();
+						for(var i=0;i<wvs.length;i++){
+							console.log('webview'+i+': '+wvs[i].getURL());
+							console.log('webview'+i+': '+wvs[i].id);
+						}
+						
+					});
+					
+					
+				
+				}
+
+				function showOpportunity(opportunity) {
+					console.log("========start========");
+					console.log(JSON.stringify(opportunity));
+					var oppor = opportunity;
+					console.log("========end========");
+					doc.getElementById("mui-content").setAttribute("data-code", oppor.code);
+					//姓名，性别，联系方式，客流或意向，创建意向的时候都有值
+					doc.getElementById("input_name").value = oppor.name;
+					doc.getElementById("input_mobile").value = oppor.mobile;
+
+					if(oppor.gender == 'MALE') {
+						doc.getElementById('male').checked = true;
+						doc.getElementById('female').removeAttribute("checked");
+					} else if(oppor.gender == 'FEMALE') {
+						doc.getElementById('female').checked = true;
+						doc.getElementById('male').removeAttribute("checked");
+						console.log(doc.getElementById('male').checked);
+						console.log(doc.getElementById('female').checked);
+					}
+					console.log(doc.getElementById('male').checked);
+						console.log(doc.getElementById('female').checked);
+					//客户性质
+					if(oppor.buyerTypeCode == 'personal') {
+						doc.getElementById('type_personal').checked = true;
+						doc.getElementById('type_company').removeAttribute("checked");
+					} else if(oppor.buyerTypeCode == 'company') {
+						doc.getElementById('type_company').checked = true;
+						doc.getElementById('type_personal').removeAttribute("checked");
+					}
+					console.log(doc.getElementById('type_company').checked);
+					console.log(doc.getElementById('type_personal').checked);
+					
+					doc.getElementById('input_other_mobile').value = oppor.otherContact || '';
+					doc.getElementById('input_address').value = oppor.address || '';
+
+					mui.each(provinceDataList3, function(i, province) {
+						if(province.value == oppor.provinceCode) {
+							doc.getElementById('showAddressPicker').innerHTML = province.text + oppor.cityCode + oppor.districtCode;
+							doc.getElementById('showAddressPicker').setAttribute("data-value", oppor.provinceCode + oppor.cityCode + oppor.districtCode);
+							doc.getElementById('showAddressPicker').setAttribute("data-provinceCode", oppor.provinceCode);
+							doc.getElementById('showAddressPicker').setAttribute("data-cityCode", oppor.cityCode);
+							doc.getElementById('showAddressPicker').setAttribute("data-districtCode", oppor.districtCode);
+							return;
+						}
+					})
+				}
+
+				doc.getElementById("next_step").addEventListener('tap', function() {
+
+					var type = doc.querySelector('input[name="type"]:checked').value; //客户性质
+					var name = doc.getElementById('input_name').value; //姓名
+					var gender = doc.querySelector('input[name="gender"]:checked').value; //性别
+					var mobilestr = doc.getElementById('input_mobile').value; //电话
+
+					if(!name) {
+						return plus.nativeUI.toast("请输入姓名");
+					}
+					if(!RegCheck.mobile(mobilestr)) {
+						return plus.nativeUI.toast("请输入正确的电话");
+					}
+					var otherContact = doc.getElementById('input_other_mobile').value; //其他联系方式
+					var provinceCode = doc.getElementById('showAddressPicker').getAttribute("data-provinceCode");
+					var cityCode = doc.getElementById('showAddressPicker').getAttribute("data-cityCode");
+					var districtCode = doc.getElementById('showAddressPicker').getAttribute("data-districtCode");
+					var address = doc.getElementById('input_address').value; //其他联系方式
+					var code = doc.getElementById("mui-content").getAttribute("data-code");
+					var baseOpportunity = {
+						code: code,
+						buyerTypeCode: type,
+						name: name,
+						gender: gender,
+						mobile: mobilestr,
+						otherContact: otherContact,
+						provinceCode: provinceCode,
+						cityCode: cityCode,
+						districtCode: districtCode,
+						address: address
+					}
+					console.log(JSON.stringify(baseOpportunity));
+					mui.fire(plus.webview.getWebviewById('oppor-bussinessinfo'), 'show', {
+						baseOpportunity: baseOpportunity,
+						title: title
+					});
+					mui.openWindow({
+						id: "oppor-bussinessinfo", //默认使用当前页面的url作为id
+						styles:{
+							cachemode:"noCache"
+						}		
+					})
+//					mui.openWindow({
+//						url: 'add-opportunity-bussinessinfo.html',
+//						id: "oppor-bussinessinfo", //默认使用当前页面的url作为id
+//						styles: { //窗口参数
+//							popGesture: 'hide',
+//							cachemode: "noCache"
+//						},
+//						extras: {
+//							code: code,
+//							baseOpportunity: baseOpportunity,
+//							title: title
+//						}, //自定义扩展参数
+//						show: {
+//							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+//							//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
+//							//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+//						},
+//						waiting: {
+//							autoShow: true, //自动显示等待框，默认为true
+//							title: '正在加载...' //等待对话框上显示的提示内容
+//						},
+//						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+//					})
+
+				})
+
+				//注意：若为ajax请求，则需将如下代码放在处理完ajax响应数据之后；
+				//				$.plusReady(function() {
+				//							//关闭等待框
+				//					plus.nativeUI.closeWaiting();
+				//						//显示当前页面
+				////					plus.webview.currentWebview().show();
+				//					
+				//					//从服务器获取数据
+				////					app.getRegion(function(data){
+				////						console.log("data");
+				////						console.log(data);
+				////						console.log("region result:"+JSON.stringify(data));
+				////						var data = JSON.stringify(data);
+				////						console.log("--------------------------------------------------------------");
+				////						if(data.success==true){
+				////							var provinceDataList = data.provinceDataList;
+				////							console.log(provinceDataList);
+				////						}else{
+				////							plus.nativeUI.toast('地址查询出错！');
+				////						   	common.baseOption.goToLogin();
+				////						}
+				////					});	
+				//						
+				//				})
+
+				//性别切换
+				$('.radio-gender-list').on('tap', '.mui-radio', function() {
+					var gender = this.classList;
+					if(gender.contains('mui-radio-male')) {
+						doc.getElementById('male').checked = !doc.getElementById('male').checked;
+					} else {
+						doc.getElementById('female').checked = !doc.getElementById('female').checked;
+					}
+					//					if (this) {
+					//							
+					//						this.checked = !this.checked;
+					//						$.trigger(this, 'change');
+					//							
+					//						$(".radio-gender-list .mui-radio").each(function () {
+					//							this.classList.remove('active');
+					//						}) 
+					//						gender.parentNode.classList.add('active');
+					//							
+					//					}
+				})
+
+				//类型切换
+				$('.radio-type-list').on('tap', '.customer-type', function() {
+					var type = this.classList;
+					if(type.contains('customer-type-company')) {
+						doc.getElementById('type_company').checked = !doc.getElementById('type_company').checked;
+					} else {
+						doc.getElementById('type_personal').checked = !doc.getElementById('type_personal').checked;
+					}
+				})
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

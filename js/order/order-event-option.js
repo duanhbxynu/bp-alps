@@ -1,15 +1,19 @@
 	document.getElementById('creatOrder').addEventListener('tap',function(){
 		var page = this.getAttribute('data-page');
 		var uid = this.getAttribute('data-customerId');
+		var orderCode = this.getAttribute('data-orderCode');
 		console.log(2);
-		var params = '';
+		console.log(page);
+		console.log(orderCode);
+		var params={};
 		
 		if(page == 'clone'){
 			var requestUrl = serviceBaseUrl+"alpssalewebservices/order/update";
-			params.code = this.getAttribute('data-orderCode');
+			params.code = orderCode;
 		}else{
 			var requestUrl = serviceBaseUrl+"alpssalewebservices/order/create";
 		}
+		console.log(JSON.stringify(params));
 		var opportunityCode = document.getElementById('customerName').getAttribute('data-oppoCode');
 		var attribute = '正式';
 		var attributeCode = '正式';
@@ -47,14 +51,20 @@
 			otherContactNumber:otherContactNumber,
 			provinceCode:provinceCode
 		}
-		params = {
-			opportunityCode:opportunityCode,
-			orderType:"wholeVehicle",
-			customer:customer,
-			deliveryDate:deliveryDate,
-			paymentType:paymentType,
-			lineItemName:document.getElementById('lineItemName').getAttribute('data-value')||''
-		}
+		params.opportunityCode = opportunityCode;
+		params.orderType = "wholeVehicle";
+		params.customer = customer;
+		params.deliveryDate = deliveryDate;
+		params.paymentType = paymentType;
+		params.lineItemName = document.getElementById('lineItemName').getAttribute('data-value')||'';
+//		params = {
+//			opportunityCode:opportunityCode,
+//			orderType:"wholeVehicle",
+//			customer:customer,
+//			deliveryDate:deliveryDate,
+//			paymentType:paymentType,
+//			lineItemName:document.getElementById('lineItemName').getAttribute('data-value')||''
+//		}
 //		params.push(customer);
 		console.log(JSON.stringify(params));
 		//车辆信息
@@ -68,8 +78,11 @@
 		var carInsideColor = document.getElementsByClassName("innerColors")[0].getAttribute("data-value");
 		var carPrice = document.getElementById('carPrice').value;
 		var carSalesPrice = document.getElementById('carSalesPrice').value;
+		if(!carPrice){
+			return plus.nativeUI.toast('请输入厂方指导价！');
+		}
 		if(!carSalesPrice){
-			return plus.nativeUI.toast('请输入销售价格');
+			return plus.nativeUI.toast('请输入销售价格！');
 		}
 		var vehicleInfo = {
 			vehicleBrand:vehicleBrand,
@@ -332,6 +345,7 @@
 			"otherPrice":""
 			}
 		console.log(JSON.stringify(parmas2));
+		console.log(requestUrl);
 		mui.ajax({
 			url:requestUrl,
 			type:"POST",

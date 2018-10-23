@@ -48,7 +48,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" id="backAction"></a>
 			<a class="mui-icon mui-icon-plusempty mui-pull-right" id="add_quotation"></a>
 			<h1 class="mui-title" id="mui-title">商谈报价</h1>
 		</header>
@@ -161,22 +161,14 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				mui('.mui-scroll-wrapper').scroll();
 				var detailPage = null;
 				var oppoCode = "";
 				var type = "";
 				var typeCode = ""; 
 				var name = "";
 				var mobile = "";
-//				var vehicleCode = "";
-//				var categoryData = "";
-//				var vehicleCategoryCodePicker = "";
-//				if(!localStorage.getItem('$state')) {
-//					plus.nativeUI.toast('登陆过期，请重新登陆！');
-//					return;
-//				}
-//				var username = JSON.parse(localStorage.getItem('$state')).username||'123456';
 				template.config('escape', false);
-//				var token = JSON.parse(localStorage.getItem('$state')).token;
 				$.plusReady(function() {
 					
 					
@@ -251,7 +243,15 @@
 						})
 					});
 				})
-
+				
+				
+				doc.getElementById('backAction').addEventListener('tap', function() {
+					  //触发详情页面的show事件
+					mui.fire(plus.webview.getWebviewById('opporDetail'),'show',oppoCode);
+					plus.webview.getWebviewById('opporDetail').show();
+						//返回true,继续页面关闭逻辑
+					return true;
+				})
 
 				doc.getElementById('add_quotation').addEventListener('tap', function() {
 					//打开关于页面
@@ -276,6 +276,10 @@
 					mui.openWindow({
 						url: 'add-quotation.html',
 						id: "add-quotation",//默认使用当前页面的url作为id
+						styles: { //窗口参数
+							popGesture: 'hide',
+							cachemode:"noCache"
+						},
 						extras: {
 							oppoCode: oppoCode,
 							name:name,

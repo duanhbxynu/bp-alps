@@ -24,6 +24,16 @@ var common = {
 			if(r != null) return unescape(r[2]);
 			return null;
 		},
+		getSliceDate:function(time){
+			return ("0" + time).slice(-2);
+		},
+		getDeadlineTime:function(time){
+			console.log(time);
+			var hour = parseInt(time/60);
+			var min = parseInt(time%60);
+			var deadline = '剩余时间'+hour+'小时'+min+'分';
+			return deadline;
+		},
 		getSelectHtml: function(value, options) {
 			var selectText = "";
 			for(var i in options) {
@@ -49,6 +59,23 @@ var common = {
 				}
 			}
 			return false;
+		},
+		setOptionHtml:function (attrList,targetValue,target){
+			mui.each(attrList,function(i,product){
+				if(targetValue){
+					if(product.value == targetValue){
+						document.getElementById(target).innerHTML = product.text;
+						document.getElementById(target).setAttribute('data-value',targetValue);
+					}
+				}
+			})
+		},
+		resetOptionHtml:function (targetArr){
+			mui.each(targetArr,function(i,item){
+				document.getElementById(item.target).innerHTML = "请选择"+item.targethtml;
+				document.getElementById(item.target).setAttribute('data-value','');
+				document.getElementById(item.target).setAttribute('data-text','');
+			})
 		},
 		setTextValue:function(attrList, excludeList) {
 			mui.each(excludeList, function(index, exclude) {

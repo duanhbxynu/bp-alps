@@ -269,18 +269,6 @@
 					plus.nativeUI.closeWaiting();
 					//显示当前页面
 					//获取父级页面查询过来的参数
-//					var self = plus.webview.currentWebview();
-//					var customerList = self.customerList;
-//					doc.getElementById('customerList').innerHTML = doc.getElementById('customerList').innerHTML + template('msg-template', {
-//						"customerList": customerList
-//					});
-//					document.getElementById('createCustomer').addEventListener('tap', function() {
-//						console.log(111);
-//						mui.openWindow({
-//							id: 'createCustomer', //b页面id
-//							url: 'create_customer.html'
-//						})
-//					})
 					showCarList();
 					document.getElementById('nextStep').addEventListener('tap', function() {
 						var radioIsChecked = document.body.querySelector('input[type=radio]:checked');
@@ -318,11 +306,14 @@
 						console.log("--------------------------------------------------------------");
 					
 						if(data.success==true){
+							mui('#offCanvasContentScroll').scroll().scrollTo(0,0);
 							var vehicleList = data.vehicleList;
 							if(!vehicleList){
 								document.getElementById('createCar').classList.remove('mui-hidden');
 								doc.getElementById('vehicleList').innerHTML = '';
 								doc.getElementById('footer').classList.add('mui-hidden');
+								document.getElementById('offCanvasContentScroll').setAttribute('style','margin-bottom:0px!important');
+								
 //								plus.nativeUI.toast('您查找的车辆不存在，请重新输入查询条件！')
 //								return;
 							}else{
@@ -331,6 +322,7 @@
 								doc.getElementById('vehicleList').innerHTML = template('msg-template', {
 									"vehicleList": vehicleList
 								});
+								document.getElementById('offCanvasContentScroll').removeAttribute('style');
 							}
 						}
 					})

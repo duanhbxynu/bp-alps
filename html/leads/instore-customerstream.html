@@ -16,7 +16,7 @@
 		<div id="flowPullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll stream-scroll list-scroll">
 				
-				<!--<div class="mui-card">
+				<div class="mui-card mui-collapse-content">
 					<div class="mui-card-header">
 						<label>客流编号 1</label>
 						<span>接待中</span>
@@ -68,7 +68,7 @@
 								</li>
 							</ul>
 					</div>
-				</div>-->
+				</div>
 			</div>
 		</div>
 		<script src="../../js/mui.js"></script>
@@ -404,19 +404,18 @@
 //							console.log('清理列表数据...');
 //							streamScroll.removeChild();
 //						}
+						detailPage = mui.preload({
+							url:'instore-customerstream-detail.html',
+							id:'customerFlowDetail',//默认使用当前页面的url作为id
+							styles:{
+									cachemode:"noCache"
+								}
+						});
 						mui('#flowPullrefresh').pullRefresh().pullupLoading();
 						
 					}, 10);
-					/*预加载详情页*/
-					detailPage = mui.preload({
-						url:'instore-customerstream-detail.html',
-						id:'customerFlowDetail',//默认使用当前页面的url作为id
-						styles:{
-								cachemode:"noCache"
-							}
-					});
 					
-					showCustomerDetail();
+					
 					
 				});
 			} else {
@@ -430,11 +429,10 @@
 								cachemode:"noCache"
 							}
 					});
-					showCustomerDetail();
 				});
 			}
 			
-//			window.addEventListener('refresh', function(e){//执行刷新
+//			document.addEventListener('refresh', function(e){//执行刷新
 //				location.reload();
 //	//			self.evalJS("mui('#flowPullrefresh').pullRefresh().pullupLoading()");
 //			});
@@ -443,26 +441,30 @@
 			function showCustomerDetail(){
 				mui('.stream-scroll').on('tap', '.mui-card', function() {
 					var customerFlowId = this.getAttribute("data-customerFlowId");
-//					var customerFlow = this.getAttribute("data-customerFlow");
-//					alert(customerFlow);
-					//获得详情页面
-					if(!detailPage){
-					    detailPage = plus.webview.getWebviewById('customerFlowDetail');
-					}
-					  //触发详情页面的show事件
-					mui.fire(detailPage,'show',customerFlowId);
+					
+					mui.fire(plus.webview.getWebviewById('customerFlowDetail'),'show',customerFlowId);
+					
+					
 					//打开详情页面          
 					mui.openWindow({
 						id: 'customerFlowDetail',
+						url:'instore-customerstream-detail.html',
 						show: {
 							aniShow: 'pop-in'
 						},
+//						extras: { //新窗口的额外扩展参数,可用来处理页面间传值
+//					       customerFlowId:customerFlowId
+//					    },
 						styles:{
 								cachemode:"noCache"
 							},
-						waiting: {
-							autoShow: false
-						}
+//						show: { //窗口显示控制参数
+//      					autoShow: false
+//						},
+//						createNew: false,
+//						waiting: {
+//							autoShow: false
+//						}
 					});
 				})
 			}

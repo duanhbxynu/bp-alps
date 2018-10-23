@@ -167,13 +167,16 @@
 			<div class="mui-card">
 				<div class="mui-card-header" id="orderHeader"></div>
 				<div class="mui-card-content">
-					<div class="types">
+					<!--<div class="types">
 						<p>客户类型&#X3000;<span id="initCustomerType"></span></p>
 						
 						
 						<p id="lineItemName">订单类型&#X3000;
 							<span id="initLineItem"></span>
 						</p>
+					</div>-->
+					<div class="">
+						<p>客户类型&#X3000;<span id="initCustomerType"></span></p>
 					</div>
 					<div class="address">
 						<p><span id="initAddress"></span></p>
@@ -207,7 +210,7 @@
 								<span>*</span>
 								<label class="require">客户联系电话</label>
 								<p class="">
-									<input class="" id="customerMobile" type="text" placeholder="请填写电话"/>
+									<input class="mui-input-clear" id="customerMobile" type="text" placeholder="请填写电话"/>
 								</p>
 							</li>
 							<li class="mui-table-view-cell predictTime guideMoney">
@@ -371,15 +374,23 @@
 								</p>
 							</li>
 							<li class="mui-table-view-cell predictTime guideMoney">
+								<span>*</span>
 								<label class="require">厂方指导价</label>
 								<p class="">
 									<input id="carPrice" class="carPrice" type="text" placeholder="请填写指导价"/>
 								</p>
 							</li>
 							<li class="mui-table-view-cell predictTime guideMoney">
+								<span>*</span>
 								<label class="require">整车销售价</label>
 								<p class="">
 									<input id="carSalesPrice" class="carSalesPrice" type="text" placeholder="请填写销售价"/>
+								</p>
+							</li>
+							<li class="mui-table-view-cell brand car mui-select-row">
+								<label class="require">订单类型</label>
+								<p class="">
+									<span class="lineItemName" id="lineItemName">请选订单类型</span>
 								</p>
 							</li>
 							<li class="mui-table-view-cell guideMoney">
@@ -1203,7 +1214,6 @@
 				  //获得事件参数
 				  var orderCode = event.detail.orderCode;
 				  var order = event.detail.order;
-				  //根据id向服务器请求新闻详情
 				  if(!order){
 				  	orderjs.getOrderDetail(orderCode,function(data){
 				  		if(data.success) {
@@ -1241,7 +1251,9 @@
 					
 					doc.getElementById('orderHeader').innerHTML = name+'&nbsp;&nbsp;'+gender+'&nbsp;&nbsp;'+mobile;
 					doc.getElementById('initCustomerType').innerHTML = order.customer.customerType;
-					doc.getElementById('initLineItem').innerHTML = lineItemName;
+//					doc.getElementById('initLineItem').innerHTML = lineItemName;
+					doc.getElementById('lineItemName').innerHTML = lineItemName;
+					doc.getElementById('lineItemName').setAttribute('data-value',lineItemName);
 					doc.getElementById('initAddress').innerHTML = address;
 					doc.getElementById('customerName').value = name;
 					doc.getElementById('customerMobile').value = mobile;
@@ -1258,7 +1270,14 @@
 						doc.getElementById('operatorInfo').classList.remove('mui-hidden');
 					}
 					//联系地址code
-					doc.getElementById('contactAddress').innerHTML = order.customer.provinceCode||''+order.customer.cityCode||''+order.customer.districtCode||'';
+					var provinceName = '';
+					mui.each(provinceDataList3,function(i,province){
+						if(province.value == order.customer.provinceCode){
+							provinceName = province.text;
+							return;
+						}
+					})
+					doc.getElementById('contactAddress').innerHTML = (provinceName||'请选择地址')+(order.customer.cityCode||'')+(order.customer.districtCode||'');
 					doc.getElementById('contactAddress').setAttribute("data-value",order.customer.provinceCode||''+order.customer.cityCode||''+order.customer.districtCode||'');
 					doc.getElementById('contactAddress').setAttribute("data-provinceCode",order.customer.provinceCode||'');
 					doc.getElementById('contactAddress').setAttribute("data-cityCode",order.customer.cityCode||'');

@@ -108,7 +108,7 @@
 		addressPicker.show(function(items) {
 			showAddressPicker.innerHTML =(items[0] || {}).text + " "+(items[1] || {}).text + " "+(items[2] || {}).text;
 			showAddressPicker.setAttribute("data-value",(items[0] || {}).text+(items[1] || {}).value+(items[2] || {}).value);
-			showAddressPicker.setAttribute("data-provinceCode",(items[0] || {}).text);
+			showAddressPicker.setAttribute("data-provinceCode",(items[0] || {}).value);
 			showAddressPicker.setAttribute("data-cityCode",(items[1] || {}).value);
 			showAddressPicker.setAttribute("data-districtCode",(items[2] || {}).value);
 		});
@@ -401,6 +401,28 @@
 		
 
 	});
+	
+	//date 年月日 时分秒
+	
+	mui(".mui-select-row").on('tap', '.dateTime', function() {
+		var datePick = this;
+		var dData = new Date();
+
+		this.picker = new $.DtPicker({
+			type: "datetime", //设置日历初始视图模式 ,
+			beginDate: new Date()
+		});
+		this.picker.show(function(rs) {
+			datePick.setAttribute("data-text",rs.text);
+			datePick.setAttribute("data-value",rs.value);
+			datePick.value = rs.text;
+//			this.picker.dispose();
+			this.picker = null;
+		});
+		
+
+	});
+	
 	
 	//选择产品
 	var searchAResultPicker = new mui.PopPicker();

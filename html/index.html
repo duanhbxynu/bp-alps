@@ -99,13 +99,15 @@
 				gestureConfig: {
 					doubletap: true
 				},
-				preloadPages:[{
-					id: 'incrementCustomerListSearch',//b页面id
-					url:'order/incrementOrder_customerList_search.html',
-					styles:{
-						cachemode:"noCache"
-					}
-				},{
+				preloadPages:[
+//				{
+//					id: 'incrementCustomerListSearch',//b页面id
+//					url:'order/incrementOrder_customerList_search.html',
+//					styles:{
+//						cachemode:"noCache"
+//					}
+//				},
+				{
 					id: 'opporSearchResult',//b页面id
 					url:'opportunity/opportunity-search-result.html',
 					styles:{
@@ -164,11 +166,11 @@
 				console.log(targetTab);
 				console.log(activeTab);
 				
-				var wvs=plus.webview.all();
-				for(var i=0;i<wvs.length;i++){
-					console.log('webview'+i+': '+wvs[i].getURL());
-					console.log('webview'+i+': '+wvs[i].id);
-				}
+//				var wvs=plus.webview.all();
+//				for(var i=0;i<wvs.length;i++){
+//					console.log('webview'+i+': '+wvs[i].getURL());
+//					console.log('webview'+i+': '+wvs[i].id);
+//				}
 				if(!plus.webview.getWebviewById(targetTab)){
 					console.log("重新加载页面");
 					var sub = plus.webview.create(targetTab, targetTab, subpage_style);
@@ -226,6 +228,7 @@
 			 						+'<h1 id="title" class="mui-title">订单</h1>';	
 					header.innerHTML = headerHtml;
 					showOrderPage();
+					mui.fire(plus.webview.getWebviewById(targetTab),'showType',{})
 					pageFlag = 2;
 				}
 				
@@ -273,8 +276,8 @@
 				}
 				var targetTab = document.getElementById(id).getAttribute('data-wid');
 				var contentWebview = plus.webview.getWebviewById(targetTab);
-				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().pulldownLoading()");
-//				//下拉刷新/上拉加载
+				contentWebview.evalJS("mui('#pullrefresh .mui-scroll').pullToRefresh().pullDownLoading();");
+				//下拉刷新/上拉加载
 //				if(targetTab == "leads/index-leads.html"){
 //					console.log("//下拉刷新/上拉加载");
 //					var contentWebview = plus.webview.getWebviewById(targetTab);
@@ -310,6 +313,17 @@
 						})
 					}else if("increment-icon-search" == idElement){
 						//	打开订单列表页面
+//						mui.openWindow({
+//							id: 'orderSearchMain',//b页面id
+//							url:'order/order_search_main.html',
+//							styles:{
+//								cachemode:"noCache"
+//							},
+//							show: {
+//								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+//								aniShow: "slide-in-right"
+//							}
+//						})
 						mui.openWindow({
 							id: 'orderSearch',//b页面id
 							url:'order/order_search.html',

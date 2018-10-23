@@ -609,7 +609,7 @@
 		</footer>
 
 		
-
+		
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
@@ -759,6 +759,21 @@
 					    }
 					})
 				}, false);
+				// H5 plus事件处理
+		        function plusReady(){
+		            share.updateSerivces();
+		            if(plus.os.name=="Android"){
+		                var main = plus.android.runtimeMainActivity();
+		                var Intent = plus.android.importClass("android.content.Intent");
+		                var File = plus.android.importClass("java.io.File");
+		                var Uri = plus.android.importClass("android.net.Uri");
+		            }
+		        }
+				if(window.plus){
+		            plusReady();
+		        }else{
+		            document.addEventListener("plusready",plusReady,false);
+		        }
 
 				$.plusReady(function() {
 
@@ -868,7 +883,40 @@
 				})
 				
 				mui('.mui-bar-nav').on('tap','.mui-icon-more-filled',function(){
-					share.updateSerivces();
+//					share.updateSerivces();
+					var sendCustomerToConfirmValue = {
+						quotationCode:quotationCode
+					}
+					$.ajax({
+						url:serviceBaseUrl+"alpssalewebservices/quotaion/sendCustomerToConfirm",
+						type:"POST",
+						dataType:"json",
+						contentType: 'application/json',
+				        data: JSON.stringify(sendCustomerToConfirmValue),
+				        beforeSend: function (xhr) {
+					       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
+					    },
+						success: function (data) {
+							console.log("send to customer result:"+JSON.stringify(data));
+							console.log("--------------------------------------------------------------");
+							var currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
+							if(data.success==true){
+								if(data.shareUrl){
+									var msg={
+										type:"web",
+										title:currentUserName+"为您服务",
+										content:"根据您的需要我们已经创建好了报价单，请您进行审核，如果确认无误请签字确认，并支付订金，我们将及时将意向单转化成正式订单，这样您就可以及时拿到您的爱车了！",
+										href:data.shareUrl,
+										thumbs:'../../images/logo.png'
+									};
+									share.shareHref(msg);
+//									$("#sendToCustomer").parent().append("<a href=\""+data.shareUrl+"\">查看分享页面</a>");
+								}
+								//location.href = getUrl(baseConfig.baseUrl+baseConfig.quotation,{},"&quotationCode="+quotationCode);
+							}
+						}
+					})
+				
 				})
 				
 

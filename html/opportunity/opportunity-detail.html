@@ -195,6 +195,18 @@
 				background: url(../../images/others.png) no-repeat;
 			    background-size: 100% 100%;
 			}
+			.follow-record:before{
+				height: 0px!important;
+				width: 0px!important;
+			}
+			/*.mui-icon-extra-outline:before{
+				content: '';
+				background-image: url(../../images/clock.png)!important;
+				background-size: 14px 14px!important;
+				font-size: 14px!important;
+				width: 14px!important;
+				height: 14px!important;
+			}*/
 		</style>
 
 	</head>
@@ -203,7 +215,7 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title" id="mui-title">意向详情</h1>
-			<a class="mui-icon mui-pull-right mui-icon-search" style="font-weight: bolder;"></a>
+			<!--<a class="mui-icon mui-pull-right mui-icon-search" style="font-weight: bolder;"></a>-->
 		</header>
 
 		<div class="mui-content mui-scroll-wrapper" id="mui-content">
@@ -234,7 +246,7 @@
 									创建时间<var id="create_time"></var>
 								</li>
 								<li class="mui-table-view-cell">
-									<var class="mui-icon-extra mui-icon-extra-outline active" id="last_follow_time">剩余时间2小时15分</var>
+									<var class="mui-icon-extra mui-icon-extra-outline active " id="last_follow_time">剩余时间2小时15分</var>
 								</li>
 							</ul>
 					</div>
@@ -327,11 +339,11 @@
 		
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js"></script>
-		<script src="../../js/oppor/oppor.js"></script>
 		<script src="../../js/follow/follow.js"></script>
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/oppor/oppor.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init({
@@ -354,7 +366,12 @@
 					},{
 						url:'../order/create_wholeVehicleOrder.html',
 						id: 'creatWholeVehicleOrder'//b页面id
-					}]
+					}],
+					beforeback: function() {　　　　 //获得父页面的webview 
+						common.baseOption.toIndex(1);
+						//返回true,继续页面关闭逻辑
+						return true;
+					}
 				});
 				
 				var aniShow = "pop-in";
@@ -374,7 +391,7 @@
 				var opporCode = '';
 				var opportunityList;
 				//添加show自定义事件监听
-				window.addEventListener('show', function(event) {
+				document.addEventListener('show', function(event) {
 					
 					opporCode = event.detail;
 					
@@ -432,7 +449,7 @@
 				        indicators: true, //是否显示滚动条,默认是true
 				    }); 
 				})(mui);
-
+				var basePage = null;
 				$.plusReady(function() {
 					$('.mui-scroll-wrapper').scroll();
 					/*---------关闭滚动条------*/
@@ -442,7 +459,14 @@
 
 					//获取父级页面查询过来的参数
 					var self = plus.webview.currentWebview();
-					
+					basePage = mui.preload({
+						url: 'modify-opportunity-baseinfo.html',
+						id: "oppor-baseinfo", //默认使用当前页面的url作为id
+						styles: { //窗口参数
+							popGesture: 'hide',
+							cachemode:"noCache"
+						}
+					})
 
 				});
 
@@ -538,27 +562,45 @@
 						var data = JSON.parse(data);
 						if(data.success==true) {
 							var opportunityList = data.opportunityList[0];
+							console.log("意向详情opporCode="+opporCode);
+							if(!basePage){
+								basePage = plus.webview.getWebviewById('oppor-baseinfo');
+							}
+							mui.fire(basePage, 'show', {
+								code: opporCode,
+								flowToOppor:opportunityList,
+								title:'维护意向'
+							});
 							mui.openWindow({
-								url: 'add-opportunity-baseinfo.html',
 								id: "oppor-baseinfo", //默认使用当前页面的url作为id
-								styles: { //窗口参数
-									popGesture: 'hide'
-									},
-								extras: {
-									code: opporCode,
-									flowToOppor:opportunityList
-								}, //自定义扩展参数
-								show: {
-									autoShow: true, //页面loaded事件发生后自动显示，默认为true
-									//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
-									//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
-								},
-								waiting: {
-									autoShow: true, //自动显示等待框，默认为true
-									title: '正在加载...' //等待对话框上显示的提示内容
-								},
-								createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+								styles:{
+									cachemode:"noCache"
+								}
+								
 							})
+//							mui.openWindow({
+//								url: 'add-opportunity-baseinfo.html',
+//								id: "oppor-baseinfo", //默认使用当前页面的url作为id
+//								styles: { //窗口参数
+//									popGesture: 'hide',
+//									cachemode:"noCache"
+//								},
+//								extras: {
+//									code: opporCode,
+//									flowToOppor:opportunityList,
+//									title:'维护意向'
+//								}, //自定义扩展参数
+//								show: {
+//									autoShow: true, //页面loaded事件发生后自动显示，默认为true
+//									//	aniShow:'pop-in',//页面显示动画，默认为”slide-in-right“；
+//									//	duration:'300'//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+//								},
+//								waiting: {
+//									autoShow: true, //自动显示等待框，默认为true
+//									title: '正在加载...' //等待对话框上显示的提示内容
+//								},
+//								createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+//							})
 							
 						} else if(data.messageCode == '403'){//token过期，重新登录
 							plus.nativeUI.toast(data.message);

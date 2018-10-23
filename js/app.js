@@ -89,7 +89,7 @@
 			return callback('密码最短为 4 个字符');
 		}
 		loginInfo = $.extend(loginInfo,common.baseClientParameter);
-		console.log(loginInfo);
+//		console.log(loginInfo);
 		console.log("login request121:"+JSON.stringify(loginInfo));
 		console.log("common.URL.accountLogin():"+common.URL.accountLogin());
 		$.ajax(common.URL.accountLogin(), {

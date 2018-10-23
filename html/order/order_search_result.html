@@ -103,11 +103,11 @@
 				var customerName = e.detail.customerName;
 				var customerMobileNumber = e.detail.customerMobileNumber;
 				var params = {
-						customerName:customerName,
-						customerMobileNumber:customerMobileNumber,
-						currentPage:0,
-						pagesize:10
-					}
+					customerName:customerName,
+					customerMobileNumber:customerMobileNumber,
+					currentPage:0,
+					pagesize:10
+				}
 				
 				orderjs.qryOrderList(params,function(data) {
 						console.log(data);

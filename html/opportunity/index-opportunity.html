@@ -10,6 +10,7 @@
 
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/pull-tips.css" rel="stylesheet" />
 		<style>
 			.mui-fullscreen {
 				background-color: #efeff4!important;
@@ -19,9 +20,15 @@
 				top: 44px;
 				height: auto;
 			}
-			.mui-scroll-wrapper{
-				top: 40px;
+			
+			.mui-scroll-wrapper {
+				top: 44px;
 			}
+			/*.mui-scroll-wrapper .mui-scroll{
+				top: 90px;
+				z-index: -1px;
+				/*bottom:51px;
+			}*/
 			
 			.oppor-tab {
 				background: #F9F9F9;
@@ -46,96 +53,119 @@
 				font-weight: 800;
 			}
 			
-			
-			
-			
 			.mui-input-row {
 				line-height: 25px;
 			}
+			
 			.img-avatar {
 				float: left;
 				padding-bottom: 5px;
 				margin-left: 0px;
 				padding-bottom: 5px;
 			}
+			
 			.mui-table-view:before {
 				height: 0px;
 			}
 			
-			.oppor-scroll-wrapper .mui-card{
-				margin:8px;
+			.oppor-scroll-wrapper .mui-card {
+				margin: 8px;
 			}
-			.oppor-scroll .mui-card-header{
-				padding-left:20px;
-				padding-right:20px;
+			
+			.oppor-scroll .mui-card-header {
+				padding-left: 20px;
+				padding-right: 20px;
 				border-bottom: 1px dashed #E4E4E4;
 				height: 45px;
 			}
 			
-			.oppor-scroll .mui-card-header:after{
+			.oppor-scroll .mui-card-header:after {
 				height: 0;
 			}
-			.oppor-scroll .mui-table-view .mui-table-view-cell:not(:first-child){
+			
+			.oppor-scroll .mui-table-view .mui-table-view-cell:not(:first-child) {
 				font-size: 12px;
 			}
 			
-			.oppor-scroll .mui-table-view .mui-table-view-cell:first-child{
+			.oppor-scroll .mui-table-view .mui-table-view-cell:first-child {
 				color: #212121;
 				padding-top: 16px;
 				font-weight: 600;
-				
 			}
-			var{
+			
+			var {
 				line-height: 20px;
 			}
 			
-			.oppor-scroll .mui-table-view .mui-table-view-cell:last-child{
-				color: #618DF6 ;
+			.oppor-scroll .mui-table-view .mui-table-view-cell:last-child {
+				color: #618DF6;
 			}
 			
 			.mui-table-view-cell:after {
 				height: 0px;
 			}
-			.mui-table-view-cell var:not(:first-child):not(:last-child){
-				padding-left:5px;
+			
+			.mui-table-view-cell var:not(:first-child):not(:last-child) {
+				padding-left: 5px;
 				padding-right: 5px;
 			}
-			.second-cell var:not(:last-child){
+			
+			.second-cell var:not(:last-child) {
 				color: #666666;
 			}
-			.second-cell var:last-child{
+			
+			.second-cell var:last-child {
 				color: #444444;
+			}
+			
+			.deadline {
+				color: #618DF6;
+				margin-left: 18px;
+			}
+			
+			.deadline:before {
+				height: 14px;
+				width: 14px;
+				position: absolute;
+				right: 0;
+				left: 15px;
+				content: '';
+				background-image: url(../../images/clock.png);
+				background-size: 14px 14px;
+				margin-top: 3px;
 			}
 		</style>
 	</head>
 
 	<body>
-		<!--<header class="mui-bar mui-bar-nav">
-			<a class="mui-icon mui-icon-search mui-pull-right" id="icon-search"></a>
-			<h1 class="mui-title">意向</h1>
-		</header>-->
-		<!--<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" href="#">
-				<span class="mui-icon mui-icon-home"></span>
+		<!--<header class="mui-bar mui-bar-nav" id="header">
+			<a class="mui-icon mui-icon-plusempty mui-pull-left mui-hidden " id="icon-add"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right mui-hidden" id="icon-search"></a>
+			<h1 id="title" class="mui-title">客流</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="leadsTab" class="mui-tab-item mui-active" href="#" data-wid='leads/index-leads.html'>
+				<span class="mui-icon mui-icon-clue"></span>
 				<span class="mui-tab-label">线索</span>
 			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-email"></span>
+			<a id="opporTab" class="mui-tab-item" href="#" data-wid="opportunity/index-opportunity.html">
+				<span class="mui-icon mui-icon-intention"></span>
 				<span class="mui-tab-label">意向</span>
 			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-contact"></span>
+			<a id="orderTab" class="mui-tab-item" href="#" data-wid="order/index-order.html">
+				<span class="mui-icon mui-icon-order"></span>
 				<span class="mui-tab-label">订单</span>
 			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-gear"></span>
+			<a id="findTab" class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-discover"></span>
 				<span class="mui-tab-label">发现</span>
 			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-gear"></span>
+			<a id="mineTab" class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-mine"></span>
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>-->
+
 		<div class="mui-content oppor-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted oppor-tab">
@@ -148,18 +178,19 @@
 					<a class="mui-control-item " href="#" data-levelType="B">
 						B
 					</a>
-					<a class="mui-control-item"  href="#" data-levelType="C">
+					<a class="mui-control-item" href="#" data-levelType="C">
 						C
 					</a>
-					<a class="mui-control-item"  href="#" data-levelType="Today">
+					<a class="mui-control-item" href="#" data-levelType="Today">
 						<img style="width: 34px;position: relative;top: 8px;" src="../../images/T.png" alt="" />
 					</a>
 				</div>
 
 				<div id="pullrefresh" class="mui-scroll-wrapper oppor-scroll-wrapper">
-					<div class="mui-scroll oppor-scroll" >
-						<!--数据列表-->
-						<!--<div class="mui-card clear" data-opporCode="OP0000009">
+					<div class="mui-scroll oppor-scroll">
+						<div id="cardList">
+							<!--数据列表-->
+							<!--<div class="mui-card clear" data-opporCode="OP0000009">
 							<div class="mui-card-header">
 								<label>意向编号 OP0000009</label>
 								<span>新建</span>
@@ -179,14 +210,73 @@
 									</li>
 									<li class="mui-table-view-cell">
 										<i class="mui-icon-extra mui-icon-extra-outline active"></i>
-										<var class="active">
+										<var class="active deadline">
+											剩余时间2小时15分
+										</var>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mui-card clear" data-opporCode="OP0000009">
+							<div class="mui-card-header">
+								<label>意向编号 OP0000009</label>
+								<span>新建</span>
+							</div>
+							<div class="mui-card-content">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell">
+										<var>到店客流测试0904</var>
+										<var>女</var>
+										<var>13314566541</var>
+										<var class="mui-pull-right">到店客流</var>
+									</li>
+									<li class="mui-table-view-cell second-cell">
+										<var>H级别</var>
+										<var>2018-09-04 10:10:10</var>
+										<var class="mui-pull-right">奥迪A6</var>
+									</li>
+									<li class="mui-table-view-cell">
+										<i class="mui-icon-extra mui-icon-extra-outline active"></i>
+										<var class="active deadline">
+											剩余时间2小时15分
+										</var>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mui-card clear" data-opporCode="OP0000009">
+							<div class="mui-card-header">
+								<label>意向编号 OP0000009</label>
+								<span>新建</span>
+							</div>
+							<div class="mui-card-content">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell">
+										<var>到店客流测试0904</var>
+										<var>女</var>
+										<var>13314566541</var>
+										<var class="mui-pull-right">到店客流</var>
+									</li>
+									<li class="mui-table-view-cell second-cell">
+										<var>H级别</var>
+										<var>2018-09-04 10:10:10</var>
+										<var class="mui-pull-right">奥迪A6</var>
+									</li>
+									<li class="mui-table-view-cell">
+										<i class="mui-icon-extra mui-icon-extra-outline active"></i>
+										<var class="active deadline">
 											剩余时间2小时15分
 										</var>
 									</li>
 								</ul>
 							</div>
 						</div>-->
-
+						</div>
+						<!--<div class="mui-pull-bottom-tips">
+							<div class="mui-pull-bottom-wrapper">
+								<span class="mui-pull-loading">正在加载...</span>
+							</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -198,300 +288,273 @@
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script src="../../js/common.js"></script>
 		<script src="../../js/oppor/oppor.js"></script>
+		<script src="../../js/common/base64.js"></script>
 		<script>
-			
-		(function($, doc) {
-			$.init({
-				swipeBack: false,
-				pullRefresh: {
-					container: '#pullrefresh',
-					down: {
-						contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-			            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-			            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-						callback: pulldownRefresh
-					},
-					up: {
-						auto:true,
-						contentrefresh: '正在加载...',
-						contentnomore:'没有更多数据了',
-						callback: pullupRefresh
-					}
-				}
-			});
-			
-			
-			
-			var detailPage = "";
-			
-			//查询参数
-			var level = 'H';
-			var mobile = '';
-			
-			//下拉刷新初始化动作	
-			if(mui.os.plus) {
-				mui.plusReady(function() {
+			(function($, doc) {
+				$.init({
+					swipeBack: false
+				});
 
-					setTimeout(function() {
-						mui('#pullrefresh').pullRefresh().pullupLoading();
-						console.log("第一次进入");
-					}, 1000);
-					
-					/*预加载详情页*/
-					detailPage = mui.preload({
-						url:'opportunity-detail.html',
-						id:'opporDetail',//默认使用当前页面的url作为id
-					});
-					
-					showOpporDetail();
-				
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
 				});
-			} else {
-				mui.ready(function() {
-					mui('#pullrefresh').pullRefresh().pullupLoading();
-				});
-				/*预加载详情页*/
-					detailPage = mui.preload({
-						url:'opportunity-detail.html',
-						id:'opporDetail',//默认使用当前页面的url作为id
-					});
-					
-					showOpporDetail();
-			}
-			
-//			window.addEventListener('refresh', function(e){//执行刷新
-////						location.reload();
-//				console.log("第二次进入");
-//			    var level = e.detail.level;
-//					    
-//			});
-					
-			/**
-			 * 下拉刷新具体业务实现
-			 */
-			
-			var count = 0;
-			var opportunityList = null;
-			
-			/**
-			 * 下拉刷新具体业务实现
-			 */
-			function pulldownRefresh() {
-				
-				setTimeout(function() {
-					var opporScroll = document.body.querySelector('.oppor-scroll');
-					console.log(level);
-					var params = {
-						level:level,
-						mobile:mobile,
-						currentPage:0,
-						pagesize:10
-					}
-					if(level == 'Today'){
-						params = {
-							mobile:mobile,
-							currentPage:0,
-							pagesize:10
-						}
-					}
-					
-					oppor.qryOpporList(params,function(data) {
-						var data = JSON.parse(data);
-						console.log(data);
-						if(data.success) {
-							//成功返回数据，
-							//1.清空原ul下的子节点全部清空
-							while(opporScroll.hasChildNodes()) {
-								console.log('清理列表数据...');
-								opporScroll.removeChild(opporScroll.firstChild);
+
+				var detailPage = "";
+				var pullToRefresh = null;
+
+				//查询参数
+				var level = 'H';
+				var mobile = '';
+				var opportunityList = null;
+				//查询参数签名
+				var preSign = '';
+				//上拉次数判断参数
+				var totalPage;
+				var count = 0;
+				var pagesize = 5;
+
+				function initPullToRefresh() {
+					pullToRefresh = $('.oppor-scroll-wrapper .mui-scroll').pullToRefresh({
+						down: {
+							callback: function() {
+								var self = this;
+								setTimeout(function() {
+									var opporScroll = document.body.querySelector('#cardList');
+									var params = {
+										level: level,
+										mobile: mobile,
+										currentPage: 0,
+										pagesize: pagesize
+									}
+									if(level == 'Today') {
+										params = {
+											mobile: mobile,
+											currentPage: 0,
+											pagesize: pagesize
+										}
+									}
+									oppor.qryOpporList(params, function(data) {
+										var data = JSON.parse(data);
+										console.log(data);
+										console.log(JSON.stringify(data));
+										if(data.success) {
+											while(opporScroll.hasChildNodes()) {
+												opporScroll.removeChild(opporScroll.firstChild);
+											}
+											totalPage = data.totalPage;
+											count = 0;
+											//console.log("totalPage = " + totalPage);
+											//2.将数据前2条填充到列表中
+											opportunityList = data.opportunityList;
+											//console.log("opportunityList=" + opportunityList);
+											//opporScroll.insertBefore(createFragment(opportunityList),opporScroll.firstChild);
+
+											if(!opportunityList) {
+												self.endPullUpToRefresh(true);
+												return;
+											} else {
+												opporScroll.appendChild(createFragment(opportunityList));
+												//console.log("childElementCount = " + opporScroll.childElementCount);
+												if(totalPage == 1) {
+													self.endPullUpToRefresh(true);
+													return;
+												}
+											}
+
+										} else if(data.messageCode == '403') { //token过期，重新登录
+											plus.nativeUI.toast(data.message);
+											common.baseOption.goToLogin();
+										} else {
+											plus.nativeUI.toast(data.message);
+											//											$('#pullrefresh .mui-scroll').endPullDownToRefresh();
+										}
+									});
+									//ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
+									self.refresh(true);
+									self.endPullDownToRefresh();
+									showOpporDetail();
+								}, 1000);
 							}
-							count = 0;
-							//2.将数据前2条填充到列表中
-							opportunityList = data.opportunityList;
-							if(!opportunityList){
-								var libDiv = document.createElement('p');
-								libDiv.setAttribute("style", "font-size:18px;text-align: center;line-height: 100px;");
-								var item = "暂无意向";
-								libDiv.innerHTML = item;
-									//下拉刷新，新纪录插到最前面；
-								console.log("下拉刷新，新纪录插到最前面");
-								opporScroll.insertBefore(libDiv, opporScroll.firstChild);
-								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-								return;
-							}else{
-								fillingData("pulldown",opportunityList);
+						},
+						up: {
+							//								auto: true,
+							//								show: true, //显示底部上拉加载提示信息，可选；
+							//								contentinit: '上拉显示更多', //可以上拉提示信息
+							//								contentdown: '上拉显示更多', //上拉结束提示信息
+							//								contentrefresh: '正在加载...', //上拉进行中提示信息
+							contentnomore: '没有更多数据了', //上拉无更多信息时提示信息
+							callback: function() {
+								var self = this;
+								setTimeout(function() {
+									//console.log('上拉加载...');
+									//console.log(count);
+									//console.log(totalPage - 1);
+									if(++count > totalPage - 1) {
+										self.endPullUpToRefresh(true);
+										return;
+									} else {
+										self.endPullUpToRefresh(false);
+									}
+
+									//var opporScroll = document.body.querySelector('.oppor-scroll');
+									var opporScroll = document.body.querySelector('#cardList');
+									var params = {
+										level: level,
+										mobile: mobile,
+										currentPage: count,
+										pagesize: pagesize
+									}
+									if(level == 'Today') {
+										params = {
+											mobile: mobile,
+											currentPage: count,
+											pagesize: pagesize
+										}
+									}
+
+									oppor.qryOpporList(params, function(data) {
+										var data = JSON.parse(data);
+										if(data.success) {
+											//更新数据
+											opportunityList = data.opportunityList;
+											console.log(opportunityList.length);
+											totalPage = data.totalPage;
+											//console.log("totalPage = " + totalPage);
+											if(!opportunityList) {
+												self.endPullUpToRefresh(true);
+												return;
+											} else {
+												opporScroll.appendChild(createFragment(opportunityList));
+											}
+										} else {
+											plus.nativeUI.toast(data.error);
+										}
+									});
+
+									showOpporDetail();
+								}, 1500);
 							}
-							
-							
-						} else if(data.messageCode == '403'){//token过期，重新登录
-							plus.nativeUI.toast(data.message);
-							common.baseOption.goToLogin();
-						}else{
-							plus.nativeUI.toast(data.message);
-							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						}
-					});
-					
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-					showOpporDetail();
-				}, 500);
-			}
-			
-			function fillingData(pull,opportunityList){
-				
-				if(pull == "pullup"){
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(opportunityList.length / 10))); //参数为true代表没有更多数据了。
+					})
+					pullToRefresh.pullDownLoading();
 				}
-				
-				var listLen = opportunityList.length;
-				console.log(listLen);
-				var opporScroll = document.body.querySelector('.oppor-scroll');
-				var opporCard = document.body.querySelectorAll('.mui-card');
-				
-				
-				var i = opporCard.length;
-//				alert(i);
-				var len = null;
-				if((i + 10 > listLen) && (i - 10 < listLen)) {
-					len = listLen;
+
+				//下拉刷新初始化动作	
+				if(mui.os.plus) {
+					mui.plusReady(function() {
+
+						setTimeout(function() {
+							initPullToRefresh();
+
+						}, 1000);
+
+						/*预加载详情页*/
+						detailPage = mui.preload({
+							url: 'opportunity-detail.html',
+							id: 'opporDetail', //默认使用当前页面的url作为id
+						});
+
+						showOpporDetail();
+
+					});
 				} else {
-					len = i + 10;
+					mui.ready(function() {
+						initPullToRefresh();
+
+						/*预加载详情页*/
+						detailPage = mui.preload({
+							url: 'opportunity-detail.html',
+							id: 'opporDetail', //默认使用当前页面的url作为id
+						});
+
+						showOpporDetail();
+					});
 				}
-				for(; i < len; i++) {
-//					var statusValue = '接待中';
-//					if(customerFlowList[i].statusCode == 'pending') {
-//						statusValue = '等待';
-//					}else if(customerFlowList[i].statusCode == 'reception'){
-//						statusValue = '接待中';
-//					} else if(customerFlowList[i].statusCode == 'complete'){
-//						statusValue = '接待完成';
-//					}
-					var gender = '';
-					if(opportunityList[i].gender == 'MALE') {
-						gender = '男';
-					} else {
-						gender = '女';
-					}
-					
+
+				function createFragment(opportunityList) {
+
+					var listLen = opportunityList.length;
+					console.log(listLen);
+					//					var opporScroll = document.body.querySelector('#cardList');
+
+					var opporCard = document.body.querySelectorAll('.mui-card');
+
+					var i = 0;
+					//					var len = null;
+					//					if((i + 5 > listLen) && (i - 5 < listLen)) {
+					//						len = listLen;
+					//					} else {
+					//						len = i + 5;
+					//					}
+					var fragment = document.createDocumentFragment();
+					//					var len = 5;
+					for(; i < listLen; i++) {
+
+						var gender = '';
+						if(opportunityList[i].gender == 'MALE') {
+							gender = '男';
+						} else {
+							gender = '女';
+						}
+						var deadlineTime = common.baseOption.getDeadlineTime(opportunityList[i].leftFollowTime);
 						var card = document.createElement('div');
 						card.className = 'mui-card';
-						card.setAttribute("data-opporCode",opportunityList[i].code );
-						card.innerHTML ='<div class="mui-card-header"><label>意向编号' + opportunityList[i].code +'</label><span>'+ opportunityList[i].statusName +'</span></div>'+
-										'<div class="mui-card-content">'+
-											'<ul class="mui-table-view">'+
-												'<li class="mui-table-view-cell">'+
-													'<var>'+opportunityList[i].name+'</var> <var>'+gender+'</var><var>'+opportunityList[i].mobile+'</var><var class="mui-pull-right">'+opportunityList[i].platform+'</var>'+
-												'</li>'+
-												'<li class="mui-table-view-cell second-cell">'+
-													'<var>'+opportunityList[i].levelName+'</var> <var>'+opportunityList[i].creationtime+'</var><var class="mui-pull-right">'+opportunityList[i].vehicleCategoryName+'&nbsp;&nbsp;&nbsp;'+opportunityList[i].vehicleName+'</var>'+
-												'</li>'+
-												'<li class="mui-table-view-cell">'+
-													'<i class="mui-icon-extra mui-icon-extra-outline active"></i> <var class="active">'+ opportunityList[i].lastFollowTime +'</var>'+
-												'</li>'+
-											'</ul>'+
-										'</div>';
+						card.setAttribute("data-opporCode", opportunityList[i].code);
+						card.innerHTML = '<div class="mui-card-header"><label>意向编号' + opportunityList[i].code + '</label><span>' + opportunityList[i].statusName + '</span></div>' +
+							'<div class="mui-card-content">' +
+							'<ul class="mui-table-view">' +
+							'<li class="mui-table-view-cell">' +
+							'<var>' + opportunityList[i].name + '</var> <var>' + gender + '</var><var>' + opportunityList[i].mobile + '</var><var class="mui-pull-right">' + opportunityList[i].platform + '</var>' +
+							'</li>' +
+							'<li class="mui-table-view-cell second-cell">' +
+							'<var>' + opportunityList[i].levelCode + '</var> <var>' + opportunityList[i].creationtime + '</var><var class="mui-pull-right">' + opportunityList[i].vehicleCategoryName + '&nbsp;&nbsp;&nbsp;' + opportunityList[i].vehicleName + '</var>' +
+							'</li>' +
+							'<li class="mui-table-view-cell">' +
+							'<i class="mui-icon-extra mui-icon-extra-outline active"></i> <var class="active deadline">' + deadlineTime + '</var>' +
+							'</li>' +
+							'</ul>' +
+							'</div>';
 						console.log("=============line 123================");
-						console.log(card);
-						if(pull=="pullup"){
-							opporScroll.appendChild(card);
-						}else{
-							//下拉刷新，新纪录插到最前面；
-							opporScroll.insertBefore(card, opporScroll.firstChild);
-						}
-						
-						console.log("=============line 126================");
-						console.log(opporScroll);
+						fragment.appendChild(card);
+					}
+					return fragment;
 				}
-			}
-			
-			
-			/**
-			 * 上拉加载具体业务实现
-			 */
-			function pullupRefresh() {
-				
-				setTimeout(function() {
-					var params = {
-						level:level,
-						mobile:mobile,
-						currentPage:0,
-						pagesize:10
-					}
-					if(level == 'Today'){
-						params = {
-							mobile:mobile,
-							currentPage:0,
-							pagesize:10
-						}
-					}
-					var opporScroll = document.body.querySelector('.oppor-scroll');
-					oppor.qryOpporList(params,function(data) {
-						var data = JSON.parse(data);
-						console.log(data);
-//						alert(data);
-						if(data.success) {
-//							alert(data.customerFlowList);
-//							alert(data.customerFlowList.length);
-							opportunityList = data.opportunityList;
-//							alert(customerFlowList);
-							
-							if(!opportunityList){
-								var libDiv = document.createElement('p');
-								libDiv.setAttribute("style", "font-size:18px;text-align: center;line-height: 100px;");
-								var item = "暂无意向";
-								libDiv.innerHTML = item;
-								opporScroll.appendChild(libDiv);
-								mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-								return;
-							}else{
-								fillingData("pullup",opportunityList);
-							}
-						}else {
-							console.log('line220');
-							plus.nativeUI.toast(data.error);
-						}
-					});
-					
-						mui('#pullrefresh').pullRefresh().refresh(true);
-						
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-						
-						showOpporDetail();
-				}, 500);
-			}
-			mui('.mui-segmented-control').on('tap', 'a', function(e) {
-				level = this.getAttribute('data-levelType');
-				console.log(level);
-				pulldownRefresh();
-			})
-			
-			
-			function showOpporDetail(){
-				mui('.oppor-scroll').on('tap', '.mui-card', function() {
-					var opporCode = this.getAttribute("data-opporCode");
-//					var customerFlow = this.getAttribute("data-customerFlow");
-					console.log(opporCode);
-//					获得详情页面
-					console.log(detailPage);
-					if(!detailPage){
-					    detailPage = plus.webview.getWebviewById('opporDetail');
-					}
-					  //触发详情页面的show事件
-					mui.fire(detailPage,'show',opporCode);
-					//打开详情页面          
-					mui.openWindow({
-						id: 'opporDetail',
-						url:'opportunity-detail.html',
-						show: {
-							aniShow: 'pop-in'
-						},
-						waiting: {
-							autoShow: false
-						}
-					});
+
+				mui('.mui-segmented-control').on('tap', 'a', function(e) {
+					level = this.getAttribute('data-levelType');
+					count = 0;
+					pullToRefresh.pullDownLoading();
 				})
-			}
-		})(mui, document);	
+
+				function showOpporDetail() {
+					mui('.oppor-scroll').on('tap', '.mui-card', function() {
+						var opporCode = this.getAttribute("data-opporCode");
+						//					var customerFlow = this.getAttribute("data-customerFlow");
+						console.log(opporCode);
+						//					获得详情页面
+						console.log(detailPage);
+						if(!detailPage) {
+							detailPage = plus.webview.getWebviewById('opporDetail');
+						}
+						//触发详情页面的show事件
+						mui.fire(detailPage, 'show', opporCode);
+						//打开详情页面          
+						mui.openWindow({
+							id: 'opporDetail',
+							url: 'opportunity-detail.html',
+//							show: {
+//								aniShow: 'pop-in'
+//							},
+//							waiting: {
+//								autoShow: false
+//							}
+						});
+					})
+				}
+			})(mui, document);
 		</script>
 	</body>
 

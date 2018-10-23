@@ -17,9 +17,7 @@
 		var token = JSON.parse(localStorage.getItem('$state')).token;
 //		alert(token);
 //		var token = "08aaf0e7-e0a7-4736-b6e7-9747d3a0494e";
-		var page = common.baseOption.getUrlParam('page');
-		page = page>0?page:0;
-		params = {access_token:token,currentPage:page,pagesize:10};
+//		params = {access_token:token,currentPage:page,pagesize:pagesize};
 		console.log("customer flow list request33:"+JSON.stringify(params));
 		console.log(params);
 		console.log(JSON.stringify(params));

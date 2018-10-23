@@ -188,35 +188,42 @@
 			//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
 				mui.back = function() {
 					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
-//					plus.webview.currentWebview().close();
 				}
 				var opporCode = "";
 				var type = "";
 				var typeCode = ""; 
 				var name = ""; 
 				var mobile = ""; 
-//				if(!localStorage.getItem('$state')) {
-//					plus.nativeUI.toast('登陆过期，请重新登陆！');
-//					return;
-//				}
-				var username = JSON.parse(localStorage.getItem('$state')).username||'123456';
-				$.plusReady(function() {
-					window.addEventListener('showTitle', function(event) {
-						opporCode = event.detail.opporCode;
-						type = event.detail.type;
-						typeCode = event.detail.typeCode;
-						name = event.detail.name;
-						mobile = event.detail.mobile;
-						document.getElementById('mui-title').innerHTML = event.detail.type;
-						document.getElementById('inputMarketActivity').value = '';
-						document.getElementById('textarea').value = '';
-						if(typeCode == 'outsideActivity'||typeCode == 'inshop'||typeCode == 'quotation'){//店外活动,到店面谈,商谈报价
-							doc.getElementById('connectCustomer_row').classList.add('mui-hidden');
-						}else{
-							doc.getElementById('connectCustomer_row').classList.remove('mui-hidden');
-						}
-					});
-				})
+				var username = JSON.parse(localStorage.getItem('$state')).userName||'123456';
+				window.addEventListener('showTitle', function(event) {
+					opporCode = event.detail.opporCode;
+					type = event.detail.type;
+					typeCode = event.detail.typeCode;
+					name = event.detail.name;
+					mobile = event.detail.mobile;
+					document.getElementById('mui-title').innerHTML = event.detail.type;
+					document.getElementById('inputMarketActivity').value = '';
+					document.getElementById('textarea').value = '';
+					if(typeCode == 'outsideActivity'||typeCode == 'inshop'||typeCode == 'quotation'){//店外活动,到店面谈,商谈报价
+						doc.getElementById('connectCustomer_row').classList.add('mui-hidden');
+					}else{
+						doc.getElementById('connectCustomer_row').classList.remove('mui-hidden');
+					}
+				});
+				window.onload = function(){
+					$.plusReady(function() {
+						//右滑返回隐藏webview
+						plus.webview.currentWebview().setStyle({
+							'popGesture': 'hide'
+						});
+						//关闭等待框
+						plus.nativeUI.closeWaiting();
+						//显示当前页面
+//						mui.currentWebview.show();
+					})
+				}
+					
+				
 				
 //				2.如果在IOS上，触摸屏幕边缘也是可以关闭页面，造成问题同上，所以处理IOS要做以下处理。（写在b页面）
 //				mui.plusReady(function() {

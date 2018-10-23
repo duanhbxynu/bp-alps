@@ -12,11 +12,76 @@ html
     -webkit-text-size-adjust: 100%;
 }
 
-body
-{
-    margin: 0;
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+html,
+body {
+	font-family: PingFangSC-Regular;
+	font-size: 18px;
+	color: #333333;
+}
+i, cite, em, var, address, dfn,pre {
+	font-family: PingFangSC-Regular;
+    font-style: normal;
+}
+.clear:after {
+    content: "";
+    height: 0;
+    clear: both;
+    display: block;
+}
+.mui-bar,.mui-slider{
+	background-color: #FFFFFF;
+	box-shadow: none!important;
+}
+header .mui-action-back{
+	color: #212121!important;
 }
 
+
+.mui-title{
+	font-size: 18px!important;
+	color: #333333!important;
+}
+.mui-card{
+	box-shadow: none;
+	margin: 8px;
+}
+.mui-content>.mui-card:first-child{
+     margin-top: 8px; 
+}
+
+.mui-card .mui-card-header{
+	font-size: 15px;
+	color: #212121;
+	font-weight: 600;
+	padding:15px 20px;
+}
+.mui-card .mui-card-header span{
+	color: #C71B1E;
+}
+.mui-card .mui-card-header .mui-icon-arrowright{
+	font-size: 14px;
+	color: #333333;
+}
+
+
+.mui-card .mui-card-header:before{
+	height:24px;
+	width:2px;
+	box-shadow: 0 2px 4px 0 rgba(199,27,30,0.40);
+	position: absolute;
+	right: 0;
+	left: 0px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #C71B1E;
+}
 article,
 aside,
 details,

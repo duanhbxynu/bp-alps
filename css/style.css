@@ -193,3 +193,30 @@
 	border: 1px solid #cf2d28;
 	background-color: #cf2d28;
 }
+
+.deadline{
+	color: #618DF6;
+	margin-left: 18px;
+}
+.deadline:before{
+	height: 14px;
+	width: 14px;
+	position: absolute;
+	right: 0;
+	left: 15px;
+	content: '';
+	background-image: url(../../../images/clock.png);
+	background-size: 14px 14px;
+	margin-top:3px;
+}
+.deadline-right:before{
+	height: 14px;
+	width: 14px;
+	position: absolute;
+	right: 0;
+	left: 15px;
+	content: '';
+	background-image: url(../../../images/clock.png);
+	background-size: 14px 14px;
+	margin-top:3px;
+}

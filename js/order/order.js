@@ -31,7 +31,6 @@
 				console.log(type);
 				console.log("errorThrown");
 				console.log(errorThrown);
-				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(true);
 //				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
 //				common.baseOption.goToLogin();
 			}

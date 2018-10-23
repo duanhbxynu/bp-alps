@@ -11,6 +11,13 @@
 		<link href="../../css/reset.css" rel="stylesheet" />
 		<link href="../../css/style.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
+		<link href="../../css/pull-tips.css" rel="stylesheet" />
+		<style>
+			.mui-segmented-control-inverted{
+				box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+			}
+			
+		</style>
 	</head>
 
 	<body>
@@ -19,7 +26,7 @@
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
-						<a class="mui-control-item mui-active" data-index="0" data-orderType='wholeVehicle'>整车订单</a>
+						<a class="mui-control-item mui-active" id="wholeVehicleItem" data-index="0" data-orderType='wholeVehicle'>整车订单</a>
 						<a class="mui-control-item" data-index="1" data-orderType='increment'>增值订单</a>
 						<a class="mui-control-item" data-index="2">全部</a>
 					</div>
@@ -28,6 +35,7 @@
 					<div class="mui-slider-item mui-control-content">
 						<div id="pullrefresh" class="mui-scroll-wrapper">
 							<div class="mui-scroll mui-scroll-list">
+								<div id="cardList"></div>
 								<!--<div class="mui-card">
 									<div class="mui-card-header">
 										订单编号KL092034
@@ -124,35 +132,58 @@
 		<script>
 			mui.init({
 				swipeBack: false,
-				preloadPages: [{
-					id: 'wholeVehicleOrderDetail',
-					url: 'wholeVehicleOrder_detail_result.html'
-				}, {
-					id: 'incrementOrderDetail',
-					url: 'incrementOrder_detail_result.html'
-				}],
-				pullRefresh: {
-					container: '#pullrefresh',
-					down: {
-						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-						callback: pulldownRefresh
-					},
-					up: {
-						auto: true,
-						contentrefresh: '正在加载...',
-						contentnomore: '没有更多数据了',
-						callback: pullupRefresh
-					}
-				}
 			});
-
-			var count = 0;
-			var orderList;
 			var orderType = 'wholeVehicle';
 			var incrementDetailPage = null;
 			var wholeDetailPage = null;
+			document.addEventListener('showType',function(){
+				console.log('再次进入');
+				mui.trigger(document.getElementById('wholeVehicleItem'), 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-scroll>.mui-control-item.mui-active");
+				if (document.getElementById('wholeVehicleItem') !== current) {
+					current.classList.remove('mui-active');
+					document.getElementById('wholeVehicleItem').classList.add('mui-active');
+				}
+			})
+			//下拉刷新初始化动作	
+			if(mui.os.plus) {
+				mui.plusReady(function() {
+
+					setTimeout(function() {
+						console.log("第一次进入");
+						initPullToRefresh();
+					}, 1000);
+					//预加载页面mui.preload必须放在plusReady事件中
+					/*预加载详情页*/
+					wholeDetailPage = mui.preload({
+						id: 'wholeVehicleOrderDetail',
+						url: 'wholeVehicleOrder_detail_result.html'
+					})
+					/*预加载详情页*/
+					incrementDetailPage = mui.preload({
+						id: 'incrementOrderDetail',
+						url: 'incrementOrder_detail_result.html'
+					})
+
+				});
+			} else {
+				mui.ready(function() {
+					initPullToRefresh();
+				});
+				//				/*预加载详情页*/
+				wholeDetailPage = mui.preload({
+					id: 'wholeVehicleOrderDetail',
+					url: 'wholeVehicleOrder_detail_result.html'
+
+				})
+				//				/*预加载详情页*/
+				incrementDetailPage = mui.preload({
+					id: 'incrementOrderDetail',
+					url: 'incrementOrder_detail_result.html'
+
+				})
+			}
 
 			function qryOrderList() {
 				var params = {
@@ -160,7 +191,6 @@
 					pagesize: 10,
 					orderType: orderType
 				}
-
 				orderjs.qryOrderList(params, function(data) {
 					console.log("订单列表");
 					console.log(data);
@@ -181,28 +211,12 @@
 				});
 			}
 
-			function fillingData(pull, dataList) {
+			function createFragment(dataList) {
 				console.log(dataList);
-				var orderScroll = document.body.querySelector('.mui-scroll-list');
 				var orderCard = document.body.querySelectorAll('.mui-card-list');
-
-				if(pull == "pullup") {
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > Math.ceil(dataList.length / 10))); //参数为true代表没有更多数据了。
-				}
-
 				var listLen = dataList.length;
-				console.log("listLen=" + listLen);
-
-				var i = orderCard.length;
-				var len = null;
-				if((i + 10 > listLen) && (i - 10 < listLen)) {
-					len = listLen;
-				} else {
-					len = i + 10;
-				}
-				console.log(i);
-				console.log(len);
-				for(; i < len; i++) {
+				var fragment = document.createDocumentFragment();
+				for(var i = 0; i < listLen; i++) {
 					var card = document.createElement('div');
 					card.className = 'mui-card mui-card-list';
 					card.setAttribute("data-orderCode", dataList[i].code);
@@ -229,86 +243,92 @@
 							item += '<p class="clearfix"><span>订单类型</span><span class="reds">增值订单</span></p>';
 						}
 					}
-					//					item +='<p class="clearfix"><span>品牌</span><span>' + dataList[i].vehicleBrand + '</span></p>' +
-					//							'<p class="clearfix"><span>车系</span><span>' + dataList[i].vehicle + '</span></p>' +
-					//							'<p class="clearfix"><span>车型</span><span>' + dataList[i].carModel + '</span></p>' +
-					//							'<p class="clearfix"><span>订单类型</span><span class="reds">'+orderTypeValue + lineItemName + '</span></p>';
-					//							
 					item += '<p class="clearfix"><span>订单状态</span><span>' + dataList[i].orderStatus + '</span></p>' +
 						'<p class="clearfix"><span>订单金额</span><span class="reds">' + dataList[i].totalPrice + '</span></p>' +
 						'<p class="clearfix"><span>创建时间</span><span>' + dataList[i].creationtime + '</span></p></div>';
 					card.innerHTML = item;
-					console.log("=============line 123================");
-					console.log(card);
-					if(pull == "pullup") {
-						console.log("orderScroll.appendChild(card)");
-						orderScroll.appendChild(card);
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-					} else {
-						//下拉刷新，新纪录插到最前面；
-						console.log("下拉刷新，新纪录插到最前面");
-						orderScroll.insertBefore(card, orderScroll.firstChild);
-						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-					}
-					showOrderDetail();
-					console.log("=============index-order line 232================");
-					console.log(orderScroll);
+					console.log("=============index-order line 233================");
+					fragment.appendChild(card);
 				}
+				return fragment;
+			}
+			var pullToRefresh = null;
+			var count = 0;
+			var pagesize = 5;
+			var totalPage;
+
+			function initPullToRefresh() {
+				pullToRefresh = mui('#pullrefresh .mui-scroll').pullToRefresh({
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentinit: '上拉显示更多', //可以上拉提示信息
+						contentdown: '上拉显示更多', //上拉结束提示信息
+						contentrefresh: '正在加载...', //上拉进行中提示信息
+						contentnomore: '没有更多数据了', //上拉无更多信息时提示信息
+						callback: pullupRefresh
+					}
+				})
+				pullToRefresh.pullDownLoading();
 			}
 
 			function pullupRefresh() {
 
 				setTimeout(function() {
 					console.log("order --- pulluprefresh");
+					if(++count > totalPage - 1) {
+						pullToRefresh.endPullUpToRefresh(true);
+						return;
+					} else {
+						pullToRefresh.endPullUpToRefresh(false);
+					}
+					var orderScroll = document.body.querySelector('#cardList');
 					var params = {
-						currentPage: 0,
-						pagesize: 10,
+						currentPage: count,
+						pagesize: pagesize,
 						orderType: orderType
 					}
-					var orderScroll = document.body.querySelector('.mui-scroll-list');
 					orderjs.qryOrderList(params, function(data) {
 						console.log("订单列表");
 						console.log(data);
 						var data = JSON.parse(data);
 						console.log(data);
-
 						console.log("订单列表data.success" + data.success);
 						if(data.success) {
 							orderList = data.orderList;
-							console.log("qryOrderList252=====orderList");
 							console.log(orderList);
+							totalPage = data.totalPage;
 							if(!orderList) {
-								var libDiv = document.createElement('p');
-								libDiv.setAttribute("style", "font-size:18px;text-align: center;line-height: 100px;");
-								var item = "没有订单";
-								libDiv.innerHTML = item;
-								orderScroll.appendChild(libDiv);
-								mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+								pullToRefresh.endPullUpToRefresh(true);
 								return;
 							} else {
-								fillingData('pullup', orderList);
+								orderScroll.appendChild(createFragment(orderList));
+								if(totalPage<=1){
+									pullToRefresh.endPullUpToRefresh(true);
+									return;	
+								}
 							}
 						} else {
 
 							plus.nativeUI.toast(data.error);
 						}
 					});
-					//					fillingData('pullup', orderList);
-					mui('#pullrefresh').pullRefresh().refresh(true);
 
+					pullToRefresh.refresh(true);
+					showOrderDetail();
 				}, 500);
 			}
 
 			function pulldownRefresh() {
 
 				setTimeout(function() {
-					//					var orderList = qryOrderList();
+					var orderScroll = document.body.querySelector('#cardList');
 					var params = {
 						currentPage: 0,
-						pagesize: 10,
+						pagesize: pagesize,
 						orderType: orderType
 					}
-					var orderScroll = document.body.querySelector('.mui-scroll-list');
 					orderjs.qryOrderList(params, function(data) {
 						console.log("订单列表");
 						console.log(data);
@@ -317,33 +337,36 @@
 
 						console.log("订单列表data.success" + data.success);
 						if(data.success) {
+							//成功返回数据，
 							orderList = data.orderList;
-							console.log(JSON.stringify(orderList));
-							//1.清空原scroll下的子节点全部清空
+							console.log(orderList);
+							//1.清空原ul下的子节点全部清空
 							while(orderScroll.hasChildNodes()) {
 								console.log('清理列表数据...');
 								orderScroll.removeChild(orderScroll.firstChild);
 							}
-
+							count = 0;
+							//2.将数据前2条填充到列表中
 							if(!orderList) {
-								var libDiv = document.createElement('p');
-								libDiv.setAttribute("style", "font-size:18px;text-align: center;line-height: 100px;");
-								var item = "没有订单";
-								libDiv.innerHTML = item;
-								//下拉刷新，新纪录插到最前面；
-								console.log("下拉刷新，新纪录插到最前面");
-								orderScroll.insertBefore(libDiv, orderScroll.firstChild);
-								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+								pullToRefresh.endPullUpToRefresh(true);
+								return;
 							} else {
-								fillingData('pulldown', orderList);
+								orderScroll.appendChild(createFragment(orderList));
+								if(totalPage<=1){
+									pullToRefresh.endPullUpToRefresh(true);
+									return;	
+								}
 							}
 
+						} else if(data.messageCode == '403') { //token过期，重新登录
+							plus.nativeUI.toast(data.message);
+							common.baseOption.goToLogin();
 						} else {
-
-							plus.nativeUI.toast(data.error);
-
+							plus.nativeUI.toast(data.message);
 						}
 					});
+					pullToRefresh.refresh(true);
+					pullToRefresh.endPullDownToRefresh();
 					showOrderDetail();
 				}, 500);
 			}
@@ -355,8 +378,7 @@
 				deceleration: mui.os.ios ? 0.003 : 0.0009
 			});
 			mui('.mui-scroll').on('tap', '.mui-control-item', function() {
-				//					itemIndex = this.getAttribute('data-index');
-
+				console.log('模拟点击');
 				orderType = this.getAttribute('data-orderType');
 				console.log(orderType);
 				if(orderType == 'increment') {
@@ -364,51 +386,37 @@
 				} else {
 					mui.fire(plus.webview.getWebviewById('main'), 'addIcon', 'false');
 				}
-				mui('#pullrefresh').pullRefresh().pulldownLoading();
-				pulldownRefresh();
+				count = 0;
+				pullToRefresh.pullDownLoading();
 			});
-
-			//下拉刷新初始化动作	
-			if(mui.os.plus) {
-				mui.plusReady(function() {
-
-					setTimeout(function() {
-						mui('#pullrefresh').pullRefresh().pullupLoading();
-						console.log("第一次进入");
-					}, 1000);
-					//预加载页面mui.preload必须放在plusReady事件中
-					showOrderDetail();
-
-				});
-			} else {
-				mui.ready(function() {
-					mui('#pullrefresh').pullRefresh().pullupLoading();
-				});
-				/*预加载详情页*/
-
-				showOrderDetail();
-			}
 
 			function showOrderDetail() {
 				mui('.mui-scroll-wrapper').on('tap', '.mui-card-list', function() {
 					var orderCode = this.getAttribute("data-orderCode");
 					var creationtime = this.getAttribute("data-creationtime");
 					var orderType = this.getAttribute("data-orderType");
+					console.log(orderCode);
+
 					if(orderType == 'wholeVehicle') {
 						//获得详情页面
 						//触发详情页面的show事件
-						mui.fire(plus.webview.getWebviewById('wholeVehicleOrderDetail'), 'showWholeVehicle', {
+						if(!wholeDetailPage) {
+							wholeDetailPage = plus.webview.getWebviewById('wholeVehicleOrderDetail');
+						}
+						mui.fire(wholeDetailPage, 'showWholeVehicle', {
 							creationtime: creationtime,
 							orderCode: orderCode
 						});
 						//打开详情页面          
 						mui.openWindow({
-							id: 'wholeVehicleOrderDetail',
-							url: 'wholeVehicleOrder_detail_result.html'
+							id: 'wholeVehicleOrderDetail'
 						});
 					} else {
 						//触发详情页面的show事件
-						mui.fire(plus.webview.getWebviewById('incrementOrderDetail'), 'show', {
+						if(!incrementDetailPage) {
+							incrementDetailPage = plus.webview.getWebviewById('incrementOrderDetail');
+						}
+						mui.fire(incrementDetailPage, 'show', {
 							creationtime: creationtime,
 							orderCode: orderCode
 						});

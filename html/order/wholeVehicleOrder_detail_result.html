@@ -16,7 +16,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class="mui-icon mui-icon-more-filled mui-pull-right mui-icon-share"></a>
+			<a class="mui-icon mui-icon-more-filled mui-pull-right mui-icon-share" id="shareIcon"></a>
 			<h1 class="mui-title" id="mui-title">整车订单详情</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab tabBar">
@@ -199,23 +199,23 @@
 								<p class=""><span id="address"></span></p>
 							</li>
 							<comment id="operatorInfo" class="mui-hidden">
-							<p class="lines"></p>
-							<li class="mui-table-view-cell">
-								<label class="require">购车经办人</label>
-								<p><span id=""></span></p>
-							</li>
-							<li class="mui-table-view-cell">
-								<label class="require">经办人电话</label>
-								<p><span id=""></span></p>
-							</li>
-							<li class="mui-table-view-cell">
-								<label class="require">经办人证件类型</label>
-								<p><span id=""></span></p>
-							</li>
-							<li class="mui-table-view-cell">
-								<label class="require">经办人证件号码</label>
-								<p><span id=""></span></p>
-							</li>
+								<p class="lines"></p>
+								<li class="mui-table-view-cell">
+									<label class="require">购车经办人</label>
+									<p><span id=""></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">经办人电话</label>
+									<p><span id=""></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">经办人证件类型</label>
+									<p><span id=""></span></p>
+								</li>
+								<li class="mui-table-view-cell">
+									<label class="require">经办人证件号码</label>
+									<p><span id=""></span></p>
+								</li>
 							</comment>
 						</ul>
 					</li>
@@ -641,10 +641,7 @@
 				$.init({
 					preloadPages: [{
 						url: 'modify_wholeVehicleOrder.html',
-						id: 'modifyWholeVehicleOrder',
-						styles:{
-							bottom:'50px'
-						}
+						id: 'modifyWholeVehicleOrder'
 					}]
 				});
 				var aniShow = "pop-in";
@@ -661,19 +658,16 @@
 						aniShow = "slide-in-right";
 					}
 				}
-
-				$.plusReady(function() {
-
-					/*---------关闭滚动条------*/
-					plus.webview.currentWebview().setStyle({
-						scrollIndicator: 'none'
-					});
-				});
+				//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
+				mui.back = function() {
+					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
+				}
+				//2.如果在IOS上，触摸屏幕边缘也是可以关闭页面，造成问题同上，所以处理IOS要做以下处理。（写在b页面）
+				//				window.onload(function(){
 				template.config('escape', false);
-				//添加show自定义事件监听
+
 				var order = '';
 				var creationtime;
-
 				window.addEventListener('showWholeVehicle', function(event) {
 					creationtime = event.detail.creationtime;
 					var orderCode = event.detail.orderCode;
@@ -694,16 +688,57 @@
 					})
 
 				}, false);
+				// H5 plus事件处理
+		        function plusReady(){
+		            share.updateSerivces();
+		            if(plus.os.name=="Android"){
+		                var main = plus.android.runtimeMainActivity();
+		                var Intent = plus.android.importClass("android.content.Intent");
+		                var File = plus.android.importClass("java.io.File");
+		                var Uri = plus.android.importClass("android.net.Uri");
+		            }
+		        }
+				if(window.plus){
+		            plusReady();
+		        }else{
+		            document.addEventListener("plusready",plusReady,false);
+		        }
+				$.plusReady(function() {
+
+					/*---------关闭滚动条------*/
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+					//关闭等待框
+//					plus.nativeUI.closeWaiting();
+//					//显示当前页面
+//					plus.webview.currentWebview().show();
+					//这里的例子是每次进入都会重新加载数据，所以退出（退出以通过处理改为隐藏hide）需要清空页面加载的数据
+					var self = plus.webview.currentWebview();
+					//						self.addEventListener("hide", function(e) {
+					//					        //do something...  这里清空加载的数据
+					//					        var optionalView = template('optional-template', {
+					//								"order": ''
+					//							});
+					//							document.getElementById('optionalComment').innerHTML = optionalView;
+					//					    }, false);
+					//					    
+
+				});
+
+				//				})
 
 				function showOrderDetail(order) {
+					
+					doc.getElementById('orderCode').innerHTML = '订单编号'+order.code;
 					doc.getElementById('messages').setAttribute('data-orderCode', order.code);
-					if(order.status != "草稿") {
+					if(order.status != "新建") {
 						doc.getElementById('editOrder').classList.add('mui-disabled');
 					} else {
 						doc.getElementById('editOrder').classList.remove('mui-disabled');
 					}
 					console.log(order);
-					vehicle = common.baseOption.setCarLayer3Value(order.vehicleBrand,order.vehicle);
+					vehicle = common.baseOption.setCarLayer3Value(order.vehicleBrand, order.vehicle);
 					console.log("vehicle:" + JSON.stringify(vehicle));
 					mui.extend(order, vehicle);
 					vehicleModel = common.baseOption.setCarColorLayer3Value(order.carModel, order.carInsideColor, order.carColor)
@@ -716,23 +751,23 @@
 					if(!order.deliveryDate) {
 						order.deliveryDate = new Date().getFullYear() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getDay();
 					}
-					var baseInfoArr = ['lineItemName','totalPrice','deposit','deliveryDate','status','paymentStatus','deliveryStatus','creationtime'];
-					common.baseOption.setInnerHtml(order,baseInfoArr);
-					var customerArr = ['name','customerType','identityType','identityNumber','mobileNumber','address'];
-					common.baseOption.setInnerHtml(order.customer,customerArr);
-					if(order.customer.customerTypeCode == 'personal'){
+					var baseInfoArr = ['lineItemName', 'totalPrice', 'deposit', 'deliveryDate', 'status', 'paymentStatus', 'deliveryStatus', 'creationtime'];
+					common.baseOption.setInnerHtml(order, baseInfoArr);
+					var customerArr = ['name', 'customerType', 'identityType', 'identityNumber', 'mobileNumber', 'address'];
+					common.baseOption.setInnerHtml(order.customer, customerArr);
+					if(order.customer.customerTypeCode == 'personal') {
 						document.getElementById('operatorInfo').classList.add('mui-hidden');
-					}else{
+					} else {
 						document.getElementById('operatorInfo').classList.remove('mui-hidden');
 					}
-//					var baseView = template('orderBase-template', {
-//						"order": order
-//					});
-//					document.getElementById('orderBaseComment').innerHTML = baseView;
-//					var customerView = template('customer-template', {
-//						"customer": order.customer
-//					});
-//					document.getElementById('customerComment').innerHTML = customerView;
+					//					var baseView = template('orderBase-template', {
+					//						"order": order
+					//					});
+					//					document.getElementById('orderBaseComment').innerHTML = baseView;
+					//					var customerView = template('customer-template', {
+					//						"customer": order.customer
+					//					});
+					//					document.getElementById('customerComment').innerHTML = customerView;
 
 					var optionalView = template('optional-template', {
 						"order": order
@@ -757,8 +792,18 @@
 					});
 				})
 				mui('.mui-bar-nav').on('tap', '.mui-icon-more-filled', function() {
-					share.updateSerivces();
+					var currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
+					var msg={
+//						type:"web",
+//						title:currentUserName+"为您服务",
+						content:"您的订单已创建！",
+//						href:data.shareUrl,
+						thumbs:'../../images/logo.png'
+					};
+					share.shareHref(msg);
 				})
+				
+				
 
 			}(mui, document));
 		</script>

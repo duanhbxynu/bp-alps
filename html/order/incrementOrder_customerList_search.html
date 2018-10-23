@@ -265,11 +265,13 @@
 //					offCanvasWrapper.offCanvas('show');
 //				});
 				document.getElementById('customerSearchBtn').addEventListener('tap', function() {
+					mui('#offCanvasContentScroll').scroll().scrollTo(0,0);
 					showCustomerList();
 					offCanvasWrapper.offCanvas('close');
 					
 				});
 				document.getElementById('customerSearchCancelBtn').addEventListener('tap', function() {
+					mui('#offCanvasContentScroll').scroll().scrollTo(0,0);
 					offCanvasWrapper.offCanvas('close');
 				});
 				
@@ -309,6 +311,50 @@
 //						})
 //					})
 					showCustomerList();
+				})
+				function showCustomerList(){
+					var customerType = document.body.querySelector('.customerType-select .mui-selected').getAttribute('data-customerType');
+					var beforetimeKey = document.body.querySelector('.beforetimeKey-select .mui-selected').getAttribute('data-customerType');
+					var params = {
+						searchText:document.getElementById('searchText').value,
+						customerType:customerType,
+//						attribute:attribute,
+						beforetimeKey:beforetimeKey
+					}
+					increment.searchCustomer(params,function(data){
+						console.log("search user result:"+JSON.stringify(data));
+						console.log("--------------------------------------------------------------");
+					
+						if(data.success==true){
+							var customerList = data.customerList;
+							if(!customerList){
+								document.getElementById('createCustomer').classList.remove('mui-hidden');
+//								plus.nativeUI.toast('您查找的客户不存在，请重新输入查询条件！')
+//								return;
+								document.getElementById('customerList').innerHTML = '';
+								document.getElementById('offCanvasContentScroll').setAttribute('style','margin-bottom:0px!important');
+								
+								document.getElementById('footer').classList.add('mui-hidden');
+							}else{
+								document.getElementById('footer').classList.remove('mui-hidden');
+								document.getElementById('createCustomer').classList.add('mui-hidden');
+								document.getElementById('customerList').innerHTML = template('msg-template', {
+									"customerList": customerList
+								});
+								document.getElementById('offCanvasContentScroll').removeAttribute('style');
+							}
+						}
+					})
+					searchCar();
+				}
+				document.getElementById('createCustomer').addEventListener('tap', function() {
+					console.log(111);
+					mui.openWindow({
+						id: 'createCustomer', //b页面id
+						url: 'create_customer.html'
+					})
+				})
+				function searchCar(){
 					document.getElementById('nextStep').addEventListener('tap', function() {
 						var radioIsChecked = document.body.querySelector('input[type=radio]:checked');
 						if(!radioIsChecked) {
@@ -336,6 +382,7 @@
 						localStorage.setItem('customerItem', JSON.stringify(customerItem));
 //						console.log(JSON.parse(localStorage.getItem('customerItem')).customerId);
 //						console.log("line335 下一步");
+						//TODO 存储选中的客户信息
 						mui.openWindow({
 							id: 'searchCarList', //b页面id
 							url: 'incrementOrder_carList_search.html',
@@ -345,48 +392,7 @@
 							}
 						})
 					})
-					
-					
-				})
-				function showCustomerList(){
-					var customerType = document.body.querySelector('.customerType-select .mui-selected').getAttribute('data-customerType');
-					var beforetimeKey = document.body.querySelector('.beforetimeKey-select .mui-selected').getAttribute('data-customerType');
-					var params = {
-						searchText:document.getElementById('searchText').value,
-						customerType:customerType,
-//						attribute:attribute,
-						beforetimeKey:beforetimeKey
-					}
-					increment.searchCustomer(params,function(data){
-						console.log("search user result:"+JSON.stringify(data));
-						console.log("--------------------------------------------------------------");
-					
-						if(data.success==true){
-							var customerList = data.customerList;
-							if(!customerList){
-								document.getElementById('createCustomer').classList.remove('mui-hidden');
-//								plus.nativeUI.toast('您查找的客户不存在，请重新输入查询条件！')
-//								return;
-								document.getElementById('customerList').innerHTML = '';
-								
-								document.getElementById('footer').classList.add('mui-hidden');
-							}else{
-								document.getElementById('footer').classList.remove('mui-hidden');
-								document.getElementById('createCustomer').classList.add('mui-hidden');
-								document.getElementById('customerList').innerHTML = template('msg-template', {
-									"customerList": customerList
-								});
-							}
-						}
-					})
 				}
-				document.getElementById('createCustomer').addEventListener('tap', function() {
-					console.log(111);
-					mui.openWindow({
-						id: 'createCustomer', //b页面id
-						url: 'create_customer.html'
-					})
-				})
 
 			}(mui, document));
 		</script>
