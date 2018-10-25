@@ -426,6 +426,7 @@
 						opportunityCode :opporCode
 					}
 					follow.getOpporFollow(params,function(data){
+						console.log(JSON.stringify(data));
 						if(data.success==true) {
 							var followOpportunityList = data.followOpportunityList;
 							doc.getElementById('record_size').innerHTML = followOpportunityList.length;

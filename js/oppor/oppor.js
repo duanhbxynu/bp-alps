@@ -21,20 +21,11 @@
 			dataType: 'JSONP', //服务器返回json格式数据
 			contentType: 'application/json',
 			jsonp: 'callback',
-			//			crossDomain: true,//强制使用5+跨域
 			type: 'POST', //HTTP请求类型
-			//			timeout: 10000, //超时时间设置为10秒；
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
-			//			success: function(data){
-			//				console.log(data);
-			//				var data1 = JSON.parse(data);
-			//				console.log(data1);
-			//				console.log(data1.success);
-			//				console.log(data1.opportunityList);
-			//			},
 			error: function(xhr, type, errorThrown) {
 				console.log("xhr");
 				console.log(xhr);
@@ -62,11 +53,13 @@
 			type: "POST",
 			dataType: "jsonp",
 			jsonp: 'callback',
-			crossDomain: true, //强制使用5+跨域
 			data: params,
-			timeout: 1000, //超时时间设置为10秒；
 			success: callback,
 			error: function(xhr, textStatus, errorThrown) {
+				console.log(xhr);
+				console.log(textStatus);
+				console.log(errorThrown);
+				console.log(xhr.status);
 				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
 				//			   	common.baseOption.goToLogin();
 			}
@@ -85,9 +78,6 @@
 			type: "POST",
 			contentType: 'application/json',
 			dataType: "json",
-			//			jsonp:'callback',
-			//			crossDomain: true,//强制使用5+跨域
-			//			timeout: 1000, //超时时间设置为10秒；
 			data: JSON.stringify(params),
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
@@ -103,13 +93,12 @@
 	//创建意向
 	oppor.createOppor = function(params, callback) {
 		callback = callback || $.noop;
-		//		if(!localStorage.getItem('$state')) {
-		//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-		//			return;
-		//		}
-		//		var token = JSON.parse(localStorage.getItem('$state')).token;
-		var currentUser = JSON.parse(localStorage.getItem('$state')).username || '123456';
-
+		var currentUser = JSON.parse(localStorage.getItem('$state')).username;
+		if(!currentUser){
+			plus.nativeUI.toast('登录过期，请重新登录！');
+			common.baseOption.goToLogin();
+			return;
+		}
 		console.log("customer flow update request51:" + JSON.stringify(params));
 		console.log(params);
 		$.ajax(common.URL.getOpporDetail(), {

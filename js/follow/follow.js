@@ -8,21 +8,20 @@
 //			return;
 //		}
 //		var token = JSON.parse(localStorage.getItem('$state')).token;
-		//		var token = '7e6f7671-94dc-47bf-9f83-157691733a93';
+//				var token = '7e6f7671-94dc-47bf-9f83-157691733a93';
 
 		console.log("follow oppo list request:" + JSON.stringify(params));
 		console.log(params);
 		$.ajax(common.URL.getOpporFollow(), {
 			type: "POST",
 			dataType: "json",
-			//			contentType: 'application/json',
 			data: params,
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR);
+				console.log(jqXHR.statu);
 				console.log(textStatus);
 				console.log(errorThrown);
 				plus.nativeUI.toast(jqXHR);
@@ -65,7 +64,6 @@
 //		}
 //		var token = JSON.parse(localStorage.getItem('$state')).token;
 		console.log("follow append content request:" + JSON.stringify(params));
-		console.log("follow append content request:" + params);
 		$.ajax(common.URL.createFollow(), {
 			type: "POST",
 			dataType: "json",

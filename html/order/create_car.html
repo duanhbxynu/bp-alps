@@ -129,10 +129,10 @@
 					
 					
 					var values = {
-						customerId:localStorage.getItem('customerId'),
-						vehicleBrand:doc.getElementById('vehicleTypeCode').getAttribute("data-vehicleBrandCode"),
-						vehicleCategory:doc.getElementById('vehicleCategoryCode').getAttribute("data-vehicleCategoryCode"),
-						vehicle:doc.getElementById('vehicleCode').getAttribute("data-vehicleCode"),
+						customerId:JSON.parse(localStorage.getItem('customerItem')).customerId,
+						vehicleBrand:doc.getElementById('vehicleTypeCode').getAttribute("data-text"),
+						vehicleCategory:doc.getElementById('vehicleCategoryCode').getAttribute("data-text"),
+						vehicle:doc.getElementById('vehicleCode').getAttribute("data-text"),
 						purchaseYear:doc.getElementById('purchaseYear').value,
 						mileage:doc.getElementById('mileage').value,
 						licensePlateNumber:doc.getElementById('licensePlateNumber').value,
@@ -155,6 +155,7 @@
 							console.log("--------------------------------------------------------------");
 							if(data.success==true){
 								//TODO 增值页面 还是列表页面
+								plus.webview.currentWebview().opener().reload(true);
 								$.back();
 							}else if(data.messageCode == '403'){//token过期，重新登录
 								plus.nativeUI.toast(data.messageCode+"token过期，请重新登录！");
@@ -163,7 +164,7 @@
 						},
 						error: function(xhr, type, errorThrown) {
 							console.log("xhr");
-							console.log(xhr); 
+							console.log(xhr.status); 
 							console.log("type");
 							console.log(type);
 							console.log("errorThrown");

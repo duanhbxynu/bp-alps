@@ -9,26 +9,13 @@
 	 * */
 	lead.qryCustomerList = function(params,callback){
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		
-		var token = JSON.parse(localStorage.getItem('$state')).token;
-//		alert(token);
-//		var token = "08aaf0e7-e0a7-4736-b6e7-9747d3a0494e";
-//		params = {access_token:token,currentPage:page,pagesize:pagesize};
 		console.log("customer flow list request33:"+JSON.stringify(params));
-		console.log(params);
-		console.log(JSON.stringify(params));
 		var qryUrl = common.URL.customerFlowList();
 		console.log(qryUrl);
 		$.ajax(qryUrl, {
 			data: params,
 			dataType: 'json', //服务器返回json格式数据
-//			jsonp:'callback',
 			type: 'POST', //HTTP请求类型
-//			timeout: 1000, //超时时间设置为10秒；
 			success: callback,
 			error: function(xhr, type, errorThrown) {
 				console.log("xhr");
@@ -48,53 +35,68 @@
 	//获取到店详情
 	lead.getCustomerFlowDetail = function(customerflowId,callback){
 		callback = callback || $.noop;
-		var token = JSON.parse(localStorage.getItem('$state')).token;
-		var params = {access_token:token,code:customerflowId};
-		
+		var params = {access_token:common.baseOption.getToken(),code:customerflowId};
 		console.log("customer flow detail request:"+JSON.stringify(params));
 		$.ajax(common.URL.getCustomerFlowDetail(),{
 			type:"POST",
 			dataType:"json",
-//			jsonp:'callback',
-//			crossDomain: true,//强制使用5+跨域
 	        data: params,
-//	        timeout: 1000, //超时时间设置为10秒；
 			success: callback,
-		    error: function(xhr, textStatus, errorThrown){
-		    	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-		    	$.back();
-//			   	common.baseOption.goToLogin();
-		    }
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				//(默 认: 自动判断 (xml 或 html)) 请求失败时调用时间。
+				//参数有以下三个：XMLHttpRequest 对象、错误信息、（可选）捕获的错误对象。
+				//如果发生了错误，错误信息（第二个参数）除了得到null之外，
+				//还可能是"timeout", "error", "notmodified" 和 "parsererror"。
+				  
+				//textStatus: "timeout", "error", "notmodified" 和 "parsererror"。
+				 console.log(XMLHttpRequest.status);//0
+				 console.log(XMLHttpRequest.readyState);//4
+				 console.log(textStatus);//abort
+				 
+//				 error事件返回的第一个参数XMLHttpRequest：
+//					XMLHttpRequest.readyState: 状态码的意思
+//					0 － （未初始化）还没有调用send()方法
+//					1 － （载入）已调用send()方法，正在发送请求
+//					2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+//					3 － （交互）正在解析响应内容
+//					4 － （完成）响应内容解析完成，可以在客户端调用了
+			},
+			complete: function(XMLHttpRequest, textStatus) {
+//				 this; // 调用本次AJAX请求时传递的options参数
+			}
+//		    error: function(xhr, textStatus, errorThrown){
+//		    	console.log("customer flow detail result");
+//		    	console.log(xhr);
+//		    	console.log(textStatus);
+//		    	alert(xhr.status);
+//		    	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+//		    	$.back();
+////			   	common.baseOption.goToLogin();
+//		    }
 		});
 	}
 	//到店详情 保存
 	lead.updateCustomerDetail = function(params,callback){
 		callback = callback || $.noop;
-		if(!localStorage.getItem('$state')) {
-			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-			return;
-		}
-		var token = JSON.parse(localStorage.getItem('$state')).token;
-		params["access_token"]=token;
+//		params["access_token"]="common.baseOption.getToken()";
 		console.log("customer flow update request51:"+JSON.stringify(params));
-		console.log(params);
 		$.ajax(common.URL.updateCustomerFlow(),{
 			type:"POST",
 			contentType: 'application/json',
 			dataType:"json",
-//			jsonp:'callback',
-//			crossDomain: true,//强制使用5+跨域
-//			timeout: 1000, //超时时间设置为10秒；
 	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
-			    xhr.setRequestHeader("Authorization","Bearer " + token);
+			    xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
 			},
 			success: callback,
-			error: function(xhr, textStatus, errorThrown){
+			ajaxError: function(jqXHR, textStatus, errorThrown){
+				console.log('jqXHR');
+				console.log(JSON.stringify(jqXHR));
+////				console.log(xhr.readyState);
+//				console.log("error: " + data.responseText);
 				//TODO
-//			   	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
 //			   	common.baseOption.goToLogin();
-				$.back();
+//				$.back();
 			}
 		})
 	}
@@ -102,21 +104,12 @@
 	//创建意向
 	lead.checkOppor = function(params,callback){
 		callback = callback || $.noop;
-//		if(!localStorage.getItem('$state')) {
-//			plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-//			return;
-//		}
-//		var token = JSON.parse(localStorage.getItem('$state')).token;
 		var currentUser = JSON.parse(localStorage.getItem('$state')).username;
-		
 		console.log("customer flow update request51:"+JSON.stringify(params));
 		console.log(params);
 		$.ajax(common.URL.getOpporDetail(),{
 			type:"POST",
 			dataType:"json",
-//			jsonp:'callback',
-//			crossDomain: true,//强制使用5+跨域
-//			timeout: 1000, //超时时间设置为10秒；
 	        data: params,
 	        beforeSend: function (xhr) {
 			    xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());

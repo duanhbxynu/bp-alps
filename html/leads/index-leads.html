@@ -367,7 +367,7 @@
 			}
 			
 			var detailPage = null;
-			if (mui.os.plus) {
+//			if (mui.os.plus) {
 				mui.plusReady(function() {
 					setTimeout(function() {
 						initPullToRefresh();
@@ -383,18 +383,18 @@
 					showCustomerDetail();
 					
 				});
-			} else {
-				mui.ready(function() {
-					initPullToRefresh();
-//					mui('#pullrefresh').pullRefresh().pullupLoading();
-					/*预加载详情页*/
-					detailPage = mui.preload({
-						url:'instore-customerstream-detail.html',
-						id:'customerFlowDetail',//默认使用当前页面的url作为id
-					});
-					showCustomerDetail();
-				});
-			}
+//			} else {
+//				mui.ready(function() {
+//					initPullToRefresh();
+////					mui('#pullrefresh').pullRefresh().pullupLoading();
+//					/*预加载详情页*/
+//					detailPage = mui.preload({
+//						url:'instore-customerstream-detail.html',
+//						id:'customerFlowDetail',//默认使用当前页面的url作为id
+//					});
+//					showCustomerDetail();
+//				});
+//			}
 			
 			
 			

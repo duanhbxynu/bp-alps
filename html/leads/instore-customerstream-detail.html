@@ -270,16 +270,7 @@
 				}
 				//				var currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
 				//				var currentUserCode = JSON.parse(localStorage.getItem('$state')).userCode;
-				//添加show自定义事件监听
-				document.addEventListener('show', function(event) {
-					currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
-					currentUserCode = JSON.parse(localStorage.getItem('$state')).userCode;
-					var customerFlowId = event.detail;
-					if(customerFlowId){
-						showPage(customerFlowId);
-					}
-
-				}, false);
+				
 
 				var detailPage = "";
 				var mask = $.createMask(); //callback为用户点击蒙版时自动执行的回调；
@@ -292,6 +283,16 @@
 						plus.webview.currentWebview().setStyle({
 							scrollIndicator: 'none'
 						});
+						//添加show自定义事件监听
+						document.addEventListener('show', function(event) {
+							currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
+							currentUserCode = JSON.parse(localStorage.getItem('$state')).userCode;
+							var customerFlowId = event.detail;
+							if(customerFlowId){
+								showPage(customerFlowId);
+							}
+		
+						}, false);
 //						currentUserName = JSON.parse(localStorage.getItem('$state')).userName;
 //						currentUserCode = JSON.parse(localStorage.getItem('$state')).userCode;
 //						var self = plus.webview.currentWebview();
@@ -313,7 +314,8 @@
 					
 					lead.getCustomerFlowDetail(customerFlowId, function(data) {
 
-						//						var data = JSON.parse(data);
+						//var data = JSON.parse(data);
+						console.log(JSON.stringify(data));
 						if(data.success == true) {
 							var customerFlowList = data.customerFlowList;
 							if(customerFlowList) {
@@ -472,6 +474,8 @@
 					lead.updateCustomerDetail(paramsCustomer, function(data) {
 						if(data.success == true) {
 							console.log(111);
+						}else{
+							return plus.nativeUI.toast("客流保存有误！")
 						}
 					});
 					var name = document.getElementById('flow_name').value;
@@ -571,6 +575,7 @@
 					};
 					lead.updateCustomerDetail(params, function(data) {
 						//						var data = JSON.parse(data);
+						console.log(JSON.stringify(data));
 						if(data.success == true) {
 							//							alert(data.success);
 

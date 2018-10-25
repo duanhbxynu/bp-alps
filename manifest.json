@@ -17,6 +17,9 @@
 		"url": "http://www.dcloud.io"
 	},
 	"permissions": {
+		"XMLHttpRequest": {
+			"description": "跨域网络连接"
+		},
         "Cache": {
             "description": "管理应用缓存"
         },
