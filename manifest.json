@@ -298,6 +298,13 @@
 					"html/opportunity/modify-opportunity-bussinessinfo.html"
 				],
 				"priority": 0
+			},
+			"html/order/wholeVehicleOrder_detail_result.html": {
+				"resources": [],
+				"refer": [
+					"html/order/modify_wholeVehicleOrder.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
