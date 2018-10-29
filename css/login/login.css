@@ -44,23 +44,40 @@ body{
 	left: 0;
 	right: 0;
 }
+.login  .mui-input-group .mui-input-row:hover:after{
+	background: #212121;
+}
 .login  .mui-input-group .code label{
 	float: right;
 	height: 100%;
 	padding: 0;
 	background: rgba(216,216,216,0.54);
-	text-align: center;
+	text-align: right;
 	line-height: 45px;
 }
 .login  .mui-input-group button{
 	height: 44px;
 	margin-top: 26px;
-	background: #C71B1E;
+	background:  #C71B1E;
 	border-radius: 100px;
+	padding: 0;
+	border-color: transparent;
+	-webkit-appearance: none;
+}
+.login  .mui-input-group button textarea{
+	width:90%;
+	height:42px;
+	margin:0 auto;
+	-webkit-appearance: none;
+	-webkit-box-shadow: 0px 0px 30px 5px rgba(199,27,30, 0.28);
+    box-shadow: 0px 0px 30px 5px rgba(199,27,30, 0.28);
+    border-radius: 0px;
 	font-size: 17px;
 	color: #FFFFFF;
-	letter-spacing: 1.42px;
-	line-height: 14px;
+	text-align: center;   
+}
+.login .msgCode{
+	padding-top: 10px;
 }
 .login .msgCode a{
 	font-size: 15px;

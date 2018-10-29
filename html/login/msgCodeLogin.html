@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/login/login.css"/>
 	</head>
 
-	<body style="background: url(../../images/background.png) no-repeat;background-size: 100% 100%;">
+	<body style="background: url(../../images/background2.png) no-repeat;background-size: 100% 100%;height: 100%;position: absolute;">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		</header>
@@ -25,10 +25,10 @@
 				</div>
 				<div class="mui-input-row code">
 					<!--<label for="">获取验证码</label>-->
-					<label for="">重新获取(60)</label>
+					<label for="" style="text-align: center;">重新获取(60)</label>
 					<input type="text" placeholder="请输入验证码">
 				</div>
-				<button type="button" class="mui-btn mui-btn-block">登录</button>
+				<button type="button" class="mui-btn mui-btn-block"><textarea readonly>登录</textarea></button>
 			</form>
 			<div class="msgCode mui-clearfix">
 				<a href="#" style="float: right;">密码登录</a>
@@ -38,7 +38,9 @@
 			<img src="../../images/cars.png" alt="" />
 		</div>
 		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/common/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			$(document).ready(function () { $('body').css({'height':$(window).height()})});
 			mui.init()
 		</script>
 	</body>

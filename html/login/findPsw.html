@@ -10,12 +10,13 @@
 		<link rel="stylesheet" type="text/css" href="../../css/login/login.css"/>
 	</head>
 
-	<body style="background: url(../../images/findpsw.png) no-repeat;background-size: 100% 100%;">
-		<div class="logo">
-			<div></div>
-			<p>找回密码</p>
-		</div>
-		<div class="mui-content login findpsw">
+	<body>
+		<div style="background: url(../../images/findpsw.png) no-repeat;background-size: 100% 100%;height: 100%;position: absolute;">
+			<div class="logo">
+				<div></div>
+				<p>找回密码</p>
+			</div>
+			<div class="mui-content login findpsw">
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<input type="text" class="mui-input-clear" placeholder="请输入手机号">
@@ -29,15 +30,18 @@
 					<input type="password" placeholder="请输入新密码">
 				</div>
 				<p>建议使用字母、数字和符号两种及以上的组合，6-20个字符</p>
-				<button type="button" class="mui-btn mui-btn-block">登录</button>
+				<button type="button" class="mui-btn mui-btn-block"><textarea readonly>登录</textarea></button>
 			</form>
 		</div>
+		</div>
 		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/common/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init()
 //			mui.toast('请输入手机号');
 //			mui.toast('请填写正确的手机号');
 //			mui.toast('网络不给力，再试一次');
+			$(document).ready(function () { $('body').css({'height':$(window).height()})});
 		</script>
 	</body>
 
