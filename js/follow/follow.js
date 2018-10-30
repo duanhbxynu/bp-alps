@@ -21,7 +21,7 @@
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR.statu);
+				console.log(jqXHR.status);
 				console.log(textStatus);
 				console.log(errorThrown);
 				plus.nativeUI.toast(jqXHR);
@@ -37,20 +37,24 @@
 //			return;
 //		}
 //		var token = JSON.parse(localStorage.getItem('$state')).token;
-		//		var token = '7e6f7671-94dc-47bf-9f83-157691733a93';
+//				var token = '7e6f7671-94dc-47bf-9f83-157691733a93';
 
 		console.log("market activity request:" + JSON.stringify(params));
 		$.ajax(common.URL.getMarketactivity(), {
 			type: "POST",
 			dataType: "json",
+			async:'false',
 			contentType: 'application/json',
 			data: JSON.stringify(params),
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken() );
 			},
 			success: callback,
 			error: function(jqXHR, textStatus, errorThrown) {
-//				common.baseOption.goToLogin();
+				console.log(jqXHR.status);
+				console.log(textStatus);
+				console.log(errorThrown);
+				common.baseOption.goToLogin();
 				//location.href = baseConfig.baseUrl+baseConfig.login_page;
 			}
 		})

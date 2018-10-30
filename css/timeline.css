@@ -50,8 +50,9 @@
 				margin-left: 50px;
 				margin-top: 12px;
 				border: 1px solid #E4E4E4 ;
-				transform: scale(1,0.5);//scale(x,y) 对元素进行缩放 X表示水平方向缩放的倍数 | Y表示垂直方向的缩放倍数
-								Y是一个可选参数，没有设置的话，则表示X，Y两个方向的缩放倍数是一样的。并以X为准。
+				transform: scale(1,0.5);
+				/*scale(x,y) 对元素进行缩放 X表示水平方向缩放的倍数 | Y表示垂直方向的缩放倍数
+				Y是一个可选参数，没有设置的话，则表示X，Y两个方向的缩放倍数是一样的。并以X为准。*/
 			}
 			#progressBar .progressBar:nth-child(2){
 				position: absolute;
@@ -99,7 +100,7 @@
 				border: 1px solid #618DF6!important;
 				transform: scale(1,1)!important;			}
 			
-.timeline {
+			.timeline {
 			    margin: 0 0 16px;
 			    padding: 0;
 			    position: relative;

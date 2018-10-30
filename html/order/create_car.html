@@ -42,7 +42,7 @@
 						</span>
 						<!--<input id="vehicleCategory" type="text" class="mui-input-clear vehicleCategory" placeholder="请输入车系" value="">-->
 					</div>
-					<div class="mui-input-row mui-select-row car">
+					<div class="mui-input-row mui-select-row car overflow-row">
 						<label class="require">车型</label>
 						<span class="mui-select vehicle" data-desc="车系" id="vehicleCode">
 							请选择车系
@@ -130,9 +130,9 @@
 					
 					var values = {
 						customerId:JSON.parse(localStorage.getItem('customerItem')).customerId,
-						vehicleBrand:doc.getElementById('vehicleTypeCode').getAttribute("data-text"),
-						vehicleCategory:doc.getElementById('vehicleCategoryCode').getAttribute("data-text"),
-						vehicle:doc.getElementById('vehicleCode').getAttribute("data-text"),
+						vehicleBrandCode:doc.getElementById('vehicleTypeCode').getAttribute("data-value"),
+						vehicleCategoryCode:doc.getElementById('vehicleCategoryCode').getAttribute("data-value"),
+						vehicleCode:doc.getElementById('vehicleCode').getAttribute("data-value"),
 						purchaseYear:doc.getElementById('purchaseYear').value,
 						mileage:doc.getElementById('mileage').value,
 						licensePlateNumber:doc.getElementById('licensePlateNumber').value,

@@ -360,7 +360,7 @@
 					console.log(baseOpportunity);
 					console.log(JSON.stringify(baseOpportunity));
 					oppor.updateOpporDetail(baseOpportunity, function(data) {
-						console.log(data);
+						console.log(JSON.stringify(data));
 						console.log(data.success);
 						if(data.success == true) {
 							common.baseOption.toIndex(1);

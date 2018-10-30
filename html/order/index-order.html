@@ -185,36 +185,37 @@
 				})
 			}
 
-			function qryOrderList() {
-				var params = {
-					currentPage: 0,
-					pagesize: 10,
-					orderType: orderType
-				}
-				orderjs.qryOrderList(params, function(data) {
-					console.log("订单列表");
-					console.log(data);
-					var data = JSON.parse(data);
-					console.log(data);
-
-					console.log("订单列表data.success " + data.success);
-					if(data.success) {
-						orderList = data.orderList;
-						console.log("qryOrderList163=====orderList");
-						console.log(orderList);
-						console.log(JSON.stringify(orderList));
-						return JSON.stringify(orderList);
-					} else {
-
-						plus.nativeUI.toast(data.error);
-					}
-				});
-			}
+//			function qryOrderList() {
+//				var params = {
+//					currentPage: 0,
+//					pagesize: pagesize,
+//					orderType: orderType
+//				}
+//				orderjs.qryOrderList(params, function(data) {
+//					console.log("订单列表");
+//					console.log(data);
+//					var data = JSON.parse(data);
+//					console.log(data);
+//
+//					console.log("订单列表data.success " + data.success);
+//					if(data.success) {
+//						orderList = data.orderList;
+//						console.log("qryOrderList163=====orderList");
+//						console.log(orderList);
+//						console.log(JSON.stringify(orderList));
+//						return JSON.stringify(orderList);
+//					} else {
+//
+//						plus.nativeUI.toast(data.error);
+//					}
+//				});
+//			}
 
 			function createFragment(dataList) {
 				console.log(dataList);
 				var orderCard = document.body.querySelectorAll('.mui-card-list');
 				var listLen = dataList.length;
+				console.log("listLen = "+listLen);
 				var fragment = document.createDocumentFragment();
 				for(var i = 0; i < listLen; i++) {
 					var card = document.createElement('div');
@@ -254,7 +255,7 @@
 			}
 			var pullToRefresh = null;
 			var count = 0;
-			var pagesize = 5;
+			var pagesize = 10;
 			var totalPage;
 
 			function initPullToRefresh() {
@@ -276,13 +277,15 @@
 			function pullupRefresh() {
 
 				setTimeout(function() {
-					console.log("order --- pulluprefresh");
+					console.log("======order --- pulluprefresh---start========");
+					console.log("totalPage="+totalPage);
 					if(++count > totalPage - 1) {
 						pullToRefresh.endPullUpToRefresh(true);
 						return;
 					} else {
 						pullToRefresh.endPullUpToRefresh(false);
 					}
+					console.log("======order --- pulluprefresh---end========");
 					var orderScroll = document.body.querySelector('#cardList');
 					var params = {
 						currentPage: count,
@@ -334,12 +337,12 @@
 						console.log(data);
 						var data = JSON.parse(data);
 						console.log(data);
-
+						totalPage = data.totalPage;
 						console.log("订单列表data.success" + data.success);
 						if(data.success) {
 							//成功返回数据，
 							orderList = data.orderList;
-							console.log(orderList);
+							
 							//1.清空原ul下的子节点全部清空
 							while(orderScroll.hasChildNodes()) {
 								console.log('清理列表数据...');
@@ -387,6 +390,7 @@
 					mui.fire(plus.webview.getWebviewById('main'), 'addIcon', 'false');
 				}
 				count = 0;
+				mui('.mui-scroll-wrapper').scroll()[1].scrollTo(0,0,100);
 				pullToRefresh.pullDownLoading();
 			});
 

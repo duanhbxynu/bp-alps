@@ -84,6 +84,7 @@
 			type:"POST",
 			contentType: 'application/json',
 			dataType:"json",
+			async:false, 
 	        data: JSON.stringify(params),
 	        beforeSend: function (xhr) {
 			    xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());

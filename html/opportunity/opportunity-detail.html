@@ -328,7 +328,7 @@
 						<div class="mui-input-row" >
 							<label>备注 </label>
 						</div>
-						<textarea id="textarea" rows="2" placeholder="多行文本框">1111</textarea>
+						<textarea id="textarea" rows="2" placeholder=""></textarea>
 		         </div> 
 				<div class="mui-button-row">
 					<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-outlined-sm" id="btn_cancel">取消</button>
@@ -344,6 +344,7 @@
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/oppor/oppor.js"></script>
+		<script src="../../js/common/common-picker.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init({
@@ -495,7 +496,7 @@
 				});
 				//modal 提交
 				doc.getElementById("btn_modal_create").addEventListener('tap', function(event) {
-					plus.nativeUI.toast("提交成功");
+//					plus.nativeUI.toast("提交成功");
 					if (doc.getElementById("modal")) {
 						event.detail.gesture.preventDefault(); //fixed hashchange
 						doc.getElementById("modal").classList.remove('mui-active');

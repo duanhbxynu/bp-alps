@@ -128,11 +128,11 @@ var productList = [{
 	children:[{
 		value:"B0001_B",
 		text:"黑",
-		price:300000
+		price:301013
 	},{
 		value:"B0001_W",
 		text:"白",
-		price:310000
+		price:301014
 	}]
 },{
 	id:"f22",
@@ -141,11 +141,11 @@ var productList = [{
 	children:[{
 		value:"B0002_B",
 		text:"黑",
-		price:350000
+		price:301015
 	},{
 		value:"B0002_W",
 		text:"白",
-		price:400000
+		price:301016
 	}]
 },{
 	id:"G30",
@@ -154,71 +154,76 @@ var productList = [{
 	children:[{
 		value:"B0003_B",
 		text:"黑",
-		price:350000
+		price:301017
 	},{
 		value:"B0003_W",
 		text:"白",
-		price:350000
+		price:301018
 	}]
 },{
 	id:"a7",
 	value:"A0002",
-	text:"Limousine 运动型",
+	text:"Limousine 40 TFSI 运动型",
 	children:[{
 		value:"A0002_B",
 		text:"黑",
-		price:450000
+		price:301005
 	},{
 		value:"A0002_W",
 		text:"白",
-		price:450000
+		price:301006
 	}]
 },{
 	id:"s3",
 	value:"A0004",
-	text:"Plus 风尚型",
+	text:"Plus 40 TFSI 风尚型",
 	children:[{
 		value:"A0004_B",
 		text:"黑",
-		price:400000
+		price:301009
 	},{
 		value:"A0004_W",
 		text:"白",
-		price:400000
+		price:301010
 	}]
 },{
 	id:"s5",
 	value:"A0005",
-	text:"Plus 风尚型",
+	text:"Plus 45 TFSI quattro 风尚型",
 	children:[{
+		value:"A0005_B",
+		text:"黑",
+		price:301011
+	},
+	{
 		value:"A0005_W",
 		text:"白",
-		price:400000
+		price:301012
 	}]
 },{
 	id:"a8",
 	value:"A0003",
-	text:"Sportback 风尚型",
+	text:"Sportback 40 TFSI 风尚型",
 	children:[{
 		value:"A0003_B",
 		text:"黑",
-		price:400000
+		price:301007
 	},{
 		value:"A0003_W",
 		text:"白",
-		price:410000
+		price:301008
 	}]
 },{
 	id:"a6",
 	value:"A0001",
-	text:"TFSI 风尚版",
+	text:"TFSI Sportback Design风尚版",
 	children:[{
 		value:"A0001_B",
 		text:"黑",
-		price:300000
+		price:301003
 	},{
 		value:"A0001_W",
 		text:"白",
-		price:310000
+		price:301002
 	}]
 }]

@@ -240,7 +240,7 @@
 		pickers.setData(industryData);
 		pickers.show(function(items) {
 			picker.innerHTML = items[0].text;
-			picker.setAttribute('data-value',items[0].text);
+			picker.setAttribute('data-text',items[0].text);
 			picker.setAttribute('data-value',items[0].value);
 
 			//返回 false 可以阻止选择框的关闭
@@ -253,7 +253,7 @@
 		pickers.setData(educationData);
 		pickers.show(function(items) {
 			picker.innerHTML = items[0].text;
-			picker.setAttribute('data-value',items[0].text);
+			picker.setAttribute('data-text',items[0].text);
 			picker.setAttribute('data-value',items[0].value);
 
 			//返回 false 可以阻止选择框的关闭
@@ -266,7 +266,7 @@
 		pickers.setData(workTypeData);
 		pickers.show(function(items) {
 			picker.innerHTML = items[0].text;
-			picker.setAttribute('data-value',items[0].text);
+			picker.setAttribute('data-text',items[0].text);
 			picker.setAttribute('data-value',items[0].value);
 
 			//返回 false 可以阻止选择框的关闭
@@ -280,7 +280,7 @@
 		pickers.setData(maritalStatusData);
 		pickers.show(function(items) {
 			picker.innerHTML = items[0].text;
-			picker.setAttribute('data-value',items[0].text);
+			picker.setAttribute('data-text',items[0].text);
 			picker.setAttribute('data-value',items[0].value);
 
 			//返回 false 可以阻止选择框的关闭
@@ -293,7 +293,7 @@
 		pickers.setData(numberOfChildrenData);
 		pickers.show(function(items) {
 			picker.innerHTML = items[0].text;
-			picker.setAttribute('data-value',items[0].text);
+			picker.setAttribute('data-text',items[0].text);
 			picker.setAttribute('data-value',items[0].value);
 
 			//返回 false 可以阻止选择框的关闭
@@ -306,7 +306,7 @@
 		pickers.setData(numberOfFamilyData);
 		pickers.show(function(items) {
 			picker.innerHTML = items[0].text;
-			picker.setAttribute('data-value',items[0].text);
+			picker.setAttribute('data-text',items[0].text);
 			picker.setAttribute('data-value',items[0].value);
 
 			//返回 false 可以阻止选择框的关闭
@@ -353,8 +353,14 @@
 			document.getElementsByClassName("financeCompany")[0].innerHTML = SelectedItem[0].text;
 		});
 	});
-	
-	
+	//战败原因
+	mui(".popover-group").on('tap','#failReasonPicker',function(){				
+		financePicker.setData(failReason);
+		financePicker.show(function(SelectedItem) {
+			document.getElementById("failReasonPicker").setAttribute("data-value",SelectedItem[0].text);
+			document.getElementById("failReasonPicker").innerHTML = SelectedItem[0].text;
+		});
+	});
 	
 	/*年份*/
 	mui(".mui-select-row").on('tap', '.year', function() {

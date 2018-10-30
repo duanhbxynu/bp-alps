@@ -12,7 +12,7 @@ var pathwx = "http://192.168.2.18/wx/";
 //var pathwx ="http://192.168.3.8/wx/"; 
 var common = {
 	baseClientParameter: {
-		client_id: "smartedit",
+		client_id: "salesApp",
 		grant_type: "password",
 		client_secret: ""
 	},
@@ -72,9 +72,11 @@ var common = {
 		},
 		resetOptionHtml:function (targetArr){
 			mui.each(targetArr,function(i,item){
-				document.getElementById(item.target).innerHTML = "请选择"+item.targethtml;
-				document.getElementById(item.target).setAttribute('data-value','');
-				document.getElementById(item.target).setAttribute('data-text','');
+				if(document.getElementById(item.target)){
+					document.getElementById(item.target).innerHTML = "请选择"+item.targethtml;
+					document.getElementById(item.target).setAttribute('data-value','');
+					document.getElementById(item.target).setAttribute('data-text','');
+				}
 			})
 		},
 		setTextValue:function(attrList, excludeList) {

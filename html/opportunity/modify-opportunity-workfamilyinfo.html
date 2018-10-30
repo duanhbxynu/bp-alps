@@ -366,7 +366,7 @@
 					console.log(baseOpportunity);
 					console.log(JSON.stringify(baseOpportunity));
 					oppor.updateOpporDetail(baseOpportunity, function(data) {
-						console.log(data);
+						console.log(JSON.stringify(data));
 						console.log(data.success);
 						if(data.success == true) {
 //							plus.webview.getWebviewById('oppor-baseinfo').reload(true);
@@ -389,11 +389,11 @@
 				function openOpporList() {
 					//					var indexOppor = plus.webview.getWebviewById("opportunity/index-opportunity.html").opener();
 					// 获取所有Webview窗口
-					var wvs = plus.webview.all();
-					for(var i = 0; i < wvs.length; i++) {
-						console.log('webview' + i + ': ' + wvs[i].getURL());
-						console.log('webview' + i + ': ' + wvs[i].id);
-					}
+//					var wvs = plus.webview.all();
+//					for(var i = 0; i < wvs.length; i++) {
+//						console.log('webview' + i + ': ' + wvs[i].getURL());
+//						console.log('webview' + i + ': ' + wvs[i].id);
+//					}
 					var current = plus.webview.currentWebview();
 					console.log('current: ' + current.getURL());
 					console.log('current: ' + current.id);

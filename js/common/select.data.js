@@ -1154,4 +1154,17 @@ var orderStatus = [
 	value: "已作废",
 	text: "已作废"
 }]
+var failReason = [{
+	value:'1',
+	text:'价格'
+},{
+	value:'2',
+	text:'竞品'
+},{
+	value:'3',
+	text:'放弃购买'
+},{
+	value:'4',
+	text:'其他'
+}]
 

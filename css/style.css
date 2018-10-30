@@ -220,3 +220,11 @@
 	background-size: 14px 14px;
 	margin-top:3px;
 }
+.overflow-row{
+	height: auto!important;
+}
+.overflow-row .vehicle{
+	width: 55%!important;
+	white-space:normal;
+	text-align: right;
+}
