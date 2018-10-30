@@ -1,3 +1,11 @@
+*{
+  -webkit-touch-callout:none; /*系统默认菜单被禁用*/
+  -webkit-user-select:none; /*webkit浏览器*/
+  -khtml-user-select:none; /*早期浏览器*/
+  -moz-user-select:none;/*火狐*/
+  -ms-user-select:none; /*IE10*/
+  user-select:none;
+}
 html{
 	height: 100%;
 	width: 100%;
@@ -64,17 +72,22 @@ body{
 	border-color: transparent;
 	-webkit-appearance: none;
 }
+.login  .mui-input-group button:active{
+	background-color: #a31d19 !important;
+}
 .login  .mui-input-group button textarea{
-	width:90%;
+	width:100%;
 	height:42px;
 	margin:0 auto;
 	-webkit-appearance: none;
 	-webkit-box-shadow: 0px 0px 30px 5px rgba(199,27,30, 0.28);
     box-shadow: 0px 0px 30px 5px rgba(199,27,30, 0.28);
-    border-radius: 0px;
+    border-radius: 100px;
 	font-size: 17px;
 	color: #FFFFFF;
-	text-align: center;   
+	text-align: center; 
+	background: transparent;  
+	-webkit-user-select: none;
 }
 .login .msgCode{
 	padding-top: 10px;
