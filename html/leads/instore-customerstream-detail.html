@@ -514,20 +514,23 @@
 							//location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"&id="+opportunity.code);
 							} else {
 								//3.查询到其他销售顾问名下的未完结意向	
+								var backdrop = document.createElement('div');
+								backdrop.className = 'mui-backdrop mui-active';
+								document.body.appendChild(backdrop);
 								document.getElementById("modal").classList.add('mui-active');
 								document.getElementById("btn_edit_modal").classList.remove('mui-hidden');
 								document.getElementById("btn_continue_modal").classList.add('mui-hidden');
-								document.getElementById("modal").setAttribute('style', 'min-height: auto;')
+								document.getElementById("modal").setAttribute('style', 'min-height: 0;');
 								//var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
 								document.getElementById('oppor_code').setAttribute('data-opporcode', opportunity.code);
 								document.getElementById('oppor_code').innerHTML = '意向编号<span>' + opportunity.code + '</span>';
 								document.getElementById('oppor_name').innerHTML = '客户姓名<span>' + opportunity.name + '</span>';
 								document.getElementById('oppor_sales').innerHTML = '销售人员<span>' + opportunity.createdPerson + '</span>';
 								//								document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
-								if(!mask){
-									mask = $.createMask();
-								}
-								mask.show(); //显示遮罩
+//								if(!mask){
+//									mask = $.createMask();
+//								}
+//								mask.show(); //显示遮罩
 							}
 						} else {
 							//1.未查询到本人名下存在未完结意向,允许直接创建新的意向,将客流的姓名，性别，电话自动带入意向维护页面
@@ -652,21 +655,24 @@
 				})
 				
 				function openOpporDetailPage(code,oppor){
+					var backdrop = document.createElement('div');
+					backdrop.className = 'mui-backdrop mui-active';
+					document.body.appendChild(backdrop);
 					document.getElementById("modal").classList.add('mui-active');
 					document.getElementById("btn_edit_modal").classList.add('mui-hidden');
 					document.getElementById("btn_continue_modal").classList.remove('mui-hidden');
-					document.getElementById("modal").setAttribute('style', 'min-height: auto;')
+					document.getElementById("modal").setAttribute('style', 'min-height: 0;');
 						//						var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
 					document.getElementById('oppor_code').setAttribute('data-opporcode', oppor.code);
 					document.getElementById('oppor_code').innerHTML = '意向编号<span>' + oppor.code + '</span>';
 					document.getElementById('oppor_name').innerHTML = '客户姓名<span>' + oppor.name + '</span>';
 					document.getElementById('oppor_sales').innerHTML = '销售人员<span>' + currentUserName + '</span>';
 						//						document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
-						
-					if(!mask){
-						mask = $.createMask();
-					}
-					mask.show(); //显示遮罩
+					
+//					if(!mask){
+//						mask = $.createMask();
+//					}
+//					mask.show(); //显示遮罩
 				}
 
 				function openAddOpporPage(flowToOppor) {
@@ -705,15 +711,24 @@
 
 				}
 
-				doc.getElementById('btn_cancel_continue').addEventListener('tap', function() {
+				doc.getElementById('btn_cancel_continue').addEventListener('tap', function(event) {
+					if(event.detail){
+						console.log("event.detail="+event.detail.gesture);
+						event.detail.gesture.preventDefault(); //fixed hashchange
+					}
 					document.getElementById("modal").classList.remove('mui-active');
 					document.getElementById("modal").removeAttribute('style');
-					mask.close(); //显示遮罩
+					document.body.removeChild(document.body.querySelector('.mui-backdrop'));
+//					mask.close(); //显示遮罩
 				})
-				doc.getElementById('btn_cancel_permissions').addEventListener('tap', function() {
+				doc.getElementById('btn_cancel_permissions').addEventListener('tap', function(event) {
+					if(event.detail.gesture){
+						event.detail.gesture.preventDefault(); //fixed hashchange
+					}
 					document.getElementById("modal").classList.remove('mui-active');
 					document.getElementById("modal").removeAttribute('style');
-					mask.close(); //显示遮罩
+					document.body.removeChild(document.body.querySelector('.mui-backdrop'));
+//					mask.close(); //显示遮罩
 				})
 				doc.getElementById('btn_get_permissions').addEventListener('tap', function() {
 					mui.trigger(doc.getElementById("btn_cancel_permissions"),'tap');
