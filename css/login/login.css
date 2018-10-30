@@ -64,13 +64,15 @@ body{
 	line-height: 45px;
 }
 .login  .mui-input-group button{
-	height: 44px;
-	margin-top: 26px;
+	height: 48px;
+	margin-top: 40px;
 	background:  #C71B1E;
 	border-radius: 100px;
 	padding: 0;
+	padding-top: 3px;
 	border-color: transparent;
 	-webkit-appearance: none;
+	z-index: 1;
 }
 .login  .mui-input-group button:active{
 	background-color: #a31d19 !important;
@@ -90,7 +92,7 @@ body{
 	-webkit-user-select: none;
 }
 .login .msgCode{
-	padding-top: 10px;
+	padding-top: 6px;
 }
 .login .msgCode a{
 	font-size: 15px;
