@@ -20,7 +20,7 @@
 			<h1 class="mui-title" id="mui-title">整车订单详情</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab tabBar">
-			<a class="mui-tab-item mui-disabled" href="#" id="editOrder">
+			<a class="mui-tab-item" href="#" id="editOrder">
 				<span class="mui-icon"></span>
 				<span class="mui-tab-label">编辑</span>
 			</a>
@@ -732,11 +732,11 @@
 					
 					doc.getElementById('orderCode').innerHTML = '订单编号'+order.code;
 					doc.getElementById('messages').setAttribute('data-orderCode', order.code);
-					if(order.status != "新建") {
-						doc.getElementById('editOrder').classList.add('mui-disabled');
-					} else {
-						doc.getElementById('editOrder').classList.remove('mui-disabled');
-					}
+//					if(order.status != "新建") {
+//						doc.getElementById('editOrder').classList.add('mui-disabled');
+//					} else {
+//						doc.getElementById('editOrder').classList.remove('mui-disabled');
+//					}
 					console.log(order);
 					vehicle = common.baseOption.setCarLayer3Value(order.vehicleBrand, order.vehicle);
 					console.log("vehicle:" + JSON.stringify(vehicle));

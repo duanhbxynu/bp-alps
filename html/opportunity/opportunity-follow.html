@@ -14,33 +14,37 @@
 		<link href="../../css/popover.css" rel="stylesheet" />
 		<style>
 			.radio-single-list .mui-radio:last-child {
-			    padding-left: 0px!important; 
+				padding-left: 0px!important;
 			}
-			.mui-input-row label~.radio-list{
+			
+			.mui-input-row label~.radio-list {
 				padding-right: 20px;
 			}
 			
-			.mui-input-row label{
+			.mui-input-row label {
 				padding-right: 0px;
 			}
-			.mui-input-row .mui-icon-search{
+			
+			.mui-input-row .mui-icon-search {
 				display: inline!important;
 				width: 10%!important;
 				font-size: 18px;
 			}
-			.mui-input-row label~.market-activity-search{
-			    width: 55%;
-			    padding-right: 20px;
-			    /*padding-top: 15px;
+			
+			.mui-input-row label~.market-activity-search {
+				width: 55%;
+				padding-right: 20px;
+				/*padding-top: 15px;
 			    padding-bottom: 15px;*/
-			    font-size: 14px;
-			    text-align: right;
-			    line-height: 20px;
-			    float: right;
-			    margin-bottom: 10px;
-			    margin-top: 10px;
+				font-size: 14px;
+				text-align: right;
+				line-height: 20px;
+				float: right;
+				margin-bottom: 10px;
+				margin-top: 10px;
 			}
-			.market-activity-search input[type=text]{
+			
+			.market-activity-search input[type=text] {
 				height: 30px;
 				margin-bottom: 0px;
 				padding-left: 0px;
@@ -48,35 +52,36 @@
 				font-size: 14px;
 				width: calc(100% - 30px);
 				padding-top: 0px;
-			    padding-bottom: 0px;
-			    line-height: 20px!important;
-			    border: 0px;
-			    text-align: right;
-				
+				padding-bottom: 0px;
+				line-height: 20px!important;
+				border: 0px;
+				text-align: right;
 			}
+			
 			.mui-icon-clear {
-			    font-size: 20px;
-			    position: absolute;
-			    z-index: 1;
-			    top: 10px;
-			    right:38px!important;
-			    width: 18px!important;
-			    height: 18px!important;
-			    text-align: center;
-			    color: #999;
-		    }
-		    #middlePopover {
+				font-size: 20px;
+				position: absolute;
+				z-index: 1;
+				top: 10px;
+				right: 38px!important;
+				width: 18px!important;
+				height: 18px!important;
+				text-align: center;
+				color: #999;
+			}
+			
+			#middlePopover {
 				position: fixed;
-				top: 200px;
+				/*top: 200px;*/
 				margin-right: 18px;
 				left: auto;
 			}
+			
 			.mui-popover .mui-popover-arrow {
-				left: 90%;
-				/*left:calc(95% - 20px)!important;*/
+				left:calc(100% - 33px)!important;
+				left:-moz-calc(100% - 33px)!important;
+				left:-webkit-calc(100% - 33px)!important;
 			}
-			
-			
 		</style>
 
 	</head>
@@ -91,79 +96,71 @@
 			<div class="mui-card leads-scroll leads-detail-scroll">
 				<div class="mui-card-header">跟进录入</div>
 				<div class="mui-card-content">
-					<div class="mui-input-row" id="connectCustomer_row"> 
+					<div class="mui-input-row" id="connectCustomer_row">
 						<label>电话是否接通 </label>
 						<div class="radio-list radio-single-list" id="connectCustomer" data-value="true">
-						        <div class="mui-radio mui-left active" data-value="true">
-									<label>是</label>
-								</div>
-								<div class="mui-radio mui-left" data-value="false">
-									<label>否</label>
-								</div>
-					       </div>
-					</div>
-					<!--<div class="market-activity">
-						<label>市场活动名称</label>
-						
-						<div class="mui-input-row mui-search">
-							<input type="text" class="mui-input-clear" placeholder="">
+							<div class="mui-radio mui-left active" data-value="true">
+								<label>是</label>
+							</div>
+							<div class="mui-radio mui-left" data-value="false">
+								<label>否</label>
+							</div>
 						</div>
-					</div>-->
-					
-					<div class="mui-input-row" id="phone_invitation"> 
+					</div>
+
+					<div class="mui-input-row" id="phone_invitation">
 						<label>市场活动名称 </label>
 						<div class="market-activity-search">
-						    <input type="text" name="name" id="inputMarketActivity"  placeholder="请输入市场活动名称" value="">
-							<!--<input type="text" name="name" id="inputMarketActivity" class="mui-input-clear" placeholder="请输入市场活动名称" value="">-->
-							
+							<input type="text" name="name" id="inputMarketActivity" placeholder="请输入市场活动名称" value="">
 							<i class="mui-icon mui-icon-search" id="icon_search"></i>
-					    </div>
+							<!--<i class="mui-icon mui-icon-search mui-hidden" id="icon_searchMarket"></i>-->
+						</div>
 						
 					</div>
-					<div class="mui-input-row textarea-row">
+					<div class="mui-input-row textarea-row" id="followTextarea">
 						<label class="">跟进内容</label>
 						<textarea id="textarea" rows="5" placeholder="请输入备注信息" value=""></textarea>
 					</div>
 					<div class="mui-button-row">
 						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined btn-save" id="btn_cancel">取消</button>
-							<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_save">保存</button>
+						<button type="button" class="mui-btn mui-btn-danger btn-create-intention" id="btn_save">保存</button>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
-<!--<div class="mui-input-row mui-checkbox ">
-										<label class="active">radio</label>
-										<input name="radio1" type="checkbox" checked>
-									</div>
-									<div class="mui-input-row mui-checkbox">
-										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
-										<input name="radio1" type="checkbox" >
-									</div>
-									<div class="mui-input-row mui-checkbox">
-										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
-										<input name="radio1" type="checkbox" >
-									</div>
-									<div class="mui-input-row mui-checkbox" id="div">
-										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
-										<input name="radio1" type="checkbox" >
-									</div>
-									<div class="mui-input-row mui-checkbox">
-										<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
-										<input name="radio1" type="checkbox" >
-									</div>-->
+
 		<div id="middlePopover" class="mui-popover">
-					<div class="mui-popover-arrow" id="mui-popover-arrow"></div>
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll market-activity-scroll">
-								<div class="mui-input-group mui-radio-list market-activity-group" id="marketActivityGroup">
-									
-								</div>
+			<div class="mui-popover-arrow" id="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll market-activity-scroll">
+					<div class="mui-input-group mui-radio-list market-activity-group" id="marketActivityGroup">
+						<div class="mui-input-row mui-checkbox ">
+							<label class="active">radio</label>
+							<input name="radio1" type="checkbox" checked>
+						</div>
+						<div class="mui-input-row mui-checkbox">
+							<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+							<input name="radio1" type="checkbox">
+						</div>
+						<div class="mui-input-row mui-checkbox">
+							<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+							<input name="radio1" type="checkbox">
+						</div>
+						<div class="mui-input-row mui-checkbox" id="div">
+							<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+							<input name="radio1" type="checkbox">
+						</div>
+						<div class="mui-input-row mui-checkbox">
+							<label>radradradioradioradioradioradioradioioradioradioradioradioradioradioio</label>
+							<input name="radio1" type="checkbox">
 						</div>
 					</div>
-		
 				</div>
-		
+			</div>
+
+		</div>
+
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js"></script>
 		<script src="../../js/follow/follow.js"></script>
@@ -179,22 +176,30 @@
 						drag: true, //默认为true
 						hold: true, //默认为false，不监听
 						release: true //默认为false，不监听
-					}
+					},
+					preloadPages: [{
+						url: '../quotation/clone-quotation.html',
+						id: "clone-quotation",
+						styles: {
+							cachemode: "noCache"
+						}
+					}]
 				});
 				mui('.mui-scroll-wrapper').scroll();
-				
-//				以下为注意事项：
 
-			//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
+				//				以下为注意事项：
+
+				//1.预加载的页面页面关闭的时候不要关闭webview，如果关闭了会导致获取不到预加载b页面的id，所以返回的时候隐藏页面，通过监听mui.back()实现。（写在b页面）
 				mui.back = function() {
 					plus.webview.currentWebview().hide("auto", 300); //隐藏当前页面，这里300是隐藏页面的动画时间，单位毫秒，可自定义
 				}
 				var opporCode = "";
 				var type = "";
-				var typeCode = ""; 
-				var name = ""; 
-				var mobile = ""; 
-				var username = JSON.parse(localStorage.getItem('$state')).userName||'123456';
+				var typeCode = "";
+				var name = "";
+				var mobile = "";
+				var username = JSON.parse(localStorage.getItem('$state')).userName || '';
+				var page = '';
 				window.addEventListener('showTitle', function(event) {
 					opporCode = event.detail.opporCode;
 					type = event.detail.type;
@@ -204,13 +209,25 @@
 					document.getElementById('mui-title').innerHTML = event.detail.type;
 					document.getElementById('inputMarketActivity').value = '';
 					document.getElementById('textarea').value = '';
-					if(typeCode == 'outsideActivity'||typeCode == 'inshop'||typeCode == 'quotation'){//店外活动,到店面谈,商谈报价
+					if(typeCode == 'outsideActivity' || typeCode == 'inshop' || typeCode == 'quotation') { //店外活动,到店面谈,商谈报价
 						doc.getElementById('connectCustomer_row').classList.add('mui-hidden');
-					}else{
+					} else {
 						doc.getElementById('connectCustomer_row').classList.remove('mui-hidden');
 					}
+					if(typeCode == 'quotation') {
+						page = event.detail.page;
+					}
+					if(page == 'add'){
+						mui.preload({
+							url: '../quotation/add-quotation.html',
+							id: "add-quotation",
+							styles: {
+								cachemode: "noCache"
+							}
+						})
+					}
 				});
-				window.onload = function(){
+				window.onload = function() {
 					$.plusReady(function() {
 						//右滑返回隐藏webview
 						plus.webview.currentWebview().setStyle({
@@ -219,198 +236,206 @@
 						//关闭等待框
 						plus.nativeUI.closeWaiting();
 						//显示当前页面
-//						mui.currentWebview.show();
+						//						mui.currentWebview.show();
 					})
 				}
-					
-				
-				
-//				2.如果在IOS上，触摸屏幕边缘也是可以关闭页面，造成问题同上，所以处理IOS要做以下处理。（写在b页面）
-//				mui.plusReady(function() {
-//					//右滑返回隐藏webview
-//					plus.webview.currentWebview().setStyle({
-//						'popGesture': 'hide'
-//					);
-//				        //这里的例子是每次进入都会重新加载数据，所以退出（退出以通过处理改为隐藏hide）需要清空页面加载的数据
-//					var self = plus.webview.currentWebview();
-//					self.addEventListener("hide", function(e) {
-//				           //do something...  这里清空加载的数据
-//				        }, false)
-//				});
 
-				doc.getElementById('icon_search').addEventListener('tap',function(){
+				//				2.如果在IOS上，触摸屏幕边缘也是可以关闭页面，造成问题同上，所以处理IOS要做以下处理。（写在b页面）
+				//				mui.plusReady(function() {
+				//					//右滑返回隐藏webview
+				//					plus.webview.currentWebview().setStyle({
+				//						'popGesture': 'hide'
+				//					);
+				//				        //这里的例子是每次进入都会重新加载数据，所以退出（退出以通过处理改为隐藏hide）需要清空页面加载的数据
+				//					var self = plus.webview.currentWebview();
+				//					self.addEventListener("hide", function(e) {
+				//				           //do something...  这里清空加载的数据
+				//				        }, false)
+				//				});
+				
+//				doc.getElementById('icon_searchMarket').addEventListener('tap',function(){
+//					
+//					var actualTop = document.getElementById("icon_search").offsetTop+40; 
+//				    var current = document.getElementById("icon_search").offsetParent;
+//				    if (current != null){
+//				        actualTop += current.offsetTop;
+//				    }
+//				    doc.getElementById("middlePopover").setAttribute("style", "top:" + actualTop +'px;');
+//					
+//					var offsetLeft = document.getElementById("icon_search").offsetParent.offsetWidth - 50;
+////					doc.getElementById("mui-popover-arrow").setAttribute("style", "left:" + offsetLeft +'px;');
+//					$('#middlePopover').popover('show');
+//				})
+
+				doc.getElementById('icon_search').addEventListener('tap', function() {
 					var info = doc.getElementById('inputMarketActivity').value;
-					console.log(info);
 					var params = {
-						name:info
+						name: info
 					}
-					var offsetLeft = document.getElementById("icon_search").offsetLeft-15;
-					doc.getElementById("mui-popover-arrow").setAttribute("style","left:"+offsetLeft+"px;")
+					var actualTop = document.getElementById("followTextarea").offsetTop+103; 
+				    doc.getElementById("middlePopover").setAttribute("style", "top:" + actualTop +'px;');
+//					var offsetLeft = document.getElementById("icon_search").offsetLeft - 15;
+//					doc.getElementById("mui-popover-arrow").setAttribute("style", "left:" + offsetLeft + "px;");
 					var marketActivityContent = doc.body.querySelector('.market-activity-group');
-							//1.清空原ul下的子节点全部清空
-//					if(marketActivityContent.childNodes.length>0){
-//						console.log('清理列表数据...');
-//						for(var i=marketActivityContent.childNodes.length;i>0;i--){
-//							marketActivityContent.removeChild(marketActivityContent.childNodes[i-1]);
-//						}
-//					}
 					marketActivityContent.innerHTML = '';
-					follow.searchMarketActivity(params,function(data){
-						console.log("market activity result:"+JSON.stringify(data));
-//						var data = JSON.parse(data);
+					follow.searchMarketActivity(params, function(data) {
+						console.log("market activity result:" + JSON.stringify(data));
+						//						var data = JSON.parse(data);
 						console.log(data.success)
 						console.log("--------------------------------------------------------------");
-						if(data.success==true){
+						if(data.success == true) {
 							var marketActivityList = data.marketActivityList;
-							console.log(marketActivityList);
-//							$("#marketActivityContent").html("");
-							
-							$.each(marketActivityList,function(i,marketActivity){
-								
+
+							$.each(marketActivityList, function(i, marketActivity) {
+
 								var html = document.createElement('div');
 								html.className = 'mui-input-row mui-radio';
-								html.setAttribute("data-marketActivityCode",marketActivity.code );
-								html.setAttribute("data-marketActivityName",marketActivity.name );
-								html.innerHTML ='<label>'+marketActivity.name+'</label>'+
-												'<input name="marketActivity" type="radio">';
+								html.setAttribute("data-marketActivityCode", marketActivity.code);
+								html.setAttribute("data-marketActivityName", marketActivity.name);
+								html.innerHTML = '<label>' + marketActivity.name + '</label>' +
+									'<input name="marketActivity" type="radio">';
 								marketActivityContent.appendChild(html);
 							})
-//							var marketActivityHeight = doc.getElementById('marketActivityGroup');
-//							var contentHeight = marketActivityHeight.offsetHeight;
-//							console.log(contentHeight);
-//							var offsetLeft = document.getElementById("icon_search").offsetLeft-15;
-//							doc.getElementById("mui-popover-arrow").setAttribute("style","left:"+offsetLeft+"px;")
-//						
-//							if(contentHeight<300){
-//								doc.getElementById('middlePopover').setAttribute("style","height:"+contentHeight+"px!important;display:block;");
-//							}
 							$('#middlePopover').popover('show');
-						} else if(data.messageCode == '403'){//token过期，重新登录
+						} else if(data.messageCode == '403') { //token过期，重新登录
 							plus.nativeUI.toast(data.message);
 							common.baseOption.goToLogin();
-						}else{
+						} else {
 							plus.nativeUI.toast(data.message);
 						}
 					})
 				})
-//				mui('.mui-input-row').on('change', 'input[class="mui-input-clear"]',function() {
-//					console.log(this.value);
-//				})
-				mui('.radio-single-list').on('tap','.mui-radio',function(){
-					var activeRadio =  this;
-					mui('.radio-single-list .mui-radio').each(function(i,object){
+				mui('.radio-single-list').on('tap', '.mui-radio', function() {
+					var activeRadio = this;
+					mui('.radio-single-list .mui-radio').each(function(i, object) {
 						this.classList.remove('active');
 					})
 					activeRadio.classList.add('active');
-					doc.getElementById('connectCustomer').setAttribute('data-value',activeRadio.getAttribute('data-value'))
+					doc.getElementById('connectCustomer').setAttribute('data-value', activeRadio.getAttribute('data-value'))
 				})
-				mui('.market-activity-group').on('tap','.mui-radio',function(){
-//					
+				mui('.market-activity-group').on('tap', '.mui-radio', function() {
+					//					
 					var marketActivity = this;
 					var marketActivityCode = marketActivity.getAttribute("data-marketActivityCode");
 					var marketActivityName = marketActivity.getAttribute("data-marketActivityName");
-//					console.log(marketActivity);
+					//					console.log(marketActivity);
 					console.log(marketActivity.childNodes.size);
-//					marketActivity.childNodes[3].checked = true;
-					mui('.mui-radio label').each(function(i,object){
+					//					marketActivity.childNodes[3].checked = true;
+					mui('.mui-radio label').each(function(i, object) {
 						this.classList.remove('active');
 					})
 					marketActivity.children[0].classList.add('active');
 					$('#middlePopover').popover('hide');
 					console.log(marketActivityCode);
 					console.log(marketActivityName);
-					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityCode",marketActivityCode );
-					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityName",marketActivityName );
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityCode", marketActivityCode);
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityName", marketActivityName);
 					doc.getElementById('inputMarketActivity').value = marketActivityName;
 				})
-				
-				mui('.market-activity-group').on('tap','input[type=radio]',function(){
-					
+
+				mui('.market-activity-group').on('tap', 'input[type=radio]', function() {
+
 					var activityRadio = this;
 					var marketActivityCode = activityRadio.parentNode.getAttribute("data-marketActivityCode");
 					var marketActivityName = activityRadio.parentNode.getAttribute("data-marketActivityName");
 					activityRadio.checked = true;
-					mui('.mui-radio label').each(function(i,object){
+					mui('.mui-radio label').each(function(i, object) {
 						this.classList.remove('active');
 					})
 					this.previousElementSibling.classList.add('active');
 					$('#middlePopover').popover('hide');
-					
+
 					console.log(marketActivityCode);
 					console.log(marketActivityName);
-					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityCode",marketActivityCode );
-					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityName",marketActivityName );
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityCode", marketActivityCode);
+					doc.getElementById('inputMarketActivity').setAttribute("data-marketActivityName", marketActivityName);
 					doc.getElementById('inputMarketActivity').value = marketActivityName;
-					
+
 				})
-				
-				doc.getElementById('btn_cancel').addEventListener('tap',function(){
+
+				doc.getElementById('btn_cancel').addEventListener('tap', function() {
 					$.back();
 				})
-				doc.getElementById('btn_save').addEventListener('tap',function(){
-					
+				doc.getElementById('btn_save').addEventListener('tap', function() {
+
 					var marketActivityCode = doc.getElementById('inputMarketActivity').getAttribute('data-marketActivityCode');
 					var marketActivityName = doc.getElementById('inputMarketActivity').getAttribute('data-marketActivityName');
 					var connectCustomer = doc.getElementById('connectCustomer').getAttribute('data-value');
 					console.log(connectCustomer);
 					var content = doc.getElementById('textarea').value;
 					var params = {
-						opportunityCode:opporCode,
-						followOpportunity:{
-							type:type,
-							typeCode:typeCode,
-							connectCustomer:connectCustomer,
-							marketActivityCode:marketActivityCode,
-							marketActivityName:marketActivityName,
-							contentList: [
-						      {
-						        content: content
-						      }
-						    ],
-						    salesConsultantName:username
+						opportunityCode: opporCode,
+						followOpportunity: {
+							type: type,
+							typeCode: typeCode,
+							connectCustomer: connectCustomer,
+							marketActivityCode: marketActivityCode,
+							marketActivityName: marketActivityName,
+							contentList: [{
+								content: content
+							}],
+							salesConsultantName: username
 						}
-						
+
 					}
-					follow.saveFollow(params,function(data){
-						console.log("follow append content result:"+JSON.stringify(data));
+					follow.saveFollow(params, function(data) {
+						console.log("follow append content result:" + JSON.stringify(data));
 						console.log("--------------------------------------------------------------");
-						if(data.success==true){
-//							var self = plus.webview.currentWebview();
-//							self.close();
-							if(typeCode =='quotation'){
-								mui.openWindow({
-									url: '../quotation/add-quotation.html',
-									id: "add-quotation",//默认使用当前页面的url作为id
-									extras: {
-										oppoCode: opporCode,
-										name:name,
-										mobile:mobile
-									}, //自定义扩展参数
-									createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
-								})
-							}
-							mui.fire(plus.webview.getWebviewById('opporDetail'),'show',opporCode);
-							//打开详情页面          
-							mui.openWindow({
-								id: 'opporDetail',
-								url:'opportunity-detail.html',
-								show: {
-									aniShow: 'pop-in'
-								},
-								waiting: {
-									autoShow: false
+						if(data.success == true) {
+							//							var self = plus.webview.currentWebview();
+							//							self.close();
+							if(typeCode == 'quotation' && page == 'add') {
+								
+								var followOpportunityCode = data.followOpportunityCode;
+								console.log("打开新建报价单页面");
+								if(!plus.webview.getWebviewById('add-quotation')){
+									plus.webview.create('../quotation/add-quotation.html','add-quotation');
 								}
-							});
-//							$.back();
-						}else if(data.messageCode == '403'){//token过期，重新登录
+								mui.fire(plus.webview.getWebviewById('add-quotation'), 'showAddPage', {
+									oppoCode: opporCode,
+									name: name,
+									mobile: mobile,
+									followOpportunityCode: followOpportunityCode
+								})
+								mui.openWindow({
+									id: "add-quotation" //默认使用当前页面的url作为id
+								})
+							} else if(typeCode == 'quotation' && page == 'clone') {
+								var followOpportunityCode = data.followOpportunityCode;
+								mui.fire(plus.webview.getWebviewById('clone-quotation'), 'showClonePage', {
+									oppoCode: opporCode,
+									name: name,
+									mobile: mobile,
+									followOpportunityCode: followOpportunityCode
+								})
+								mui.openWindow({
+									id: "clone-quotation" //默认使用当前页面的url作为id
+								})
+							} else {
+								mui.fire(plus.webview.getWebviewById('opporDetail'), 'show', opporCode);
+								//打开详情页面          
+								mui.openWindow({
+									id: 'opporDetail',
+									url: 'opportunity-detail.html',
+									show: {
+										aniShow: 'pop-in'
+									},
+									waiting: {
+										autoShow: false
+									}
+								});
+							}
+
+							//							$.back();
+						} else if(data.messageCode == '403') { //token过期，重新登录
 							plus.nativeUI.toast(data.message);
 							common.baseOption.goToLogin();
-						}else{
+						} else {
 							plus.nativeUI.toast(data.message);
 						}
-				   
+
 					})
-					
+
 				})
 			}(mui, document));
 		</script>

@@ -650,7 +650,7 @@
 //				var token = JSON.parse(localStorage.getItem('$state')).token;
 				var quotationCode = '';
 				var creationtime = ''; 
-				var quotation = '';
+				var quotation = null;
 				var oppoCode = '';
 				
 				template.config('escape', false);
@@ -832,18 +832,40 @@
 				
 				doc.getElementById('cloneQuotation').addEventListener('tap',function(){
 					//克隆
+					console.log("克隆");
 					var customerName =  doc.getElementById('customer').getAttribute("data-customerName");
 					var customerMobile =  doc.getElementById('customer').getAttribute("data-customerMobile");
+					localStorage.setItem('quotation', JSON.stringify(quotation));
 					
-					mui.fire(plus.webview.getWebviewById('clone-quotation'),'showClonePage',{
-						oppoCode: oppoCode,
+					//打开关于页面
+					mui.fire(plus.webview.getWebviewById('opporFollow'), 'showTitle', {
+						type: "商谈报价",
+						typeCode:"quotation",
+						opporCode:oppoCode,
 						name:customerName,
 						mobile:customerMobile,
-						quotation:quotation
-					})
+						page:'clone'
+					});
+					//TODO 方便测试用，之后要放开
+	//				打开相关页面
 					mui.openWindow({
-						id: "clone-quotation"//默认使用当前页面的url作为id
+						id: 'opporFollow',//b页面id
+						url:'../opportunity/opportunity-follow.html',
+						show: {
+						    autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							aniShow: "slide-in-right"
+						},
 					})
+					
+//					mui.fire(plus.webview.getWebviewById('clone-quotation'),'showClonePage',{
+//						oppoCode: oppoCode,
+//						name:customerName,
+//						mobile:customerMobile,
+//						quotation:quotation
+//					})
+//					mui.openWindow({
+//						id: "clone-quotation"//默认使用当前页面的url作为id
+//					})  
 					
 				})
 				doc.getElementById('invalidQuotation').addEventListener('tap',function(){

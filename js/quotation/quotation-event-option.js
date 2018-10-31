@@ -68,6 +68,7 @@
 	document.getElementById('creatQuotation').addEventListener('tap',function(){
 		var page = this.getAttribute('data-page');
 		var opportunityCode = document.getElementById('customerName').getAttribute('data-oppoCode');
+		var followOpportunityCode = document.getElementById('customerName').getAttribute('data-followOpportunityCode');
 		var deposit = document.getElementById('deposit').value;
 		var lineItemName = document.getElementById('lineItemName').getAttribute('data-value');
 		//车辆信息
@@ -237,6 +238,7 @@
 		
 		var params = {
 			opportunityCode:opportunityCode,
+			followOpportunityCode:followOpportunityCode,
 			deposit:deposit,
 			lineItemName:lineItemName,
 			vehicleBrand:brands,
@@ -352,31 +354,46 @@
 				console.log("quotation create result:"+JSON.stringify(data));
 				console.log("--------------------------------------------------------------");
 				if(data.success==true){
+					mui.fire(plus.webview.getWebviewById('opporDetail'), 'show', opportunityCode);
+					//打开详情页面          
+					mui.openWindow({
+						id: 'opporDetail',
+						url: '../opportunity/opportunity-detail.html',
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
 					if(page=='add'){
-						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
-							type: "商谈报价",
-							typeCode:"quotation",
-							opporCode:opportunityCode,
-							name:document.getElementById('customerName').getAttribute('data-name'),
-							mobile:document.getElementById('customerName').getAttribute('data-mobile'),
-						});
-						mui.openWindow({
-							url:'quotation-list.html',
-							id: 'quotation-list'//b页面id
-						})
-					}else if(page=='clone'){
-						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
-							type: "商谈报价",
-							typeCode:"quotation",
-							opporCode:opportunityCode,
-							name:document.getElementById('customerName').getAttribute('data-name'),
-							mobile:document.getElementById('customerName').getAttribute('data-mobile'),
-						});
-						mui.openWindow({
-							url:'quotation-list.html',
-							id: 'quotation-list'//b页面id
-						})
+						plus.webview.getWebviewById('add-quotation').close();
 					}
+//					if(page=='add'){
+//						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
+//							type: "商谈报价",
+//							typeCode:"quotation",
+//							opporCode:opportunityCode,
+//							name:document.getElementById('customerName').getAttribute('data-name'),
+//							mobile:document.getElementById('customerName').getAttribute('data-mobile'),
+//						});
+//						mui.openWindow({
+//							url:'quotation-list.html',
+//							id: 'quotation-list'//b页面id
+//						})
+//					}else if(page=='clone'){
+//						mui.fire(plus.webview.getWebviewById('quotation-list'), 'showList', {
+//							type: "商谈报价",
+//							typeCode:"quotation",
+//							opporCode:opportunityCode,
+//							name:document.getElementById('customerName').getAttribute('data-name'),
+//							mobile:document.getElementById('customerName').getAttribute('data-mobile'),
+//						});
+//						mui.openWindow({
+//							url:'quotation-list.html',
+//							id: 'quotation-list'//b页面id
+//						})
+//					}
 					
 				}
 			},

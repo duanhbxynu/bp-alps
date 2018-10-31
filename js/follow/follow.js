@@ -103,6 +103,7 @@
 			type: "POST",
 			dataType: "jsonp",
 			jsonp: 'callback',
+			asyn:false,
 			data: params,
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());

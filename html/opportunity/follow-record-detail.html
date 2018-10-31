@@ -463,6 +463,7 @@
 				}
 				
 				function showDetail(followCode,opporCode){
+					var typeCode='';
 					follow.getFollowDetail(followCode,function(data){
 						console.log(data);
 						var data = JSON.parse(data);
@@ -472,7 +473,7 @@
 							console.log(followOpportunity);
 							template.config('escape', false);
 							if(followOpportunity){
-								var typeCode = followOpportunity.typeCode;
+								typeCode = followOpportunity.typeCode;
 								doc.getElementById('follow_type').innerHTML = followOpportunity.type;
 								doc.getElementById('salesConsultantName').innerHTML = followOpportunity.salesConsultantName||'';
 								doc.getElementById('salesConsultantName').setAttribute("data-salesConsultantId",followOpportunity.salesConsultantId);
@@ -513,6 +514,32 @@
 									doc.getElementById('quotationList').classList.remove('mui-hidden');
 									doc.getElementById('dirver_info').classList.add('mui-hidden');
 									doc.getElementById('footer').classList.add('mui-hidden');
+									$.ajax({
+										url:serviceBaseUrl+"alpssalewebservices/quotaion/list",
+										type:"POST",
+										dataType:"json",
+										contentType: 'application/json',
+							            data: JSON.stringify({oppoCode:opporCode}),
+							            beforeSend: function (xhr) {
+										       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
+										},
+										success: function (data) {
+											console.log("quotation list result:"+JSON.stringify(data));
+											console.log("--------------------------------------------------------------");
+											if(data.success){
+												var quotationList = data.quotationList;
+												if(quotationList){
+													//追加模板消息 
+											        var str = template('quotation-template', { 
+											            "contentList": quotationList
+											        }); 
+											        doc.getElementById('quotationList').innerHTML =  str;
+												}
+											}
+									    },
+									    error: function(jqXHR, textStatus, errorThrown){
+									    }
+									})
 								}
 								
 							}
@@ -525,33 +552,8 @@
 						}
 					})
 					
-					$.ajax({
-						url:serviceBaseUrl+"alpssalewebservices/quotaion/list",
-						type:"POST",
-						dataType:"json",
-						contentType: 'application/json',
-			            data: JSON.stringify({oppoCode:opporCode}),
-			            beforeSend: function (xhr) {
-						       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
-						},
-						success: function (data) {
-							console.log("quotation list result:"+JSON.stringify(data));
-							console.log("--------------------------------------------------------------");
-							if(data.success){
-								var quotationList = data.quotationList;
-								if(quotationList){
-									//追加模板消息 
-							        var str = template('quotation-template', { 
-							            "contentList": quotationList
-							        }); 
-							        doc.getElementById('quotationList').innerHTML =  str;
-								}
-							}
-					    },
-					    error: function(jqXHR, textStatus, errorThrown){
-					    	//location.href = baseConfig.baseUrl+baseConfig.login_page;
-					    }
-					})
+					
+					
 					
 					
 					

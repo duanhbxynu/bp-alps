@@ -1,7 +1,7 @@
 {
-	"html/login/startPage.html": {
-		"refer": [
-			"html/login/login.html"
-		]
-	}
+  "html/login/startPage.html": {
+    "refer": [
+      "html/login/login.html"
+    ]
+  }
 }

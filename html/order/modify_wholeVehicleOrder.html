@@ -1214,6 +1214,7 @@
 				  //获得事件参数
 				  var orderCode = event.detail.orderCode;
 				  var order = event.detail.order;
+				  console.log(order);
 				  if(!order){
 				  	orderjs.getOrderDetail(orderCode,function(data){
 				  		if(data.success) {
@@ -1244,7 +1245,7 @@
 					var	name =  order.customer.name;
 					var	mobile =  order.customer.mobileNumber;
 					var	lineItemName = order.lineItemName||'';
-					var	address = order.customer.address||'上海市';
+					var	address = order.customer.address||'';
 					var gender = order.customer.gender == 'MALE'?'男':'女';
 					doc.getElementById('creatOrder').setAttribute('data-customerId',order.customer.uid);
 					doc.getElementById('creatOrder').setAttribute('data-orderCode',order.code);

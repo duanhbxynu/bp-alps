@@ -13,11 +13,11 @@
 				height: 200px;
 				left:18px!important;
 				background: #FFFFFF;
-				width: 90%;
+				width: calc(100% - 36px);
 				text-align: center;
 			}
 			.mui-popover .mui-popover-arrow{
-				top:-20px;
+				/*top:-15px;*/
 				
 			}
 			.mui-popover .mui-popover-arrow:after{

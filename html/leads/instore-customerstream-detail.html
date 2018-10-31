@@ -80,11 +80,13 @@
 			}
 			
 			.mui-modal .mui-input-row span {
-				margin-left: 10px;
-			}
-			.mui-modal .mui-content .mui-input-row label{
+				/*margin-left: 10px;*/
 				color: #000000;
+				
 			}
+			/*.mui-modal .mui-content .mui-input-row label{
+				color: #000000;
+			}*/
 		</style>
 
 	</head>
@@ -197,10 +199,10 @@
 						<label id="oppor_name">客户姓名</label>
 						<label id="oppor_sales">销售顾问</label>
 						<label id="oppor_create_time">11</label>-->
-					意向编号&#X3000;<label id="oppor_code"></label>
-					客户姓名&#X3000;<label id="oppor_name"></label>
-					销售顾问&#X3000;<label id="oppor_sales"></label>
-					创建时间&#X3000;<label id="oppor_create_time"></label>
+					<label id="oppor_code">意向编号&#X3000;<span>11</span></label>
+					<label id="oppor_name">客户姓名&#X3000;<span>11</span></label>
+					<label id="oppor_sales">销售顾问&#X3000;<span>11</span></label>
+					<label id="oppor_create_time">创建时间&#X3000;<span>11</span></label>
 				</div>
 				<div class="modal-self mui-button-row mui-hidden" id="btn_continue_modal">
 					<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" id="btn_cancel_continue">取消</button>
@@ -423,17 +425,16 @@
 					active.classList.add('active');
 				})
 				//创建意向
-				//				doc.getElementById('btn_create').addEventListener('tap',function(){
-
-				//					首先到“意向”表中“客流编号”字段检查是否存在本客流编号，如果存在，则提示该客流已经创建意向记录，不可重复创建
-				//1.未查询到本人名下存在未完结意向,允许直接创建新的意向
-				//					$('#modal').show();
-				//					document.getElementById("modal").classList.add('mui-active')
-				//					document.getElementById("modal").setAttribute('style','min-height: auto;')
-				//					var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
-				//					mask.show();//显示遮罩
-				//					mask.close();//关闭遮罩
-				//				})
+//				doc.getElementById('btn_create').addEventListener('tap',function(){
+//
+//				//					首先到“意向”表中“客流编号”字段检查是否存在本客流编号，如果存在，则提示该客流已经创建意向记录，不可重复创建
+//				//1.未查询到本人名下存在未完结意向,允许直接创建新的意向
+//					document.getElementById("modal").classList.add('mui-active')
+//					document.getElementById("modal").setAttribute('style','min-height: 0;')
+//					var backdrop = document.createElement('div');
+//					backdrop.className = 'mui-backdrop mui-active';
+//					document.body.appendChild(backdrop);
+//				})
 
 				//创建意向
 
@@ -502,19 +503,13 @@
 						console.log("--------------------------------------------------------------");
 						if(data.success == true) {
 							var opportunity = data.opportunityList[0];
-							
-							
-
 							//2.查询到本人名下存在未完结意向
 							console.log(currentUserCode);
 							console.log(currentUserName);
-							console.log("opportunity.code");
 							console.log(opportunity.code);
 							console.log(opportunity.createdPerson);
 							if(opportunity.createdPerson == currentUserCode) {
-
 								openOpporDetailPage(opportunity.code, opportunity);
-							//location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"&id="+opportunity.code);
 							} else {
 								//3.查询到其他销售顾问名下的未完结意向	
 								var backdrop = document.createElement('div');
@@ -524,21 +519,15 @@
 								document.getElementById("btn_edit_modal").classList.remove('mui-hidden');
 								document.getElementById("btn_continue_modal").classList.add('mui-hidden');
 								document.getElementById("modal").setAttribute('style', 'min-height: 0;');
-								//var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
 								document.getElementById('oppor_code').setAttribute('data-opporcode', opportunity.code);
-								document.getElementById('oppor_code').innerHTML = '意向编号<span>' + opportunity.code + '</span>';
-								document.getElementById('oppor_name').innerHTML = '客户姓名<span>' + opportunity.name + '</span>';
-								document.getElementById('oppor_sales').innerHTML = '销售人员<span>' + opportunity.createdPerson + '</span>';
-								//								document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
-//								if(!mask){
-//									mask = $.createMask();
-//								}
-//								mask.show(); //显示遮罩
+								document.getElementById('oppor_code').innerHTML = '意向编号&#X3000;<span>'+ opportunity.code +'</span>' ;
+								document.getElementById('oppor_name').innerHTML = '客户姓名&#X3000;<span>'+ opportunity.name +'</span>';
+								document.getElementById('oppor_sales').innerHTML = '销售顾问&#X3000;<span>'+ opportunity.createdPerson +'</span>';
+								document.getElementById('oppor_create_time').innerHTML = '创建时间&#X3000;<span>'+ opportunity.creationtime +'</span>';
 							}
 						} else {
 							//1.未查询到本人名下存在未完结意向,允许直接创建新的意向,将客流的姓名，性别，电话自动带入意向维护页面
 							openAddOpporPage(flow);
-							//location.href = getUrl(baseConfig.baseUrl+baseConfig.opportunity_detail,{},"");
 						}
 					})
 				})
@@ -665,13 +654,11 @@
 					document.getElementById("btn_edit_modal").classList.add('mui-hidden');
 					document.getElementById("btn_continue_modal").classList.remove('mui-hidden');
 					document.getElementById("modal").setAttribute('style', 'min-height: 0;');
-						//						var mask = $.createMask();//callback为用户点击蒙版时自动执行的回调；
 					document.getElementById('oppor_code').setAttribute('data-opporcode', oppor.code);
-					document.getElementById('oppor_code').innerHTML = '意向编号<span>' + oppor.code + '</span>';
-					document.getElementById('oppor_name').innerHTML = '客户姓名<span>' + oppor.name + '</span>';
-					document.getElementById('oppor_sales').innerHTML = '销售人员<span>' + currentUserName + '</span>';
-						//						document.getElementById('oppor_create_time').innerHTML = '创建时间'+opportunity.createdPerson;
-					
+					document.getElementById('oppor_code').innerHTML = '意向编号&#X3000;<span>'+ oppor.code +'</span>';
+					document.getElementById('oppor_name').innerHTML =  '客户姓名&#X3000;<span>'+ oppor.name +'</span>';
+					document.getElementById('oppor_sales').innerHTML = '销售顾问&#X3000;<span>'+ currentUserName +'</span>';
+					document.getElementById('oppor_create_time').innerHTML = '创建时间&#X3000;<span>'+ oppor.creationtime +'</span>';
 //					if(!mask){
 //						mask = $.createMask();
 //					}

@@ -260,33 +260,34 @@
 						typeCode:typeCode,
 						opporCode:oppoCode,
 						name:name,
-						mobile:mobile
+						mobile:mobile,
+						page:'add'
 					});
 					//TODO 方便测试用，之后要放开
 	//				打开相关页面
-//					mui.openWindow({
-//						id: 'opporFollow',//b页面id
-//						url:'../opportunity/opportunity-follow.html',
-//						show: {
-//						    autoShow: true, //页面loaded事件发生后自动显示，默认为true
-//							aniShow: "slide-in-right"
-//						},
-//					})
-					//TODO 方便测试用，之后要注掉
 					mui.openWindow({
-						url: 'add-quotation.html',
-						id: "add-quotation",//默认使用当前页面的url作为id
-						styles: { //窗口参数
-							popGesture: 'hide',
-							cachemode:"noCache"
+						id: 'opporFollow',//b页面id
+						url:'../opportunity/opportunity-follow.html',
+						show: {
+						    autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							aniShow: "slide-in-right"
 						},
-						extras: {
-							oppoCode: oppoCode,
-							name:name,
-							mobile:mobile
-						}, //自定义扩展参数
-						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
 					})
+					//TODO 方便测试用，之后要注掉
+//					mui.openWindow({
+//						url: 'add-quotation.html',
+//						id: "add-quotation",//默认使用当前页面的url作为id
+//						styles: { //窗口参数
+//							popGesture: 'hide',
+//							cachemode:"noCache"
+//						},
+//						extras: {
+//							oppoCode: oppoCode,
+//							name:name,
+//							mobile:mobile
+//						}, //自定义扩展参数
+//						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+//					})
 				})
 					mui('#mui-content').on('tap','.mui-card', function() {
 						console.log("quotationCode");

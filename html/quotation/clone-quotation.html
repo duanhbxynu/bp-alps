@@ -1132,7 +1132,7 @@
 					oppoCode = e.detail.oppoCode;
 					var name =  e.detail.name;
 					var mobile =  e.detail.mobile;
-					var quotation =  e.detail.quotation;
+					var quotation = JSON.parse(localStorage.getItem('quotation'));
 					console.log(quotation);		
 					doc.getElementById('customerName').innerHTML = name+'&nbsp;&nbsp;'+mobile;
 					doc.getElementById('customerName').setAttribute('data-name',name);
@@ -1140,8 +1140,8 @@
 					doc.getElementById('customerName').setAttribute('data-oppoCode',oppoCode);
 					doc.getElementById('deposit').value = quotation.deposit;
 					if(quotation.lineItemName){
-						doc.getElementById('order_type').innerHTML = quotation.lineItemName||'';
-						doc.getElementById('order_type').setAttribute("data-value",quotation.lineItemName||'');
+						doc.getElementById('lineItemName').innerHTML = quotation.lineItemName||'';
+						doc.getElementById('lineItemName').setAttribute("data-value",quotation.lineItemName||'');
 					}
 					showTemplate(quotation);
 				})
@@ -1162,7 +1162,7 @@
 					
 					console.log("==========showQuotation================");	
 					console.log(quotation);	
-					console.log("quotation:"+JSON.stringify(quotation));
+//					console.log("quotation:"+JSON.stringify(quotation));
 					var carInfo={
 						vehicleBrand:quotation.vehicleBrand||'',
 						vehicleCategory:quotation.vehicle||'',

@@ -824,7 +824,12 @@
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init();
+				$.init({
+					preloadPages:[{
+						url:'../opportunity/opportunity-detail.html',
+						id:'opporDetail'
+					}]
+				});
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -849,12 +854,22 @@
 					voucher:"coupon" //卡券
 				};
 				var oppoCode = '';
+				var followOpportunityCode = '';
 //				if(!localStorage.getItem('$state')) {
 //					plus.nativeUI.toast('登陆过期，请重新登陆！');
 //					return;
 //				}
 //				var token = JSON.parse(localStorage.getItem('$state')).token;
 				var preloadPage=null;
+				window.addEventListener('showAddPage',function(e){
+					oppoCode = e.detail.oppoCode;
+					var name =  e.detail.name;
+					var mobile =  e.detail.mobile;
+					followOpportunityCode =  e.detail.followOpportunityCode;
+					doc.getElementById('customerName').innerHTML = name+'&nbsp;&nbsp;'+mobile;
+					doc.getElementById('customerName').setAttribute('data-oppoCode',oppoCode);
+					doc.getElementById('customerName').setAttribute('data-followOpportunityCode',followOpportunityCode);
+				})
 				$.plusReady(function() {
 
 					/*---------关闭滚动条------*/
@@ -872,8 +887,11 @@
 					oppoCode = self.oppoCode;
 					name = self.name;
 					mobile = self.mobile;
+					followOpportunityCode = self.followOpportunityCode;
 					doc.getElementById('customerName').innerHTML = name+'&nbsp;&nbsp;'+mobile;
 					doc.getElementById('customerName').setAttribute('data-oppoCode',oppoCode);
+					doc.getElementById('customerName').setAttribute('data-followOpportunityCode',followOpportunityCode);
+					
 				});
 //				$('.mui-table-view-cell-scroll').scroll();
 				//是否置换
