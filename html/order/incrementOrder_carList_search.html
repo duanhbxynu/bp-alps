@@ -196,6 +196,10 @@
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init({
+					preloadPages:[{
+						id: 'createIncrement', //b页面id
+						url: 'create_incrementOrder.html',
+					}]
 //					beforeback: function(){
 //			            plus.webview.currentWebview().hide();
 //			            //返回true，继续页面关闭逻辑
@@ -280,12 +284,18 @@
 						console.log(carCode);
 						//TODO 存储选中的客户id
 						localStorage.setItem("carCode", carCode);
+						if(plus.webview.getWebviewById('createIncrement')){
+							plus.webview.getWebviewById('createIncrement').reload(true);
+						}
 						mui.openWindow({
 							id: 'createIncrement', //b页面id
 							url: 'create_incrementOrder.html',
-							show: {
-								autoShow: true, //页面loaded事件发生后自动显示，默认为true
-								aniShow: "slide-in-right"
+//							show: {
+//								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+//								aniShow: "slide-in-right"
+//							},
+							styles:{
+								cachemode:"noCache"
 							}
 						})
 					})

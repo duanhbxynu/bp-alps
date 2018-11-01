@@ -11,13 +11,16 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/icons-extra.css" />
+		<link href="../../css/pull-tips.css" rel="stylesheet" />
 		<style>
-			
+			.mui-content .mui-scroll-wrapper{
+				top:45px!important;
+			}
 			.mui-table-view-cell:after {
 				height: 0px!important;
 			}
 			
-			.mui-table-view-cell{
+			.mui-table-view-cell {
 				height: 30px;
 				padding: 5px 20px;
 			}
@@ -26,22 +29,25 @@
 				float: right;
 				color: #212121;
 			}
-			.mui-table-view-cell:first-child{
+			
+			.mui-table-view-cell:first-child {
 				height: 38px;
 				padding-top: 13px;
 			}
-			.mui-table-view-cell:last-child{
+			
+			.mui-table-view-cell:last-child {
 				height: 38px;
 				padding-bottom: 13px;
 			}
-			.status{
+			
+			.status {
 				color: #C71B1E!important;
 			}
-			.mui-icon-plusempty{
-				font-weight: 800;
-				color:linear-gradient(-180deg, #E53A40 0%, #C71B1E 100%)!important;
-			}
 			
+			.mui-icon-plusempty {
+				font-weight: 800;
+				color: linear-gradient(-180deg, #E53A40 0%, #C71B1E 100%)!important;
+			}
 		</style>
 
 	</head>
@@ -54,11 +60,32 @@
 		</header>
 
 		<div class="mui-content" id="mui-content">
-			<p id="listNo" class="mui-hidden" style='margin: 10px auto;text-align: center;'>暂无报价</p>
+			<!--<p id="listNo" class="mui-hidden" style='margin: 10px auto;text-align: center;'>暂无报价</p>-->
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll quotation-scroll">
-					
-					<script id='content-template' type="text/template">
+					<div id="cardList">
+						<!--<div class="mui-card" id='mui-card-<%=item.code %>' data-code="<%=( item.code|| '&nbsp;&nbsp;') %>" 
+								data-creationtime="<%=( item.creationtime|| '&nbsp;&nbsp;') %>" >
+								<div class="mui-card-content">
+									<ul class="mui-table-view mui-clearfix">
+										<li class="mui-table-view-cell">
+											报价单号<var id="name"><%=( item.code|| '&nbsp;&nbsp;') %></var>
+										</li>	
+										<li class="mui-table-view-cell">
+											状态<var id="tel" class="status"><%=( item.status|| '草稿') %></var>
+										</li>
+										<li class="mui-table-view-cell">
+											报价时间<var id="intent_car"><%=( item.creationtime|| '&nbsp;&nbsp;') %></var>
+										</li>
+										<li class="mui-table-view-cell">
+											总价 <var id="origin"><%=( item.totalPrice|| '&nbsp;&nbsp;') %></var>
+										</li>
+									</ul>
+								</div>
+							</div>	-->
+					</div>
+
+					<!--<script id='content-template' type="text/template">
 						<% for(var i in quotationList){ var item=quotationList[i]; %>
 							<div class="mui-card" id='mui-card-<%=item.code %>' data-code="<%=( item.code|| '&nbsp;&nbsp;') %>" 
 								data-creationtime="<%=( item.creationtime|| '&nbsp;&nbsp;') %>" >
@@ -80,8 +107,8 @@
 								</div>
 							</div>	
 						<% } %>
-					</script>
-				
+					</script>-->
+
 					<!--<div class="mui-card" id="mui-card-YD00000006" data-code="YD00000006">
 						<div class="mui-card-content">
 							<ul class="mui-table-view mui-clearfix">
@@ -122,15 +149,14 @@
 						</div>
 					</div>-->
 				</div>
-			</div>	
+			</div>
 		</div>
-		
-
-		
 
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/common/arttmpl.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<!--<script src="../../js/common/arttmpl.js"></script>-->
 		<script src="../../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/common/select.data.js" type="text/javascript" charset="utf-8"></script>
@@ -138,188 +164,345 @@
 		<script src="../../js/common/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init({
-					/*预加载详情页*/
-				    preloadPages:[{
-				    	id:'quotationDetail',
-				    	url:'quotation_details.html'           
-				  	}]
-				});
-				
-
-				var aniShow = "pop-in";
-				//只有ios支持的功能需要在Android平台隐藏；
-				if(mui.os.android) {
-					var list = document.querySelectorAll('.ios-only');
-					if(list) {
-						for(var i = 0; i < list.length; i++) {
-							list[i].style.display = 'none';
-						}
-					}
-					//Android平台暂时使用slide-in-right动画
-					if(parseFloat(mui.os.version) < 4.4) {
-						aniShow = "slide-in-right";
-					}
-				}
-				mui('.mui-scroll-wrapper').scroll();
-				var detailPage = null;
-				var oppoCode = "";
-				var type = "";
-				var typeCode = ""; 
-				var name = "";
-				var mobile = "";
-				template.config('escape', false);
-				$.plusReady(function() {
-					
-					
-					window.addEventListener('showList', function(event) {
-						oppoCode = event.detail.opporCode;
-						type = event.detail.type;
-						typeCode = event.detail.typeCode;
-						name = event.detail.name;
-						mobile = event.detail.mobile;
-						var values = {oppoCode:oppoCode};
-						console.log("quotation list request:"+JSON.stringify(values));
-						
-						$.ajax({
-							url:serviceBaseUrl+"alpssalewebservices/quotaion/list",
-							type:"POST",
-							dataType:"json",
-							contentType: 'application/json',
-				            data: JSON.stringify({oppoCode:oppoCode}),
-				            beforeSend: function (xhr) {
-							       xhr.setRequestHeader("Authorization","Bearer " + common.baseOption.getToken());
-							},
-							success: function (data) {
-								console.log("quotation list result:"+JSON.stringify(data));
-								console.log("--------------------------------------------------------------");
-								if(data.success){
-									var quotationList = data.quotationList;
-									if(quotationList.length>0){
-										//追加模板消息 
-//										for(var i=0;i<quotationList.length;i++){
-//											var card = document.createElement('div');
-//							card.className = 'mui-card';
-//							card.setAttribute("data-opporCode",opportunityList[i].code );
-//							card.innerHTML ='<div class="mui-card-header"><label>意向编号' + opportunityList[i].code +'</label><span>'+ opportunityList[i].statusName +'</span></div>'+
-//											'<div class="mui-card-content">'+
-//												'<ul class="mui-table-view">'+
-//													'<li class="mui-table-view-cell">'+
-//														'<var>'+opportunityList[i].name+'</var> <var>'+gender+'</var><var>'+opportunityList[i].mobile+'</var><var class="mui-pull-right">'+opportunityList[i].platform+'</var>'+
-//													'</li>'+
-//													'<li class="mui-table-view-cell second-cell">'+
-//														'<var>'+opportunityList[i].levelName+'</var> <var>'+opportunityList[i].creationtime+'</var><var class="mui-pull-right">'+opportunityList[i].vehicleCategoryName+'&nbsp;&nbsp;&nbsp;'+opportunityList[i].vehicleName+'</var>'+
-//													'</li>'+
-//													'<li class="mui-table-view-cell">'+
-//														'<i class="mui-icon-extra mui-icon-extra-outline active"></i> <var class="active">'+ opportunityList[i].lastFollowTime +'</var>'+
-//													'</li>'+
-//												'</ul>'+
-//											'</div>';
-//							console.log("=============line 123================");
-//							console.log(card);
-//										}
-								        var str = template('content-template', { 
-								            "quotationList": quotationList
-								        }); 
-								        doc.getElementById('mui-content').innerHTML = str;
-								        if( doc.getElementById('listNo')){
-								        	doc.getElementById('listNo').classList.remove('mui-hidden');
-								        }
-								        
-									}else{
-										doc.getElementById('listNo').classList.add('mui-hidden');
-									}
-								}else if(data.messageCode == '403'){//token过期，重新登录
-									plus.nativeUI.toast(data.message);
-									common.baseOption.goToLogin();
-								}
-						    },
-					    	error: function(jqXHR, textStatus, errorThrown){
-						    	console.log(jqXHR);
-						    	console.log(textStatus);
-						    	console.log(errorThrown);
-//						    	common.baseOption.goToLogin();
-						    }
-						})
-					});
-				})
-				
-				
-				doc.getElementById('backAction').addEventListener('tap', function() {
-					  //触发详情页面的show事件
-					mui.fire(plus.webview.getWebviewById('opporDetail'),'show',oppoCode);
-					plus.webview.getWebviewById('opporDetail').show();
-						//返回true,继续页面关闭逻辑
-					return true;
-				})
-
-				doc.getElementById('add_quotation').addEventListener('tap', function() {
-					//打开关于页面
-					mui.fire(plus.webview.getWebviewById('opporFollow'), 'showTitle', {
-						type: type,
-						typeCode:typeCode,
-						opporCode:oppoCode,
-						name:name,
-						mobile:mobile,
-						page:'add'
-					});
-					//TODO 方便测试用，之后要放开
-	//				打开相关页面
-					mui.openWindow({
-						id: 'opporFollow',//b页面id
-						url:'../opportunity/opportunity-follow.html',
-						show: {
-						    autoShow: true, //页面loaded事件发生后自动显示，默认为true
-							aniShow: "slide-in-right"
-						},
-					})
-					//TODO 方便测试用，之后要注掉
-//					mui.openWindow({
-//						url: 'add-quotation.html',
-//						id: "add-quotation",//默认使用当前页面的url作为id
-//						styles: { //窗口参数
-//							popGesture: 'hide',
-//							cachemode:"noCache"
-//						},
-//						extras: {
-//							oppoCode: oppoCode,
-//							name:name,
-//							mobile:mobile
-//						}, //自定义扩展参数
-//						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
-//					})
-				})
-					mui('#mui-content').on('tap','.mui-card', function() {
-						console.log("quotationCode");
-						var quotationCode = this.getAttribute("data-code");
-						var creationtime = this.getAttribute("data-creationtime");
-						console.log(quotationCode);
-						console.log(creationtime);
-						console.log(detailPage);
-						if(!detailPage){
-							detailPage = plus.webview.getWebviewById('quotationDetail');
-						}
-						//触发详情页面的show事件
-						mui.fire(detailPage,'show',{
-							quotationCode:quotationCode,
-							creationtime:creationtime,
-							oppoCode: oppoCode,
-						});
-						//打开详情页面          
-						mui.openWindow({
+					$.init({
+						/*预加载详情页*/
+						preloadPages: [{
 							id: 'quotationDetail',
-							show: {
-								aniShow: 'pop-in'
-							},
-							waiting: {
-								autoShow: false
-							}
-						});
-					})
-				
-					
+							url: 'quotation_details.html'
+						}]
+					});
 
-			}(mui, document));
+					var aniShow = "pop-in";
+					//只有ios支持的功能需要在Android平台隐藏；
+					if(mui.os.android) {
+						var list = document.querySelectorAll('.ios-only');
+						if(list) {
+							for(var i = 0; i < list.length; i++) {
+								list[i].style.display = 'none';
+							}
+						}
+						//Android平台暂时使用slide-in-right动画
+						if(parseFloat(mui.os.version) < 4.4) {
+							aniShow = "slide-in-right";
+						}
+					}
+					//阻尼系数
+					var deceleration = mui.os.ios ? 0.003 : 0.0009;
+					$('.mui-scroll-wrapper').scroll({
+						bounce: false,
+						indicators: true, //是否显示滚动条
+						deceleration: deceleration
+					});
+					var detailPage = null;
+					var oppoCode = "";
+					var type = "";
+					var typeCode = "";
+					var name = "";
+					var mobile = "";
+					//				template.config('escape', false);
+					var pullToRefresh;
+					var count = 0;
+					var quotationList;
+
+					function initPullToRefresh() {
+						pullToRefresh = mui('#pullrefresh .mui-scroll').pullToRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									console.log(self);
+									setTimeout(function() {
+										var table = self.element.querySelector('#cardList');
+										getQuotationList(oppoCode, function(data) {
+											if(data.success) {
+												console.log('下拉刷新...');
+													//成功返回数据，
+												quotationList = data.quotationList;
+													//1.清空原ul下的子节点全部清空
+												while(table.hasChildNodes()) {
+													console.log('清理列表数据...');
+													table.removeChild(table.firstChild);
+												}
+												count = 0;
+												
+												if(quotationList.length<1){
+													console.log(self);
+													self.endPullUpToRefresh(true);
+													return;
+												}else{
+													//2.将数据前10条填充到列表中
+													table.insertBefore(createFragment(quotationList), table.firstChild);
+													if(quotationList.length<10){
+														self.endPullUpToRefresh(true);
+														return;
+													}
+												}
+											}else{
+												plus.nativeUI.toast(data.error);
+											}
+										});
+										self.refresh(true); 
+										self.endPullDownToRefresh();
+									}, 1000);
+								}
+							},
+							up: {
+								contentinit: '上拉显示更多', //可以上拉提示信息
+								contentdown: '上拉显示更多', //上拉结束提示信息
+								contentrefresh: '正在加载...', //上拉进行中提示信息
+								contentnomore: '没有更多数据了', //上拉无更多信息时提示信息
+								callback: function() {
+									var self = this;
+									console.log(self);
+									setTimeout(function() {
+										console.log('上拉加载...');
+										self.endPullUpToRefresh((++count > Math.ceil(quotationList.length / 10)));
+										var table = self.element.querySelector('#cardList');
+										table.appendChild(createFragment(quotationList));
+										self.refresh(true);
+									}, 500);
+								}
+							}
+						})
+					}
+
+						function getQuotationList(oppoCode, callback) {
+
+							$.ajax({
+								url: serviceBaseUrl + "alpssalewebservices/quotaion/list",
+								type: "POST",
+								dataType: "json",
+								contentType: 'application/json',
+								async:true,
+								data: JSON.stringify({
+									oppoCode: oppoCode
+								}),
+								beforeSend: function(xhr) {
+									xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+								},
+								success: callback,
+								error: function(jqXHR, textStatus, errorThrown) {
+									console.log(jqXHR);
+									console.log(textStatus);
+									console.log(errorThrown);
+								}
+							});
+						}
+
+						function createFragment(dataList) {
+							var cardScroll = document.body.querySelectorAll('.mui-card');
+							var listLen = dataList.length;
+							console.log("listLen = " + listLen);
+							var i = cardScroll.length;
+							var len = null;
+							if((cardScroll.length + 10 > listLen) && (cardScroll.length - 10 < listLen)) {
+								len = listLen;
+							} else {
+								len = i + 10;
+							}
+							console.log('循环参数i：' + i);
+							console.log('循环参数len：' + len);
+							console.log('数据填充>>>');
+							var fragment = document.createDocumentFragment();
+							for(; i < len; i++) {
+								var card = document.createElement('div');
+								card.className = 'mui-card';
+								card.setAttribute('id', 'mui-card-' + dataList[i].code);
+								card.setAttribute('data-code', dataList[i].code);
+								card.setAttribute('data-creationtime', dataList[i].creationtime);
+								var item = '<div class="mui-card-content">\
+									<ul class="mui-table-view mui-clearfix">\
+										<li class="mui-table-view-cell">报价单号<var id="name">' + dataList[i].code + '</var></li>\
+										<li class="mui-table-view-cell">状态<var id="tel" class="status">' + dataList[i].status + '</var></li>\
+										<li class="mui-table-view-cell">报价时间<var id="intent_car">' + dataList[i].creationtime + '</var></li>\
+										<li class="mui-table-view-cell">总价 <var id="origin">' + dataList[i].totalPrice + '</var></li>\
+									</ul>\
+								</div>';
+								card.innerHTML = item;
+								fragment.appendChild(card);
+							}
+							return fragment;
+						}
+
+						window.addEventListener('showList', function(event) {
+							oppoCode = event.detail.opporCode;
+							type = event.detail.type;
+							typeCode = event.detail.typeCode;
+							name = event.detail.name;
+							mobile = event.detail.mobile;
+							mui('.mui-scroll-wrapper').scroll().scrollTo(0, 0, 100);
+							if(!pullToRefresh){
+								initPullToRefresh();
+							}
+							pullToRefresh.pullDownLoading();
+						});
+
+						window.addEventListener('showList1', function(event) {
+							oppoCode = event.detail.opporCode;
+							type = event.detail.type;
+							typeCode = event.detail.typeCode;
+							name = event.detail.name;
+							mobile = event.detail.mobile;
+							var values = {
+								oppoCode: oppoCode
+							};
+							console.log("quotation list request:" + JSON.stringify(values));
+							initPullToRefresh();
+							$.ajax({
+								url: serviceBaseUrl + "alpssalewebservices/quotaion/list",
+								type: "POST",
+								dataType: "json",
+								contentType: 'application/json',
+								data: JSON.stringify({
+									oppoCode: oppoCode
+								}),
+								beforeSend: function(xhr) {
+									xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
+								},
+								success: function(data) {
+									console.log("quotation list result:" + JSON.stringify(data));
+									console.log("--------------------------------------------------------------");
+									if(data.success) {
+										var quotationList = data.quotationList;
+										if(quotationList.length > 0) {
+											//追加模板消息 
+											//										for(var i=0;i<quotationList.length;i++){
+											//											var card = document.createElement('div');
+											//							card.className = 'mui-card';
+											//							card.setAttribute("data-opporCode",opportunityList[i].code );
+											//							card.innerHTML ='<div class="mui-card-header"><label>意向编号' + opportunityList[i].code +'</label><span>'+ opportunityList[i].statusName +'</span></div>'+
+											//											'<div class="mui-card-content">'+
+											//												'<ul class="mui-table-view">'+
+											//													'<li class="mui-table-view-cell">'+
+											//														'<var>'+opportunityList[i].name+'</var> <var>'+gender+'</var><var>'+opportunityList[i].mobile+'</var><var class="mui-pull-right">'+opportunityList[i].platform+'</var>'+
+											//													'</li>'+
+											//													'<li class="mui-table-view-cell second-cell">'+
+											//														'<var>'+opportunityList[i].levelName+'</var> <var>'+opportunityList[i].creationtime+'</var><var class="mui-pull-right">'+opportunityList[i].vehicleCategoryName+'&nbsp;&nbsp;&nbsp;'+opportunityList[i].vehicleName+'</var>'+
+											//													'</li>'+
+											//													'<li class="mui-table-view-cell">'+
+											//														'<i class="mui-icon-extra mui-icon-extra-outline active"></i> <var class="active">'+ opportunityList[i].lastFollowTime +'</var>'+
+											//													'</li>'+
+											//												'</ul>'+
+											//											'</div>';
+											//							console.log("=============line 123================");
+											//							console.log(card);
+											//										}
+											var str = template('content-template', {
+												"quotationList": quotationList
+											});
+											doc.getElementById('mui-content').innerHTML = str;
+											if(doc.getElementById('listNo')) {
+												doc.getElementById('listNo').classList.remove('mui-hidden');
+											} else {
+												var p = document.createElement('p');
+												p.setAttribute('id', 'listNo');
+												p.className = 'mui-hidden';
+												p.setAttribute('style', 'margin: 10px auto;text-align: center;');
+												p.innerHTML = '暂无报价';
+											}
+										} else if(doc.getElementById('listNo')) {
+											doc.getElementById('listNo').classList.remove('mui-hidden');
+										} else {
+											doc.getElementById('listNo').classList.add('mui-hidden');
+										}
+									} else if(data.messageCode == '403') { //token过期，重新登录
+										plus.nativeUI.toast(data.message);
+										common.baseOption.goToLogin();
+									}
+								},
+								error: function(jqXHR, textStatus, errorThrown) {
+									console.log(jqXHR);
+									console.log(textStatus);
+									console.log(errorThrown);
+								}
+							})
+						});
+
+						//下拉刷新初始化动作	
+						if(mui.os.plus) {
+							mui.plusReady(function() {
+								setTimeout(function() {
+									initPullToRefresh();
+								}, 1000);
+							});
+						} else {
+							mui.ready(function() {
+								initPullToRefresh();
+							});
+						}
+
+						doc.getElementById('backAction').addEventListener('tap', function() {
+							//触发详情页面的show事件
+							mui.fire(plus.webview.getWebviewById('opporDetail'), 'show', oppoCode);
+							plus.webview.getWebviewById('opporDetail').show();
+							//返回true,继续页面关闭逻辑
+							return true;
+						})
+
+						doc.getElementById('add_quotation').addEventListener('tap', function() {
+							//打开关于页面
+							mui.fire(plus.webview.getWebviewById('opporFollow'), 'showTitle', {
+								type: type,
+								typeCode: typeCode,
+								opporCode: oppoCode,
+								name: name,
+								mobile: mobile,
+								page: 'add'
+							});
+							//TODO 方便测试用，之后要放开
+							//				打开相关页面
+							mui.openWindow({
+								id: 'opporFollow', //b页面id
+								url: '../opportunity/opportunity-follow.html',
+								show: {
+									autoShow: true, //页面loaded事件发生后自动显示，默认为true
+									aniShow: "slide-in-right"
+								},
+							})
+							//TODO 方便测试用，之后要注掉
+							//					mui.openWindow({
+							//						url: 'add-quotation.html',
+							//						id: "add-quotation",//默认使用当前页面的url作为id
+							//						styles: { //窗口参数
+							//							popGesture: 'hide',
+							//							cachemode:"noCache"
+							//						},
+							//						extras: {
+							//							oppoCode: oppoCode,
+							//							name:name,
+							//							mobile:mobile
+							//						}, //自定义扩展参数
+							//						createNew: false //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+							//					})
+						})
+						mui('#mui-content').on('tap', '.mui-card', function() {
+							console.log("quotationCode");
+							var quotationCode = this.getAttribute("data-code");
+							var creationtime = this.getAttribute("data-creationtime");
+							console.log(quotationCode);
+							console.log(creationtime);
+							console.log(detailPage);
+							if(!detailPage) {
+								detailPage = plus.webview.getWebviewById('quotationDetail');
+							}
+							//触发详情页面的show事件
+							mui.fire(detailPage, 'show', {
+								quotationCode: quotationCode,
+								creationtime: creationtime,
+								oppoCode: oppoCode,
+							});
+							//打开详情页面          
+							mui.openWindow({
+								id: 'quotationDetail',
+								show: {
+									aniShow: 'pop-in'
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+						})
+
+					}(mui, document));
 		</script>
 	</body>
 

@@ -202,17 +202,17 @@ var buyPointGroup = [{
 
 /*服务需求*/
 var servicesTypesGroup = [{
-	value: 'brand',
-	text: '品牌'
+	value: '加装',
+	text: '加装'
 }, {
-	value: 'surface',
-	text: '外形'
+	value: '二手车置换',
+	text: '二手车置换'
 }, {
 	value: '1',
-	text: '动力'
+	text: '保险'
 }, {
 	value: '2',
-	text: '操控'
+	text: '上牌'
 }, {
 	value: '舒适',
 	text: '舒适'

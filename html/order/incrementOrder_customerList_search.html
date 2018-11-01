@@ -298,7 +298,7 @@
 					plus.nativeUI.closeWaiting();
 					//显示当前页面
 					//获取父级页面查询过来的参数
-//					var self = plus.webview.currentWebview();
+					var self = plus.webview.currentWebview();
 //					var customerList = self.customerList;
 //					doc.getElementById('customerList').innerHTML = doc.getElementById('customerList').innerHTML + template('msg-template', {
 //						"customerList": customerList
@@ -383,6 +383,9 @@
 //						console.log(JSON.parse(localStorage.getItem('customerItem')).customerId);
 //						console.log("line335 下一步");
 						//TODO 存储选中的客户信息
+						if(plus.webview.getWebviewById('searchCarList')){
+							plus.webview.getWebviewById('searchCarList').reload(true);
+						}
 						mui.openWindow({
 							id: 'searchCarList', //b页面id
 							url: 'incrementOrder_carList_search.html',

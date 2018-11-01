@@ -224,6 +224,9 @@
 				console.log("--------------------------------------------------------------");
 				if(data.success==true){
 //					mui.back();
+					if(page == 'add'){
+						plus.webview.getWebviewById('createIncrement').hide();
+					}
 					common.baseOption.toIndex(2);
 				}
 			},

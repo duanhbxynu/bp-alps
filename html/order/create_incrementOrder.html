@@ -370,37 +370,59 @@
 					}
 				});
 				
-
-				$.plusReady(function() {
-
-					/*---------关闭滚动条------*/
-					plus.webview.currentWebview().setStyle({
-						scrollIndicator: 'none'
+//				window.addEventListener('showTitle',function(e){
+					
+//					setTimeout(function() {
+//						var customerId  = JSON.parse(localStorage.getItem('customerItem')).customerId;
+//						var name = JSON.parse(localStorage.getItem('customerItem')).name;
+//						var address = JSON.parse(localStorage.getItem('customerItem')).address;
+//						var customerType = JSON.parse(localStorage.getItem('customerItem')).customerType;
+//						var attribute = JSON.parse(localStorage.getItem('customerItem')).attribute;
+//						var mobileNumber = JSON.parse(localStorage.getItem('customerItem')).mobileNumber;
+//						console.log("customerId:"+customerId);
+//						var carCode = localStorage.getItem('carCode');
+//						console.log("carCode:"+carCode);
+//						
+//						var str = template('customer-template', { 
+//							       	"customer": JSON.parse(localStorage.getItem('customerItem'))
+//							    });
+//						doc.getElementById('customer-comment').innerHTML = str;	  
+//					},1000)
+//				})
+				
+//				window.onload = function(){
+					
+//					
+					$.plusReady(function() {
+	
+						/*---------关闭滚动条------*/
+						plus.webview.currentWebview().setStyle({
+							scrollIndicator: 'none'
+						});
+//						plus.nativeUI.closeWaiting();
+						//获取父级页面查询过来的参数
+						var self = plus.webview.currentWebview();
+						
+//						setTimeout(function() {
+							var customerId = JSON.parse(localStorage.getItem('customerItem')).customerId;
+							var name = JSON.parse(localStorage.getItem('customerItem')).name;
+							var address = JSON.parse(localStorage.getItem('customerItem')).address;
+							var customerType = JSON.parse(localStorage.getItem('customerItem')).customerType;
+							var attribute = JSON.parse(localStorage.getItem('customerItem')).attribute;
+							var mobileNumber = JSON.parse(localStorage.getItem('customerItem')).mobileNumber;
+							console.log("customerId:"+customerId);
+							var carCode = localStorage.getItem('carCode');
+							console.log("carCode:"+carCode);
+							var str = template('customer-template', { 
+								       	"customer": JSON.parse(localStorage.getItem('customerItem'))
+								    });
+							doc.getElementById('customer-comment').innerHTML = str;
+//						},1000);
+//						self.show();
+							    
 					});
-
-					//获取父级页面查询过来的参数
-					var self = plus.webview.currentWebview();
-					var customerId = JSON.parse(localStorage.getItem('customerItem')).customerId;
-					var name = JSON.parse(localStorage.getItem('customerItem')).name;
-					var address = JSON.parse(localStorage.getItem('customerItem')).address;
-					var customerType = JSON.parse(localStorage.getItem('customerItem')).customerType;
-					var attribute = JSON.parse(localStorage.getItem('customerItem')).attribute;
-					var mobileNumber = JSON.parse(localStorage.getItem('customerItem')).mobileNumber;
-					console.log("customerId:"+customerId);
-					var carCode = localStorage.getItem('carCode');
-					console.log("carCode:"+carCode);
-					
-					
-					
-					var str = template('customer-template', { 
-						       	"customer": JSON.parse(localStorage.getItem('customerItem'))
-						    });
-					doc.getElementById('customer-comment').innerHTML = str;	    
-					
-					
-				});
-
-			
+	
+//				}
 
 			}(mui, document));
 		</script>
