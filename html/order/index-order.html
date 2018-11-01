@@ -236,9 +236,9 @@
 					var orderTypeValue = "增值订单";
 					if(dataList[i].orderType) {
 						if(orderList[i].orderType == 'wholeVehicle') {
-							item += '<p class="clearfix"><span>品牌</span><span>' + orderList[i].vehicleBrand + '</span></p>' +
-								'<p class="clearfix"><span>车系</span><span>' + orderList[i].vehicle + '</span></p>' +
-								'<p class="clearfix"><span>车型</span><span>' + orderList[i].carModel + '</span></p>' +
+							item += '<p class="clearfix"><span>品牌</span><span>' + orderList[i].vehicleBrandName + '</span></p>' +
+								'<p class="clearfix"><span>车系</span><span>' + orderList[i].vehicleName + '</span></p>' +
+								'<p class="clearfix"><span>车型</span><span>' + orderList[i].carModelName + '</span></p>' +
 								'<p class="clearfix"><span>订单类型</span><span class="reds">整车-' + lineItemName + '</span></p>';
 						} else {
 							item += '<p class="clearfix"><span>订单类型</span><span class="reds">增值订单</span></p>';
