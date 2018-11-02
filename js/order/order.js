@@ -53,7 +53,9 @@
 			},
 			success: callback,
 		    error: function(xhr, textStatus, errorThrown){
-		    	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
+		    	console.log(xhr.status);
+		    	console.log(textStatus);
+//		    	plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
 //			   	common.baseOption.goToLogin();
 		    }
 		});
@@ -87,7 +89,7 @@
 				}
 		    },
 		    error: function(jqXHR, textStatus, errorThrown){
-		    	plus.nativeUI.toast('order message list出错了，请稍后再试！');
+		    	plus.nativeUI.toast('order message list error！');
 //			   	common.baseOption.goToLogin();
 		    }
 		})    

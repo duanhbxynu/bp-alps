@@ -110,7 +110,6 @@
 			},
 			success: callback,
 			error: function(xhr, textStatus, errorThrown) {
-				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
 				console.log(xhr);
 				console.log(textStatus);
 				console.log(errorThrown);

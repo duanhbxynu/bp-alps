@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/order/order.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/pull-tips.css" />
 		<style>
-			.orderList{
+			.orderList {
 				margin-bottom: 0px!important;
 			}
 		</style>
@@ -54,8 +54,7 @@
 		<script src="../../js/common/arttmpl.js"></script>
 		<script type="text/javascript">
 			(function($, doc) {
-				$.init({
-				});
+				$.init({});
 				var aniShow = "pop-in";
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -70,6 +69,7 @@
 						aniShow = "slide-in-right";
 					}
 				}
+				var wholeDetailPage, incrementDetailPage;
 				$.plusReady(function() {
 
 					/*---------关闭滚动条------*/
@@ -77,255 +77,237 @@
 						scrollIndicator: 'none'
 					});
 					initPullToRefresh();
+					//预加载页面mui.preload必须放在plusReady事件中
+					wholeDetailPage = mui.preload({
+						id: 'wholeVehicleOrderDetail',
+						url: 'wholeVehicleOrder_detail_result.html'
+					});
+					incrementDetailPage = mui.preload({
+						id: 'incrementOrderDetail',
+						url: 'incrementOrder_detail_result.html'
+					});
+
 				});
-				
+
 				//上拉次数判断参数
-			var pullToRefresh = null;
-			var count = 0;
-			var pagesize = 5;
-			var totalPage;
-			
-			var orderList = null;
-			var customerName;
-			var customerMobileNumber;
-			
-			document.addEventListener('getParams',function(e){
-				customerName = e.detail.customerName;
-				customerMobileNumber = e.detail.customerMobileNumber;
-				count = 0;
-				pullToRefresh.pullDownLoading();
-				
-			})
-			function initPullToRefresh() {
-				pullToRefresh = mui('#pullrefresh .mui-scroll').pullToRefresh({
-					down: {
-						callback: pulldownRefresh
-					},
-					up: {
-						contentinit: '上拉显示更多', //可以上拉提示信息
-						contentdown: '上拉显示更多', //上拉结束提示信息
-						contentrefresh: '正在加载...', //上拉进行中提示信息
-						contentnomore: '没有更多数据了', //上拉无更多信息时提示信息
-						callback: pullupRefresh
-					}
+				var pullToRefresh = null;
+				var count = 0;
+				var pagesize = 5;
+				var totalPage;
+
+				var orderList = null;
+				var customerName;
+				var customerMobileNumber;
+
+				document.addEventListener('getParams', function(e) {
+					customerName = e.detail.customerName;
+					customerMobileNumber = e.detail.customerMobileNumber;
+					count = 0;
+					pullToRefresh.pullDownLoading();
+
 				})
-			}
-			
-			/**
-			 * 上拉加载具体业务实现
-			 */
-			function pullupRefresh() {
-				
-				setTimeout(function() {
-					if(++count > totalPage - 1) {
-						pullToRefresh.endPullUpToRefresh(true);
-						return;
-					} else {
-						pullToRefresh.endPullUpToRefresh(false);
-					}
-					var orderScroll = document.body.querySelector('#cardList');
-					var params = {
-						customerName:customerName,
-						customerMobileNumber:customerMobileNumber,
-						currentPage:count,
-						pagesize:pagesize
-					}
-					orderjs.qryOrderList(params, function(data) {
-						console.log("订单列表");
-						console.log(data);
-						var data = JSON.parse(data);
-						console.log(data);
-						console.log("订单列表data.success" + data.success);
-						if(data.success) {
-							orderList = data.orderList;
-							console.log(orderList);
-							totalPage = data.totalPage;
-							if((!orderList)) {
-								pullToRefresh.endPullUpToRefresh(true);
-								return;
-							} else {
-								orderScroll.appendChild(createFragment(orderList));
-								if(totalPage<=1){
-									pullToRefresh.endPullUpToRefresh(true);
-									return;	
-								}
-							}
-						} else {
 
-							plus.nativeUI.toast(data.error);
+				function initPullToRefresh() {
+					pullToRefresh = mui('#pullrefresh .mui-scroll').pullToRefresh({
+						down: {
+							callback: pulldownRefresh
+						},
+						up: {
+							contentinit: '上拉显示更多', //可以上拉提示信息
+							contentdown: '上拉显示更多', //上拉结束提示信息
+							contentrefresh: '正在加载...', //上拉进行中提示信息
+							contentnomore: '没有更多数据了', //上拉无更多信息时提示信息
+							callback: pullupRefresh
 						}
-					});
-
-					pullToRefresh.refresh(true);
-
-				}, 1500);
-			}
-			
-			/**
-			 * 下拉刷新具体业务实现
-			 */
-			function pulldownRefresh() {
-				setTimeout(function() {
-					var orderScroll = document.body.querySelector('#cardList');
-					var params = {
-						customerName:customerName,
-						customerMobileNumber:customerMobileNumber,
-						currentPage:0,
-						pagesize:pagesize
-					}
-					orderjs.qryOrderList(params, function(data) {
-						console.log("订单列表");
-						console.log(data);
-						var data = JSON.parse(data);
-						console.log(data);
-
-						console.log("订单列表data.success" + data.success);
-						if(data.success) {
-							//成功返回数据，
-							orderList = data.orderList;
-							console.log(orderList);
-							//1.清空原ul下的子节点全部清空
-							while(orderScroll.hasChildNodes()) {
-								console.log('清理列表数据...');
-								orderScroll.removeChild(orderScroll.firstChild);
-							}
-							count = 0;
-							//2.将数据前2条填充到列表中
-							if((!orderList)) {
-								pullToRefresh.endPullUpToRefresh(true);
-								return;
-							} else {
-								orderScroll.appendChild(createFragment(orderList));
-								if(totalPage<=1){
-									pullToRefresh.endPullUpToRefresh(true);
-									return;	
-								}
-							}
-
-						} else if(data.messageCode == '403') { //token过期，重新登录
-							plus.nativeUI.toast(data.message);
-							common.baseOption.goToLogin();
-						} else {
-							plus.nativeUI.toast(data.message);
-						}
-					});
-					pullToRefresh.refresh(true);
-					pullToRefresh.endPullDownToRefresh();
-					
-				}, 1500);
-			}
-			function createFragment(dataList) {
-				console.log(dataList);
-				var cells = document.body.querySelectorAll('.mui-card');
-				var fragment = document.createDocumentFragment();
-				for(var i = 0; i < dataList.length; i++) {
-					var card = document.createElement('div');
-					card.className = 'mui-card mui-card-list';
-					card.setAttribute("data-orderCode", dataList[i].code);
-					card.setAttribute("data-creationtime", dataList[i].creationtime);
-					card.setAttribute("data-orderType", dataList[i].orderType || orderType);
-					var item = "";
-					item = '<div class="mui-card-header"><label>订单编号' + dataList[i].code + '</label></div>' +
-						'<div class="mui-card-content">' +
-						'<p class="clearfix"><span>姓名</span><span>' + dataList[i].customerName + '</span></p>' +
-						'<p class="clearfix"><span>电话</span><span>' + dataList[i].customerMobileNumber + '</span></p>';
-
-					var lineItemName = '零售订单';
-					if(dataList[i].lineItemName) {
-						lineItemName = dataList[i].lineItemName;
-					}
-					var orderTypeValue = "增值订单";
-					if(dataList[i].orderType) {
-						if(orderList[i].orderType == 'wholeVehicle') {
-							item += '<p class="clearfix"><span>品牌</span><span>' + orderList[i].vehicleBrand + '</span></p>' +
-								'<p class="clearfix"><span>车系</span><span>' + orderList[i].vehicle + '</span></p>' +
-								'<p class="clearfix"><span>车型</span><span>' + orderList[i].carModel + '</span></p>' +
-								'<p class="clearfix"><span>订单类型</span><span class="reds">整车-' + lineItemName + '</span></p>';
-						} else {
-							item += '<p class="clearfix"><span>订单类型</span><span class="reds">增值订单</span></p>';
-						}
-					}
-					item += '<p class="clearfix"><span>订单状态</span><span>' + dataList[i].orderStatus + '</span></p>' +
-						'<p class="clearfix"><span>订单金额</span><span class="reds">' + dataList[i].totalPrice + '</span></p>' +
-						'<p class="clearfix"><span>创建时间</span><span>' + dataList[i].creationtime + '</span></p></div>';
-					card.innerHTML = item;
-					console.log("=============index-order line 233================");
-					fragment.appendChild(card);
+					})
 				}
-				return fragment;
-				
-			}
-			
-			function showOrderDetail() {
+
+				/**
+				 * 上拉加载具体业务实现
+				 */
+				function pullupRefresh() {
+
+					setTimeout(function() {
+						if(++count > totalPage - 1) {
+							pullToRefresh.endPullUpToRefresh(true);
+							return;
+						} else {
+							pullToRefresh.endPullUpToRefresh(false);
+						}
+						var orderScroll = document.body.querySelector('#cardList');
+						var params = {
+							customerName: customerName,
+							customerMobileNumber: customerMobileNumber,
+							currentPage: count,
+							pagesize: pagesize
+						}
+						orderjs.qryOrderList(params, function(data) {
+							console.log("订单列表");
+							console.log(data);
+							var data = JSON.parse(data);
+							console.log(data);
+							console.log("订单列表data.success" + data.success);
+							if(data.success) {
+								orderList = data.orderList;
+								console.log(orderList);
+								totalPage = data.totalPage;
+								if((!orderList)) {
+									pullToRefresh.endPullUpToRefresh(true);
+									return;
+								} else {
+									orderScroll.appendChild(createFragment(orderList));
+									if(totalPage <= 1) {
+										pullToRefresh.endPullUpToRefresh(true);
+										return;
+									}
+								}
+							} else {
+
+								plus.nativeUI.toast(data.error);
+							}
+						});
+
+						pullToRefresh.refresh(true);
+						showOrderDetail();
+					}, 1500);
+				}
+
+				/**
+				 * 下拉刷新具体业务实现
+				 */
+				function pulldownRefresh() {
+					setTimeout(function() {
+						var orderScroll = document.body.querySelector('#cardList');
+						var params = {
+							customerName: customerName,
+							customerMobileNumber: customerMobileNumber,
+							currentPage: 0,
+							pagesize: pagesize
+						}
+						orderjs.qryOrderList(params, function(data) {
+							console.log("订单列表");
+							console.log(data);
+							var data = JSON.parse(data);
+							console.log(data);
+
+							console.log("订单列表data.success" + data.success);
+							if(data.success) {
+								//成功返回数据，
+								orderList = data.orderList;
+								console.log(orderList);
+								//1.清空原ul下的子节点全部清空
+								while(orderScroll.hasChildNodes()) {
+									console.log('清理列表数据...');
+									orderScroll.removeChild(orderScroll.firstChild);
+								}
+								count = 0;
+								//2.将数据前2条填充到列表中
+								if((!orderList)) {
+									pullToRefresh.endPullUpToRefresh(true);
+									return;
+								} else {
+									orderScroll.appendChild(createFragment(orderList));
+									if(totalPage <= 1) {
+										pullToRefresh.endPullUpToRefresh(true);
+										return;
+									}
+								}
+
+							} else if(data.messageCode == '403') { //token过期，重新登录
+								plus.nativeUI.toast(data.message);
+								common.baseOption.goToLogin();
+							} else {
+								plus.nativeUI.toast(data.message);
+							}
+						});
+						pullToRefresh.refresh(true);
+						pullToRefresh.endPullDownToRefresh();
+						showOrderDetail();
+					}, 1500);
+				}
+
+				function createFragment(dataList) {
+					console.log(dataList);
+					var cells = document.body.querySelectorAll('.mui-card');
+					var fragment = document.createDocumentFragment();
+					for(var i = 0; i < dataList.length; i++) {
+						var card = document.createElement('div');
+						card.className = 'mui-card mui-card-list';
+						card.setAttribute("data-orderCode", dataList[i].code);
+						card.setAttribute("data-creationtime", dataList[i].creationtime);
+						card.setAttribute("data-orderType", dataList[i].orderType || orderType);
+						var item = "";
+						item = '<div class="mui-card-header"><label>订单编号' + dataList[i].code + '</label></div>' +
+							'<div class="mui-card-content">' +
+							'<p class="clearfix"><span>姓名</span><span>' + dataList[i].customerName + '</span></p>' +
+							'<p class="clearfix"><span>电话</span><span>' + dataList[i].customerMobileNumber + '</span></p>';
+
+						var lineItemName = '零售订单';
+						if(dataList[i].lineItemName) {
+							lineItemName = dataList[i].lineItemName;
+						}
+						var orderTypeValue = "增值订单";
+						if(dataList[i].orderType) {
+							if(orderList[i].orderType == 'wholeVehicle') {
+								item += '<p class="clearfix"><span>品牌</span><span>' + orderList[i].vehicleBrand + '</span></p>' +
+									'<p class="clearfix"><span>车系</span><span>' + orderList[i].vehicle + '</span></p>' +
+									'<p class="clearfix"><span>车型</span><span>' + orderList[i].carModel + '</span></p>' +
+									'<p class="clearfix"><span>订单类型</span><span class="reds">整车-' + lineItemName + '</span></p>';
+							} else {
+								item += '<p class="clearfix"><span>订单类型</span><span class="reds">增值订单</span></p>';
+							}
+						}
+						item += '<p class="clearfix"><span>订单状态</span><span>' + dataList[i].orderStatus + '</span></p>' +
+							'<p class="clearfix"><span>订单金额</span><span class="reds">' + dataList[i].totalPrice + '</span></p>' +
+							'<p class="clearfix"><span>创建时间</span><span>' + dataList[i].creationtime + '</span></p></div>';
+						card.innerHTML = item;
+						console.log("=============index-order line 233================");
+						fragment.appendChild(card);
+					}
+					return fragment;
+
+				}
+
+				function showOrderDetail() {
 					mui('.orderList').on('tap', '.mui-card', function() {
 						var orderCode = this.getAttribute("data-orderCode");
 						var creationtime = this.getAttribute("data-creationtime");
 						console.log(orderCode);
-						
-						var jsonvalue = {orderCode:orderCode};
-						mui.ajax({
-							url: serviceBaseUrl+"alpssalewebservices/order/detail",
-							type: "POST",
-							dataType: "json",
-							contentType: 'application/json',
-							data: JSON.stringify(jsonvalue),
-							beforeSend: function(xhr) {
-								xhr.setRequestHeader("Authorization", "Bearer " + common.baseOption.getToken());
-							},
-							success: function(data) {
-								if(data.success){
-									console.log("order detail result:" + JSON.stringify(data));
-									var	order = data.order;
-									console.log("--------------------------------------------------------------");
-									console.log(order);
-									console.log(order.orderType);
-									if(order.orderType == 'wholeVehicle'){
-										//获得详情页面
-										  //触发详情页面的show事件
-										if(!wholeDetailPage){
-											wholeDetailPage = plus.webview.getWebviewById('wholeVehicleOrderDetail');
-										}
-										mui.fire(plus.webview.getWebviewById('wholeVehicleOrderDetail'),'showWholeVehicle',{
-											creationtime:creationtime,
-											order:order
-										});
-										//打开详情页面          
-										mui.openWindow({
-											id: 'wholeVehicleOrderDetail',
-											url: 'wholeVehicleOrder_detail_result.html'
-										});
-									}else{
-										//获得详情页面
-										if(!incrementDetailPage){
-											incrementDetailPage = plus.webview.getWebviewById('incrementOrderDetail');
-										}
-										  //触发详情页面的show事件
-										mui.fire(plus.webview.getWebviewById('incrementOrderDetail'),'show',{
-											creationtime:creationtime,
-											order:order
-										});
-										//打开详情页面          
-										mui.openWindow({
-											id: 'incrementOrderDetail',
-											url: 'incrementOrder_detail_result.html'
-										});
-									}
-									
-								}else{
-									plus.nativeUI.toast(data.message);
-									return;
-								}
-								
+						var orderType = this.getAttribute("data-orderType");
+						if(orderType == 'wholeVehicle') {
+							//获得详情页面
+							//触发详情页面的show事件
+							if(!wholeDetailPage) {
+								wholeDetailPage = plus.webview.getWebviewById('wholeVehicleOrderDetail');
 							}
-						})
-						
+							mui.fire(wholeDetailPage, 'showWholeVehicle', {
+								creationtime: creationtime,
+								orderCode: orderCode
+							});
+							//打开详情页面          
+							mui.openWindow({
+								id: 'wholeVehicleOrderDetail'
+							});
+						} else {
+							//触发详情页面的show事件
+							if(!incrementDetailPage) {
+								incrementDetailPage = plus.webview.getWebviewById('incrementOrderDetail');
+							}
+							mui.fire(incrementDetailPage, 'show', {
+								creationtime: creationtime,
+								orderCode: orderCode
+							});
+							//打开详情页面          
+							mui.openWindow({
+								id: 'incrementOrderDetail'
+							});
+						}
+
 					})
 				}
-
-				
-				
 
 			}(mui, document));
 		</script>
 	</body>
+
 </html>

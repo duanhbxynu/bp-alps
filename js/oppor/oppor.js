@@ -60,7 +60,6 @@
 				console.log(textStatus);
 				console.log(errorThrown);
 				console.log(xhr.status);
-				plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
 				//			   	common.baseOption.goToLogin();
 			}
 		});
@@ -84,8 +83,7 @@
 			},
 			success: callback,
 			error: function(xhr, textStatus, errorThrown) {
-				return plus.nativeUI.toast('哎哟，出错了，请稍后再试！');
-				//			   	common.baseOption.goToLogin();
+				console.log(xhr.status);
 			}
 		})
 	}

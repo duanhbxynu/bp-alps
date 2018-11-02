@@ -371,7 +371,6 @@
 				console.log("errorThrown");
 				console.log(errorThrown);
 //				common.baseOption.toIndex(2);
-//				plus.nativeUI.toast('order create出错了，请稍后再试！');
 //				common.baseOption.goToLogin();
 			}
 		})
