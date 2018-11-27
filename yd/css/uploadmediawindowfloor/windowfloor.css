@@ -1,0 +1,86 @@
+	/**弹窗层蒙版**/
+		.boxshaow,
+		.tipshaow {
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    z-index: 20;
+		    width: 100%;
+		    height: 100%;
+		    background: #131313;
+		    opacity: 0.5;
+		    filter: alpha(opacity=50);
+		}		
+		/**弹窗层蒙版**/
+
+		#mediaAllDiv>div.row{
+			width: 100%; 
+			height: 100%;
+			padding: 15px 0 15px 15px;
+			margin-left: -10px;
+		}
+		.logs {
+			position: fixed;
+			z-index: 30;
+			left: 50%;
+			top: 50%;	
+			height: auto;
+			background-color: #fff;
+			border-radius: 4px;
+			z-index: 10000000;
+		}
+		.logs > p{
+			margin: 15px 0 0 25px;
+			color: #000000;
+			font-weight: bold;
+			font-size: 20px;
+		}
+		.logs > a {
+			position: absolute;
+			right: 0;
+			top: 0;
+			display: block;
+			width: 50px;
+			height: 50px;
+			background: url(../../img/tipBindClose.png) center no-repeat;
+		}
+		.log{
+			padding: 25px;
+		}
+		.log .btns-select{
+			margin-bottom: 25px;
+		}
+		.log .btns-select button{
+			margin-right: 15px;
+		}
+		.log table{
+			display: block;
+			min-height: 200px;
+			max-height: 403px;
+			width: 100%;
+			min-width: 375px;
+			overflow: auto;
+			border: none;
+   			border-top: 1px solid #ddd;
+		}
+		.log table thead{
+			background: #F5F5F6;
+		}
+		.log table thead tr td{
+			border-bottom: none;
+			font-weight: bold;
+			text-align: center;
+			
+		}
+		.log table thead tr td{			
+		}
+		.log table tbody tr td a{
+			text-decoration: none;
+			color: #428bca;
+		}
+		.log .btns-submit{
+			text-align: center;
+		}
+		.log .btns-submit button:nth-of-type(1){
+			margin-right: 15px;
+		}

@@ -1,0 +1,161 @@
+.ibox-content .row{
+	margin-right: 0;
+	margin-left: 0;
+}
+.count{
+	padding: 10px 15px 0px 0px;
+	margin-bottom: 10px;
+}
+.count>div{
+	border: 1px solid rgba(228, 228, 228, 1);
+	border-radius: 4px;
+	width: 100%;
+	padding: 20px 15px 10px 25px;
+}
+.count .img{
+	margin-right: 15px;
+}
+.count .img img{
+	width: 48px;
+	height: 50px;
+}
+.count .counts{
+	box-sizing: border-box;
+}
+.count .counts p:nth-of-type(1){
+	font-size: 16px;
+	color: #999999;
+}
+.count .counts p:nth-of-type(2){
+	margin-top: -5px;
+	font-size: 20px;
+}
+.pending{
+	margin-top: 10px;
+	padding-right: 15px;
+}
+.pending .row{
+	border: 1px solid rgba(228, 228, 228, 1);
+	border-radius: 4px;
+}
+.pending .ibox{
+	border: none;
+}
+.pending .infos{
+	padding: 0 15px;
+}
+.pending .infos div{
+	margin-bottom: 30px;
+}
+/*.pending .infos div:first-child{
+	padding-left: 15px;
+}*/
+.pending .infos div:last-child{
+	padding-right: 15px;
+}
+.pending .infos div a{
+	font-size: 14px;
+	border: none;
+	border-bottom: 1px solid rgba(242, 242, 242, 1);
+}
+.pending .infos div a:hover{
+	background: transparent !important;
+	color:#428bca;
+}
+.pending .infos div a span{
+	color: red;
+}
+.pending .infos div a span:hover{
+	color: #428bca;
+}
+.pending .infos div a span{
+	float: right;
+}
+.pandect{
+	margin-top: 20px;
+}
+.pandect .row{
+	padding: 0 15px 0 0;
+}
+.pandect .kc,.pandect .kh{
+	padding-left: 0;
+	padding-right: 0;
+}
+.pandect .kc,.pandect .kh{
+	margin-bottom: 15px;
+	
+}
+.pandect .kc > div a,.pandect .kh > div a{
+	float: left;
+	width: 25%;
+	border: none;
+	text-align: center;
+	padding: 25px 0;
+}
+.pandect .kc div a:hover,.pandect .kh div a:hover{
+	background: transparent;
+}
+.pandect .kc > div a p:nth-child(1),
+.pandect .kh > div a p:nth-child(1){
+	font-size: 28px;
+	color: #F04844;
+}
+.pandect .kc > div a p:nth-child(2),
+.pandect .kh > div a p:nth-child(2){
+	font-size: 14px;
+	color: #666666;
+}
+@media (min-width: 992px){
+	.pandect .kc{
+		padding-right: 15px;
+	}
+	.pandect .kh{
+		padding-left: 15px;
+	}
+}
+.trees{
+	padding-right: 15px;
+}
+.trees > div{
+	border: 1px solid rgba(228, 228, 228, 1);
+}
+.trees ul{
+	background: rgba(244, 247, 250, 1);
+}
+.trees ul li.active a{
+	background: #FFFFFF !important;
+}
+.nav-tabs > li.active > a{
+	color: rgb(79, 142, 200);
+	border-bottom: 1px solid #FFFFFF !important;
+}
+.nav-tabs > li > a{
+	border-radius: 0;
+	font-size: 14px;
+	padding: 10px 17px 10px 15.8px;
+	font-weight: 500;
+}
+.nav-tabs > li > a:hover{
+	background: transparent;
+}
+.nav-tabs > li > a:first-child{
+	border-left: none;
+}
+.trees .nav-lists .list{
+	padding: 25px;
+}
+.trees .nav-lists .list a{
+	float: left;
+	margin-right: 28px;
+}
+.trees .nav-lists .list a p{
+	text-align: center;
+}
+.trees .nav-lists .list a p:nth-of-type(1){
+	font-size: 28px;
+	color: #F04844;
+}
+.trees .nav-lists .list a p:nth-of-type(2){
+	font-size: 14px;
+	color: #666666;
+}

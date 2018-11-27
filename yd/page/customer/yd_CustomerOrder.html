@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>客户列表</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap-3.3.7.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/select/select2.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/plugins/iCheck/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/form.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/plugins/dataTables/dataTables.bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/plugins/chosen/chosen.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.datatables.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/plugins/bootstrap-table/bootstrap-table.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../js/plugins/layer/skin/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="../../js/plugins/layer/laydate/need/laydate.css"/>
+		<link rel="stylesheet" type="text/css" href="../../js/plugins/layer/laydate/skins/default/laydate.css"/>
+	</head>
+<head>
+<body class="gray-bg">
+		<form>
+			<div class="wrapper wrapper-content animated fadeInRight table00">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>客户列表
+			                        <small>查找</small>
+			                    </h5>
+							</div>
+							<div class="ibox-content yd_table2 ">
+								<div class="row">
+									<div class="col-md-4 yd_flex form-group col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">所属门店:</label>
+										<div class="select2-container form-control hell select2 from-control11 col-md-8 col-sm-8 select22" ">
+											<a href="javascript:void(0)" class="select2-choice" tabindex="-1"> <span class="select2-chosen" >---请选择---</span><abbr class="select2-search-choice-close"></abbr></a><label for="s2id_autogen1" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-1" >
+											<div class="select2-drop select2-display-none select2-with-searchbox">
+												<div class="select2-search"> <label for="s2id_autogen1_search" class="select2-offscreen"></label> <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-1" placeholder=""> </div>
+												<ul class="select2-results" role="listbox" > </ul>
+											</div>
+										</div>
+										<select class="form-control hell select2 from-control11 col-md-8 col-sm-8 select22" tabindex="-1" title="" style="display: none;">
+											<option value="" class="yd_kong">---请选择---</option>
+											<option value="3101">永达奥迪世博店</option>
+											<option value="3103">宝诚浦西店</option>
+											<option value="3104">宝诚申江店</option>
+											<option value="3105">永达捷豹路虎龙东店</option>
+											<option value="3102">永达奥迪宝山店</option>
+											<option value="1402">太原宝诚店</option>
+
+										</select>
+									</div>
+
+									<div class="col-md-4 yd_flex col-sm-6 form-group">
+										<label for="" class="col-md-3 yd_label col-sm-3 ">创建时间:</label>
+										<div class="col-md-9 col-sm-9 yd_labell col-xs-12">
+											<input name="creationtimeStart"  readonly="readonly" value="" class="laydate-icon form-control yd_yd_time layer-date yd_data form-control" placeholder="创建时间 开始">
+										</div>
+									</div>
+
+									<div class="form-group col-md-4  yd_flex col-sm-6">
+										<label class="yd_label33 col-md-3 col-sm-3">结束时间:</label>
+										<div class="col-md-9 col-sm-9 yd_labell col-xs-12">
+											<input name="creationtimeEnd"  readonly="readonly" value="" class="laydate-icon form-control yd_yd_time layer-date yd_data form-control" placeholder="创建时间 结束">
+										</div>
+									</div>
+
+									<div class="col-md-4 yd_flex form-group col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">输入搜索:</label>
+										<input type="text" name="keys"  placeholder="请输入姓名、联系方式或客户编号" class="form-control col-md-8 col-sm-8 yd_input">
+									</div>
+									<div class="col-md-4 yd_flex form-group col-sm-6"></div>
+									<div class="col-md-4 yd_flex form-group col-sm-6" style="flex-direction: row-reverse">
+										<input type="button" class="btn btn-primary yd_submit col-md-2" name="key" id="search2" value="搜索">
+										<button type="reset" class="btn btn-primary yd_submit col-md-2 yd_reset">重置</button>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+						<div class="table-responsive yd_taable" style="border: 1px solid #e7eaec;">
+							<div id="" class="btn-group" style="margin-bottom:10px;">
+								<button  type="button" class="btn btn-primary">
+                        	<span class="glyphicon glyphicon-download" aria-hidden="true" style="margin-right: 2px;top: 2px;"></span>导出
+                    	</button>
+							</div>
+							<div class="bootstrap-table">
+								<div class="fixed-table-toolbar"></div>
+								<div class="fixed-table-container" style="padding-bottom: 0px;">
+									<div class="fixed-table-header" style="display: none;">
+										<table></table>
+									</div>
+									<div class="fixed-table-body">
+										<div class="fixed-table-loading" style="display: none; top: 38px;">正在努力地加载数据中，请稍候……</div>
+										<table class="table  table-striped table-bordered table-hover dataTables-example yd_table">
+											<thead>
+												<tr>
+													<th style="" data-field="name" tabindex="0">
+														<div class="th-inner ">客户名称</div>
+														<div class="fht-cell"></div>
+													</th>
+													<th style="" data-field="code" tabindex="0">
+														<div class="th-inner ">客户编号</div>
+														<div class="fht-cell"></div>
+													</th>
+													<th style="" data-field="customerMoblie" tabindex="0">
+														<div class="th-inner ">联系方式</div>
+														<div class="fht-cell"></div>
+													</th>
+													<th style="" data-field="paper" tabindex="0">
+														<div class="th-inner ">证件信息</div>
+														<div class="fht-cell"></div>
+													</th>
+													<th style="" data-field="creationtime" tabindex="0">
+														<div class="th-inner ">创建日期</div>
+														<div class="fht-cell"></div>
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr data-index="0">
+													<td style="">张大海</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051873</a>
+													</td>
+													<td style="">13837677469</td>
+													<td style="">身份证【411526199905123637】</td>
+													<td style="">2018-11-05</td>
+												</tr>
+												<tr data-index="1">
+													<td style="">u0008</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051966</a>
+													</td>
+													<td style="">19355555555</td>
+													<td style="">身份证【351977197903210511】</td>
+													<td style="">2018-11-19</td>
+												</tr>
+												<tr data-index="2">
+													<td style="">u0007</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051965</a>
+													</td>
+													<td style="">19344444444</td>
+													<td style="">身份证【351966197903210511】</td>
+													<td style="">2018-11-19</td>
+												</tr>
+												<tr data-index="3">
+													<td style="">u0006</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051964</a>
+													</td>
+													<td style="">19322222222</td>
+													<td style="">身份证【351955197903210511】</td>
+													<td style="">2018-11-19</td>
+												</tr>
+												<tr data-index="4">
+													<td style="">u0005</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051963</a>
+													</td>
+													<td style="">19300000000</td>
+													<td style="">身份证【351944197903210511】</td>
+													<td style="">2018-11-19</td>
+												</tr>
+												<tr data-index="5">
+													<td style="">u0004</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051957</a>
+													</td>
+													<td style="">10355555555</td>
+													<td style="">身份证【350977197903210511】</td>
+													<td style="">2018-11-16</td>
+												</tr>
+												<tr data-index="6">
+													<td style="">u0003</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051956</a>
+													</td>
+													<td style="">10344444444</td>
+													<td style="">身份证【350966197903210511】</td>
+													<td style="">2018-11-16</td>
+												</tr>
+												<tr data-index="7">
+													<td style="">u0002</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051955</a>
+													</td>
+													<td style="">10322222222</td>
+													<td style="">身份证【350955197903210511】</td>
+													<td style="">2018-11-16</td>
+												</tr>
+												<tr data-index="8">
+													<td style="">u0001</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051954</a>
+													</td>
+													<td style="">10300000000</td>
+													<td style="">身份证【350944197903210511】</td>
+													<td style="">2018-11-16</td>
+												</tr>
+												<tr data-index="9">
+													<td style="">test000006</td>
+													<td style="">
+														<a href="yd_CustomerDetail.html" class="update_customer">4000051977</a>
+													</td>
+													<td style="">61111111</td>
+													<td style="">身份证【310101198001010021】</td>
+													<td style="">2018-11-21</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="fixed-table-footer" style="display: none;">
+										<table>
+											<tbody>
+												<tr></tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="fixed-table-pagination" style="display: block;">
+										<div class="pull-left pagination-detail"><span class="pagination-info">总共 2052 条 </span><span class="page-list">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button>
+											<ul class="dropdown-menu" role="menu">
+												<li class="active">
+													<a href="javascript:void(0)">10</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">20</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">30</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">50</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">100</a>
+												</li>
+											</ul>
+											</span> 条</span>
+										</div>
+										<div class="pull-right pagination">
+											<ul class="pagination">
+												<li class="page-first disabled">
+													<a href="javascript:void(0)">首页</a>
+												</li>
+												<li class="page-pre disabled">
+													<a href="javascript:void(0)">上一页</a>
+												</li>
+												<li class="page-number active">
+													<a href="javascript:void(0)">1</a>
+												</li>
+												<li class="page-number">
+													<a href="javascript:void(0)">2</a>
+												</li>
+												<li class="page-number">
+													<a href="javascript:void(0)">3</a>
+												</li>
+												<li class="page-number">
+													<a href="javascript:void(0)">4</a>
+												</li>
+												<li class="page-number">
+													<a href="javascript:void(0)">5</a>
+												</li>
+												<li class="page-next">
+													<a href="javascript:void(0)">下一页</a>
+												</li>
+												<li class="page-last">
+													<a href="javascript:void(0)">尾页</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</body>
+	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/select/select2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/select/select2_locale_zh-CN.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/content.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/jeditable/jquery.jeditable.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/datapicker/bootstrap-datepicker.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/layer/layer.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/clockpicker/clockpicker.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/cropper/cropper.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/iCheck/icheck.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugins/layer/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/publicjs/date.js" type="text/javascript" charset="utf-8"></script>
+	
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>车辆列表</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap-3.3.7.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/plugins/iCheck/custom.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/form.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/plugins/dataTables/dataTables.bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/plugins/chosen/chosen.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	</head>
+
+	<body class="gray-bg ">
+		<form>
+			<div class="wrapper wrapper-content animated fadeInRight table00">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>订单 <small>查找</small></h5>
+							</div>
+							<div class="ibox-content yd_table2 ">
+								<div class="row">
+									<div class="col-md-4 yd_flex form-group col-sm-6">
+										<label for="ydstore" class="yd_label col-md-4 col-sm-4">所属门店：</label>
+										<div class="select2-container select2-container-multi form-control hell col-md-8 col-sm-8 select22" id="s2id_ydstore">
+											<ul class="select2-choices">
+												<li class="select2-search-field"> <label for="s2id_autogen1" class="select2-offscreen">所属门店：</label> <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" id="s2id_autogen1" placeholder="" style="width: 20px;"> </li>
+											</ul>
+											<div class="select2-drop select2-drop-multi select2-display-none">
+												<ul class="select2-results">
+													<li class="select2-no-results">没有找到匹配项</li>
+												</ul>
+											</div>
+										</div>
+										<select id="" multiple="multiple" name="ydstore" class="form-control hell col-md-8 col-sm-8 select22" tabindex="-1" style="display: none;">
+											<option value="3101">永达奥迪世博店</option>
+											<option value="3103">宝诚浦西店</option>
+											<option value="3104">宝诚申江店</option>
+											<option value="3105">永达捷豹路虎龙东店</option>
+											<option value="3102">永达奥迪宝山店</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">订单类型：</label>
+										<select name="" id="" class="form-control hell col-md-8 col-sm-8">
+											<option value=" ">--请选择--</option>
+											<option value="BULK">大宗(含对私和对公)</option>
+											<option value="RETAILORDER">零售</option>
+											<option value="PRIVATEBULKORDER">对私大宗</option>
+											<option value="PUBLICBULKORDER">对公大宗</option>
+											<option value="WHOLESALEORDER">批发</option>
+											<option value="NOTNEWCARORDER">次新车订单</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">订单状态：</label>
+										<div class="select2-container select2-container-multi form-control hell col-md-8 col-sm-8 select22" id="">
+											<ul class="select2-choices">
+												<li class="select2-search-field"> <label for="" class="select2-offscreen">订单状态：</label> <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" id="s2id_autogen2" placeholder="" style="width: 20px;"> </li>
+											</ul>
+											<div class="select2-drop select2-drop-multi select2-display-none">
+												<ul class="select2-results">
+													<li class="select2-no-results">没有找到匹配项</li>
+												</ul>
+											</div>
+										</div>
+										<select name="" multiple="multiple" id="" class="form-control hell col-md-8 col-sm-8 select22" tabindex="-1" style="display: none;">
+											<option value="CREATED">已保存</option>
+											<option value="SAVED">已提交</option>
+											<option value="APPROVED">已审核</option>
+											<option value="REJECT">已驳回</option>
+											<option value="STAY_INVOICE">待开票</option>
+											<option value="INVOICED">已开票</option>
+											<option value="SETTLEMENT">已结算</option>
+											<option value="UNSUBSCRIBE">已退订</option>
+											<option value="BACK_CAR">已退车</option>
+											<option value="CANCELED">已作废</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">财务状态：</label>
+										<div class="select2-container select2-container-multi form-control hell col-md-8 col-sm-8 select22" id="">
+											<ul class="select2-choices">
+												<li class="select2-search-field"> <label for="" class="select2-offscreen">财务状态：</label> <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" id="" placeholder="" style="width: 20px;"> </li>
+											</ul>
+											<div class="select2-drop select2-drop-multi select2-display-none">
+												<ul class="select2-results">
+													<li class="select2-no-results">没有找到匹配项</li>
+												</ul>
+											</div>
+										</div>
+										<select name="" multiple="multiple" id="" class="form-control hell col-md-8 col-sm-8 select22" tabindex="-1" style="display: none;">
+											<option value="NOT_PAYMENT">未收款</option>
+											<option value="DOWN_PAYMENT">已收订金</option>
+											<option value="VEHICLE_PAYMENT">已收整车款</option>
+											<option value="FULL_PAYMENT">已收全款</option>
+											<option value="VEHICLE_GUARANTEE_PAYMENT">已收整车款(含欠款担保)</option>
+											<option value="FULL_GUARANTEE_PAYMENT">已收全款(含欠款担保)</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">车辆状态：</label>
+										<div class="select2-container select2-container-multi form-control hell col-md-8 col-sm-8 select22" id="">
+											<ul class="select2-choices">
+												<li class="select2-search-field"> <label for="" class="select2-offscreen">车辆状态：</label> <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" id="s2id_autogen4" placeholder="" style="width: 20px;"> </li>
+											</ul>
+											<div class="select2-drop select2-drop-multi select2-display-none">
+												<ul class="select2-results">
+													<li class="select2-no-results">没有找到匹配项</li>
+												</ul>
+											</div>
+										</div>
+										<select name="" multiple="multiple" id="" class="form-control hell col-md-8 col-sm-8 select22" tabindex="-1" style="display: none;">
+											<option value="STAY_RESERVED">待预留</option>
+											<option value="RESERVED">已预留</option>
+											<option value="STAY_ALLOCATED">待配车</option>
+											<option value="ALLOCATED">已配车</option>
+											<option value="STAY_OUTGOING">待出库</option>
+											<option value="OUTGOING">已出库</option>
+											<option value="STAY_DELIVERY_CAR">待交车</option>
+											<option value="DELIVERY_CAR">已交车</option>
+											<option value="BACK_CAR">已退车</option>
+											<option value="CANCEL">已取消</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">业务状态：</label>
+										<input type="hidden" id="" name="selbusinessstatus" value="">
+										<div class="select2-container select2-container-multi form-control hell col-md-8 col-sm-8 select22" id="">
+											<ul class="select2-choices">
+												<li class="select2-search-field"> <label for="" class="select2-offscreen">业务状态：</label> <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" id="s2id_autogen5" placeholder="" style="width: 20px;"> </li>
+											</ul>
+											<div class="select2-drop select2-drop-multi select2-display-none">
+												<ul class="select2-results">
+													<li class="select2-no-results">没有找到匹配项</li>
+												</ul>
+											</div>
+										</div>
+										<select name="" multiple="multiple" id="businessStatus" class="form-control hell col-md-8 col-sm-8 select22" tabindex="-1" style="display: none;">
+											<option value="INIT">订单未提交</option>
+											<option value="ORDER_APPROVEING">订单审批中</option>
+											<option value="MANAGER_APPROVED">总经理已审批</option>
+											<option value="ORDER_APPROVED">订单审批通过</option>
+											<option value="ORDER_UNAPPROVED">订单审批驳回</option>
+											<option value="GUARANTEE_APPROVEING">欠款担保申请审批中</option>
+											<option value="GUARANTEE_APPROVED">欠款担保申请审批通过</option>
+											<option value="GUARANTEE_UNAPPROVED">欠款担保申请审批驳回</option>
+											<option value="INVOICE_APPROVEING">开票申请审批中</option>
+											<option value="INVOICE_APPROVED">开票申请审批通过</option>
+											<option value="INVOICE_UNAPPROVED">开票申请审批驳回</option>
+											<option value="OUTGOING_APPROVEING">出库申请审批中</option>
+											<option value="OUTGOING_APPROVED">出库申请审批通过</option>
+											<option value="OUTGOING_UNAPPROVED">出库申请审批驳回</option>
+											<option value="DELIVERY_CAR_APPROVEING">交车申请审批中</option>
+											<option value="DELIVERY_CAR_APPROVED">交车申请审批通过</option>
+											<option value="DELIVERY_CAR_UNAPPROVED">交车申请审批驳回</option>
+											<option value="UNSUBSCRIBE_APPROVEING">退订申请审批中</option>
+											<option value="UNSUBSCRIBE_APPROVED">退订申请审批通过</option>
+											<option value="UNSUBSCRIBE_UNAPPROVED">退订审批驳回</option>
+											<option value="REFUND_APPROVEING">退款申请审批中</option>
+											<option value="REFUND_APPROVED">退款申请审批通过</option>
+											<option value="REFUND_UNAPPROVED">退款申请审批驳回</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌：</label>
+										<select name="" id=""  class="form-control hell col-md-8 col-sm-8">
+											<option value="">
+												--请选择--</option>
+											<option value="A6">捷豹</option>
+											<option value="A1">宝马</option>
+											<option value="B1">宾利</option>
+											<option value="A7">路虎</option>
+											<option value="B3">福特</option>
+											<option value="A4">奥迪</option>
+											<option value="00">公用</option>
+											<option value="A5">保时捷</option>
+											<option value="A2">MINI</option>
+											<option value="B5">沃尔沃</option>
+											<option value="A8">别克</option>
+											<option value="B6">英菲尼迪</option>
+											<option value="A9">雪佛兰</option>
+											<option value="B2">阿斯顿马丁</option>
+											<option value="A3">BMW摩托车</option>
+											<option value="B4">林肯</option>
+											<option value="B9">斯柯达</option>
+											<option value="B8">大众</option>
+											<option value="B7">雷克萨斯</option>
+											<option value="C1">丰田</option>
+											<option value="C2">本田</option>
+											<option value="C3">荣威</option>
+											<option value="C4">北汽</option>
+											<option value="C5">江淮</option>
+											<option value="C6">凯迪拉克</option>
+											<option value="ZZ">公用</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系：</label>
+										<select name="" id="" onchange="" class="form-control hell col-md-8 col-sm-8">
+											<option value="">
+												--请选择--</option>
+										</select>
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">车型：<input id="ifInStock" onchange="" type="checkbox" title="勾选显示停售车型" style="position: relative;top: 2px;"></label>
+										<select name="" id="" class="form-control hell col-md-8 col-sm-8">
+											<option value="">
+												--请选择--</option>
+										</select>
+									</div>
+									<div class="form-group col-md-4  yd_flex col-sm-6">
+										<label class="yd_label33 col-md-3 col-sm-3">开始日期：</label>
+										<div class="col-md-9 col-sm-9 yd_labell col-xs-12">
+											<input id="" name="" readonly="readonly" class="laydate-icon form-control layer-date yd_data form-control yd_yd_time" placeholder="开始日期">
+										</div>
+									</div>
+									<div class="form-group col-md-4  yd_flex col-sm-6">
+										<label class="yd_label33 col-md-3 col-sm-3 ">结束日期：</label>
+										<div class="col-md-9 col-sm-9 yd_labell col-xs-12">
+											<input id="" name="" readonly="readonly" class="laydate-icon yd_data form-control layer-date form-control yd_yd_time" placeholder="结束日期">
+										</div>
+									</div>
+									<div class="form-group col-md-4  yd_flex col-sm-6">
+										<label for="search" class="yd_label col-md-4 col-sm-4">输入搜索：</label>
+										<input type="text" id="search" name="search" placeholder="请输入客户姓名或订单号" class="form-control col-md-8 col-sm-8 yd_input">
+									</div>
+									<div class="col-md-4 yd_flex form-group  col-sm-6">
+										<label for="" class="yd_label col-md-4 col-sm-4">员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工：</label>
+										<input type="text" id="" name="companyEmploye" placeholder="请输入员工姓名或员工编号" class="form-control col-md-8 col-sm-8 yd_input">
+									</div>
+									<div class="col-md-4 yd_flex form-group pull-right  col-sm-6" style="flex-direction: row-reverse">
+										<button class="btn btn-primary yd_submit col-md-2" id="search2" type="button">搜索</button>
+										<button id="reset" class="btn btn-primary yd_submit yd_reset col-md-2" type="reset">重置</button>
+									</div>
+								</div>
+
+							</div>
+							<div class="row yd_flex" style="flex-direction: row-reverse">
+
+							</div>
+
+						</div>
+					</div>
+					<div class="table-responsive yd_taable yd_tableTop">
+						<div id="" class="btn-group" style="margin-bottom:10px;">
+							<button id="" type="button" class="btn btn-primary">
+								<span class="glyphicon glyphicon-download" aria-hidden="true" style="margin-right: 2px;top: 2px;"></span>导出
+							</button>
+						</div>
+						<div class="bootstrap-table">
+							<div class="fixed-table-toolbar"></div>
+							<div class="fixed-table-container" style="padding-bottom: 0px;">
+								<div class="fixed-table-header" style="display: none;">
+									<table></table>
+								</div>
+								<div class="fixed-table-body">
+									<div class="fixed-table-loading" style="display: none; top: 38px;">正在努力地加载数据中，请稍候……</div>
+									<table class="table  table-striped table-bordered table-hover dataTables-example yd_table" id="orderlistTab">
+
+										<thead>
+											<tr>
+												<th style="text-align: center; " data-field="formalOrderDate" tabindex="0">
+													<div class="th-inner ">订单日期</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="formalOrderCode" tabindex="0">
+													<div class="th-inner ">订单号</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="orderType" tabindex="0">
+													<div class="th-inner ">订单类型</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="customerName" tabindex="0">
+													<div class="th-inner ">客户名称</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="customerMobile" tabindex="0">
+													<div class="th-inner ">联系方式</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="ydOrderStatus" tabindex="0">
+													<div class="th-inner ">订单状态</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="vehicleBrandCode" tabindex="0">
+													<div class="th-inner ">品牌</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="vehicleSeriesCode" tabindex="0">
+													<div class="th-inner ">车系</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="vehicleTypeCode" tabindex="0">
+													<div class="th-inner ">车型</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="vinNo" tabindex="0">
+													<div class="th-inner ">VIN码</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="vehicleStatus" tabindex="0">
+													<div class="th-inner ">车辆状态</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="financialStatus" tabindex="0">
+													<div class="th-inner ">财务状态</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="businessStatus" tabindex="0">
+													<div class="th-inner ">业务状态</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="salesConsultant" tabindex="0">
+													<div class="th-inner ">业务员</div>
+													<div class="fht-cell"></div>
+												</th>
+												<th style="text-align: center; " data-field="ydStore" tabindex="0">
+													<div class="th-inner ">门店</div>
+													<div class="fht-cell"></div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr data-index="0">
+												<td style="text-align: center; ">2018-11-21 17:53:20</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202752</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">test000006</td>
+												<td style="text-align: center; ">61111111</td>
+												<td style="text-align: center; ">已保存</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A3</td>
+												<td style="text-align: center; ">A3_2017_Audi A3 Limousine 35 TFSI进取型_194000</td>
+												<td style="text-align: center; "></td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="1">
+												<td style="text-align: center; ">2018-11-21 17:39:07</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202751</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">test000005</td>
+												<td style="text-align: center; ">61111111</td>
+												<td style="text-align: center; ">已保存</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A3</td>
+												<td style="text-align: center; ">A3_2017_Audi A3 Limousine 35 TFSI进取型_194000</td>
+												<td style="text-align: center; "></td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="2">
+												<td style="text-align: center; ">2018-11-21 17:35:29</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202750</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">test0001</td>
+												<td style="text-align: center; ">611111111</td>
+												<td style="text-align: center; ">已保存</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A3</td>
+												<td style="text-align: center; ">A3_2017_Audi A3 Limousine 35 TFSI进取型_194000</td>
+												<td style="text-align: center; "></td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="3">
+												<td style="text-align: center; ">2018-11-19 18:03:20</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3"href="yd_vehicleOrderDetail.html">8200202700</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">tony</td>
+												<td style="text-align: center; ">13300998855</td>
+												<td style="text-align: center; ">已提交</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A8L</td>
+												<td style="text-align: center; ">奥迪A8L_2017_45 TFSI卓越先锋典藏版_927800</td>
+												<td style="text-align: center; ">-</td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单审批中</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="4">
+												<td style="text-align: center; ">2018-11-16 15:43:18</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202600</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">tony</td>
+												<td style="text-align: center; ">13300998855</td>
+												<td style="text-align: center; ">已作废</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A8L</td>
+												<td style="text-align: center; ">奥迪A8L_2017_45 TFSI卓越先锋典藏版_927800</td>
+												<td style="text-align: center; ">-</td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="5">
+												<td style="text-align: center; ">2018-11-16 10:03:20</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202552</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">tony</td>
+												<td style="text-align: center; ">13300998855</td>
+												<td style="text-align: center; ">已保存</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A8L</td>
+												<td style="text-align: center; ">奥迪A8L_2017_45 TFSI卓越先锋典藏版_927800</td>
+												<td style="text-align: center; ">-</td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="6">
+												<td style="text-align: center; ">2018-11-15 14:19:57</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202452</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">陶昌菊</td>
+												<td style="text-align: center; ">17601349468</td>
+												<td style="text-align: center; ">已保存</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">奥迪S4</td>
+												<td style="text-align: center; ">S4_2018_S4 2018款_469800</td>
+												<td style="text-align: center; ">-</td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="7">
+												<td style="text-align: center; ">2018-11-14 18:42:19</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202300</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">梁朝伟</td>
+												<td style="text-align: center; ">13777777777</td>
+												<td style="text-align: center; ">已作废</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A8L</td>
+												<td style="text-align: center; ">奥迪A8L_2017_45 TFSI卓越先锋典藏版_927800</td>
+												<td style="text-align: center; ">-</td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">未收款</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="8">
+												<td style="text-align: center; ">2018-11-13 16:16:28</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202100</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">DFE</td>
+												<td style="text-align: center; ">13699869986</td>
+												<td style="text-align: center; ">已提交</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A3</td>
+												<td style="text-align: center; ">奥迪A3 Sportback_2018_Sportback 40 TFSI 运动型_252500</td>
+												<td style="text-align: center; ">-</td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">已收全款(含欠款担保)</td>
+												<td style="text-align: center; ">订单审批中</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+											<tr data-index="9">
+												<td style="text-align: center; ">2018-11-13 15:49:12</td>
+												<td style="text-align: center; ">
+													<a class="OrderMange3" href="yd_vehicleOrderDetail.html">8200202054</a>
+												</td>
+												<td style="text-align: center; ">零售</td>
+												<td style="text-align: center; ">DFE</td>
+												<td style="text-align: center; ">13699869986</td>
+												<td style="text-align: center; ">已保存</td>
+												<td style="text-align: center; ">奥迪</td>
+												<td style="text-align: center; ">A3</td>
+												<td style="text-align: center; ">奥迪A3 Sportback_2018_Sportback 40 TFSI 运动型_252500</td>
+												<td style="text-align: center; ">-</td>
+												<td style="text-align: center; ">待预留</td>
+												<td style="text-align: center; ">已收全款(含欠款担保)</td>
+												<td style="text-align: center; ">订单未提交</td>
+												<td style="text-align: center; ">陆琦强</td>
+												<td style="text-align: center; ">永达奥迪世博店</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="fixed-table-footer" style="display: none;">
+									<table>
+										<tbody>
+											<tr></tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="fixed-table-pagination" style="display: block;">
+									<div class="pull-left pagination-detail"><span class="pagination-info">总共 1692 条 </span><span class="page-list">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button>
+										<ul class="dropdown-menu" role="menu">
+											<li class="active">
+												<a href="javascript:void(0)">10</a>
+											</li>
+											<li>
+												<a href="javascript:void(0)">20</a>
+											</li>
+											<li>
+												<a href="javascript:void(0)">30</a>
+											</li>
+											<li>
+												<a href="javascript:void(0)">50</a>
+											</li>
+											<li>
+												<a href="javascript:void(0)">100</a>
+											</li>
+										</ul>
+										</span> 条</span>
+									</div>
+									<div class="pull-right pagination">
+										<ul class="pagination">
+											<li class="page-first disabled">
+												<a href="javascript:void(0)">首页</a>
+											</li>
+											<li class="page-pre disabled">
+												<a href="javascript:void(0)">上一页</a>
+											</li>
+											<li class="page-number active">
+												<a href="javascript:void(0)">1</a>
+											</li>
+											<li class="page-number">
+												<a href="javascript:void(0)">2</a>
+											</li>
+											<li class="page-number">
+												<a href="javascript:void(0)">3</a>
+											</li>
+											<li class="page-number">
+												<a href="javascript:void(0)">4</a>
+											</li>
+											<li class="page-number">
+												<a href="javascript:void(0)">5</a>
+											</li>
+											<li class="page-next">
+												<a href="javascript:void(0)">下一页</a>
+											</li>
+											<li class="page-last">
+												<a href="javascript:void(0)">尾页</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</body>
+
+</html>

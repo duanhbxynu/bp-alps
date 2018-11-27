@@ -1,0 +1,77 @@
+/**弹窗层蒙版**/
+.boxshaow,
+.tipshaow {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    background: #131313;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+/**弹窗层蒙版**/
+
+.rowNew{
+    width: 375px;
+    height: 100%;
+    padding: 15px 0 15px 15px;
+    margin-left: 0px;
+}
+.logs {
+    position: fixed;
+    z-index: 30;
+    left: 50%;
+    top: 50%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 4px;
+    z-index: 10000000;
+}
+.logs > p{
+    margin: 15px 0 0 15px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+}
+.logs > a {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: url(../img/tipBindClose.png) center no-repeat;
+}
+.log .content{
+    margin-top: 15px;
+}
+.log .content span{
+    display: inline-block;
+    text-align: right;
+    width: 120px;
+}
+.log .content input,.log .content p{
+    display: inline-block;
+    border: 1px solid #e2e2e2;
+    border-radius: 2px;
+    background: #f0f0f0;
+    padding: 4px;
+    width: 175px;
+}
+.log .content p{
+	min-height: 28.4px;
+	vertical-align: middle;
+}
+.log .content select{
+    display: inline-block;
+    width: 175px;
+    height: 28.4px;
+    border: 1px solid #e2e2e2;
+    border-radius: 2px;
+}
+.log .btns{
+    text-align: center;
+    margin: 25px 0 25px -20px;
+}

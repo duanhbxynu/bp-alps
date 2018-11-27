@@ -1,0 +1,158 @@
+/**弹窗层蒙版**/
+		.boxshaow{
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    z-index: 20;
+		    width: 100%;
+		    height: 100%;
+		    background: #131313;
+		    opacity: 0.5;
+		    filter: alpha(opacity=50);
+		}		
+		/**弹窗层蒙版**/
+		.logs {
+			position: fixed;
+			z-index: 30;
+			left: 50%;
+			top: 50%;	
+			height: auto;
+			background-color: #fff;
+			border-radius: 4px;
+			z-index: 10000000;
+		}
+		.logs > p{
+			margin: 15px 0 0 25px;
+			color: #000000;
+			font-weight: bold;
+			font-size: 20px;
+		}
+		.logs > a {
+			position: absolute;
+			right: 0;
+			top: 0;
+			display: block;
+			width: 50px;
+			height: 50px;
+			background: url(../../img/tipBindClose.png) center no-repeat;
+		}
+		.log{
+			padding: 15px 25px;
+		}
+		.log .searchs .form-group{
+			display: flex;			
+		}
+		.log .searchs .form-group label{
+			width: 80px;
+			padding-top: 8px;
+		}
+		.log .table-responsive{
+			max-height: 164px;
+			overflow: auto;
+		}
+		.log table{
+			margin-bottom: 10px;
+		}
+		.log table tr td{
+			text-align: center;
+			padding: 4px !important;
+		}
+		.log #disRoleTable tr td,
+		.log #disRoleTableToPerson tr td{
+			padding: 4px !important;
+		}
+		.log table tr td:nth-of-type(1){
+			background: #F5F5F6;
+		}
+		.log .fixed-table-container thead th .th-inner{
+			line-height: 10px;
+		}
+		.log .ibox{
+			border: none;
+		     -webkit-box-shadow:none; 
+		     box-shadow: none; 
+		     margin: 10px 0;
+		}
+		.log .ibox-title{
+			background: rgb(98,84,178);
+			height: 30px;
+    		padding: 9px 15px 0px 15px;
+		}
+		.log .ibox-title h5{
+			font-size: 13px;
+			color: #FFFFFF;
+		}
+		.fixed-table-pagination{
+			margin-top: 10px;
+		}
+		.pagination{
+			margin: 0;
+		}
+		.pagination>li>a{
+			color: inherit;
+		}
+		.log .btns{
+			text-align: center;
+			margin: 15px 0 0px -20px;
+		}
+		/**弹窗层蒙版**/
+		.boxshaow,
+		.tipshaow {
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    z-index: 20;
+		    width: 100%;
+		    height: 100%;
+		    background: #131313;
+		    opacity: 0.5;
+		    filter: alpha(opacity=50);
+		}		
+		/**弹窗层蒙版**/
+
+		.newRow{
+			width: 400px; 
+			height: 550px;
+			padding: 15px 0 15px 15px;
+			margin-left: -10px;
+		}
+		.logs {
+			position: fixed;
+			z-index: 30;
+			left: 50%;
+			top: 50%;	
+			height: auto;
+			background-color: #fff;
+			border-radius: 4px;
+			z-index: 10000000;
+		}
+		.logs > p{
+			margin: 15px 0 0 15px;
+			color: #000000;
+			font-weight: bold;
+			font-size: 20px;
+		}
+		.logs > a {
+			position: absolute;
+			right: 0;
+			top: 0;
+			display: block;
+			width: 50px;
+			height: 50px;
+			background: url(../../img/tipBindClose.png) center no-repeat;
+		}
+		.treeview {
+			padding: 0 20px 0 15px;
+			height: 515px;
+			overflow-y: auto;
+			
+		}
+		.treeview .list-group-item.node-checked,
+		.treeview .list-group-item.node-selected {
+			color: red;
+		}
+		.saves{
+			text-align: center;
+			margin-top: -10px;
+    		padding-bottom: 25px;
+		}
