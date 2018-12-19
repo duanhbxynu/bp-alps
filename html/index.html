@@ -82,11 +82,11 @@
 				<span class="mui-icon mui-icon-order"></span>
 				<span class="mui-tab-label">订单</span>
 			</a>
-			<a id="findTab" class="mui-tab-item" href="#">
+			<a id="findTab" class="mui-tab-item" href="#" data-wid="order/index-discover.html">
 				<span class="mui-icon mui-icon-discover"></span>
 				<span class="mui-tab-label">发现</span>
 			</a>
-			<a id="mineTab" class="mui-tab-item" href="#">
+			<a id="mineTab" class="mui-tab-item" href="#" data-wid="order/index-mine.html">
 				<span class="mui-icon mui-icon-mine"></span>
 				<span class="mui-tab-label">我的</span>
 			</a>
@@ -230,6 +230,22 @@
 					showOrderPage();
 					mui.fire(plus.webview.getWebviewById(targetTab),'showType',{})
 					pageFlag = 2;
+				}else if(targetTab == "order/index-discover.html"){
+					var headerHtml = '';
+					//发现
+					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="discover-plate"></a>'
+			 						+'<h1 id="title" class="mui-title">发现</h1>';	
+					header.innerHTML = headerHtml;
+					showOrderPage();
+					pageFlag = 3;
+				}else if(targetTab == "order/index-mine.html"){
+					var headerHtml = '';
+					//我的
+					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="mine-plate"></a>'
+			 						+'<h1 id="title" class="mui-title">我的</h1>';	
+					header.innerHTML = headerHtml;
+					showOrderPage();
+					pageFlag = 4;
 				}
 				
 				//显示目标选项卡

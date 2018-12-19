@@ -1,0 +1,73 @@
+.mine .mui-card .mui-table-view-cell .mui-navigate-right{
+	font-size: 14px;
+	color: #333333;
+	line-height: 20px;
+}
+.mine .mui-card .mui-table-view-cell .mui-navigate-right::after{
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+}
+.mine .mui-card  .mui-table-view-cell:after{
+	left: 0;
+	height: 2px;
+	background-color: #F5F5F5;
+}
+.mine .mui-card .mui-table-view-cell .mui-navigate-right img{
+	height: 16px;
+	margin-right: 16px;
+	top: 4px;
+    position: relative;
+}
+.mine .account{
+	height: 183px;
+	background: url(../../images/mineBg.png) no-repeat;
+	background-size: 100% 100%;
+	text-align: center;
+}
+.mine .account .qrcode{
+	width: 18px;
+	height: 18px;
+	float: right;
+	margin: 18px 18px 0 0;
+}
+.mine .account .qrcode img{
+	width: 100%;
+}
+.mine .account .portrait{
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+	margin: 0 auto;
+	margin-top: 36px;
+}
+.mine .account .portrait img{
+	width: 100%;
+	border-radius: 50%;
+}
+.mine .account .name p{
+	font-size: 14px;
+	color: #FFFFFF;
+	letter-spacing: 0.93px;
+	line-height: 20px;
+	margin-top: 10px;
+}
+.mine .account .name p.man{
+	line-height: 12px;
+	height: 12px;
+	position: relative;
+}
+.mine .account .name p.man span{
+	display: inline-block;
+}
+.mine .account .name p.man span:nth-of-type(1){
+	margin-right: 15px;
+	padding-right: 15px;
+	border-right: 1px solid #ffffff;
+}
+.mine .account .name p.man img{
+	position: absolute;
+	width: 7.7px;
+	height: 12px;
+	margin-left: 15px;
+}
