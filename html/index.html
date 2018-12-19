@@ -82,11 +82,11 @@
 				<span class="mui-icon mui-icon-order"></span>
 				<span class="mui-tab-label">订单</span>
 			</a>
-			<a id="findTab" class="mui-tab-item" href="#" data-wid="order/index-discover.html">
+			<a id="findTab" class="mui-tab-item" href="#" data-wid="discover/index-discover.html">
 				<span class="mui-icon mui-icon-discover"></span>
 				<span class="mui-tab-label">发现</span>
 			</a>
-			<a id="mineTab" class="mui-tab-item" href="#" data-wid="order/index-mine.html">
+			<a id="mineTab" class="mui-tab-item" href="#" data-wid="mine/index-mine.html">
 				<span class="mui-icon mui-icon-mine"></span>
 				<span class="mui-tab-label">我的</span>
 			</a>
@@ -123,7 +123,7 @@
 				
 	
 			});
-			var subpages = ['leads/index-leads.html','opportunity/index-opportunity.html','order/index-order.html'];
+			var subpages = ['leads/index-leads.html','opportunity/index-opportunity.html','order/index-order.html','discover/index-discover.html','mine/index-mine.html'];
 			var subpage_style = {
 				top: '45px',
 				bottom: '51px'
@@ -230,7 +230,7 @@
 					showOrderPage();
 					mui.fire(plus.webview.getWebviewById(targetTab),'showType',{})
 					pageFlag = 2;
-				}else if(targetTab == "order/index-discover.html"){
+				}else if(targetTab == "discover/index-discover.html"){
 					var headerHtml = '';
 					//发现
 					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="discover-plate"></a>'
@@ -238,7 +238,7 @@
 					header.innerHTML = headerHtml;
 					showOrderPage();
 					pageFlag = 3;
-				}else if(targetTab == "order/index-mine.html"){
+				}else if(targetTab == "mine/index-mine.html"){
 					var headerHtml = '';
 					//我的
 					headerHtml += '<a class="mui-icon mui-icon-search mui-pull-right" id="mine-plate"></a>'
